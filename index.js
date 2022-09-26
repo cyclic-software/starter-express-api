@@ -13,7 +13,7 @@ app.listen(process.env.PORT || 3001)
 app.get("/test", async (req, res) => {
     const url = 'https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept=CPSC&course=110'
     const data = await crawl(url); //hold until response comes back
-    res.status(200).json({ data: 1 })
+    res.status(200).json({ data: data })
   })
 
   
@@ -29,7 +29,7 @@ app.get("/test", async (req, res) => {
             const tbody = table.find('tbody');
             const trs = tbody.children('tr');
             
-            console.log(trs.text())
+            return trs.text()
         }
         else {
             return 'ERROR'
