@@ -5,7 +5,7 @@ const request = require('request')
 
 app.all('/', (req, res) => {
     console.log("Just got a request!")
-    res.send('Yo!')
+    res.send('HI~')
 })
 app.listen(process.env.PORT || 3001)
 
