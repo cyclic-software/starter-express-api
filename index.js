@@ -10,10 +10,15 @@ app.all('/', (req, res) => {
     res.send('UBC Course Scheduler API')
 })
 
-//@TODO: fix url and parse req's parameters
-app.get("/110", async (req, res) => {
-    const url = 'https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept=CPSC&course=110'
-    const data = await crawl(url); //hold until response comes back
+/**
+ * Main endpoint to trigger web crawler 
+ * Use of Directory Example: /api/sections?subject=CPSC&number=110'
+ */
+app.get("/api/sections", async (req, res) => {
+    const subject = req.query.subject
+    const number = req.query.number
+    const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=2022&sesscd=W&dept=${subject}&pname=subjarea`
+    const data = await crawl(url)
     res.status(200).json({ sections: data })
   })
 
