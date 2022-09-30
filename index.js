@@ -2,6 +2,15 @@ const express = require('express')
 const app = express();
 const cheerio = require('cheerio')
 const request = require('request')
+const cors = require("cors")
+app.use(
+  cors({
+    // origin:"https://ubcscheduler.herokuapp.com",
+    origin:"*",
+    optionsSuccessStatus: 200,
+    methods:["GET"],
+  })
+)
 
 app.listen(process.env.PORT || 3001)
 
