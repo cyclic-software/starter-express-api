@@ -5,8 +5,8 @@ const request = require('request')
 const cors = require("cors")
 app.use(
   cors({
-    // origin:"https://ubcscheduler.herokuapp.com",
-    origin:"*",
+    origin:"https://ubcscheduler.pythonanywhere.com",
+    // origin:"*",
     optionsSuccessStatus: 200,
     methods:["GET"],
   })
