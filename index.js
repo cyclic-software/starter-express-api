@@ -5,8 +5,8 @@ const request = require('request')
 const cors = require("cors")
 app.use(
   cors({
-    origin:"https://ubcscheduler.pythonanywhere.com",
-    // origin:"*",
+    // origin:"https://ubcscheduler.pythonanywhere.com",
+    origin:"*",
     optionsSuccessStatus: 200,
     methods:["GET"],
   })
@@ -71,7 +71,6 @@ const getHTML = (url) => {
 
 /**
  * Given a tr element, read and parse necessary information and write into the tr object
- * @param {*} $ 
  * @param {Section} newSection 
  * @param {HTMLElement} tr 
  */
