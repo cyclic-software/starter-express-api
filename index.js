@@ -26,7 +26,9 @@ app.all('/', (req, res) => {
 app.get("/api/sections", async (req, res) => {
     const subject = req.query.subject
     const number = req.query.number
-    const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=2022&sesscd=W&dept=${subject}&pname=subjarea`
+    // const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=2022&sesscd=W&dept=${subject}&pname=subjarea`
+    const url = `https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept=${subject}&course=${number}`
+
     const data = await crawl(url)
     res.status(200).json({ sections: data })
   })
