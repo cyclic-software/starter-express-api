@@ -12,7 +12,7 @@ app.use(
   })
 )
 
-app.listen(process.env.PORT || 3001)
+app.listen(process.env.PORT || 3002)
 
 // ROUTES:
 app.all('/', (req, res) => {
@@ -42,7 +42,23 @@ app.get("/api/sections", async (req, res) => {
  */
  const crawl = async (url) => {
     let sections = new Array;
-    const html = await getHTML(url)
+    let html;
+    let success = false;
+    let trial = 20;
+
+    while (!success && trial > 0) {
+        try {
+            html = await getHTML(url)
+            success = true
+            trial = 0;
+        } catch (e) {
+            console.log('Fail first, refetch')
+            success = false;
+            trial --;
+            // Once trial runs out, set success to true to exit inf.loop
+            if (trial == 0) success = true;
+        }
+    }
     const $ = cheerio.load(html);
     const trs = $('.table.table-striped.section-summary tbody tr');
     trs.each((idx, tr) => {
@@ -50,7 +66,7 @@ app.get("/api/sections", async (req, res) => {
         readSectionFromTr($, newSection, tr)
         sections.push(newSection)
     })
-
+    
     return sections
 }
 
@@ -60,11 +76,19 @@ app.get("/api/sections", async (req, res) => {
  * @returns 
  */
 const getHTML = (url) => {
+    const options = {
+        url: url,
+        // headers : {
+        //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+        // }
+    }
     return new Promise(function (resolve, reject) {
-        request(url, (error, response, html) => {
+        request(options, (error, response, html) => {
             if (!error && response.statusCode == 200) {
+                console.log("success")
                 resolve(html);
             } else {
+                console.log("fail")
                 reject(error)
             }
         })
