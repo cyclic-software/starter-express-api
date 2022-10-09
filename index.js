@@ -28,10 +28,10 @@ app.get("/api/sections", async (req, res) => {
     const number = req.query.number
     // const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=2022&sesscd=W&dept=${subject}&pname=subjarea`
     const url = `https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept=${subject}&course=${number}`
-
     const data = await crawl(url)
     res.status(200).json({ sections: data })
   })
+
 
 
 // HELPERS:
@@ -44,7 +44,7 @@ app.get("/api/sections", async (req, res) => {
     let sections = new Array;
     let html;
     let success = false;
-    let trial = 20;
+    let trial = 50;
 
     while (!success && trial > 0) {
         try {
@@ -52,11 +52,9 @@ app.get("/api/sections", async (req, res) => {
             success = true
             trial = 0;
         } catch (e) {
-            console.log('Fail first, refetch')
+            // if blocked, try again
             success = false;
             trial --;
-            // Once trial runs out, set success to true to exit inf.loop
-            if (trial == 0) success = true;
         }
     }
     const $ = cheerio.load(html);
@@ -76,16 +74,10 @@ app.get("/api/sections", async (req, res) => {
  * @returns 
  */
 const getHTML = (url) => {
-    const options = {
-        url: url,
-        // headers : {
-        //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
-        // }
-    }
     return new Promise(function (resolve, reject) {
-        request(options, (error, response, html) => {
+        request(url, (error, response, html) => {
             if (!error && response.statusCode == 200) {
-                console.log("success")
+                // console.log("success")
                 resolve(html);
             } else {
                 console.log("fail")
