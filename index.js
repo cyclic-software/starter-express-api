@@ -5,8 +5,9 @@ const request = require('request')
 const cors = require("cors")
 app.use(
   cors({
-    // origin:"https://ubcscheduler.pythonanywhere.com",
-    origin:"*",
+    origin:"https://ubcscheduler.pythonanywhere.com",
+    origin:"https://ubcscheduler.onrender.com",
+    // origin:"*",
     optionsSuccessStatus: 200,
     methods:["GET"],
   })
