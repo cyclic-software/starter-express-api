@@ -5,9 +5,9 @@ const request = require('request')
 const cors = require("cors")
 app.use(
   cors({
-    origin:"https://ubcscheduler.pythonanywhere.com",
+    // origin:"https://ubcscheduler.pythonanywhere.com",
     // origin:"https://ubcscheduler.onrender.com",
-    // origin:"*",
+    origin:"*",
     optionsSuccessStatus: 200,
     methods:["GET"],
   })
@@ -78,7 +78,7 @@ const getHTML = (url) => {
     return new Promise(function (resolve, reject) {
         request(url, (error, response, html) => {
             if (!error && response.statusCode == 200) {
-                // console.log("success")
+                console.log("success")
                 resolve(html);
             } else {
                 console.log("fail")
@@ -103,6 +103,7 @@ const readSectionFromTr = ($, newSection, tr) => {
     const [subject, course, section] = name.split(" ");
     const activity = $(tds[2]).text()
     const term = $(tds[3]).text()
+    const mode = $(tds[4]).text().trim()
     const days = $(tds[6]).text().trimStart()
     const start_time = $(tds[7]).text()
     const end_time = $(tds[8]).text()
@@ -119,6 +120,7 @@ const readSectionFromTr = ($, newSection, tr) => {
     newSection['section'] = section;
     newSection['activity'] = activity;
     newSection['term'] = term;
+    newSection['mode'] = mode;
     newSection['schedule'] = schedule;
 }
 
