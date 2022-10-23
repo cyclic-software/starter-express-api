@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 var allowedOrigins = ['http://localhost:3000',
-    'https://draft-bola-ao-ar.onrender.com/'];
+    'https://draft-bola-ao-ar.onrender.com'];
 
 app.get('/stats', async (req, res) => {
     console.log('Requesting stats...')
