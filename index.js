@@ -1,4 +1,5 @@
 const express = require('express')
+const NBA = require('nba')
 const app = express()
 const standingsJson = require('./standings.json')
 var cors = require('cors');
