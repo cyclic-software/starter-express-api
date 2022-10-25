@@ -21,13 +21,13 @@ app.use(cors({
 var allowedOrigins = ['http://localhost:3000',
     'https://draft-bola-ao-ar.onrender.com'];
 
-cron.schedule("0 18,20,22,0,1,2,3,4,5,6,7 * * *", function () {
+cron.schedule("0 18,20,21,22,23,0,1,2,3,4,5,6,7 * * *", function () {
     console.log("Updating Standings...");
     const options = {
         method: 'GET',
         headers: {
             'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
-            'x-rapidapi-key': process.env.API_KEY
+            'x-rapidapi-key': process.env.API_KEYY
         }
     };
 
@@ -35,7 +35,7 @@ cron.schedule("0 18,20,22,0,1,2,3,4,5,6,7 * * *", function () {
         console.log('Standings file was updated!');
         if (!error && response.statusCode == 200) {
             json = JSON.parse(response.body)
-            json.lastUpdate = new Date().toLocaleString("pt-PT").toString()
+            json.lastUpdate = new Date().toLocaleString("pt-PT")
             fs.writeFile("standings.json", JSON.stringify(json), function (err) {
                 if (err) throw err;
                 console.log('Standings file was updated!');
