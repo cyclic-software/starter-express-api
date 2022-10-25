@@ -22,7 +22,7 @@ app.use(cors({
 var allowedOrigins = ['http://localhost:3000',
     'https://draft-bola-ao-ar.onrender.com'];
 
-cron.schedule("23 18,20,21,22,23,0,1,2,3,4,5,6,7 * * *", function () {
+cron.schedule("45 18,20,22,0,1,2,3,4,5,6,7 * * *", function () {
     console.log("Updating Standings...");
     const options = {
         method: 'GET',
@@ -32,13 +32,16 @@ cron.schedule("23 18,20,21,22,23,0,1,2,3,4,5,6,7 * * *", function () {
         }
     };
 
-    request('https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022', options, function (error, response, body) {
+    request('http://data.nba.net/prod/v1/current/standings_all.json', options, function (error, response, body) {
         console.log('Received response from API.');
         if (!error && response.statusCode == 200) {
             json = JSON.parse(response.body)
             json.lastUpdate = new Date().toLocaleString("pt-PT")
-            fs.writeFile("standings.json", JSON.stringify(json), function (err) {
-                if (err) throw err;
+            fs.writeFile('./standings.json', JSON.stringify(json), function (err) {
+                if (err) {
+                    console.log(err);
+                    throw err
+                };
                 console.log('Standings file was updated!');
             }
             );
