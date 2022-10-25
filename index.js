@@ -31,7 +31,7 @@ cron.schedule("0 18,20,22,0,1,2,3,4,5,6,7 * * *", function () {
         }
     };
 
-    request('https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022"', options, function (error, response, body) {
+    request('https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022', options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             json = JSON.parse(response.body)
             json.lastUpdate = new Date().toLocaleString("pt-PT").toString()
