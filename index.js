@@ -1,8 +1,9 @@
 const express = require('express')
-const NBA = require('nba')
 const app = express()
 const standingsJson = require('./standings.json')
 var cors = require('cors');
+const cron = require('node-cron')
+const request = require('request');
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin 
@@ -20,16 +21,33 @@ app.use(cors({
 var allowedOrigins = ['http://localhost:3000',
     'https://draft-bola-ao-ar.onrender.com'];
 
-app.get('/stats', async (req, res) => {
-    console.log('Requesting stats...')
-    NBA.stats.teamStats({ Season: '2022-23' }).then(x => {
-        console.log("Sending stats...")
-        res.send(x)
-    });
+cron.schedule("0 18,20,22,0,1,2,3,4,5,6,7 * * *", function () {
+    console.log("Updating Standings...");
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
+            'x-rapidapi-key': process.env.API_KEY
+        }
+    };
+
+    request('https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022"', options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            json = JSON.parse(response.body)
+            json.lastUpdate = new Date().toLocaleString("pt-PT").toString()
+            fs.writeFile("standings.json", JSON.stringify(json), function (err) {
+                if (err) throw err;
+                console.log('Standings file was updated!');
+            }
+            );
+        }
+    })
 })
+
 
 app.get('/standings', (req, res) => {
     console.log('Requesting standings...')
     res.send(standingsJson)
 })
+
 app.listen(process.env.PORT || 3001)
