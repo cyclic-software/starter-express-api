@@ -4,6 +4,7 @@ const standingsJson = require('./standings.json')
 var cors = require('cors');
 const cron = require('node-cron')
 const request = require('request');
+const fs = require('fs');
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin 
@@ -21,7 +22,7 @@ app.use(cors({
 var allowedOrigins = ['http://localhost:3000',
     'https://draft-bola-ao-ar.onrender.com'];
 
-cron.schedule("15 18,20,21,22,23,0,1,2,3,4,5,6,7 * * *", function () {
+cron.schedule("23 18,20,21,22,23,0,1,2,3,4,5,6,7 * * *", function () {
     console.log("Updating Standings...");
     const options = {
         method: 'GET',
