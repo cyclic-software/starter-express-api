@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
-const standingsJson = require('./standings.json')
 var cors = require('cors');
 const cron = require('node-cron')
 const request = require('request');
 const fs = require('fs');
+path = require('path'),
+    filePath = path.join(__dirname, 'standings.json');
+
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin 
@@ -37,7 +39,7 @@ cron.schedule("0 * * * *", function () {
         if (!error && response.statusCode == 200) {
             json = JSON.parse(response.body)
             json.lastUpdate = new Date().toLocaleString("pt-PT")
-            fs.writeFile('./standings.json', JSON.stringify(json), function (err) {
+            fs.writeFile(filePath, JSON.stringify(json), function (err) {
                 if (err) {
                     console.log(err);
                     throw err
@@ -54,7 +56,12 @@ cron.schedule("0 * * * *", function () {
 
 app.get('/standings', (req, res) => {
     console.log('Requesting standings...')
-    res.send(standingsJson)
+    fs.readFile(filePath, function (err, data) {
+        if (!err) {
+            res.send(JSON.parse(data))
+        } else {
+            console.log(err);
+        }
+    });
 })
-
 app.listen(process.env.PORT || 3001)
