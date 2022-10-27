@@ -24,7 +24,7 @@ app.use(cors({
 var allowedOrigins = ['http://localhost:3000',
     'https://draft-bola-ao-ar.onrender.com'];
 
-cron.schedule("0 20,22,23,0,1,2,3,4,5,6,7,8 * * *", function () {
+cron.schedule("30 20,22,23,0,1,2,3,4,5,6,7,8,10,11 * * *", function () {
     console.log("Updating Standings...");
     const options = {
         method: 'GET',
