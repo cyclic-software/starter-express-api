@@ -46,6 +46,7 @@ app.get('/standings', async (req, res) => {
                     if (!error && response.statusCode == 200) {
                         json = JSON.parse(response.body)
                         json.lastUpdate = moment().format('DD-MM-YYYY HH:mm:ss')
+                        console.log('Deleting the file.');
                         fs.unlinkSync(filePath);
                         console.log('File was deleted.');
                         fs.writeFile(filePath, JSON.stringify(json), function (err) {
