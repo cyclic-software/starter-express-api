@@ -6,7 +6,7 @@ const request = require('request');
 const moment = require('moment')
 const fs = require('fs');
 path = require('path'),
-    filePath = path.join('tmp', 'standings.json');
+    filePath = path.join('/tmp', 'standings.json');
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -70,7 +70,6 @@ app.get('/standings', async (req, res) => {
                 if (!error && response.statusCode == 200) {
                     json = JSON.parse(response.body)
                     json.lastUpdate = moment().format('DD-MM-YYYY HH:mm:ss')
-                    console.log('File was deleted.');
                     fs.writeFile(filePath, JSON.stringify(json), function (err) {
                         if (err) {
                             console.log(err);
