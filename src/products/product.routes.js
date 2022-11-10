@@ -3,9 +3,17 @@ const product = require("./product.model");
 
 const app = express.Router();
 
-app.get("/", (req, res) => product.find().then((r) => {
-    res.send(r);
-}));
+let name = "cover"
+product.find().then((r) => {
+    console.log("boom")
+    console.log(r);
+}).catch((e)=>console.log(e)).finally(()=>console.log("hoola "));
+
+app.get("/", async (req, res) => {
+    let prd = await product.find();
+
+
+})
 
 
 module.exports = app;
