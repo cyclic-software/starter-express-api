@@ -13,6 +13,10 @@ const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
 const telr = new Telr(process.env.AUTH_KEY, process.env.STORE_ID, process.env.CREATE_QUICKLINK_API);
 const botName = process.env.TELEGRAM_BOT_NAME;
 
+bot.on('message', async (msg) => {
+  console.log(msg);
+});
+
 // Bot logic
 bot.onText(/\/start/, async (msg) => {
   await bot.sendMessage(msg.chat.id, 'Привет! Я Телеграм бот для генерации qr-кода для оплаты услуг и товаров. Пожалуйста, введите данные в формате "дата(дд.мм)/сумма/имя" для создания ссылки на оплату.');
@@ -53,7 +57,8 @@ app.get('/', async (request, response) => {
 })
 
 app.post('/', async (request, response) => {
-  console.log(request.body);
+  return;
+
   if(!request.body) return response.sendStatus(400);
   const data = request.body.split('&');
   let ref = '';
