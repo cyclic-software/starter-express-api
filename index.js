@@ -20,20 +20,23 @@ app.get('/', async (request, response) => {
 })
 
 app.post('/', async (request, response) => {
-  if (!request.hasOwnProperty('update_id')) {
+  if (!request.body.hasOwnProperty('update_id')) {
     return response.sendStatus(200);
   }
 
-  const msg = request.message;
-  if (request.message.text.test(/\/start/)) {
+  const msg = request.body.message;
+  if (/\/start/.test(msg.text)) {
     await bot.sendMessage(msg.chat.id, 'Привет! Я Телеграм бот для генерации qr-кода для оплаты услуг и товаров. Пожалуйста, введите данные в формате "дата(дд.мм)/сумма/имя" для создания ссылки на оплату.');
+    return response.sendStatus(200);
   }
 
-  if (request.message.text.test(RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g))) {
+  if (RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g).test(msg.text)) {
     const chatId = msg.chat.id;
     const data = msg.text.split(' ');
 
-    if (data[0] !== botName) return;
+    console.log(data);
+
+    if (data[0] !== botName) return response.sendStatus(200);
 
     const paymentData = data[1].split('/');
     let [date, amount, name] = paymentData;
@@ -55,6 +58,8 @@ app.post('/', async (request, response) => {
     let qlData = await telr.createQuickLink([date, amount, name]);
     let opts = { 'caption': qlData.url.replace('_', '\\_'), 'parse_mode': 'markdown' }; // The '_' character must be escaped, otherwise there will be an error
     await bot.sendPhoto(chatId, qlData.qrCode, opts);
+
+    return response.sendStatus(200);
   }
 });
 
@@ -98,4 +103,4 @@ app.post('/payment_gate', async (request, response) => {
 })
 
 // Express server logic
-app.listen(process.env.EXPRESS_PORT, async () => console.log(`App listening on port ${process.env.EXPRESS_PORT}`))
+app.listen(3000, async () => console.log(`App listening on port ${process.env.EXPRESS_PORT}`))
