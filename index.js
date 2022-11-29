@@ -61,6 +61,8 @@ app.post('/', async (request, response) => {
 
     return response.sendStatus(200);
   }
+
+  return response.sendStatus(200);
 });
 
 app.post('/payment_gate', async (request, response) => {
