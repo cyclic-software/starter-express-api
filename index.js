@@ -1,7 +1,6 @@
 const TelegramApi = require('node-telegram-bot-api');
 const express = require('express');
 const bodyParser = require('body-parser');
-const process.env = require('process.env').config().parsed;
 const Telr = require('./clients/telr');
 const moment = require('moment-timezone');
 const axios = require('axios');
