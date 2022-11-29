@@ -1,7 +1,7 @@
 const TelegramApi = require('node-telegram-bot-api');
 const express = require('express');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv').config().parsed;
+const process.env = require('process.env').config().parsed;
 const Telr = require('./clients/telr');
 const moment = require('moment-timezone');
 const axios = require('axios');
@@ -10,9 +10,9 @@ const parseString = require('xml2js').parseString;
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.text({type:"*/*"}));
-const bot = new TelegramApi(dotenv.TELEGRAM_BOT_TOKEN, { polling: true });
-const telr = new Telr(dotenv.AUTH_KEY, dotenv.STORE_ID, dotenv.CREATE_QUICKLINK_API);
-const botName = dotenv.TELEGRAM_BOT_NAME;
+const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const telr = new Telr(process.env.AUTH_KEY, process.env.STORE_ID, process.env.CREATE_QUICKLINK_API);
+const botName = process.env.TELEGRAM_BOT_NAME;
 
 // Bot logic
 bot.onText(/\/start/, async (msg) => {
@@ -64,7 +64,7 @@ app.post('/', async (request, response) => {
     }
   });
   const getTranInfo = await axios.get(`https://secure.telr.com/tools/api/xml/transaction/${ref}`, { headers: {
-    'Authorization': dotenv.AUTHORIZATION_TOKEN
+    'Authorization': process.env.AUTHORIZATION_TOKEN
   }});
   parseString(getTranInfo.data, async function (err, trc) {
       let id = trc.transaction.id[0];
@@ -86,9 +86,9 @@ app.post('/', async (request, response) => {
           break;
       }
 
-      await bot.sendMessage(dotenv.TELEGRAM_GROUP_ID, `<b>Информация по платежу:</b>\n<b>ID транзакции:</b> ${id}\n<b>Дата Дубай, ОАЭ:</b> ${serverDate}\n<b>Статус платежа:</b> ${status}`, {parse_mode: 'HTML'});
+      await bot.sendMessage(process.env.TELEGRAM_GROUP_ID, `<b>Информация по платежу:</b>\n<b>ID транзакции:</b> ${id}\n<b>Дата Дубай, ОАЭ:</b> ${serverDate}\n<b>Статус платежа:</b> ${status}`, {parse_mode: 'HTML'});
   });
 })
 
 // Express server logic
-app.listen(dotenv.EXPRESS_PORT, async () => console.log(`App listening on port ${dotenv.EXPRESS_PORT}`))
+app.listen(process.env.EXPRESS_PORT, async () => console.log(`App listening on port ${process.env.EXPRESS_PORT}`))
