@@ -53,6 +53,7 @@ app.get('/', async (request, response) => {
 })
 
 app.post('/', async (request, response) => {
+  console.log(request.body);
   if(!request.body) return response.sendStatus(400);
   const data = request.body.split('&');
   let ref = '';
