@@ -88,7 +88,7 @@ app.post('/payment_gate', async (request, response) => {
     const transactionInfo = await telr.getTransacionInfo(ref);
     parseString(transactionInfo, async function (err, trc) {
       let id = trc.transaction.id[0];
-      let srcDate = moment.tz(trc.transaction.date[0], "Asia/Dubai");
+      let srcDate = moment(trc.transaction.date[0]).tz("Asia/Dubai");
       let serverDate = srcDate.format('YYYY-MM-DD HH:mm:ss');
       const status = telr.defineTransactionStatus(trc.transaction.auth[0].status[0]);
 
