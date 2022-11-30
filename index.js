@@ -4,21 +4,25 @@ const bodyParser = require('body-parser');
 const Telr = require('./clients/telr');
 const moment = require('moment');
 const axios = require('axios');
+const dotenv = require('dotenv').config().parsed;
 const parseString = require('xml2js').parseString;
+
+const _env = process.env.environment ?? 'local';
+const configAccess = _env === '_local' ? dotenv : process.env;
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.text({ type: "*/*" }));
-const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
+const bot = new TelegramApi(configAccess.TELEGRAM_BOT_TOKEN, { polling: false });
 const telr = new Telr(
-  process.env.AUTH_KEY, 
-  process.env.STORE_ID, 
-  process.env.AUTHORIZATION_TOKEN, 
-  process.env.CREATE_QUICKLINK_API,
-  process.env.GET_TRANSACTION_API);
-const botName = process.env.TELEGRAM_BOT_NAME;
+  configAccess.AUTH_KEY, 
+  configAccess.STORE_ID, 
+  configAccess.AUTHORIZATION_TOKEN, 
+  configAccess.CREATE_QUICKLINK_API,
+  configAccess.GET_TRANSACTION_API);
+const botName = configAccess.TELEGRAM_BOT_NAME;
 const startCommandReg = RegExp(/\/start/);
-const createQLCommandReg = RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
+const createQLCommandReg = RegExp(/\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
 // Endpoints
 app.get('/', async (request, response) => {
   response.status(200).send('ECHO');
@@ -31,22 +35,16 @@ app.post('/', async (request, response) => {
     }
   
     const msg = request.body.message;
-    console.log('Message: ', msg)
     const chatId = msg.chat.id;
-    console.log('Chat: ', msg.chat)
-    console.log('Chat type: ', msg.chat.type)
     const chatType = msg.chat.type;
     
     if (startCommandReg.test(msg.text)) {
-      await bot.sendMessage(chatId, process.env.START_COMMAND_TEXT);
+      await bot.sendMessage(chatId, configAccess.START_COMMAND_TEXT);
       return response.sendStatus(200);
     }
   
     if (createQLCommandReg.test(msg.text)) {
-      const data = msg.text.split(' ');
-  
-      console.log('DATA: ', data);
-  
+      const data = msg.text.split(' ');  
       if (data[0] !== botName && chatType !== 'private') return response.sendStatus(200);
   
       const paymentData = data[1].split('/');
@@ -71,15 +69,14 @@ app.post('/', async (request, response) => {
     }
     return response.sendStatus(200);
   } catch (error) {
-    return response.status(200).send(error);
+    console.log(error);
+    return response.status(200).send('Something wrong');
   }
 });
 
 app.post('/payment_gate', async (request, response) => {
   if (!request.body) return response.sendStatus(200);
   try {
-    console.log('Type: ', typeof request.body);
-    console.log('Body: ', request.body);
     const data = request.body.split('&');
     let ref = '';
     data.forEach(el => {
@@ -89,24 +86,26 @@ app.post('/payment_gate', async (request, response) => {
     });
 
     const transactionInfo = await telr.getTransacionInfo(ref);
-    parseString(transactionInfo, async function (err, trc) {
+    parseString(transactionInfo, async (err, trc) => {
       let id = trc.transaction.id[0];
       let srcDate = moment(trc.transaction.date[0]).utcOffset('+0400');
       let serverDate = srcDate.format('YYYY-MM-DD HH:mm:ss');
       const status = telr.defineTransactionStatus(trc.transaction.auth[0].status[0]);
 
       await bot.sendMessage(
-        process.env.TELEGRAM_GROUP_ID,
+        configAccess.TELEGRAM_GROUP_ID,
         `<b>Информация по платежу:</b>\n<b>ID транзакции:</b> ${id}\n<b>Дата Дубай, ОАЭ:</b> ${serverDate}\n<b>Статус платежа:</b> ${status}`,
         { parse_mode: 'HTML' }
       );
     });
-  return response.sendStatus(200);
+
+    return response.sendStatus(200);
   }
   catch (error) {
-    return response.status(200).send(`Catch error: ${error}`);
+    console.log(error);
+    return response.status(200).send(`Something wrong`);
   }
 })
 
 // Express server logic
-app.listen(process.env.EXPRESS_PORT, async () => console.log(`App listening on port ${process.env.EXPRESS_PORT}`))
+app.listen(configAccess.EXPRESS_PORT, async () => console.log(`App listening on port ${configAccess.EXPRESS_PORT}`))
