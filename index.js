@@ -9,7 +9,12 @@ const parseString = require('xml2js').parseString;
 const app = express();
 app.use(bodyParser.json());
 const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-const telr = new Telr(process.env.AUTH_KEY, process.env.STORE_ID, process.env.CREATE_QUICKLINK_API);
+const telr = new Telr(
+  process.env.AUTH_KEY, 
+  process.env.STORE_ID, 
+  process.env.AUTHORIZATION_TOKEN, 
+  process.env.CREATE_QUICKLINK_API,
+  process.env.GET_TRANSACTION_API);
 const botName = process.env.TELEGRAM_BOT_NAME;
 const startCommandReg = RegExp(/\/start/);
 const creatQLCommandReg = RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
