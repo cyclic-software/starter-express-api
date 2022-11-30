@@ -33,7 +33,7 @@ app.post('/', async (request, response) => {
     const msg = request.body.message;
     console.log('Message: ', msg)
     const chatId = msg.chat.id;
-    const chatType = masg.chat.type;
+    const chatType = msg.chat.type;
     
     if (startCommandReg.test(msg.text)) {
       await bot.sendMessage(chatId, process.env.START_COMMAND_TEXT);
