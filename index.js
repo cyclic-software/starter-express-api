@@ -33,7 +33,8 @@ app.post('/', async (request, response) => {
     const msg = request.body.message;
     console.log('Message: ', msg)
     const chatId = msg.chat.id;
-  
+    const chatType = masg.chat.type;
+    
     if (startCommandReg.test(msg.text)) {
       await bot.sendMessage(chatId, process.env.START_COMMAND_TEXT);
       return response.sendStatus(200);
@@ -44,7 +45,7 @@ app.post('/', async (request, response) => {
   
       console.log(data);
   
-      if (data[0] !== botName) return response.sendStatus(200);
+      if (data[0] !== botName && chatType !== 'private') return response.sendStatus(200);
   
       const paymentData = data[1].split('/');
       let [date, amount, name] = paymentData;
@@ -94,10 +95,7 @@ app.post('/payment_gate', async (request, response) => {
 
       await bot.sendMessage(
         process.env.TELEGRAM_GROUP_ID,
-        `<b>Информация по платежу:</b>\n
-          <b>ID транзакции:</b> ${id}\n
-          <b>Дата Дубай, ОАЭ:</b> ${serverDate}\n
-          <b>Статус платежа:</b> ${status}`,
+        `<b>Информация по платежу:</b>\n<b>ID транзакции:</b> ${id}\n<b>Дата Дубай, ОАЭ:</b> ${serverDate}\n<b>Статус платежа:</b> ${status}`,
         { parse_mode: 'HTML' }
       );
     });
