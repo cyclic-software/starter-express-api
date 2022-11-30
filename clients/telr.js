@@ -4,12 +4,16 @@ const axios = require('axios');
 class Telr {
   #authkey;
   #storeId;
+  #authToken;
   #qlApi;
+  #getTransApi;
 
   constructor(authKey, storeId, authToken, creteQLApi, getTransApi) {
     this.#authkey = authKey;
     this.#storeId = storeId;
     this.#qlApi = creteQLApi;
+    this.#authToken = authToken;
+    this.#getTransApi = getTransApi;
   }
 
   createQuickLink([date, amount, name]) {
@@ -94,9 +98,10 @@ class Telr {
   getTransacionInfo(ref) {
     return new Promise(async (resolve, reject) => {
       try {
-        const transInfo = await axios.get(getTransApi + `/${ref}`, {
+        const link = this.#getTransApi + `/${ref}`;
+        const transInfo = await axios.get(link, {
           headers: {
-            'Authorization': authToken
+            'Authorization': this.#authToken
           }
         });
         resolve(transInfo.data);
