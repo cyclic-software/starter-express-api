@@ -99,10 +99,11 @@ class Telr {
     return new Promise(async (resolve, reject) => {
       try {
         const link = this.#getTransApi + `/${ref}`;
-        const transInfo = await axios.get(link, {
-          headers: {
+        const _headers = {
             'Authorization': this.#authToken
           }
+        const transInfo = await axios.get(link, {
+          headers: _headers
         });
         resolve(transInfo.data);
       }
