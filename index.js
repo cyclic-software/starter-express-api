@@ -65,11 +65,9 @@ app.post('/', async (request, response) => {
       }
       else await bot.sendMessage(chatId, `Указанная сумма должна быть разделена точкой, а не запятой (${amount.replace(',', '.')})`);
     }
+    return response.sendStatus(200);
   } catch (error) {
     return response.status(200).send(err);
-  }
-  finally{
-    return response.sendStatus(200);
   }
 });
 
@@ -101,11 +99,9 @@ app.post('/payment_gate', async (request, response) => {
       );
     });
   }
+  return response.sendStatus(200);
   catch (error) {
     return response.status(200).send(error);
-  }
-  finally{
-    return response.sendStatus(200);
   }
 })
 
