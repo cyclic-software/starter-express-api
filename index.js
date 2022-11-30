@@ -18,7 +18,7 @@ const telr = new Telr(
   process.env.GET_TRANSACTION_API);
 const botName = process.env.TELEGRAM_BOT_NAME;
 const startCommandReg = RegExp(/\/start/);
-const creatQLCommandReg = RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
+const createQLCommandReg = RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
 // Endpoints
 app.get('/', async (request, response) => {
   response.status(200).send('ECHO');
@@ -33,6 +33,8 @@ app.post('/', async (request, response) => {
     const msg = request.body.message;
     console.log('Message: ', msg)
     const chatId = msg.chat.id;
+    console.log('Chat: ', msg.chat)
+    console.log('Chat type: ', msg.chat.type)
     const chatType = msg.chat.type;
     
     if (startCommandReg.test(msg.text)) {
@@ -40,10 +42,10 @@ app.post('/', async (request, response) => {
       return response.sendStatus(200);
     }
   
-    if (creatQLCommandReg.test(msg.text)) {
+    if (createQLCommandReg.test(msg.text)) {
       const data = msg.text.split(' ');
   
-      console.log(data);
+      console.log('DATA: ', data);
   
       if (data[0] !== botName && chatType !== 'private') return response.sendStatus(200);
   
