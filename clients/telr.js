@@ -2,37 +2,37 @@ const qrcode = require('qrcode');
 const axios = require('axios');
 
 class Telr {
-    #authkey;
-    #storeId;
+	#authkey;
+	#storeId;
 	#qlApi;
 
-    constructor(authKey, storeId, creteQLApi){
+	constructor(authKey, storeId, creteQLApi) {
 		this.#authkey = authKey;
 		this.#storeId = storeId;
 		this.#qlApi = creteQLApi;
-        quickLinksData.QuickLinkRequest.StoreID = storeId;
-        quickLinksData.QuickLinkRequest.AuthKey = authKey;
-    }
+		quickLinksData.QuickLinkRequest.StoreID = storeId;
+		quickLinksData.QuickLinkRequest.AuthKey = authKey;
+	}
 
-    createQuickLink([date, amount, name]) {
-      return new Promise(async (resolve, reject) => {
-        // Copy QuickLinksData object
-        let _qld = JSON.stringify(quickLinksData);
-        let qlData = JSON.parse(_qld);
-      
-        qlData.QuickLinkRequest.Details.Desc = `${date} ${name}`;
-        qlData.QuickLinkRequest.Details.Amount = amount;
-        qlData.QuickLinkRequest.Details.FullName = name;
+	createQuickLink([date, amount, name]) {
+		return new Promise(async (resolve, reject) => {
+			// Copy QuickLinksData object
+			let _qld = JSON.stringify(quickLinksData);
+			let qlData = JSON.parse(_qld);
 
-        try {
-          const request = await axios.post(this.#qlApi, qlData);
-          const qrUrl = request.data.QuickLinkResponse.URL;
-          resolve (await this.createQRCode(qrUrl));
-        } catch(e) {
-          reject(e);
-        }
-      });
-    }
+			qlData.QuickLinkRequest.Details.Desc = `${date} ${name}`;
+			qlData.QuickLinkRequest.Details.Amount = amount;
+			qlData.QuickLinkRequest.Details.FullName = name;
+
+			try {
+				const request = await axios.post(this.#qlApi, qlData);
+				const qrUrl = request.data.QuickLinkResponse.URL;
+				resolve(await this.createQRCode(qrUrl));
+			} catch (e) {
+				reject(e);
+			}
+		});
+	}
 
 	createQRCode(qrUrl) {
 		return new Promise((resolve, reject) => {
@@ -41,10 +41,10 @@ class Telr {
 					reject(err);
 				}
 				let base64Url = url.replace(new RegExp(`.*?${','}(.*)`), '$1');
-				resolve({qrCode: Buffer.from(base64Url, 'base64'), url: qrUrl});
+				resolve({ qrCode: Buffer.from(base64Url, 'base64'), url: qrUrl });
 			})
 		});
-  }
+	}
 }
 
 const quickLinksData = {
