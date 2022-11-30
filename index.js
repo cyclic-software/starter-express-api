@@ -74,7 +74,7 @@ app.post('/', async (request, response) => {
 app.post('/payment_gate', async (request, response) => {
   if (!request.body) return response.sendStatus(200);
   try {
-    console.log('Type: ', type of request.body);
+    console.log('Type: ', typeof request.body);
     console.log('Body: ', request.body);
     const data = request.body.split('&');
     let ref = '';
