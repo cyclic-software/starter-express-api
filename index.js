@@ -98,8 +98,8 @@ app.post('/payment_gate', async (request, response) => {
         { parse_mode: 'HTML' }
       );
     });
-  }
   return response.sendStatus(200);
+  }
   catch (error) {
     return response.status(200).send(error);
   }
