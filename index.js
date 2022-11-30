@@ -23,6 +23,7 @@ app.post('/', async (request, response) => {
   }
 
   const msg = request.body.message;
+  console.log('Message: ', msg)
   const chatId = msg.chat.id;
 
   if (process.env.START_COMMAND_REG.test(msg.text)) {
