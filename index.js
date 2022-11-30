@@ -101,7 +101,7 @@ app.post('/payment_gate', async (request, response) => {
   return response.sendStatus(200);
   }
   catch (error) {
-    return response.status(200).send('Catch error: ', error);
+    return response.status(200).send(`Catch error: ${error}`);
   }
 })
 
