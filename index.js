@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
 const telr = new Telr(process.env.AUTH_KEY, process.env.STORE_ID, process.env.CREATE_QUICKLINK_API);
 const botName = process.env.TELEGRAM_BOT_NAME;
-
+const startCommandReg = RegExp(/\/start/);
+const creatQLCommandReg = RegExp(/\b\s\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
 // Endpoints
 app.get('/', async (request, response) => {
   response.send('ECHO');
@@ -26,12 +27,12 @@ app.post('/', async (request, response) => {
   console.log('Message: ', msg)
   const chatId = msg.chat.id;
 
-  if (process.env.START_COMMAND_REG.test(msg.text)) {
+  if (startCommandReg.test(msg.text)) {
     await bot.sendMessage(chatId, process.env.START_COMMAND_TEXT);
     return response.sendStatus(200);
   }
 
-  if (CREATE_QUICKLINK_COMMAND_REG.test(msg.text)) {
+  if (creatQLCommandReg.test(msg.text)) {
     const data = msg.text.split(' ');
 
     console.log(data);
