@@ -69,7 +69,7 @@ app.post('/', async (request, response) => {
     }
     return response.sendStatus(200);
   } catch (error) {
-    return response.status(200).send(err);
+    return response.status(200).send(error);
   }
 });
 
