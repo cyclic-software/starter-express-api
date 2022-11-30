@@ -8,6 +8,7 @@ const parseString = require('xml2js').parseString;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.text({ type: "*/*" }));
 const bot = new TelegramApi(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
 const telr = new Telr(
   process.env.AUTH_KEY, 
