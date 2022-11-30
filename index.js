@@ -47,7 +47,7 @@ app.post('/', async (request, response) => {
       const data = msg.text.split(' ');  
       if (data[0] !== botName && chatType !== 'private') return response.sendStatus(200);
   
-      const paymentData = data[1].split('/');
+      const paymentData =  data.length == 1 ? data[0].split('/') : data[1].split('/');
       let [date, amount, name] = paymentData;
       date += '.' + new Date().getFullYear();
   
