@@ -6,7 +6,7 @@ class Telr {
   #storeId;
   #qlApi;
 
-  constructor(authKey, storeId, creteQLApi) {
+  constructor(authKey, storeId, authToken, creteQLApi, getTransApi) {
     this.#authkey = authKey;
     this.#storeId = storeId;
     this.#qlApi = creteQLApi;
@@ -62,8 +62,8 @@ class Telr {
         }
       }
 
-      quickLinksData.QuickLinkRequest.StoreID = storeId;
-      quickLinksData.QuickLinkRequest.AuthKey = authKey;
+      quickLinksData.QuickLinkRequest.StoreID = this.#storeId;
+      quickLinksData.QuickLinkRequest.AuthKey = this.#authkey;
       quickLinksData.QuickLinkRequest.Details.Desc = `${date} ${name}`;
       quickLinksData.QuickLinkRequest.Details.Amount = amount;
       quickLinksData.QuickLinkRequest.Details.FullName = name;
@@ -94,9 +94,9 @@ class Telr {
   getTransacionInfo(ref) {
     return new Promise(async (resolve, reject) => {
       try {
-        const transInfo = await axios.get(process.env.GET_TRANSACTION_API + `/${ref}`, {
+        const transInfo = await axios.get(getTransApi + `/${ref}`, {
           headers: {
-            'Authorization': process.env.AUTHORIZATION_TOKEN
+            'Authorization': authToken
           }
         });
         resolve(transInfo.data);
