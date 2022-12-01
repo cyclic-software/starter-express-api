@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Telr = require('./clients/telr');
 const moment = require('moment');
-const axios = require('axios');
 const dotenv = require('dotenv').config().parsed;
 const parseString = require('xml2js').parseString;
 
@@ -21,8 +20,8 @@ const telr = new Telr(
   configAccess.CREATE_QUICKLINK_API,
   configAccess.GET_TRANSACTION_API);
 const botName = configAccess.TELEGRAM_BOT_NAME;
-const startCommandReg = RegExp(/\/start/);
-const createQLCommandReg = RegExp(/\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/g);
+const startCommandReg = /\/start/;
+const createQLCommandReg = /\d{1,2}\.\d{1,2}\/[+-]?([0-9]*[.,])?[0-9]+\/[A-zА-я]+/;
 // Endpoints
 app.get('/', async (request, response) => {
   response.status(200).send('ECHO');
