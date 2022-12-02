@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Telr = require('./clients/telr');
 const moment = require('moment');
+const { parse } = require('dotenv');
 const dotenv = require('dotenv').config().parsed;
 const parseString = require('xml2js').parseString;
 
@@ -43,11 +44,19 @@ app.post('/', async (request, response) => {
     }
   
     if (createQLCommandReg.test(msg.text)) {
-      const data = msg.text.split(' ');  
-      if (data[0] !== botName && chatType !== 'private') return response.sendStatus(200);
+      if (!msg.text.includes(botName) && chatType !== 'private') {
+        return response.sendStatus(200);
+      }
+
+      let data = [];
+      if (msg.text.includes(botName)) {
+        data = msg.text.slice(botName.length + 1, msg.text.length);
+      } else {
+        data = msg.text;
+      }  
   
-      const paymentData =  data.length == 1 ? data[0].split('/') : data[1].split('/');
-      let [date, amount, name] = paymentData;
+      const parsedData = data.split('/');
+      let [date, amount, name] = parsedData;
       date += '.' + new Date().getFullYear();
   
       if (!moment(date, 'DD.MM.YYYY', true).isValid()) {
