@@ -1,22 +1,23 @@
 {
-  "name": "starter-express-api",
+  "name": "starter-rest-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "env-cmd nodemon index.js",
+    "repl": "env-cmd node"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
-  },
-  "author": "",
+  "keywords": [],
+  "author": "Kam Lasater <kam.lasater@cyclic.sh>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cyclic-dynamodb": "0.0.21",
+    "env-cmd": "^10.1.0",
+    "express": "^4.18.1",
+    "firebase": "^9.14.0",
+    "firebase-admin": "^11.3.0"
   }
 }
