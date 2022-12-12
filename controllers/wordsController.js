@@ -18,33 +18,50 @@ router.get('/words/get', async (req, res) => {
 })
 
 //add new words
-router.get('/words/add', async (req, res) => {
-    //load new words from json to array
-    const newWords = require('./words.json'); //hard codex :s
+router.post('/words/add', async (req, res) => {
+    //check of body isnt empty
+    if (Object.keys(req.body).length === 0){
+        //send 400 result: no data
+        res.status(400).send("no data").end()
+    }
+    else
+    {
+        //put req.body in array
+        const newWords = req.body;
 
-    //retrieve current words
-    const snapshot = await firebaseApp.getAllWords();
-    let safeArray = new Array;
-    const oldWords = new Array;
+        //retrieve current words
+        const snapshot = await firebaseApp.getAllWords();
+        let safeArray = new Array;
+        const oldWords = new Array;
 
-    //put all old words in array
-    snapshot.forEach(doc => {
-        oldWords.push(doc.data().word)
-    })
+        //put all old words in array
+        snapshot.forEach(doc => {
+            oldWords.push(doc.data().word)
+        })
 
-    //compare array to new words and filter duplicate words
-    safeArray = newWords.filter(val => !oldWords.includes(val))
+        //compare array to new words and filter duplicate words
+        safeArray = newWords.filter(val => !oldWords.includes(val))
 
-    safeArray.forEach(newWord => {
-        console.log(newWord)
-        //const newDoc = db.collection('words').add({newWord})
-    })
+        if(safeArray.length === 0){
+            //no words saved
+            res.json("no words saved").end();
+        }
+        else
+        {
+            //foreach loop to put words into database
+            safeArray.forEach(newWord => {
+                //console.log(newWord)
+                firebaseApp.addWords(newWord)
+            })
 
-    res.json({ wordssaved: safeArray }).end();
+            //succesfully saved
+            res.json({ wordssaved: safeArray }).end();
+        }
+    }
 })
 
 //delete word
-router.post('/words/delete', async (req, res) => {
+router.delete('/words/delete', async (req, res) => {
 
 
     res.json({}).end();

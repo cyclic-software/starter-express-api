@@ -1,6 +1,7 @@
 const express = require('express')
 const res = require('express/lib/response')
 const app = express()
+require('dotenv').config()
 
 //controllers
 const words = require('./controllers/wordsController')
@@ -13,6 +14,13 @@ app.use(express.urlencoded({ extended: true }))
 //controllers
 app.use("/api/", words.router)
 app.use("/api/", scores.router)
+
+//test
+app.use('/test', (req, res) => {
+  const file = require("./firebase/accountInformationKey.json")
+  console.log(process.env.TYPE)
+  res.json(file).end()
+})
 
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
