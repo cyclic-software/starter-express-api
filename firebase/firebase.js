@@ -31,10 +31,29 @@ async function getAllWords() {
 //safe words to database
 async function addWords(word){
   const newDoc = db.collection('words').add({word})
-  console.log("firebase:" + word)
 }
 
+//delete words from database
+async function deleteWord(word){
+  //retrieve docId via field value of 'word'
+  const getWordData = await db.collection('words').where('word', 'in', word).get()
 
+  //check of return data is empty
+  if((getWordData).empty){
+    //return that there are no words found
+    return "word not found"
+  }
+  else
+  {
+    //loop over results
+    getWordData.forEach(wordData => {
+      //delete the word via the docId
+      db.collection('words').doc(wordData.id).delete();
+    })
+    //return that word 'x' has been deleted
+    return "word deleted: " + word
+  }
+}
 
 
 //#### scores ####//
@@ -47,5 +66,6 @@ async function getAllScores() {
 module.exports = {
     getAllWords,
     addWords,
+    deleteWord,
     getAllScores
 }
