@@ -10,9 +10,7 @@ router.get('/words/get', async (req, res) => {
     const snapshot = await firebaseApp.getAllWords();
     const returnArray = new Array;
     snapshot.forEach(doc => {
-        key = doc.id;
-        value = doc.data().word;
-        returnArray.push([key, value])
+        returnArray.push(doc.data().word)//only need to send the actual word to frontend no need for id
     })
     res.json(returnArray).end()
 })

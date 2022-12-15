@@ -63,9 +63,40 @@ async function getAllScores() {
   return result;
 }
 
+async function addScore(newNname, newScore, newWpm) {
+  //put it in json
+  const data = {
+    naam: newNname,
+    score: newScore,
+    wpm: newWpm
+  }
+
+  //add to firebase
+  db.collection('scores').add(data);
+
+  return "score added"
+}
+
+async function deleteScore(name, score, wpm){
+  //get score data
+  const getScoreData = await db.collection('scores').where('naam', '==', name).where('score', '==', score).where('wpm', '==', wpm).get()
+
+  if(getScoreData.empty){
+    return "score not found with input: naam: " + name + " score: " + score + " wpm: " + wpm 
+  }
+  else{
+    getScoreData.forEach(doc => {
+      db.collection('scores').doc(doc.id).delete()
+    })
+    return "score deleted input  naam: " + name + " score: " + score + " wpm: " + wpm
+  }
+}
+
 module.exports = {
     getAllWords,
     addWords,
     deleteWord,
-    getAllScores
+    getAllScores,
+    addScore,
+    deleteScore
 }
