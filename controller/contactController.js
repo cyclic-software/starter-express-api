@@ -4,13 +4,14 @@ import LeadContact from '../database/schemas/contactSchema.js'
 class ContactController {
     async create(request, response){
         try {
-            const {nome, profissao, procura, cellphone, criadoEm} = request.body;
+            const {nome, profissao, procura, cellphone, criadoEm, referee} = request.body;
 
             const leadcontact = await LeadContact.create({
                 nome,
                 profissao,
                 procura,
                 cellphone,
+                referee,
                 criadoEm
             });
 
