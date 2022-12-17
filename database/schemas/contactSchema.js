@@ -17,6 +17,10 @@ const LeadContact = new mongoose.Schema({
         type:Number,
         required:true,
     },
+    referee: {
+        type:String,
+        required: false,
+    },
     criadoEm: {
         type: Date,
         default: Date.now
