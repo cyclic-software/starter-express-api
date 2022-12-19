@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import contactController from './controller/contactController.js';
-import HomeContactController from './controller/homeContactController.js';
+import HomeContactController from './controller/HomeContactController.js';
 
 const routes = Router();
 
