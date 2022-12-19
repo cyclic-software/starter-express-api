@@ -58,35 +58,37 @@ router.post('/words/add', async (req, res) => {
     }
 })
 
+//deze functie hoeft van de opdachtgever er niet meer in
 //delete word (marc delete woord; jay edit woord)
-router.delete('/words/delete', async (req, res) => {
-    //put request data in variable
-    const requestData = req.body;
+// router.delete('/words/delete', async (req, res) => {
+//     //put request data in variable
+//     const requestData = req.body;
 
-    //check of request is empty 
-    if(Object.keys(requestData).length === 0){
-        //error no request
-        res.status(400).send('no data, make sure to use ["word"] format').end();
-    }
-    else
-    {
-        //check if requestData has one OR more than one word
-        if(requestData.length > 1){ //more than 1 word
-            res.json('only able to delete 1 word ["word"]').end();
-        }
-        else{ //only 1 word
-            //logic is handled in firebaseApp
-            res.json(await firebaseApp.deleteWord(requestData)).end()
-        }
-    }
-})
+//     //check of request is empty 
+//     if(Object.keys(requestData).length === 0){
+//         //error no request
+//         res.status(400).send('no data, make sure to use ["word"] format').end();
+//     }
+//     else
+//     {
+//         //check if requestData has one OR more than one word
+//         if(requestData.length > 1){ //more than 1 word
+//             res.json('only able to delete 1 word ["word"]').end();
+//         }
+//         else{ //only 1 word
+//             //logic is handled in firebaseApp
+//             res.json(await firebaseApp.deleteWord(requestData)).end()
+//         }
+//     }
+// })
 
+//deze functie hoeft van de opdachtgever er niet meer in
 //edit word
-router.post('/words/edit', async (req, res) => {
+// router.post('/words/edit', async (req, res) => {
 
 
-    res.json({}).end();
-})
+//     res.json({}).end();
+// })
 
 module.exports = {
     router

@@ -6,6 +6,7 @@ require('dotenv').config()
 //controllers
 const words = require('./controllers/wordsController')
 const scores = require('./controllers/scoresController')
+const users = require('./controllers/userController')
 
 //express functions
 app.use(express.json())
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 //controllers
 app.use("/api/", words.router)
 app.use("/api/", scores.router)
+app.use("/api/", users.router)
 
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
