@@ -31,10 +31,29 @@ async function getAllWords() {
 //safe words to database
 async function addWords(word){
   const newDoc = db.collection('words').add({word})
-  console.log("firebase:" + word)
 }
 
+//delete words from database
+async function deleteWord(word){
+  //retrieve docId via field value of 'word'
+  const getWordData = await db.collection('words').where('word', 'in', word).get()
 
+  //check of return data is empty
+  if((getWordData).empty){
+    //return that there are no words found
+    return "word not found"
+  }
+  else
+  {
+    //loop over results
+    getWordData.forEach(wordData => {
+      //delete the word via the docId
+      db.collection('words').doc(wordData.id).delete();
+    })
+    //return that word 'x' has been deleted
+    return "word deleted: " + word
+  }
+}
 
 
 //#### scores ####//
@@ -44,8 +63,40 @@ async function getAllScores() {
   return result;
 }
 
+async function addScore(newNname, newScore, newWpm) {
+  //put it in json
+  const data = {
+    naam: newNname,
+    score: newScore,
+    wpm: newWpm
+  }
+
+  //add to firebase
+  db.collection('scores').add(data);
+
+  return "score added"
+}
+
+async function deleteScore(name, score, wpm){
+  //get score data
+  const getScoreData = await db.collection('scores').where('naam', '==', name).where('score', '==', score).where('wpm', '==', wpm).get()
+
+  if(getScoreData.empty){
+    return "score not found with input: naam: " + name + " score: " + score + " wpm: " + wpm 
+  }
+  else{
+    getScoreData.forEach(doc => {
+      db.collection('scores').doc(doc.id).delete()
+    })
+    return "score deleted input  naam: " + name + " score: " + score + " wpm: " + wpm
+  }
+}
+
 module.exports = {
     getAllWords,
     addWords,
-    getAllScores
+    deleteWord,
+    getAllScores,
+    addScore,
+    deleteScore
 }

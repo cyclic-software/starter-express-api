@@ -15,13 +15,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/api/", words.router)
 app.use("/api/", scores.router)
 
-//test
-app.use('/test', (req, res) => {
-  const file = require("./firebase/accountInformationKey.json")
-  console.log(process.env.TYPE)
-  res.json(file).end()
-})
-
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
   res.json({ msg: 'no route handler found' }).end()

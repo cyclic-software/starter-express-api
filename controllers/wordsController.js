@@ -10,9 +10,7 @@ router.get('/words/get', async (req, res) => {
     const snapshot = await firebaseApp.getAllWords();
     const returnArray = new Array;
     snapshot.forEach(doc => {
-        key = doc.id;
-        value = doc.data().word;
-        returnArray.push([key, value])
+        returnArray.push(doc.data().word)//only need to send the actual word to frontend no need for id
     })
     res.json(returnArray).end()
 })
@@ -60,11 +58,27 @@ router.post('/words/add', async (req, res) => {
     }
 })
 
-//delete word
+//delete word (marc delete woord; jay edit woord)
 router.delete('/words/delete', async (req, res) => {
+    //put request data in variable
+    const requestData = req.body;
 
-
-    res.json({}).end();
+    //check of request is empty 
+    if(Object.keys(requestData).length === 0){
+        //error no request
+        res.status(400).send('no data, make sure to use ["word"] format').end();
+    }
+    else
+    {
+        //check if requestData has one OR more than one word
+        if(requestData.length > 1){ //more than 1 word
+            res.json('only able to delete 1 word ["word"]').end();
+        }
+        else{ //only 1 word
+            //logic is handled in firebaseApp
+            res.json(await firebaseApp.deleteWord(requestData)).end()
+        }
+    }
 })
 
 //edit word
