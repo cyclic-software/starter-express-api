@@ -48,20 +48,21 @@ router.post('/scores/add', async (req, res) =>{
   }
 })
 
+//deze functie hoeft van de opdachtgever er niet meer in
 //delete score from db
-router.delete('/scores/delete', async (req, res) =>{
-  //check of body is not empty
-  if(Object.keys(req.body) === 0){
-    res.status(400).send("no data").end()
-  }
-  else{
-    const name = req.body.name
-    const score = req.body.score
-    const wpm = req.body.wpm
+// router.delete('/scores/delete', async (req, res) =>{
+//   //check of body is not empty
+//   if(Object.keys(req.body) === 0){
+//     res.status(400).send("no data").end()
+//   }
+//   else{
+//     const name = req.body.name
+//     const score = req.body.score
+//     const wpm = req.body.wpm
 
-    res.json(await firebaseApp.deleteScore(name, score, wpm)).end();
-  }
-})
+//     res.json(await firebaseApp.deleteScore(name, score, wpm)).end();
+//   }
+// })
 
 module.exports = {
     router

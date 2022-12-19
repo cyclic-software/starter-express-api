@@ -33,6 +33,7 @@ async function addWords(word){
   const newDoc = db.collection('words').add({word})
 }
 
+//deze functie hoeft van de opdachtgever er niet meer in
 //delete words from database
 async function deleteWord(word){
   //retrieve docId via field value of 'word'
@@ -77,6 +78,7 @@ async function addScore(newNname, newScore, newWpm) {
   return "score added"
 }
 
+//deze functie hoeft van de opdachtgever er niet meer in
 async function deleteScore(name, score, wpm){
   //get score data
   const getScoreData = await db.collection('scores').where('naam', '==', name).where('score', '==', score).where('wpm', '==', wpm).get()
@@ -97,6 +99,5 @@ module.exports = {
     addWords,
     deleteWord,
     getAllScores,
-    addScore,
-    deleteScore
+    addScore
 }
