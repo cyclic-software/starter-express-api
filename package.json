@@ -14,6 +14,7 @@
     "nodemon": "^2.0.16"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "cyclic-dynamodb": "0.0.21",
     "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",

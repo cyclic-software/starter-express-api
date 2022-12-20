@@ -1,6 +1,7 @@
 const express = require('express')
 const res = require('express/lib/response')
 const app = express()
+const cors = require('cors')
 require('dotenv').config()
 
 //controllers
@@ -11,6 +12,9 @@ const users = require('./controllers/userController')
 //express functions
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+//cors
+app.use(cors())
 
 //controllers
 app.use("/api/", words.router)
