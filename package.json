@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "cryptr": "^6.0.3",
     "express": "^4.18.2",
+    "generate-password": "^1.7.0",
     "mongoose": "^6.8.0",
-    "nodemon": "^2.0.20",
-    "cors": "^2.8.5"
+    "nodemon": "^2.0.20"
   }
 }
