@@ -1,22 +1,33 @@
 {
-  "name": "starter-express-api",
+  "name": "movies-series-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Arabic Movies and Series Scraper",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
-  },
-  "author": "",
+  "keywords": [
+    "movies",
+    "series",
+    "arabic",
+    "asia",
+    "englisch",
+    "netflix",
+    "horror",
+    "action",
+    "sport"
+  ],
+  "author": "Anybody in the world",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
-  },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.20",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "util": "^0.12.5"
   }
 }
