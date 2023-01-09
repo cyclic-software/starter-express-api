@@ -20,6 +20,9 @@ const SignupProject= new mongoose.Schema({
     startdate: {
         type: String,
     },
+    linkonline: {
+        type: String,
+    },
     estimatedtime: {
         type:String,
     },
