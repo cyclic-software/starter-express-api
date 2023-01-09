@@ -1,17 +1,25 @@
 import {request, response} from 'express';
 import SignupProject from '../database/schemas/SignupProjectSchema.js'
-import generator from 'generate-password'
-
-
 
 class SignupProjectController {
+    async find(request, response){
+        try {
+            var id = request.params.id;
+            const contratos = await SignupProject.findById(id);
+            return response.json(contratos);
+        }
+        catch (error) { 
+            console.log(error);
+            return response.status(500).send({
+                error: "Alguma coisa deu errado, tente novamente",
+                mensagem: error
+            })
+        }
+
+    }
     async create(request, response){
         try {
-            const {projname, domain, customer, discount, price, startdate, estimatedtime, file, functionalities, productservice, plataformmodule, objectives, criadoEm} = request.body;
-            //Project Id 
-            if(file){
-                console.log(file);
-            }
+            const {projname, domain, customer, discount, price, startdate, linkonline, estimatedtime, functionalities, productservice, plataformmodule, objectives, criadoEm} = request.body;
 
             let col1pass = generator.generate({
                 length:4,
@@ -46,6 +54,7 @@ class SignupProjectController {
             const signupprojectcontroller = await SignupProject.create({
                 projname,
                 projectid,
+                linkonline,
                 domain, 
                 customer, 
                 discount, 
