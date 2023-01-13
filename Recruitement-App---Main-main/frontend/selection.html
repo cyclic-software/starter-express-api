@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Quiz | Kuizu</title>
+</head>
+<body style="overflow-y: hidden;" onload=getuser()>
+    <nav class="navbar navI navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+          <img src="../frontend/assets/logo.png" width="" height="55" alt="50">
+        </a>
+      <div class="navbar-right user" style="padding: 5px; margin: 10px;">
+        <div id="useritem">
+        </div>
+        <img src="../frontend/assets/pic.png"/>
+      </div>
+    </nav>
+    <div class="selection">
+      <h2>Upcoming Quizzes</h2>
+      <div>
+
+        <div class="col-md-4" id="expandDiv1">
+          <h2>Quiz 1</h2>
+          <h4>Data Visualization</h4>
+          <p>Open till June 10, 2021 at 11:00 am</p>
+          <div id="codeBox1" style="display:none">
+            <label>Enter Code</label>
+            <input type="text" placeholder="Code"/>
+            <button onclick="window.location.href='instructions.html'">Start</button>
+          </div>
+          <button id="join1" onclick="showCode(1)">Join</button>
+        </div>
+
+        <div class="col-md-4" id="expandDiv2">
+          <h2>Quiz 2</h2>
+          <h4>Software Engineering</h4>
+          <p>Open till July 12, 2021 at 09:00 am</p>
+          <div id="codeBox2" style="display:none">
+            <label>Enter Code</label>
+            <input type="text" placeholder="Code"/>
+            <button onclick="window.location.href='instructions.html'">Start</button>
+          </div>
+          <button id="join2" onclick="showCode(2)">Join</button>
+        </div>
+
+        <div class="col-md-4" id="expandDiv3">
+          <h2>Quiz 3</h2>
+          <h4>Web Mining</h4>
+          <p>Open till July 15, 2021 at 08:00 am</p>
+          <div id="codeBox3" style="display:none">
+            <label>Enter Code</label>
+            <input type="text" placeholder="Code"/>
+            <button onclick="window.location.href='instructions.html'">Start</button>
+          </div>
+          <button id="join3" onclick="showCode(3)">Join</button>
+        </div>
+
+      </div>
+      <img src="../frontend/assets/Saly-17.png"/>
+    </div>
+<script>
+  function showCode(a){
+      for(let i=1;i<=3;i++){
+        var x = document.getElementById(`codeBox${i}`);
+        var y = document.getElementById(`expandDiv${i}`);
+        var z = document.getElementById(`join${i}`);
+        if(a===i){
+          if (x.style.display === "none") {
+            x.style.display = "block";
+            y.classList.add("q2");
+            x.classList.add("inputScale");
+            z.style.display="none";
+          }
+        } else {
+            x.style.display = "none";
+            y.classList.remove("q2");
+            x.classList.remove("inputScale");
+            z.style.display="block";
+          }
+      }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

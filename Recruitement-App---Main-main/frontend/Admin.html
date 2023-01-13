@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Admin - KUIZU</title>
+</head>
+<body onload="getuser()">
+    <nav class="navbar navI navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img src="../frontend/assets/logo.png" width="" height="50" alt="50">
+        </a>
+      <div class="navbar-right user" style="padding: 5px; margin: 10px;">
+        <div id="useritem">
+            
+        </div>
+        <img src="../frontend/assets/pic.png"/>
+      </div>
+      </nav>
+      <div class="adminContainer">
+          <div class="adminHeader">
+              <h2>ADMIN PORTAL</h2>
+              <p>Create, Edit and Manage Domain Specific Quizzes and Questions</p>
+          </div>
+          <div class="adminHeader2">
+              <h3>Questionaire : </h3>
+              <button onclick="show()">+ Add Question </button>
+          </div>
+          <div class="questionContainer">
+            <div class="item">
+                <div class="question">
+                    <p>Hello, what is your name ?  I'm mounvi </p>
+                    <div class="options">
+                        <p>A. Option A</p>
+                        <p>A. Option A</p>
+                        <p>A. Option A</p>
+                    </div>
+                </div>
+                <div class="trash">
+                    <i class="fa fa-trash"></i>
+                </div>
+            </div>
+          </div>
+          <div class="quizBtn">
+              <button>Save Quiz</button>
+              <button onclick="window.location.href='AdminView.html'">Post Quiz</button>
+          </div>
+          <div class="modal display-none" id="modal">
+              <div class="modal-main">
+                <i class="fa fa-times" onclick="show()" aria-hidden="true"></i>
+                <h4>Add Question</h4>
+                <div class="stmt">
+                    <label>Statement</label>
+                    <textarea placeholder="Enter the question here" id="description"></textarea>
+                </div>
+                <div>
+                    <label>Options : </label>
+                    <div class="add">
+                        <button onclick="addOptions()">+</button>
+                    </div>
+                </div>
+                <input placeholder="Enter your option" id="options" type="text"></input>
+                <div class="modalOptions" id='modalOptions'>
+                </div>
+                <div class="inputBox">
+                    <label>Enter the Correct Option Index : </label>
+                    <input placeholder="Ex. A" id="correctOption" type="text"></input>
+                </div>
+                <div class="post">
+                    <button onclick="addQuestion()">Post Question</button>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <script>
+        var modal = document.getElementById("modal");
+        var questionContainer = document.getElementsByClassName('questionContainer')[0];
+        var description = document.getElementById("description");
+        var options = document.getElementById("options");
+        const optCon = document.getElementById('modalOptions');
+        var correctOption = document.getElementById('correctOption');
+
+        let opt,optionsArray=[];
+
+        function show(){
+            modal.classList.contains("display-none") ? modal.classList.replace("display-none","display-block") : modal.classList.replace("display-block","display-none");
+        }
+        var questions = [
+            {
+            question:"Question title",
+            options:[
+                "Option 1",
+                "Option 2",
+                "Option 3",
+            ],
+            correctOption:'a'
+        },
+    ]
+
+    function build(){
+        questionContainer.textContent='';
+        questions.forEach((element,index) => {
+            const questionItem = document.createElement("div");
+            questionItem.classList.add('item');
+
+            const option1 = document.createElement("p");
+            option1.textContent=`A. ${element.options[0]}`;
+            const option2 = document.createElement("p");
+            option2.textContent=`B. ${element.options[1]}`;
+            const option3 = document.createElement("p");
+            option3.textContent=`C. ${element.options[2]}`;
+            
+
+            let correct = element.correctOption.toLowerCase();
+
+            correct === 'a' ? option1.style.color="#E88A9B" : 
+                correct === 'b' ? option2.style.color="#E88A9B" : 
+                    correct === 'c' ? option3.style.color="#E88A9B" : 
+                        option4.style.color="#E88A9B";
+            
+            const options = document.createElement("div");
+            options.classList.add('options');
+            options.append(option1,option2,option3);
+
+            const qDescrip = document.createElement("p");
+            qDescrip.textContent = `${index+1}. ${element.question}`;
+            qDescrip.style.fontWeight = 800;
+
+            const question = document.createElement("div");
+            question.classList.add('question');
+
+            question.append(qDescrip,options);
+
+            const closeIcon = document.createElement('i');
+            closeIcon.classList.add('fa','fa-trash');
+            closeIcon.setAttribute('onclick', `deleteQuestion('${element.question}')`);
+
+            const closeContainer = document.createElement("div");
+            closeContainer.classList.add('trash');
+            closeContainer.appendChild(closeIcon);
+
+            questionItem.append(question,closeContainer);
+            questionContainer.appendChild(questionItem);
+        });
+        }
+
+        function addOptions() {
+            optionsArray.push(options.value);
+            options.value='';
+
+            optCon.textContent='';
+
+            optionsArray.forEach((option,index)=>{
+                const opt = document.createElement('p');
+                opt.textContent= `${index+1}. ${option}`;
+                optCon.append(opt);
+            })
+        }
+        function addQuestion() {
+            const q = {
+                question:description.value,
+                options:optionsArray,
+                correctOption:correctOption.value
+            }
+            questions.push(q);
+            description.value='';
+            optCon.textContent='';
+            optionsArray=[];
+            correctOption.value='';
+
+            show();
+            build();
+        }
+        function deleteQuestion(question){
+            questions.forEach((q,i)=>{
+            if(q.question===question){
+                questions.splice(i,1);
+            }
+            build();
+        });
+        }
+        //On load
+        build();
+
+    </script>
+     <script src="./js/login.js"></script>
+</body>
+</html>
