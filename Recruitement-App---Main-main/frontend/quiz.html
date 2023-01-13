@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="https://webgazer.cs.brown.edu/webgazer.js?" defer></script>
+  <script src="./js/script.js" defer></script>
+  <script src="https://cdn.socket.io/4.1.1/socket.io.min.js"
+    integrity="sha384-cdrFIqe3RasCMNE0jeFG9xJHog/tgOVC1E9Lzve8LQN1g5WUHo0Kvk1mawWjxX7a"
+    crossorigin="anonymous" ></script>
+  
+  
+
+  <title>Quiz | Kuizu</title>
+  <style>
+
+  </style>
+</head>
+
+<body onload=getuser()>
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">
+      <img src="../frontend/assets/logo.png" width="" height="50" alt="50">
+    </a>
+    <div class="navbar-right user" style="padding: 5px; margin: 10px;">
+      <div class="useritem" id="useritem">
+      </div>
+      <img src="../frontend/assets/pic.png" />
+    </div>
+  </nav>
+  <audio id="myAudio">
+    <source src="./mj.mp3" type="audio/mp3">
+  </audio>
+  <div class="container">
+    <div style="text-align: center;">
+      <h1>
+        Quiz 2
+      </h1>
+      <h3>
+        Software Engineering
+      </h3>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"> </div>
+      <div class="col-md-6 quiz-box">
+        <div id="question">
+          Which one of the following is not a step of requirement engineering?
+        </div>
+        <div id="options">
+          <div class="option" onclick="select(this)">
+            documentation
+          </div>
+          <div class="option" onclick="select(this)">
+            analysis
+          </div>
+          <div class="option" onclick="select(this)">
+            design
+          </div>
+        </div>
+        <div style="display: flex;">
+          <button style="background: #D3544B;
+              width:300px;
+              margin:auto;
+              margin-top: 5px;
+              padding:10px;
+              border-radius:10px;
+              border:none;
+              outline:none;
+              cursor:pointer;
+              color:white;
+              text-transform: uppercase;" onclick="save(this)">Save</button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div>
+          <div class="row" style="margin-top: 60px;">
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">1</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">2</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">3</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">4</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">5</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div onclick="showQuestion(this)">
+                <div class="question-box">6</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div style="margin-top: 80px; margin-left: 100px; display: flex;
+            justify-content: center;
+            align-items: center;" class="">
+              <button style="background:#2ea100;
+              width:300px;
+              margin:auto;
+              margin-top: 5px;
+              padding:10px;
+              border-radius:10px;
+              border:none;
+              outline:none;
+              cursor:pointer;
+              color:white;
+              text-transform: uppercase;" onclick="result()">Result</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  </div>
+</body>
+
+<script>
+
+  var answers = []
+
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="js/login.js"></script>
+
+</html>
