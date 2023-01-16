@@ -18,8 +18,6 @@ class SignupCustomerController {
             })
 
             const senha = cryptr.encrypt(Senha)
-            const decript = cryptr.decrypt(senha);
-            console.log(decript);
 
             const signupcustomercontroller = await SignupCustomer.create({
                 nome,
