@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import routes from './routes.js';
 import cors from 'cors';
 
+//Data-base Connection
 const dbUrl = "mongodb+srv://FelipeMDuarte:35624652Fenix-@cluster0.jl61ifv.mongodb.net/?retryWrites=true&w=majority";
 const ConnectionParams = {
     useNewUrlParser: true,
@@ -19,7 +20,13 @@ const app = express();
 app.use(cors())
 
 app.use(express.json());
-
+import session from 'express-session';
+app.use(session({
+    secret:"831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624652Fenix-",
+    resave:false,
+    saveUninitialized: true,
+    cookie: {maxAge:3600000}
+}))
 app.use(routes);
 
 
