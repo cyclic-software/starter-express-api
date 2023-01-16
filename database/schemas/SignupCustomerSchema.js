@@ -23,6 +23,10 @@ const SignupCustomer= new mongoose.Schema({
     senha: {
         type:String,
     },
+    senhaisdefault: {
+        type:Boolean,
+        default: true,
+    },
     admin: {
         type:Boolean,
         default: false
