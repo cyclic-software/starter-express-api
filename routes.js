@@ -19,11 +19,11 @@ routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
 
 routes.post("/pagamento/creditcard",paymentController.create)
 
-routes.get("/login", loginController.find)
+routes.post("/login", loginController.find)
 
-routes.post("/login",loginController.create)
+routes.post("/login/changepassword",loginController.create)
 
-routes.post("/forgotpassword",loginController.sendEmail)
+routes.post("/login/changepassword/sendmail",loginController.sendEmail)
 
 routes.get("/contratos/:id", SignupProjectController.find)
 
