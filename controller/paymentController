@@ -1,0 +1,72 @@
+import {request, response} from 'express';
+import axios from 'axios';
+
+
+class CreatePaymentLink {
+    async create(request, response){
+        try {
+            const {reference_id, description, value, installments, number, exp_month, exp_year, security_code, name} = request.body;
+            //Define post
+            let forms = {
+                "reference_id": reference_id,
+                "description": description,
+                "amount": {
+                  "value": Number(value),
+                  "currency": "BRL"
+                },
+                "payment_method": {
+                  "type": "CREDIT_CARD",
+                  "installments": installments,
+                  "capture": false,
+                  "soft_descriptor": "FELIPEMDUARTE",    
+                  "card": {
+                    "number": number,
+                    "exp_month": exp_month,
+                    "exp_year": exp_year,
+                    "security_code": security_code,
+                    "holder": {
+                      "name": name
+                    }
+                  }
+                },
+                "notification_urls": [
+                  "http://www.felipemduarte.com/pagamento-aprovado"
+                ]
+            }
+
+            function axioscredit(){
+                const promise = axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
+                    headers:{
+                        "Authorization": "48D51F6ED65A429EB989F63A0307E765",
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                const dataPromise = promise.then((res)=>res.data);
+
+                return dataPromise;
+            }
+
+            axioscredit()
+            .then(data =>{
+                return response.json({mensagem:"requisição recebida", data})
+            }).catch((err)=>{
+                return response.status(400).send({
+                    error:"não foi possivel fazer pagamento",
+                    mensagem: err
+                })
+            })
+            
+        }
+        catch (error) {
+            return response.status(500).send({
+                error: "falhou em cadastrar conta",
+                mensagem: error
+            })
+
+        }
+    }
+
+}
+
+export default new CreatePaymentLink
