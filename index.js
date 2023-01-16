@@ -13,7 +13,7 @@ app.use(
   })
 )
 
-app.listen(process.env.PORT || 3002)
+app.listen(process.env.PORT || 8000)
 
 // ROUTES:
 app.all('/', (req, res) => {
@@ -21,15 +21,30 @@ app.all('/', (req, res) => {
 })
 
 /**
- * Main endpoint to trigger web crawler 
- * Use of Directory Example: /api/sections?subject=CPSC&number=110'
+ * Main endpoint to trigger web crawler, winter courses
+ * Use of Directory Example: /api/W/sections?subject=CPSC&number=210&term=1
  */
-app.get("/api/sections", async (req, res) => {
+app.get("/api/W/sections", async (req, res) => {
     const subject = req.query.subject
     const number = req.query.number
-    // const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=2022&sesscd=W&dept=${subject}&pname=subjarea`
+    const term = req.query.term;
     const url = `https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept=${subject}&course=${number}`
-    const data = await crawl(url)
+    const data = await crawl(url, term)
+    res.status(200).json({ sections: data })
+  })
+
+/**
+ * Main endpoint to trigger web crawler, summer courses
+ * Use of Directory Example: /api/S/sections?subject=CPSC&number=210&term=1
+ */
+ app.get("/api/S/sections", async (req, res) => {
+    const subject = req.query.subject
+    const number = req.query.number
+    const term = req.query.term;
+    //TODO: year needs to change appropriately
+    const year = "2022"
+    const url = `https://courses.students.ubc.ca/cs/courseschedule?tname=subj-course&course=${number}&sessyr=${year}&sesscd=S&dept=${subject}&pname=subjarea`
+    const data = await crawl(url, term)
     res.status(200).json({ sections: data })
   })
 
@@ -41,7 +56,7 @@ app.get("/api/sections", async (req, res) => {
  * Connects and retrieve data from SSC. Main execution function for web scrapping SSC data.
  * @param {string} url 
  */
- const crawl = async (url) => {
+ const crawl = async (url, term) => {
     let sections = new Array;
     let html;
     let success = false;
@@ -61,9 +76,10 @@ app.get("/api/sections", async (req, res) => {
     const $ = cheerio.load(html);
     const trs = $('.table.table-striped.section-summary tbody tr');
     trs.each((idx, tr) => {
-        let newSection = new Object
-        readSectionFromTr($, newSection, tr)
-        sections.push(newSection)
+        const newSection = readSectionFromTr($, tr, term)
+        if (newSection !== null) {
+            sections.push(newSection)
+        }
     })
     
     return sections
@@ -93,8 +109,12 @@ const getHTML = (url) => {
  * @param {Section} newSection 
  * @param {HTMLElement} tr 
  */
-const readSectionFromTr = ($, newSection, tr) => {
+const readSectionFromTr = ($, tr, userSelectedTerm) => {
+    
     const tds = $(tr).children('td')
+
+    //TODO skip the rest, if term != term from Tr
+    if (!$(tds[3]).text().includes(userSelectedTerm)) return null;
     
     // parse information from tr element:
     const id = createUUID();
@@ -112,6 +132,7 @@ const readSectionFromTr = ($, newSection, tr) => {
     )
     
     // write in newSection object
+    let newSection = new Object
     newSection['id'] = id;
     newSection['status'] = status;
     newSection['name'] = name;
@@ -122,6 +143,8 @@ const readSectionFromTr = ($, newSection, tr) => {
     newSection['term'] = term;
     newSection['mode'] = mode;
     newSection['schedule'] = schedule;
+
+    return newSection;
 }
 
 /**
