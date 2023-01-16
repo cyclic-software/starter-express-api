@@ -3,7 +3,9 @@ import contactController from './controller/contactController.js';
 import HomeContactController from './controller/HomeContactController.js';
 import SignupCustomerController from './controller/SignupCustomerController.js';
 import SignupProjectController from './controller/SignupProjectController.js';
-
+import paymentController from './controller/paymentController.js';
+import loginController from './controller/loginController.js';
+import login from './middleware/login.js';
 
 const routes = Router();
 
@@ -11,9 +13,17 @@ routes.post("/contact", contactController.create)
 
 routes.post("/contacthome", HomeContactController.create)
 
-routes.post("/admin/cadastrar/cliente", SignupCustomerController.create)
+routes.post("/admin/cadastrar/cliente",login,SignupCustomerController.create)
 
-routes.post("/admin/cadastrar/projeto",SignupProjectController.create)
+routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
+
+routes.post("/pagamento/creditcard",paymentController.create)
+
+routes.get("/login", loginController.find)
+
+routes.post("/login",loginController.create)
+
+routes.post("/forgotpassword",loginController.sendEmail)
 
 routes.get("/contratos/:id", SignupProjectController.find)
 
