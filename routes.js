@@ -17,6 +17,8 @@ routes.post("/admin/cadastrar/cliente",login,SignupCustomerController.create)
 
 routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
 
+routes.post("/encontrar/endereco",SignupCustomerController.adress)
+
 routes.post("/pagamento/creditcard",paymentController.create)
 
 routes.post("/login", loginController.find)
