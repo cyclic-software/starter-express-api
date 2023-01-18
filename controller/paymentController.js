@@ -1,5 +1,6 @@
 import {request, response} from 'express';
 import PaymentCreate from '../database/schemas/PaymentSchema.js'
+import SignupProject from '../database/schemas/SignupProjectSchema.js'
 
 import axios from 'axios';
 
@@ -7,7 +8,13 @@ import axios from 'axios';
 class CreatePaymentLink {
     async create(request, response){
         try {
-            const {customername, customeremail, rg, cpf, adress, cnpj, reference_id, description, value, installments, number, exp_month, exp_year, security_code, name} = request.body;
+            const {customername, customeremail, rg, cpf, adress, cnpj, reference_id, description, installments, number, exp_month, exp_year, security_code, name} = request.body;
+            
+            const projectfind = await SignupProject.findById(reference_id);
+            let pricerange = projectfind.generalprice;
+            let pricediscount = projectfind.generaldiscount;
+            let pricetotal = pricerange - pricediscount;
+            
             //Define post
             let forms = {
                 "reference_id": reference_id,
@@ -17,7 +24,7 @@ class CreatePaymentLink {
                     "email": customeremail,
                 },
                 "amount": {
-                  "value": Number(value),
+                  "value": Number(pricetotal),
                   "currency": "BRL"
                 },
                 "payment_method": {
