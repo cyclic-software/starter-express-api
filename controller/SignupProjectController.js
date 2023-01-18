@@ -55,11 +55,13 @@ class SignupProjectController {
             const pricefilterb = String(pricefiltera).replaceAll(',', '.');
             const pricefilterc = String(pricefilterb).replaceAll('R$', '');
             const pricefilter = String(pricefilterc).replaceAll(' ', '');
+            const totalpricfilter = String(pricefilter).replaceAll('.', '');
             
             const discountfiltera = String(discount).replaceAll('.', '');
             const discountfilterb = String(discountfiltera).replaceAll(',', '.');
             const discountfilterc = String(discountfilterb).replaceAll('R$', '');
             const discountfilter = String(discountfilterc).replaceAll(' ', '');
+            const totaldisfilter = String(discountfilter).replaceAll('.', '');
 
             const signupprojectcontroller = await SignupProject.create({
                 projname,
@@ -67,7 +69,9 @@ class SignupProjectController {
                 linkonline,
                 domain, 
                 customer, 
+                generaldiscount:totaldisfilter,
                 discount:discountfilter, 
+                generalprice:totalpricfilter,
                 price:pricefilter,
                 startdate, 
                 estimatedtime, 
