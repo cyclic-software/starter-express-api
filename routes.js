@@ -15,9 +15,9 @@ routes.post("/contacthome", HomeContactController.create)
 
 routes.post("/admin/cadastrar/cliente",login,SignupCustomerController.create)
 
-routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
-
 routes.post("/encontrar/endereco",SignupCustomerController.adress)
+
+routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
 
 routes.post("/pagamento/creditcard",paymentController.create)
 
