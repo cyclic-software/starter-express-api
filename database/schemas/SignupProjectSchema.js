@@ -11,7 +11,13 @@ const SignupProject= new mongoose.Schema({
     customer: {
         type:String,
     },
+    generaldiscount:{
+        type:String,
+    },
     discount: {
+        type:String,
+    },
+    generalprice:{
         type:String,
     },
     price: {
