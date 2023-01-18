@@ -8,7 +8,6 @@ const cryptr = new Cryptr('831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624
 const secretkey = '831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624652Fenix-';
 
 class loginController {
-
     async sendEmail(request, response){
         try {
             const {email} = request.body;
@@ -229,64 +228,73 @@ class loginController {
     }
     async create(request, response){
         try {
-            const {email,senhaatual,senhaconfirmacao,senha} = request.body;
+            const {encrip,senhaconfirmacao,senha} = request.body;
 
-            const userfind = await SignupCustomer.find({"email":email})
-            .catch(err=>{
-                console.log(err);
-            });
-
-            //Email not exist
-            if(userfind[0] === undefined){
+            //Check if is filled
+            if(!senhaconfirmacao || !senha || !encrip){
                 return response.status(400).send({
-                    resultado: "Este e-mail não existe cadastrado"
+                    msg:"Por favor, preencha todos campos"
                 })
             }
 
-            //Wrong Password
-            let userpassword = userfind[0].senha;
-            var decriptPass = cryptr.decrypt(userpassword);
-            console.log(decriptPass);
-            if(decriptPass !== senhaatual) {
-                return response.status(400).send({
-                    resultado: "Não coincide com a senha atual"
-                })
-            }
-            
-            //Password Confirmation is right
+            //Check if password coincide
             if(senha !== senhaconfirmacao){
                 return response.status(400).send({
-                    resultado: "Senhas de confirmação estão incorretas"
+                    msg:"Senhas inseridas não coincidem"
                 })
             }
 
-            //Password can be like the last
-            if(senha === senhaatual){
+            //Decrypt the code sended by link
+            let desencrip = cryptr.decrypt(encrip);
+            let dataexp = desencrip.split("--")[0];
+            let id = desencrip.split("--")[1];
+
+            //Check if expired
+            var currentdate = new Date();
+            var options = { hour12: false };
+            var current = currentdate.toLocaleString('pt-BR', options);
+            if(dataexp < current){
                 return response.status(400).send({
-                    resultado: "Senha não pode ser igual antiga"
+                    msg:"Link de mudança expirado, clique para alterar senha novamente",
+                    reason: err
                 })
             }
 
-            let newPassword = cryptr.encrypt(senha);
+            //Search for user
+            const user = await SignupCustomer.findById(id)
+            .catch(err=>{
+                return response.status(400).send({
+                    msg:"Não foi possivel encontrar id",
+                    reason: err
+                })
+            });
 
-            await SignupCustomer.findOneAndUpdate({"email":email}, {$set:{senhaisdefault: false}},{new: true})
+            //Check if old password is equal the actual
+            let oldpass = cryptr.decrypt(user.senha)
+            if (oldpass === senha){
+                return response.status(400).send({
+                    msg:"Insira uma nova senha.",
+                })
+            }
+
+            //Change de password
+            let newpassword = cryptr.encrypt(senha)
+            await SignupCustomer.findOneAndUpdate({"_id":id}, {$set:{senha: newpassword}},{new: true})
             .clone()
             .catch(err=>{
                 console.log(err);
             });
 
-            await SignupCustomer.findOneAndUpdate({"email":email}, {$set:{senha: newPassword}},{new: true},(err, doc) =>{
-                if(err){
-                    console.log(err);
-                } else {
-                    return response.status(200).send({
-                        resultado: "senha alterada com sucesso",
-                        doc
-                    })
-                }
-            })
-            .clone();
+            await SignupCustomer.findOneAndUpdate({"_id":id}, {$set:{senhaisdefault: false}},{new: true})
+            .clone()
+            .catch(err=>{
+                console.log(err);
+            });
 
+            //sucessfull altered
+            return response.status(200).send({
+                msg: "Senha alterada com sucesso",
+            })
         }
 
         catch (error) {
