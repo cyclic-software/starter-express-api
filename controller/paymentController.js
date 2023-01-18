@@ -1,15 +1,21 @@
 import {request, response} from 'express';
+import PaymentCreate from '../database/schemas/PaymentSchema.js'
+
 import axios from 'axios';
 
 
 class CreatePaymentLink {
     async create(request, response){
         try {
-            const {reference_id, description, value, installments, number, exp_month, exp_year, security_code, name} = request.body;
+            const {customername, customeremail, rg, cpf, adress, cnpj, reference_id, description, value, installments, number, exp_month, exp_year, security_code, name} = request.body;
             //Define post
             let forms = {
                 "reference_id": reference_id,
                 "description": description,
+                "customer": {
+                    "name": customername,
+                    "email": customeremail,
+                },
                 "amount": {
                   "value": Number(value),
                   "currency": "BRL"
@@ -49,8 +55,21 @@ class CreatePaymentLink {
 
             axioscredit()
             .then(data =>{
+                PaymentCreate.create({
+                    rg, 
+                    cpf, 
+                    adress, 
+                    cnpj,
+                    description,
+                    reference_id,
+                    price:value,
+                    installments,
+                    customername,
+                    customeremail,
+                }).catch(err=>{console.log(err)});
                 return response.json({mensagem:"requisição recebida", data})
             }).catch((err)=>{
+                console.log(err);
                 return response.status(400).send({
                     error:"não foi possivel fazer pagamento",
                     mensagem: err
@@ -59,6 +78,7 @@ class CreatePaymentLink {
             
         }
         catch (error) {
+            console.log(error);
             return response.status(500).send({
                 error: "falhou em cadastrar conta",
                 mensagem: error
