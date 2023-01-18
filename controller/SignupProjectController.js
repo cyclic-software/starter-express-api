@@ -1,5 +1,6 @@
 import {request, response} from 'express';
 import SignupProject from '../database/schemas/SignupProjectSchema.js'
+import 'generator from 'generate-password'
 
 class SignupProjectController {
     async find(request, response){
