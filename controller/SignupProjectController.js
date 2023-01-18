@@ -50,7 +50,11 @@ class SignupProjectController {
 
             let projectid = col1pass + "-" + col2pass + '-' + col3pass + catchletters(projname);
             //Project Id generator Closed
-
+            
+            const pricefiltera = String(price).replaceAll('.', '');
+            const pricefilterb = String(pricefiltera).replaceAll(',', '.');
+            const pricefilterc = String(pricefilterb).replaceAll('R$', '');
+            const pricefilter = String(pricefilterc).replaceAll(' ', '');
 
             const signupprojectcontroller = await SignupProject.create({
                 projname,
@@ -59,7 +63,7 @@ class SignupProjectController {
                 domain, 
                 customer, 
                 discount, 
-                price,
+                price:pricefilter,
                 startdate, 
                 estimatedtime, 
                 functionalities, 
