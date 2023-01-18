@@ -69,7 +69,7 @@ class CreatePaymentLink {
                     cnpj,
                     description,
                     reference_id,
-                    price:value,
+                    price:pricetotal,
                     installments,
                     customername,
                     customeremail,
