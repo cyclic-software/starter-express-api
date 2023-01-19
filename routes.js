@@ -21,6 +21,8 @@ routes.post("/admin/cadastrar/projeto",login,SignupProjectController.create)
 
 routes.post("/pagamento/creditcard",paymentController.create)
 
+routes.post("/pagamento/checkstatus",paymentController.check)
+
 routes.post("/login", loginController.find)
 
 routes.post("/login/changepassword",loginController.create)
