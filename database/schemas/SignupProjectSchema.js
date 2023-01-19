@@ -1,41 +1,54 @@
 import mongoose from 'mongoose'
 
-const PaymentCreate= new mongoose.Schema({
-    reference_id: {
+const SignupProject= new mongoose.Schema({
+    projname: {
         type:String,
         required:true,
     },
-    paymentid: {
+    domain: {
         type:String,
     },
-    statuspayment: {
+    customer: {
         type:String,
     },
-    rg: {
+    generaldiscount:{
         type:String,
     },
-    cpf: {
+    discount: {
         type:String,
     },
-    cnpj: {
-        type:String,
+    paid: {
+        type:Boolean,
+        default: false,
     },
-    adress: {
+    generalprice:{
         type:String,
     },
     price: {
         type:String,
     },
-    installments: {
+    startdate: {
         type: String,
     },
-    customername: {
+    linkonline: {
         type: String,
     },
-    customeremail: {
-        type: String,
+    estimatedtime: {
+        type:String,
     },
-    description: {
+    functionalities: {
+        type:String,
+    },
+    productservice: {
+        type:String,
+    },
+    plataformmodule: {
+        type:String,
+    },
+    objectives: {
+        type:String,
+    },
+    projectid:{
         type:String,
     },
     criadoEm: {
@@ -44,4 +57,4 @@ const PaymentCreate= new mongoose.Schema({
     }
 })
 
-export default mongoose.model("PaymentCreate", PaymentCreate);
+export default mongoose.model("SignupProject", SignupProject);
