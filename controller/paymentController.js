@@ -6,10 +6,52 @@ import axios from 'axios';
 
 
 class CreatePaymentLink {
+    async check(request, response){
+        try {
+            const {id} = request.body;
+            const projectfind = await SignupProject.findById(id);
+
+            if(projectfind === undefined){
+                return response.status(400).send({
+                    error: "Não foi encontrado um projeto.",
+                })
+            }
+
+            let ispaid = projectfind.paid;
+            if(ispaid === false){
+                return response.status(400).send({
+                    error: "Este projeto, não houve pagamento",
+                })
+            } 
+
+            const paymentfind = await PaymentCreate.find({"reference_id":id});
+            if(paymentfind[0] === undefined){
+                return response.status(500).send({
+                    error: "Nenhum pagamento foi criado.",
+                })
+            } 
+
+            let status = paymentfind[0].statuspayment;
+            let paymentid = paymentfind[0].paymentid;
+        
+            return response.json({
+                mensagem:"Requisição feita com sucesso", 
+                statuspagamento: status,
+                pagamentoid: paymentid
+            })
+        }
+        catch (error) {
+            console.log(error);
+            return response.status(500).send({
+                error: "falhou em cadastrar conta",
+                mensagem: error
+            })
+
+        }
+    }
     async create(request, response){
         try {
             const {customername, customeremail, rg, cpf, adress, cnpj, reference_id, description, installments, number, exp_month, exp_year, security_code, name} = request.body;
-            
             const projectfind = await SignupProject.findById(reference_id);
             let pricerange = projectfind.generalprice;
             let pricediscount = projectfind.generaldiscount;
@@ -62,13 +104,21 @@ class CreatePaymentLink {
 
             axioscredit()
             .then(data =>{
+                SignupProject.findOneAndUpdate({"_id":reference_id}, {$set:{paid: true}},{new: true})
+                .clone()
+                .catch(err=>{
+                    console.log(err);
+                });
+                let statuspayment = data.status;
                 PaymentCreate.create({
                     rg, 
                     cpf, 
                     adress, 
                     cnpj,
+                    paymentid:data.id,
                     description,
                     reference_id,
+                    statuspayment,
                     price:pricetotal,
                     installments,
                     customername,
