@@ -17,6 +17,10 @@ const SignupProject= new mongoose.Schema({
     discount: {
         type:String,
     },
+    paid: {
+        type:Boolean,
+        default: false,
+    },
     generalprice:{
         type:String,
     },
