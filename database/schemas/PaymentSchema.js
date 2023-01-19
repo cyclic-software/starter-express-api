@@ -5,10 +5,19 @@ const PaymentCreate= new mongoose.Schema({
         type:String,
         required:true,
     },
+    paymentid: {
+        type:String,
+    },
+    statuspayment: {
+        type:String,
+    },
     rg: {
         type:String,
     },
     cpf: {
+        type:String,
+    },
+    cnpj: {
         type:String,
     },
     adress: {
