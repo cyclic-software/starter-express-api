@@ -330,7 +330,7 @@ class CreatePaymentLink {
                         price:pricetotal,
                         installments,
                         customername,
-                        customeremail,
+                        customeremail:String(customeremail),
                     }).catch(err=>{console.log(err)});
                     return response.json({mensagem:"requisição recebida", paid:false}) 
                 }
