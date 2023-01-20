@@ -223,13 +223,13 @@ class CreatePaymentLink {
                 ]
             }
 
-            async function axioscapture(id){
+            function axioscapture(id){
                 let forms = {
                     "amount":{
                         "value": pricetotal
                     }
                 }
-                const promise = await axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
+                const promise = axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
                     headers:{
                         Authorization: "48D51F6ED65A429EB989F63A0307E765",
                         "content-Type": "application/json",
@@ -242,8 +242,8 @@ class CreatePaymentLink {
                 return dataPromise;
             }
 
-            async function axioscredit(){
-                const promise = await axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
+            function axioscredit(){
+                const promise = axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
                     headers:{
                         "Authorization": "48D51F6ED65A429EB989F63A0307E765",
                         "Content-Type": "application/json"
