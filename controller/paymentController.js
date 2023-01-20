@@ -223,13 +223,13 @@ class CreatePaymentLink {
                 ]
             }
 
-            function axioscapture(id){
+            async function axioscapture(id){
                 let forms = {
                     "amount":{
                         "value": pricetotal
                     }
                 }
-                const promise = axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
+                const promise = await axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
                     headers:{
                         Authorization: "48D51F6ED65A429EB989F63A0307E765",
                         "content-Type": "application/json",
@@ -242,8 +242,8 @@ class CreatePaymentLink {
                 return dataPromise;
             }
 
-            function axioscredit(){
-                const promise = axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
+            async function axioscredit(){
+                const promise = await axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
                     headers:{
                         "Authorization": "48D51F6ED65A429EB989F63A0307E765",
                         "Content-Type": "application/json"
@@ -255,8 +255,8 @@ class CreatePaymentLink {
                 return dataPromise;
             }
 
-            async function saveDatabase(res){
-                await PaymentCreate.create({
+            function saveDatabase(res){
+                PaymentCreate.create({
                     rg, 
                     cpf, 
                     adress, 
@@ -270,7 +270,6 @@ class CreatePaymentLink {
                     installments,
                     customername,
                 })
-                .save()
                 .then(doc=>{
                     return doc
                 })
@@ -281,7 +280,7 @@ class CreatePaymentLink {
 
             let customer = await SignupCustomer.find({"email":customeremail})
             console.log(customer[0]);
-            async function saveUser(){
+            function saveUser(){
                 if(customer[0] === undefined || customer[0] === ""){
                     var Senha = generator.generate({
                         length:10,
@@ -290,12 +289,11 @@ class CreatePaymentLink {
                         uppercase: true,
                     })
                     const senha = cryptr.encrypt(Senha)
-                    await SignupCustomer.create({
+                    SignupCustomer.create({
                         nome:customername,
                         email:customeremail,
                         senha
                     })
-                    .save()
                     .catch(err=>{
                         console.log(err);
                     })
@@ -306,10 +304,9 @@ class CreatePaymentLink {
             .then(data =>{
                 let statuspayment = data.status;
                 console.log(statuspayment);
-                console.log(data);
 
                 //If authorized capture the charge 
-                if(data.status === "AUTHORIZED"){
+                if(data.status === "AUTHORIZED" && data !== undefined){
                     //Then charge the price
                     axioscapture(data.id)
                     .then(res=>{
