@@ -6,6 +6,7 @@ import SignupProjectController from './controller/SignupProjectController.js';
 import paymentController from './controller/paymentController.js';
 import loginController from './controller/loginController.js';
 import login from './middleware/login.js';
+import customer from './middleware/customer.js';
 
 const routes = Router();
 
@@ -25,7 +26,9 @@ routes.post("/pagamento/checkstatus",paymentController.check)
 
 routes.post("/admin/changestatus",login,paymentController.changestatus)
 
-routes.post("/login", loginController.find)
+routes.post("/login",loginController.find)
+
+routes.get("/conta/painel-usuario", customer, loginController.getinfo)
 
 routes.post("/login/changepassword",loginController.create)
 
