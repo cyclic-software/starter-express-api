@@ -1,33 +1,153 @@
 import {request, response} from 'express';
 import PaymentCreate from '../database/schemas/PaymentSchema.js'
 import SignupProject from '../database/schemas/SignupProjectSchema.js'
-
+import SignupCustomer from '../database/schemas/SignupCustomerSchema.js'
 import axios from 'axios';
-
+import generator from 'generate-password';
+import Cryptr from 'cryptr';
+const cryptr = new Cryptr('831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624652Fenix-')
 
 class CreatePaymentLink {
+    async changestatus(request, response){
+        try {
+            const {id,status} = request.body
+            
+            //Check values was sent
+            if(!id || !status){
+                return response.status(400).send({
+                    error: "Preencha todas informações.",
+                })
+            }
+            
+            //Find the payment history by the last document
+            const paymentfind = await PaymentCreate
+            .find({"reference_id":id})
+            .sort({created_at: -1})
+            .catch(err=>console.log(err));
+            
+            //If there is no payment history
+            if(paymentfind[0] === undefined){
+                return response.status(400).send({
+                    error: "Nenhum pagamento foi criado ou projeto foi pago.",
+                })
+            } 
+            
+            let paymentid = paymentfind[0].paymentid;
+            function axioscapture(id){
+                let forms = {
+                    "amount":{
+                        "value": pricetotal
+                    }
+                }
+                const promise = axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
+                    headers:{
+                        Authorization: "48D51F6ED65A429EB989F63A0307E765",
+                        "content-Type": "application/json",
+                        accept: "application/json"
+                    }
+                });
+
+                const dataPromise = promise.then((res)=>res.data);
+
+                return dataPromise;
+            }
+
+            //If was in-analysis and went to authorized
+            if(status === PAID){
+                //send email
+                if(paymentfind[0].statuspayment === "PAID"){
+                    return response.status(400).send({
+                        error: "Valor não pode ser cobrado duas vezes.",
+                        mensagem: error
+                    })
+                }
+                //Create an user
+                let customer = SignupCustomer.find({"email":paymentfind[0].customeremail});
+                if(customer[0] === undefined){
+                    var Senha = generator.generate({
+                        length:10,
+                        numbers: true,
+                        lowercase: true,
+                        uppercase: true,
+                    })
+                    const senha = cryptr.encrypt(Senha)
+                    await SignupCustomer.create({
+                        nome:paymentfind[0].customername,
+                        email:paymentfind[0].customeremail,
+                        senha
+                    })
+                }
+                //Charge the price
+                axioscapture(paymentid)
+                .then(res => {
+                    console.log(res);
+                    //If could be able to charge
+                    if(res.status === 201 || res.status === 200){
+                        //Create new payment record
+                        PaymentCreate.create({
+                            rg, 
+                            cpf, 
+                            adress, 
+                            cnpj,
+                            paymentid:res.id,
+                            description,
+                            reference_id,
+                            statuspayment:"PAID",
+                            price:paymentfind[0].price,
+                            installments,
+                            customername,
+                            customeremail,
+                            }).catch(err=>{console.log(err)});
+                        }
+                })
+                .catch(err=>{
+                    console.log(err);
+                    return response.status(500).json({mensagem:"requisição não aprovada",error:err})
+                })
+                return response.json({mensagem:"requisição aprovada", paid:true, data:paymentfind[0]})
+            }
+
+            if(status === DECLINED){
+               await PaymentCreate.create({
+                    rg: paymentfind[0].rg, 
+                    cpf: paymentfind[0].cpf, 
+                    adress: paymentfind[0].adress, 
+                    cnpj: paymentfind[0].cnpj,
+                    paymentid:paymentfind[0].paymentid,
+                    description: paymentfind[0].description,
+                    reference_id: paymentfind[0].reference_id,
+                    statuspayment:"DECLINED",
+                    price:paymentfind[0].price,
+                    installments: paymentfind[0].installments,
+                    customername: paymentfind[0].customername,
+                    customeremail: paymentfind[0].customeremail,
+                }).catch(err=>{console.log(err)});
+
+                //Send email
+            }
+
+        }
+        catch (error) {
+            console.log(error);
+            return response.status(500).send({
+                error: "falhou em cadastrar conta",
+                mensagem: error
+            })
+        }
+
+    }
     async check(request, response){
         try {
             const {id} = request.body;
-            const projectfind = await SignupProject.findById(id);
 
-            if(projectfind === undefined){
-                return response.status(400).send({
-                    error: "Não foi encontrado um projeto.",
-                })
-            }
-
-            let ispaid = projectfind.paid;
-            if(ispaid === false){
-                return response.status(400).send({
-                    error: "Este projeto, não houve pagamento",
-                })
-            } 
-
-            const paymentfind = await PaymentCreate.find({"reference_id":id});
+            //If not found the payment
+            const paymentfind = await PaymentCreate
+            .find({"reference_id":id})
+            .sort({created_at: -1})
+            .catch(err=>console.log(err));
             if(paymentfind[0] === undefined){
                 return response.status(500).send({
-                    error: "Nenhum pagamento foi criado.",
+                    error: "Nenhum pagamento foi criado ou projeto foi pago.",
                 })
             } 
 
@@ -93,6 +213,25 @@ class CreatePaymentLink {
                 ]
             }
 
+            function axioscapture(id){
+                let forms = {
+                    "amount":{
+                        "value": pricetotal
+                    }
+                }
+                const promise = axios.post(`https://sandbox.api.pagseguro.com/charges/${id}/capture`, forms, {
+                    headers:{
+                        Authorization: "48D51F6ED65A429EB989F63A0307E765",
+                        "content-Type": "application/json",
+                        accept: "application/json"
+                    }
+                });
+
+                const dataPromise = promise.then((res)=>res.data);
+
+                return dataPromise;
+            }
+
             function axioscredit(){
                 const promise = axios.post("https://sandbox.api.pagseguro.com/charges", forms, {
                     headers:{
@@ -108,12 +247,9 @@ class CreatePaymentLink {
 
             axioscredit()
             .then(data =>{
-                SignupProject.findOneAndUpdate({"_id":reference_id}, {$set:{paid: true}},{new: true})
-                .clone()
-                .catch(err=>{
-                    console.log(err);
-                });
                 let statuspayment = data.status;
+
+                //Save on database 
                 PaymentCreate.create({
                     rg, 
                     cpf, 
@@ -128,7 +264,56 @@ class CreatePaymentLink {
                     customername,
                     customeremail,
                 }).catch(err=>{console.log(err)});
-                return response.json({mensagem:"requisição recebida", data})
+
+                //If authorized capture the charge 
+                if(data.status === "AUTHORIZED"){
+                    let customer = SignupCustomer.find({"email":customeremail});
+                    //Create user
+                    if(customer[0] === undefined){
+                        var Senha = generator.generate({
+                            length:10,
+                            numbers: true,
+                            lowercase: true,
+                            uppercase: true,
+                        })
+                        const senha = cryptr.encrypt(Senha)
+                        SignupCustomer.create({
+                            nome:customername,
+                            email:customeremail,
+                            senha
+                        })
+                    }
+                    //Then charge the price
+                    axioscapture(data.id)
+                    .then(res=>{
+                        console.log(res);
+                        //If could be able to charge
+                        if(res.status === 201 || res.status === 200){
+                            //Create new payment record
+                            PaymentCreate.create({
+                                rg, 
+                                cpf, 
+                                adress, 
+                                cnpj,
+                                paymentid:res.id,
+                                description,
+                                reference_id,
+                                statuspayment:"PAID",
+                                price:pricetotal,
+                                installments,
+                                customername,
+                                customeremail,
+                            }).catch(err=>{console.log(err)});
+                        }
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    })
+                    return response.json({mensagem:"requisição aprovada", paid:true, data})
+                } 
+                else {
+                    return response.json({mensagem:"requisição recebida", data}) 
+                }
             }).catch((err)=>{
                 console.log(err);
                 return response.status(400).send({
