@@ -23,6 +23,8 @@ routes.post("/pagamento/creditcard",paymentController.create)
 
 routes.post("/pagamento/checkstatus",paymentController.check)
 
+routes.post("/admin/changestatus",login,paymentController.changestatus)
+
 routes.post("/login", loginController.find)
 
 routes.post("/login/changepassword",loginController.create)
