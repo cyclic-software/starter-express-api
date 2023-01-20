@@ -1,13 +1,66 @@
 import {request, response} from 'express';
 import SignupCustomer from '../database/schemas/SignupCustomerSchema.js'
 import SignupProject from '../database/schemas/SignupProjectSchema.js'
+import PaymentCreate from '../database/schemas/PaymentSchema.js'
 import jwt from 'jsonwebtoken';
 import Cryptr from 'cryptr';
 import { MailtrapClient } from 'mailtrap';
 const cryptr = new Cryptr('831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624652Fenix-');
 const secretkey = '831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624652Fenix-';
+const customerkey = 'fa1r90ur@:5513616na-sigileauth-@:public=481905uri1nfaon0@8felipemd';
+
 
 class loginController {
+    async getinfo(request,response){
+        try {
+            //Catch encripted id in user
+            let user = request.usuario;
+            let decripuser = cryptr.decrypt(user.user_id)
+
+            //Catch user e-mail
+            const userfind = await SignupCustomer.findById(decripuser);
+            //If exists
+            if(userfind === undefined || userfind === ""){
+                return response.status(400).send({
+                    error: "O Token de Autenticação foi alterado ou não funciona mais",
+                })
+            }
+
+            //Searches for payments
+            const paymentfind = await PaymentCreate
+            .find({"customeremail":userfind.email})
+            .sort({created_at: -1})
+            .catch(err=>{console.log(err)});
+            console.log(paymentfind);
+            if(paymentfind[0] === undefined || paymentfind[0] === ""){
+                return response.status(500).send({
+                    error: "Não foi possivel localizar o pagamento",
+                })
+            }
+
+            //Searches for project
+            const projectfind = await SignupProject
+            .findById(paymentfind[0].reference_id)
+            .catch(err=>{console.log(err)});
+            if(projectfind === undefined || projectfind === ""){
+                return response.status(500).send({
+                    error: "Não foi possivel localizar o projeto",
+                })
+            }
+
+            return response.status(200).send({
+                projeto: projectfind,
+                pagamento: paymentfind[0]
+            })
+        }
+        catch (error) {
+            return response.status(500).send({
+                error: "falhou em captar a mensagem",
+                mensagem: error
+            })
+
+        }
+    }
     async sendEmail(request, response){
         try {
             const {email} = request.body;
@@ -40,11 +93,9 @@ class loginController {
             }
             //Format the data
             var currentdate = new Date().addHours(12);
-            var options = { hour12: false };
-            var current = currentdate.toLocaleString('pt-BR', options);
 
             //Encript
-            let encrip = cryptr.encrypt(String(current)+"--"+userId);
+            let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
             let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
 
             //Now send the email
@@ -194,8 +245,14 @@ class loginController {
                     })     
                 }
 
+                let useridencrip = cryptr.encrypt(userId)
+                const customertoken = jwt.sign({
+                    user_id:useridencrip,
+                }, customerkey, {expiresIn:"1h"})
                 return response.status(200).send({
                     resultado: "Você foi autenticado com E-Mail",
+                    nivel: "Usuario",
+                    token: customertoken
                 })
             }
 
@@ -250,10 +307,10 @@ class loginController {
             let id = desencrip.split("--")[1];
 
             //Check if expired
-            var currentdate = new Date();
-            var options = { hour12: false };
-            var current = currentdate.toLocaleString('pt-BR', options);
-            if(dataexp < current){
+            var current = new Date();
+            dataexp = new Date(dataexp);
+            
+            if(current > dataexp){
                 return response.status(400).send({
                     msg:"Link de mudança expirado, clique para alterar senha novamente",
                     reason: err
