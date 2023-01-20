@@ -33,11 +33,13 @@ class CreatePaymentLink {
 
             let status = paymentfind[0].statuspayment;
             let paymentid = paymentfind[0].paymentid;
+            let paymentDate = paymentfind[0].criadoEm;
         
             return response.json({
                 mensagem:"Requisição feita com sucesso", 
                 statuspagamento: status,
-                pagamentoid: paymentid
+                pagamentoid: paymentid,
+                pagamentodata: paymentDate
             })
         }
         catch (error) {
