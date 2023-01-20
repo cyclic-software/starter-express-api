@@ -305,6 +305,8 @@ class CreatePaymentLink {
             axioscredit()
             .then(data =>{
                 let statuspayment = data.status;
+                console.log(statuspayment);
+                console.log(data);
 
                 //If authorized capture the charge 
                 if(data.status === "AUTHORIZED"){
