@@ -265,6 +265,7 @@ class CreatePaymentLink {
                     description,
                     reference_id,
                     statuspayment:"PAID",
+                    customeremail,
                     price:pricetotal,
                     installments,
                     customername,
