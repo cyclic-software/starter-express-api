@@ -255,8 +255,8 @@ class CreatePaymentLink {
                 return dataPromise;
             }
 
-            async function saveDatabase(res){
-                await PaymentCreate.create({
+            function saveDatabase(res){
+                PaymentCreate.create({
                     rg, 
                     cpf, 
                     adress, 
@@ -280,7 +280,7 @@ class CreatePaymentLink {
 
             let customer = await SignupCustomer.find({"email":customeremail})
             console.log(customer[0]);
-            async function saveUser(){
+            function saveUser(){
                 if(customer[0] === undefined || customer[0] === ""){
                     var Senha = generator.generate({
                         length:10,
@@ -289,7 +289,7 @@ class CreatePaymentLink {
                         uppercase: true,
                     })
                     const senha = cryptr.encrypt(Senha)
-                    await SignupCustomer.create({
+                    SignupCustomer.create({
                         nome:customername,
                         email:customeremail,
                         senha
