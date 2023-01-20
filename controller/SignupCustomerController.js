@@ -9,8 +9,10 @@ const cryptr = new Cryptr('831ur9f7uunm@:1#rjjmjfna-042c-admin@outlook.com-35624
 class SignupCustomerController {
     async adress(request, response){
         try {
-            const {adress} = request.body;
-
+            let {adress} = request.body;
+            adress = String(adress).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            adress = String(adress).toLowerCase();
+            
             //Working with circular json
             function axiosadress(){
                 var config = {
