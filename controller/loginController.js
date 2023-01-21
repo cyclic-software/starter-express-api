@@ -29,7 +29,7 @@ class loginController {
             //Searches for payments
             const paymentfind = await PaymentCreate
             .find({"customeremail":userfind.email})
-            .sort({created_at: -1})
+            .sort({criadoEm: -1})
             .catch(err=>{console.log(err)});
             console.log(paymentfind);
             if(paymentfind[0] === undefined || paymentfind[0] === ""){
@@ -362,6 +362,4 @@ class loginController {
         }
     }
 }
-
-
 export default new loginController
