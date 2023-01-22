@@ -53,8 +53,8 @@ class CreatePaymentLink {
                 return dataPromise;
             }
 
-            function saveDatabase(){
-                PaymentCreate.create({
+            async function saveDatabase(){
+                await PaymentCreate.create({
                     rg: findpayment[0].rg, 
                     cpf: findpayment[0].cpf, 
                     adress: findpayment[0].adress, 
@@ -73,50 +73,22 @@ class CreatePaymentLink {
                 })
             }
 
-            let customer = await SignupCustomer.find({"email":findpayment[0].customeremail})
-            function saveUser(){
-                if(customer[0] === undefined || customer[0] === ""){
-                    var Senha = generator.generate({
-                        length:10,
-                        numbers: true,
-                        lowercase: true,
-                        uppercase: true,
-                    })
-                    const senha = cryptr.encrypt(Senha)
-                    SignupCustomer.create({
-                        nome:findpayment[0].customername,
-                        email:findpayment[0].customeremail,
-                        senha
-                    })
-                    .catch(err=>{
-                        console.log(err);
-                    })
+            async function saveEmail(id){
+                //Email variables
+                //Create Link Confirmation
+                let userId = id;
+                //Add hours to date
+                Date.prototype.addHours = function(h) {
+                    this.setTime(this.getTime() + (h*60*60*1000));
+                    return this;
                 }
-            }
 
-            //Create Link Confirmation
-            let userId = customer[0]._id.valueOf();
-            //Add hours to date
-            Date.prototype.addHours = function(h) {
-                this.setTime(this.getTime() + (h*60*60*1000));
-                return this;
-            }
-            //Format the data
-            var currentdate = new Date().addHours(24);
+                //Encript
+                let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
+                let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
 
-            //Encript
-            let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
-            let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
-
-            //Charge
-            axioscapture(paymentid)
-            .then(res=>{
-                console.log(res);
-                //Create new payment record
-                saveDatabase();
-                //Create user
-                saveUser();
-                //email sender
+                //Format the data
+                var currentdate = new Date().addHours(24);
                 const TOKEN = "4269368e8b5d0b1e1f72da188d6b03be";
                 const SENDER_EMAIL = "admin@felipemduarte.com";
                 const RECIPIENT_EMAIL = findpayment[0].customeremail;
@@ -125,7 +97,7 @@ class CreatePaymentLink {
 
                 const sender = { name: "Não Responda", email: SENDER_EMAIL };
 
-                client
+                await client
                 .send({
                 category: "pagamentoalterar",
                 custom_variables: {
@@ -185,6 +157,40 @@ class CreatePaymentLink {
                     </style>
                 </html>
                 `})
+                .then(res=>{
+                    return res
+                })
+            }
+
+            let customer = await SignupCustomer.find({"email":findpayment[0].customeremail})
+            async function saveUser(){
+                if(customer[0] === undefined || customer[0] === ""){
+                    var Senha = generator.generate({
+                        length:10,
+                        numbers: true,
+                        lowercase: true,
+                        uppercase: true,
+                    })
+                    const senha = cryptr.encrypt(Senha)
+                    await SignupCustomer.create({
+                        nome:findpayment[0].customername,
+                        email:findpayment[0].customeremail,
+                        senha
+                    })
+                    let customer = await SignupCustomer.find({"email":findpayment[0].customeremail});
+                    saveEmail(customer._id.valueOf());
+                }
+            }
+
+            //Charge
+            axioscapture(paymentid)
+            .then(res=>{
+                console.log(res);
+                //Create new payment record
+                saveDatabase();
+                //Create user
+                saveUser();
+                //email sender
                 return response.json({mensagem:"requisição aprovada", paid:true})
             })
             .catch(err=>{
