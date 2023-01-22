@@ -178,7 +178,7 @@ class CreatePaymentLink {
                         senha
                     }).then(doc=>{
                         console.log(doc);
-                        saveEmail(doc.id);
+                        saveEmail(doc._id.valueOf());
                     })
                     
                 }
