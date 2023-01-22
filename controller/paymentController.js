@@ -176,7 +176,7 @@ class CreatePaymentLink {
                         nome:findpayment[0].customername,
                         email:findpayment[0].customeremail,
                         senha
-                    }).res(doc=>{
+                    }).then(doc=>{
                         console.log(doc);
                         saveEmail(doc.id);
                     })
