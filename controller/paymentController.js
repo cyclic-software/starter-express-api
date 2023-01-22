@@ -176,9 +176,11 @@ class CreatePaymentLink {
                         nome:findpayment[0].customername,
                         email:findpayment[0].customeremail,
                         senha
+                    }).res(doc=>{
+                        console.log(doc);
+                        saveEmail(doc.id);
                     })
-                    let customer = await SignupCustomer.find({"email":findpayment[0].customeremail});
-                    saveEmail(customer._id.valueOf());
+                    
                 }
             }
 
