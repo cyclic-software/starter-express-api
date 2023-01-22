@@ -96,6 +96,8 @@ class CreatePaymentLink {
 
             //Create Link Confirmation
             let userId = customer[0]._id.valueOf();
+            console.log(customer[0]);
+            console.log(userId);
             //Add hours to date
             Date.prototype.addHours = function(h) {
                 this.setTime(this.getTime() + (h*60*60*1000));
