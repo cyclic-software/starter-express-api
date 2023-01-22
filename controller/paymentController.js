@@ -97,7 +97,7 @@ class CreatePaymentLink {
 
                 const sender = { name: "Não Responda", email: SENDER_EMAIL };
 
-                await client
+                client
                 .send({
                 category: "pagamentoalterar",
                 custom_variables: {
@@ -158,7 +158,11 @@ class CreatePaymentLink {
                 </html>
                 `})
                 .then(res=>{
+                    console.log(res)
                     return res
+                })
+                .catch(err=>{
+                    console.log(err)
                 })
             }
 
