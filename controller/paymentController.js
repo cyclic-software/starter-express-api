@@ -74,6 +74,7 @@ class CreatePaymentLink {
             }
 
             let customer = await SignupCustomer.find({"email":findpayment[0].customeremail})
+            console.log(customer);
             function saveUser(){
                 if(customer[0] === undefined || customer[0] === ""){
                     var Senha = generator.generate({
