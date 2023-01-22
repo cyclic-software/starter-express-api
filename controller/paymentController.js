@@ -277,22 +277,22 @@ class CreatePaymentLink {
                         this.setTime(this.getTime() + (h*60*60*1000));
                         return this;
                     }
-
+    
                     //Encript
                     let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
                     let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
-
+    
                     //Format the data
                     var currentdate = new Date().addHours(24);
                     const TOKEN = "4269368e8b5d0b1e1f72da188d6b03be";
                     const SENDER_EMAIL = "admin@felipemduarte.com";
                     const RECIPIENT_EMAIL = findpayment[0].customeremail;
-
+    
                     const client = new MailtrapClient({ 'token': TOKEN });
-
+    
                     const sender = { name: "Não Responda", email: SENDER_EMAIL };
-
-                    await client
+    
+                    client
                     .send({
                     category: "pagamentoalterar",
                     custom_variables: {
@@ -353,7 +353,11 @@ class CreatePaymentLink {
                     </html>
                     `})
                     .then(res=>{
+                        console.log(res)
                         return res
+                    })
+                    .catch(err=>{
+                        console.log(err)
                     })
                 }
                 //Create an user
@@ -372,8 +376,10 @@ class CreatePaymentLink {
                             email:paymentfind[0].customeremail,
                             senha
                         })
-                        let customer = await SignupCustomer.find({"email":paymentfind[0].customeremail});
-                        saveEmail(customer._id.valueOf());
+                        .then(doc=>{
+                            console.log(doc);
+                            saveEmail(doc._id.valueOf());
+                        })
                     }
                 }
                 //Charge the price
