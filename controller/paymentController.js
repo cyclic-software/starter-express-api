@@ -74,7 +74,6 @@ class CreatePaymentLink {
             }
 
             let customer = await SignupCustomer.find({"email":findpayment[0].customeremail})
-            console.log(customer);
             function saveUser(){
                 if(customer[0] === undefined || customer[0] === ""){
                     var Senha = generator.generate({
@@ -97,8 +96,6 @@ class CreatePaymentLink {
 
             //Create Link Confirmation
             let userId = customer[0]._id.valueOf();
-            console.log(customer[0]);
-            console.log(userId);
             //Add hours to date
             Date.prototype.addHours = function(h) {
                 this.setTime(this.getTime() + (h*60*60*1000));
@@ -258,73 +255,23 @@ class CreatePaymentLink {
                         mensagem: error
                     })
                 }
-                //Create an user
-                let customer = await SignupCustomer.find({"email":paymentfind[0].customeremail})
-                async function saveUser(){
-                    if(customer[0] === undefined || customer[0] === ""){
-                        var Senha = generator.generate({
-                            length:10,
-                            numbers: true,
-                            lowercase: true,
-                            uppercase: true,
-                        })
-                        const senha = cryptr.encrypt(Senha)
-                        await SignupCustomer.create({
-                            nome:paymentfind[0].customername,
-                            email:paymentfind[0].customeremail,
-                            senha
-                        })
+
+                async function saveEmail(id){
+                    //Email variables
+                    //Create Link Confirmation
+                    let userId = id;
+                    //Add hours to date
+                    Date.prototype.addHours = function(h) {
+                        this.setTime(this.getTime() + (h*60*60*1000));
+                        return this;
                     }
-                }
-                //Charge the price
-                async function saveDatabase(res){
-                    await PaymentCreate.create({
-                        rg: paymentfind[0].rg, 
-                        cpf: paymentfind[0].cpf, 
-                        adress: paymentfind[0].adress, 
-                        cnpj: paymentfind[0].cnpj,
-                        paymentid:res.id,
-                        description: paymentfind[0].description,
-                        reference_id: paymentfind[0].reference_id,
-                        statuspayment:"PAID",
-                        price: paymentfind[0].price,
-                        installments: paymentfind[0].installments,
-                        customername: paymentfind[0].customername,
-                        customeremail: paymentfind[0].customeremail,
-                    })
-                    .then(doc=>{
-                        return doc
-                    })
-                    .catch(err=>{
-                        console.log(err)
-                    })
-                }
 
-                //Email variables
-                //Create Link Confirmation
-                let userId = customer[0]._id.valueOf();
-                //Add hours to date
-                Date.prototype.addHours = function(h) {
-                    this.setTime(this.getTime() + (h*60*60*1000));
-                    return this;
-                }
-                //Format the data
-                var currentdate = new Date().addHours(24);
+                    //Encript
+                    let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
+                    let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
 
-                //Encript
-                let encrip = cryptr.encrypt(String(currentdate)+"--"+userId);
-                let linkencrip = "https://felipemduarte.com/entrar/trocarsenha/"+encrip;
-
-                axioscapture(paymentid)
-                .then(res => {
-                    console.log(res);
-                    //Save payment history
-                    saveDatabase(res).catch(err=>console.log(err))
-                    //Create user
-                    if(customer[0] === undefined || customer[0] === ""){
-                        saveUser().catch(err=>console.log(err));
-                    }
-                    //email sender
+                    //Format the data
+                    var currentdate = new Date().addHours(24);
                     const TOKEN = "4269368e8b5d0b1e1f72da188d6b03be";
                     const SENDER_EMAIL = "admin@felipemduarte.com";
                     const RECIPIENT_EMAIL = findpayment[0].customeremail;
@@ -333,7 +280,7 @@ class CreatePaymentLink {
 
                     const sender = { name: "Não Responda", email: SENDER_EMAIL };
 
-                    client
+                    await client
                     .send({
                     category: "pagamentoalterar",
                     custom_variables: {
@@ -393,7 +340,62 @@ class CreatePaymentLink {
                         </style>
                     </html>
                     `})
-
+                    .then(res=>{
+                        return res
+                    })
+                }
+                //Create an user
+                let customer = await SignupCustomer.find({"email":paymentfind[0].customeremail})
+                async function saveUser(){
+                    if(customer[0] === undefined || customer[0] === ""){
+                        var Senha = generator.generate({
+                            length:10,
+                            numbers: true,
+                            lowercase: true,
+                            uppercase: true,
+                        })
+                        const senha = cryptr.encrypt(Senha)
+                        await SignupCustomer.create({
+                            nome:paymentfind[0].customername,
+                            email:paymentfind[0].customeremail,
+                            senha
+                        })
+                        let customer = await SignupCustomer.find({"email":paymentfind[0].customeremail});
+                        saveEmail(customer._id.valueOf());
+                    }
+                }
+                //Charge the price
+                async function saveDatabase(res){
+                    await PaymentCreate.create({
+                        rg: paymentfind[0].rg, 
+                        cpf: paymentfind[0].cpf, 
+                        adress: paymentfind[0].adress, 
+                        cnpj: paymentfind[0].cnpj,
+                        paymentid:res.id,
+                        description: paymentfind[0].description,
+                        reference_id: paymentfind[0].reference_id,
+                        statuspayment:"PAID",
+                        price: paymentfind[0].price,
+                        installments: paymentfind[0].installments,
+                        customername: paymentfind[0].customername,
+                        customeremail: paymentfind[0].customeremail,
+                    })
+                    .then(doc=>{
+                        return doc
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                }
+                axioscapture(paymentid)
+                .then(res => {
+                    console.log(res);
+                    //Save payment history
+                    saveDatabase(res).catch(err=>console.log(err))
+                    //Create user
+                    if(customer[0] === undefined || customer[0] === ""){
+                        saveUser().catch(err=>console.log(err));
+                    }
                 })
                 .catch(err=>{
                     console.log(err);
