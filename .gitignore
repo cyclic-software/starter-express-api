@@ -2,7 +2,6 @@
 /.env
 .env.test
 /uploads
-/build
 desktop.ini
 .vscode
 logs
