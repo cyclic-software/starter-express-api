@@ -4,9 +4,9 @@
      "description": "",
      "main": "index.js",
      "scripts": {
-          "start": "node build/index.js",
+          "start": "node src/index.js",
           "build": "npm run build:server",
-          "build:server": "babel src -d build",
+          "build:server": "babel src -d build && npm run start",
           "dev": "nodemon",
           "test": "cross-env DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles",
           "test:cov": "cross-env DOTENV_CONFIG_PATH=./.env.test jest --coverage --runInBand --detectOpenHandles"

@@ -1,8 +1,8 @@
 import express from 'express';
 import session from 'express-session';
-// import swaggerUi from 'swagger-ui-express';
-// import yaml from 'yamljs';
-// import path from 'path';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
+import path from 'path';
 import MongoStore from 'connect-mongo';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
@@ -45,13 +45,11 @@ app.use('/static', express.static('assets'));
 //router
 app.use('/', globalRouter);
 
-// if (process.env.MODE === "development") {
-//   //path.join vs path.resolve
-//   const openAPIDocument = yaml.load(
-//     path.join(__dirname, "/swagger/swagger.yaml")
-//   );
-//   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openAPIDocument));
-// }
+if (process.env.MODE === 'development') {
+     //path.join vs path.resolve
+     const openAPIDocument = yaml.load(path.join(__dirname, '/swagger/swagger.yaml'));
+     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openAPIDocument));
+}
 app.use('/admin', adminRouter);
 app.use('/users', userRouter);
 app.use('/board', boardRouter);
