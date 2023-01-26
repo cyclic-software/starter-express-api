@@ -1,0 +1,113 @@
+@import url("./reset.css");
+@import url("./components/color.css");
+@import url("./components/font.css");
+@import url("./components/user/user.css");
+/* home */
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.content-box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 50px 0;
+}
+.card {
+  margin: 20px auto;
+  border-radius: 2.2222rem;
+}
+
+.card img {
+  border-top-right-radius: 2.2222rem;
+  border-top-left-radius: 2.2222rem;
+}
+.card-text {
+  margin: 10px 0;
+  line-height: 1.25em;
+}
+
+.carousel-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.carousel-content {
+  width: 80%;
+}
+
+/*card detail page*/
+.card-detail {
+  margin: 50px auto;
+}
+.margin-right {
+  margin-right: 5px;
+}
+
+/* login */
+.login-form-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.login-form-wrapper .login-form {
+  width: 80%;
+}
+
+.login-form-wrapper .title-name {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* board */
+
+.board-form-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  flex-direction: column;
+}
+
+.board-form-wrapper .board-form {
+  width: 80%;
+}
+.board-title--text {
+  margin: 30px 0;
+}
+.board-form .input-group {
+  height: 25em;
+}
+
+.board-form-wrapper .title-name {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.center-box {
+  width: 100%;
+  text-align: center;
+}
+.end-box {
+  width: 100%;
+  text-align: end;
+}
+
+/*무통장 입금 스타일*/
+.no-account {
+  margin-left: 5px;
+  align-items: center;
+}
+.no-account input {
+  margin-left: 5px;
+}

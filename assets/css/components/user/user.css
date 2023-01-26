@@ -1,0 +1,204 @@
+.modal__btn {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 10%;
+  z-index: 10;
+  right: 5%;
+}
+
+.modal__btn.none {
+  display: none;
+}
+
+.modal__btn button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.2s linear;
+  box-shadow: -1px 0 15px -1px rgba(0, 0, 0, 0.1);
+}
+
+.modal__btn button:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.item-list {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-list.none {
+  display: none;
+}
+
+.item-list .item-list__info {
+  width: 50%;
+  height: 80%;
+  background-color: white;
+  border-radius: 2.222rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-list .item-list__info .item-list__title {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 5px;
+}
+
+.item-list .item-list__info .item-list__title i {
+  position: absolute;
+  top: 35%;
+  right: 5%;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 3px solid #0d6efd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0d6efd;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.item-list .item-list__info .item-list__title i:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.item-list .item-list__info .item-list__title h2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+.item-list .item-list__info .item-list__content-wrapper {
+  width: 95%;
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.item-list .item-list__info .item-list__content-wrapper::-webkit-scrollbar {
+  width: 15px;
+}
+
+.item-list .item-list__info .item-list__content-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.item-list .item-list__info .item-list__content-wrapper::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.item-list .item-list__info .item-list__content-wrapper .item-list__content {
+  width: 95%;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 5px;
+}
+
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__number {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+}
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__number:hover p {
+  display: none;
+}
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__number:hover img {
+  width: 85px;
+  height: 85px;
+}
+
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__number p {
+  font-size: 14px;
+}
+
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__datas {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__datas li {
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.item-list .item-list__info .item-list__content-wrapper .item-list__content .item-list__datas li span:first-child {
+  font-weight: bold;
+}
+
+.item-list .item-list__info .item-list__content .item-list__btn {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-list .item-list__info .item-list__content .item-list__btn li .refund {
+  width: 50px;
+  height: 35px;
+  border-radius: 2.222rem;
+  background-color: #fff;
+  border: 3px solid tomato;
+  color: tomato;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.item-list .item-list__info .item-list__content .item-list__btn li .download {
+  width: 100px;
+  height: 35px;
+  border-radius: 2.222rem;
+  background-color: #fff;
+  border: 3px solid green;
+  color: green;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.item-list .item-list__info .item-list__content .item-list__btn li .refund:hover {
+  background-color: tomato;
+  color: white;
+}
+
+.item-list .item-list__info .item-list__content .item-list__btn li .download:hover {
+  background-color: green;
+  color: white;
+}
+
+.download__link.none {
+  display: none;
+}
+.download__img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+

@@ -1,0 +1,7 @@
+.green--color {
+    color:#00b894 !important;
+}
+
+.button--gradient-color {
+    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%) !important;
+}

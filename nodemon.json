@@ -1,0 +1,3 @@
+{
+    "exec" : "npx babel-node src/init.js"
+}
