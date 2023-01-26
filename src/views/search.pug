@@ -1,0 +1,21 @@
+extends base
+include mixins/card
+
+block content
+    div.board-form-wrapper
+        form(method="GET").board-form.row.g-3
+            div.col-md-6
+                label(for="searchKeyword").form-label
+                input(placeholder="Search by Title" name="keyword" type="text" id="searchKeyword").form-control
+            div.col-md-6
+                label(for="searchBtn").form-label
+                input(type="submit" value="Search Now" id="searchBtn" style="width: 10rem;").btn-primary.form-control
+            hr
+
+    div.content-box
+        each board in boards 
+            +boardMixins(board)
+        else
+            span
+            span.end-box 아직 게시물이 없어요
+            span.center-box 🙄

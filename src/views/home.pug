@@ -1,0 +1,18 @@
+extends base
+include mixins/card
+
+block content
+    include partials/carousel
+    div.carousel-wrapper
+        div.carousel-content
+            include partials/carousel2
+    div.content-box
+        each board in boards 
+            +boardMixins(board)
+        else
+            span
+            span.end-box 아직 게시물이 없어요
+            span.center-box 🙄
+    div.carousel-wrapper
+        div.carousel-content
+            include partials/carousel2

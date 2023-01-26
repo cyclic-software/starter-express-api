@@ -1,0 +1,23 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    div.container-fluid
+        a(href="/").navbar-brand  Cafe Small House
+        button(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation").navbar-toggler 
+            span.navbar-toggler-icon
+
+        div.collapse.navbar-collapse#navbarNavAltMarkup
+            div.navbar-nav
+                a(aria-current="page" href="/").nav-link.active Home
+                a(href="/shop/list").nav-link.green--color Shop
+                if loggedIn
+                    a(href="/users/logout").nav-link.active Logout
+                    a(href="/users/edit" style="color:var(--bs-primary);").nav-link.active #{loggedInUser.name} Profile ☕
+                    a(href=`/users/${loggedInUser._id}`).nav-link My Profile
+                    a(href="/board/write").nav-link Write
+                else
+                    a(href="/login").nav-link.active Login
+                    a(href="/join").nav-link Join
+                a(href="/search").nav-link Search
+                if isAdmin
+                    a(href="/admin" style="color:tomato;").nav-link Admin
+                //- a(href="/search").nav-link Write
+                //- a(href="#").nav-link.disabled Disabled

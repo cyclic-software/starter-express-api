@@ -1,0 +1,18 @@
+extends ../base
+block content
+    div.login-form-wrapper
+        div.login-form
+            if errorMessage
+                p(style="color: red;")=errorMessage
+                br
+            h3(style="color:tomato;").title-name 🔑 Admin Login
+            form(method="POST").row.g-3
+                div.col-12
+                    label(for="inputUsername").form-label Admin Id
+                    input(type="text" placeholder="Admin Id..." name="username").form-control#inputUsername
+                div.col-12
+                    label(for="inputPassword").form-label Password
+                    input(type="password" placeholder="Password..." name="password").form-control#inputAddress2
+                div.col-12
+                    button(type="submit").btn.btn-primary Login &rarr;
+        

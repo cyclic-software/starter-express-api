@@ -1,0 +1,126 @@
+extends base
+block content
+    div.login-form-wrapper
+        div.login-form
+            if errorMessage
+                p(style="color: red;")=errorMessage
+                br
+            h3.title-name ☕Join
+            div.col-12
+                form(method="POST" action="/users/certifications")
+                    label(for="inputPhoneNum").form-label PhoneNumber
+                    input(type="text" placeholder="PhoneNumber" required).form-control#inputPhoneNum
+                    br
+                    button(type="submit").btn.btn-warning#auth 인증하기 📌
+                    br
+                    br
+                p(style="color:green; display:none;")#authText 
+                p(style="color:red; display:none;")#authFailText 
+                br
+            form(method="POST")#createForm.row.g-3
+                div.col-md-6
+                    label(for="inputUser").form-label User name
+                    input(type="text" placeholder="User name" name="username" required).form-control#inputUser
+                div.col-md-6
+                    label(for="inputNickname").form-label Nickname
+                    input(type="text" placeholder="Nickname" name="name" required).form-control#inputNickname
+                div.col-12
+                    label(for="inputPassword").form-label Password
+                    input(type="password" placeholder="Password" name="password" required).form-control#inputPassword
+                div.col-12
+                    label(for="inputPasswordConfirm").form-label Confirmation Password
+                    input(type="password" placeholder="Confirmation Password" name="password2" required).form-control#inputPasswordConfirm
+                div.col-12
+                    label(for="inputEmail").form-label Email
+                    input(type="email" placeholder="Email" name="email" required).form-control#inputEmail
+                div.col-12
+                    label(for="inputRegion").form-label Region
+                    input(type="text" placeholder="Region" name="region" required).form-control#inputRegion
+                div.col-12    
+                    input(type="hidden" name="phoneNum" required).form-control#authNum
+                div.col-12
+                    button(type="submit").btn.btn-primary#createUser Sign in
+                    br
+                    br
+                hr
+                div.col-12
+                    p 계정이 이미 있으신가요? 💬
+                    br
+                    a(href="/login").btn.btn-secondary Login &rarr;
+    script.
+        const button = document.getElementById("auth");
+        const authNum = document.getElementById("authNum");
+        const authText = document.getElementById("authText");
+        const authFailText = document.getElementById("authFailText");
+        const phoneNum = document.getElementById("inputPhoneNum");
+
+        const subButton = document.getElementById("createUser");
+        const createForm = document.getElementById("createForm");
+        subButton.addEventListener("click",(event) => {
+            event.preventDefault();
+            if(!phoneNum.value) {
+               alert("핸드폰 번호를 입력해주세요");
+               return;
+            }
+            createForm.submit();
+        });
+
+        button.addEventListener("click",(event) => {
+            event.preventDefault();
+           if(!phoneNum.value) {
+               alert("핸드폰 번호를 입력해주세요");
+               return;
+            }
+            authNum.value = phoneNum.value;
+            requestAuthentication();
+        })
+
+        function requestAuthentication() {
+            const IMP = window.IMP;
+            IMP.init("#{shopPidCode}");
+            IMP.certification({
+                merchant_uid:`merchant_#{Date.now()}`,
+                m_redirect_url :`#{isHeroku ? domain : devDomain}/payments/success/mobile`,
+                popup:false
+             }, async function(rsp) {
+                if (rsp.success) {
+                    const data = await(
+                            await fetch("#{isHeroku ? domain : devDomain}/users/certifications",
+                            {
+                                method:"POST",
+                                headers: {"Content-Type": "application/json"},
+                                body: JSON.stringify({
+                                    imp_uid: rsp.imp_uid
+                                })
+                            }
+                        )).json();
+
+                    try {
+                        if(data.status === "success") {
+                            authText.style.display = "block";
+                            authText.innerText = data.message;
+                            authFailText.innerText = "";
+                            phoneNum.disabled = true;
+                        } else {
+                            authFailText.style.display = "block";
+                            authFailText.innerText = data.message;
+                            authNum.value = "";
+                            phoneNum.value = "";
+                            phoneNum.innerText = "";
+                        }
+                    } catch(error) {
+                        console.log(error);
+                    }
+
+                 } else {
+                     authNum.value = "";
+                     phoneNum.value = "";
+                     phoneNum.innerText = "";
+                     authText.style.display = "none";
+                     alert("인증에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                 }
+
+            })
+                
+
+        }

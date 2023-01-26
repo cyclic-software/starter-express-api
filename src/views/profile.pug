@@ -1,0 +1,98 @@
+extends base
+include mixins/card
+block content
+  div.board-form-wrapper  
+    h3.title-name #{user.name} Profile
+    img(src=`${user.avatar ? (isHeroku ? user.avatar : "/" + user.avatar) : "/image/cafe_logo.png"}` width="100" height="100")
+    div.modal__btn.none
+      button(onclick="onClick()") ItemList
+  div.content-box
+    each board in user.boards.reverse() 
+      +boardMixins(board)
+    else
+      span
+      span.end-box 아직 게시물이 없어요
+      span.center-box 🙄
+
+  div.item-list.none
+    div.item-list__info 
+      div.item-list__title
+        h2 My Item List 
+        i(onclick="onClick()").fas.fa-times
+      div.item-list__content-wrapper
+        each order in user.orders.reverse()
+          div.item-list__content
+            ul.item-list__number
+              li 
+                img.download__img(src=`${"/" + order.item.itemImg}`)
+                p #{order.merchantUid}
+            ul.item-list__datas
+              if order.status === "ready"
+                li 
+                  span 결제상태: 
+                  span 대기중
+              else
+                li 
+                  span 결제상태: 
+                  span 완료
+              li 
+                span 결제방법: 
+                span #{order.payMethod === "vbank" ? "가상계좌" : "일반결제"}
+              li 
+                span 가격: 
+                span #{order.amount}원 💰
+            ul.item-list__btn
+              li
+                button.download(onclick="onDownload()") Download
+                a.download__link.none(href=`${"/" + order.item.itemImg}` download=`${order.item.name}`) 
+            ul.item-list__btn                    
+              li
+                button.refund(onclick="onRefund()") 환불
+        else
+          span
+          span.end-box 아직 구매하신 상품이 없어요
+          span.center-box 🙄
+    script.
+      const itemList = document.querySelector(".item-list");
+      const itemListBtn = document.querySelector(".modal__btn");
+      const modalCloseBtn = itemList.querySelector("i");
+      const userId = location.pathname.split("/").reverse()[0];
+      const downloadLink = document.querySelector(".download__link");
+      if(userId === "#{loggedInUser._id}") {
+        itemListBtn.classList.remove("none");
+      } else {
+        itemList.remove();
+        itemListBtn.remove();
+      }
+
+      let isShow = true;
+      const onClick = () => {
+        if(isShow) {
+          document.body.style.overflow = "hidden";
+          itemList.classList.remove("none");
+          isShow = false;
+        } else {
+          document.body.style.overflow = "unset";
+          itemList.classList.add("none");
+          isShow = true;
+        }
+      }
+      const onRefund = () => {
+        if(userId !== "#{loggedInUser._id}") {
+          alert("본인이 아니면 환불하실수 없습니다");
+          location.href = "/";   
+          return;
+        }
+        const check = confirm("환불을 진행하시겠습니까?");
+        if(check) {
+          document.body.style.overflow = "unset";
+          itemList.classList.add("none");
+          isShow = true;
+        }
+      }
+      const onDownload = () => {
+        downloadLink.click();
+      }
+
+
+

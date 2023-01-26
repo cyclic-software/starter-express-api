@@ -1,0 +1,18 @@
+div(data-bs-ride="carousel")#carouselExampleIndicators.carousel.slide
+    div.carousel-indicators
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1").active
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2")
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3")
+    div.carousel-inner
+        div(data-bs-slide-to="0").carousel-item.active
+            img(src="/image/banner_main.png" alt="image" height="500").d-block.w-100
+        div(data-bs-slide-to="1").carousel-item
+            img(src="/image/banner_main2.png" alt="image2" height="500").d-block.w-100
+        div(data-bs-slide-to="2").carousel-item
+            img(src="/image/banner_main3.png" alt="image3" height="500").d-block.w-100
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev").carousel-control-prev
+            span(aria-hidden="true").carousel-control-prev-icon
+            span.visually-hidden Previous
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next").carousel-control-next
+            span(aria-hidden="true").carousel-control-next-icon
+            span.visually-hidden Next

@@ -1,0 +1,7 @@
+mixin boardMixins(board)
+    div(style="width: 18rem;").card
+        img(src=`${board.boardImg ? (isHeroku ? board.boardImg : "/" + board.boardImg ): "/image/cafe_logo.png"}` alt="board" height="200").card-img-top
+        div.card-body
+            h5.card-title #{`${board.title.length > 17 ? board.title.slice(0,17) + "..." : board.title}`}
+            p.card-text #{`${board.content.length > 30 ? board.content.slice(0,30) + "..." : board.content}`}
+            a(href=`/board/${board.id}`).btn.btn-primary See more

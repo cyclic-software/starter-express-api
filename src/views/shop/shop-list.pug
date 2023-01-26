@@ -1,0 +1,27 @@
+extends ../base
+block content
+    div.board-form-wrapper
+        if errorMessage
+            span=errorMessage
+        form(method="POST" enctype="multipart/form-data").board-form
+            img(src="/image/cafe_logo.png" width="100" height="100")
+            br
+            hr
+            div.col-12
+                label(for="inputName").form-label 🎁 Item name
+                input(type="text" placeholder="Name" name="name" required maxLength=30).form-control#inputName
+            br
+            div.col-12
+                label(for="inputItemImg").form-label 🎨 Item Img
+                input(type="file" placeholder="Item Img" name="itemImg" accept="*/image").form-control#inputItemImg
+            br
+            div.col-12
+                label(for="inputPrice").form-label 🍰 Price
+                input(type="number" placeholder="Price" name="amount").form-control#inputPrice
+            br
+            p.board-title--text ⛳ Textarea
+            div.input-group 
+                span.input-group-text Textarea
+                textarea(aria-label="With textarea" name="content" required maxLength=300).form-control
+            br
+            input(type="submit" value="Upload Item").btn.btn-primary

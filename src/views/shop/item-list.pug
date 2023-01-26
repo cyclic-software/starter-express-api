@@ -1,0 +1,11 @@
+extends ../base
+include ../mixins/item
+
+block content
+    div.content-box
+        each item in items 
+            +itemMixins(item)
+        else
+            span
+            span.end-box 아직 게시물이 없어요
+            span.center-box 🙄

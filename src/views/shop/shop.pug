@@ -1,0 +1,90 @@
+extends ../base
+
+block content
+    div(style="width: 32rem;").card-detail
+        img(src="/" + item.itemImg alt="logo" height="300").card-img-top
+        div.card-body
+            h5.card-title=item.name
+            p.card-text=item.content
+            strong.card-text #{item.amount}원
+            br
+            br
+            form(method="POST")
+                br
+                span 무단 배포를 하지 않겠습니다
+                input(id="check" type="checkbox" name="check" value="true" checked)
+                br
+                br
+                a(href="/shop/list") &larr;뒤로가기
+                |&nbsp;&nbsp;&nbsp;
+                input(onclick="requestPay()" value="결제하기").btn.btn-primary
+                span.no-account 무통장 입금💰
+                    input(id="noAccount" type="checkbox")
+                
+    script.
+        const check = document.getElementById("check");
+        const noAccountCheck = document.getElementById("noAccount");
+        function requestPay() {
+        if(!check.checked) {
+            alert("무단 배포에 대한 동의를 확인해주세요");
+            return;
+        }
+        if(#{!loggedIn}) {
+            alert("로그인을 해주세요 감사합니다 :)");
+            return;
+        }
+   
+            const IMP = window.IMP;
+            IMP.init("#{shopPidCode}");
+            IMP.request_pay({
+                pg: "daou", // PG사 선택 html5_inicis
+                pay_method: `${!noAccountCheck.checked ? 'card' : 'vbank'}`, // 지불 수단 vbank "가상계좌" //-> https://docs.iamport.kr/sdk/javascript-sdk
+                merchant_uid: `merchant_#{Date.now()}`, //가맹점에서 구별할 수 있는 고유한id
+                name: `#{item.name}`, // 상품명
+                amount: `#{item.amount}`, // 가격
+                buyer_email: `#{loggedInUser.email}`,
+                buyer_name: `#{loggedInUser.name}`, // 구매자 이름
+                buyer_tel: "", // 구매자 연락처 
+                buyer_addr: `#{loggedInUser.region}`,// 구매자 주소지
+                buyer_postcode: "", // 구매자 우편번호
+                m_redirect_url : '', // 모바일 결제시 사용할 url
+                digital: true, // 실제 물품인지 무형의 상품인지(핸드폰 결제에서 필수 파라미터)
+                app_scheme : '' // 돌아올 app scheme
+            }, async function (rsp) { // callback
+                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                    // jQuery로 HTTP 요청
+                    const data = await(
+                        await fetch("#{isHeroku ? domain : devDomain}/shop/success",
+                            {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body : JSON.stringify({
+                                    imp_uid: rsp.imp_uid,
+                                    merchant_uid: rsp.merchant_uid,
+                                    id:"#{item._id}"
+                                })
+                            }
+                    )).json();
+                    console.log(data);
+                    try {
+                        switch(data.status) {
+                            case "vbankIssued":
+                                // 가상계좌 발급 시 로직
+                                const {vbank_date,vbank_name,vbank_num} = data;
+                                sessionStorage.setItem("bank",JSON.stringify({vbank_date,vbank_name,vbank_num}));
+                                window.location.href = "/shop/success";
+                            break;
+                            case "success":
+                                // 결제 성공 시 로직
+                                window.location.href = "/shop/success";
+                            break;
+                        }
+                    }  catch (error) {
+                        console.log(error);
+                    }
+                    
+                } else {
+                    alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg );
+                }
+            }); 
+        }

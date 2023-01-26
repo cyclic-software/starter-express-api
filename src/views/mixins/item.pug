@@ -1,0 +1,8 @@
+mixin itemMixins(item)
+    div(style="width: 18rem;").card
+        img(src=`${item.itemImg ?  "/" + item.itemImg : "/image/cafe_logo.png"}` alt="board" height="200").card-img-top
+        div.card-body
+            h5.card-title #{`${item.name.length > 17 ? item.name.slice(0,17) + "..." : item.name}`}
+            p.card-text #{`${item.content.length > 30 ? item.content.slice(0,30) + "..." : item.content}`}
+            div.center-box
+                a(href=`list/${item.id}`).btn.btn-success 구매하기 🛒

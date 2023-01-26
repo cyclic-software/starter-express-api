@@ -1,0 +1,33 @@
+extends base
+block content
+    div.login-form-wrapper
+        div.login-form
+            if errorMessage
+                p(style="color: red;")=errorMessage
+                br
+            h3.title-name ☕Edit Profile
+            img(src=`${loggedInUser.avatar ? (isHeroku ? loggedInUser.avatar : "/" + loggedInUser.avatar ): "/image/cafe_logo.png"}` width="100" height="100")
+            form(method="POST" enctype="multipart/form-data").row.g-3
+                div.col-12
+                    label(for="inputPic").form-label Profile Picture
+                    input(type="file" placeholder="Profile Picture" name="avatar" accept="*/image").form-control#inputPic
+                div.col-md-6
+                    label(for="inputUser").form-label User name
+                    input(type="text" placeholder="User name" name="username" value=loggedInUser.username required).form-control#inputUser
+                div.col-md-6
+                    label(for="inputNickname").form-label Nickname
+                    input(type="text" placeholder="Nickname" name="name" value=loggedInUser.name required).form-control#inputNickname
+                div.col-12
+                    label(for="inputEmail").form-label Email
+                    input(type="email" placeholder="Email" name="email" value=loggedInUser.email required).form-control#inputEmail
+                div.col-12
+                    label(for="inputRegion").form-label Region
+                    input(type="text" placeholder="Region" name="region" value=loggedInUser.region).form-control#inputRegion
+                div.col-12
+                    label(for="inputPhoneNum").form-label PhoneNumber
+                    input(type="text" placeholder="PhoneNumber" name="phoneNum" required).form-control#inputPhoneNum
+                div.col-12
+                    button(type="submit").btn.btn-primary Edit
+                hr
+                div.col-12
+                    a(href="change-password").btn.btn-secondary Change Password
