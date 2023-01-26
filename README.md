@@ -1,1 +1,3 @@
 # board project ☕
+
+board deploy
