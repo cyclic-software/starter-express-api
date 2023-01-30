@@ -4,4 +4,8 @@ app.all('/', (req, res) => {
     console.log("Just got a request!")
     res.send('Hello world✋✋')
 })
-app.listen(process.env.PORT || 3000)
+
+app.listen(PORT, (
+//     creating a server
+    console.log(`Server is now Running on https://localhost:${PORT}`)
+))
