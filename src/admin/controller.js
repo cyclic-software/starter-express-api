@@ -37,10 +37,10 @@ const bloquecardId = async (data) => {
     } else if (isBlockedcardId) {
       throw Error("Cet Identifiant est deja bloqué");
     } else {
-      const newcardId = new bloquer({
+      const cardIdblocked = new bloquer({
         cardId,
       });
-      const blockedcardId = await newcardId.save();
+      const blockedcardId = await cardIdblocked.save();
       return "User blocked successfully";
     }
   } catch (error) {

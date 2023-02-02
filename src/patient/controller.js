@@ -29,8 +29,7 @@ const authenticatePatient = async (data) => {
       const token = await createToken(tokenData);
 
       //assign patient token to the etched patient data
-      fetchedPatient.token = token;
-      return fetchedPatient;
+      return token;
     }
   } catch (error) {
     throw error;
@@ -50,7 +49,6 @@ const createNewPatient = async (data) => {
       profession,
       nationality,
       phoneNumber,
-      token,
     } = data;
 
     //checking if CardId belongs to the system
@@ -80,7 +78,6 @@ const createNewPatient = async (data) => {
       profession,
       nationality,
       phoneNumber,
-      token,
     });
     const createdPatient = await newPatient.save();
     return createdPatient;

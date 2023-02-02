@@ -11,6 +11,6 @@ const app = express();
 //middlewares
 app.use(cors());
 app.use(bodyParser());
-app.use("/api/Beta_luzabu", routes);
+app.use("/api/Beta_luzabu/pa/", routes);
 
 module.exports = app;

@@ -48,9 +48,6 @@ const PatientSchema = new Schema({
     type: Boolean,
     required: false,
   },
-  token: {
-    type: String,
-  },
 });
 
 const Patient = mongoose.model("Patients", PatientSchema);
