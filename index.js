@@ -1,7 +1,11 @@
-const express = require('express')
-const app = express()
-app.all('/', (req, res) => {
-    console.log("Just got a request!")
-    res.send('Yo!')
-})
-app.listen(process.env.PORT || 3000)
+const app = require("./app");
+const { PORT } = process.env;
+
+//Lancer l'application
+const startApp = () => {
+  app.listen(PORT, () => {
+    console.log(`Backend running on port ${PORT}`);
+  });
+};
+
+startApp();
