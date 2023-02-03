@@ -16,7 +16,6 @@ const createNewcardId = async (data) => {
       cardId,
     });
     const createdcardId = await newcardId.save();
-    return createdcardId;
   } catch (error) {
     throw error;
   }
@@ -37,10 +36,10 @@ const bloquecardId = async (data) => {
     } else if (isBlockedcardId) {
       throw Error("Cet Identifiant est deja bloqué");
     } else {
-      const cardIdblocked = new bloquer({
+      const newcardId = new bloquer({
         cardId,
       });
-      const blockedcardId = await cardIdblocked.save();
+      const blockedcardId = await newcardId.save();
       return "User blocked successfully";
     }
   } catch (error) {

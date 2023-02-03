@@ -1,9 +1,5 @@
 const { Patient } = require("../patient/model");
 const { check, validationResult } = require("express-validator");
-const {
-  createNewPatient,
-  authenticatePatient,
-} = require("../patient/controller");
 
 const validateProfile = [
   check("firstName").optional().isLength({ min: 2 }),
@@ -23,7 +19,7 @@ const validateProfile = [
     //verify if email already exist
     const patient = await Patient.findOne({ email: req.body.email });
     if (patient) {
-      return res.status(400).send("Email existe déjà");
+      return res.status(400).send({ message: "email already used" });
     }
 
     next();
@@ -71,33 +67,21 @@ const validateSignup = async (req, res) => {
         phoneNumber
       )
     ) {
-      throw Error("Un ou plusieurs champs vides!!!");
+      return res.status(400).json({ message: "Some fields are empty!!!" });
       //testing email,names,password
       //name test
     } else if (!/^[a-zA-Z ]*$/.test(firstName, lastName)) {
-      throw Error("Un des noms est invalide!!!");
+      return res.status(400).json({ message: "Invalid name!!!" });
     } else if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,4}))$/.test(
         email
       )
     ) {
-      throw Error("l'email entré est invalide");
+      throw Error("Invalid email");
     } else if (password.length < 8) {
-      throw Error("Le mot de passe doit contenir au moins de 8 caractères");
-    } else {
-      // good credentials, create new user function in controller file
-      const newPatient = await createNewPatient({
-        firstName,
-        lastName,
-        email,
-        password,
-        cardId,
-        sex,
-        profession,
-        nationality,
-        phoneNumber,
-      });
-      res.status(200).json(newPatient);
+      return res
+        .status(400)
+        .json({ message: "Password must contain atleast 8 caracters!!!" });
     }
   } catch (error) {
     res.status(400).send(error.message);
@@ -107,19 +91,15 @@ const validateSignup = async (req, res) => {
 const validateSignin = async (req, res) => {
   try {
     let { cardId, password } = req.body;
-    cardId = cardId.trim();
-    password = password.trim();
-    //validation
-    if (!(cardId && password)) {
-      throw Error("L'un des champs est vide");
-    }
 
-    //authenticate patient with the infos provided
-    const authenticatedPatient = await authenticatePatient({
-      cardId,
-      password,
-    });
-    res.status(200).json(authenticatedPatient);
+    //validation de longeur du cardId
+    if (!(cardId || cardId.trim().length === 0)) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    // Validation de la longueur du mot de passe
+    if (!password || password.length === 0) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -6,18 +6,15 @@ const {
   getProfile,
   editProfile,
 } = require("./controller");
-const {
-  validateProfile,
-  validateSignup,
-  validateSignin,
-} = require("../middleware/dataValidation");
+const { validateProfile } = require("../middleware/dataValidation");
+
 const { verifyToken } = require("../middleware/auth");
 
 //Signup route
-router.post("/signup", validateSignup);
+router.post("/signup", createNewPatient);
 
 //Signin
-router.post("/signin", validateSignin);
+router.post("/signin", authenticatePatient);
 
 //Consulter profile
 router.get("/profile", verifyToken, getProfile);
