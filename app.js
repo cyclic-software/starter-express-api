@@ -1,6 +1,5 @@
-require("dotenv").config();
 const express = require("express");
-const PORT = process.env.PORT || 8080;
+const { PORT } = require("./helpers/constants");
 
 const categoryRoutes = require("./routes/category");
 const authRoutes = require("./routes/auth");
