@@ -74,15 +74,16 @@ router.get("/unfollowers", async (req, res) => {
   if (!username) {
     res.status(400).send("Username is required");
   } else {
-    const tclient = twitterClinet.readOnly;
-    user = await client
-      .db("hookup")
-      .collection("followers")
-      .findOne({ username: username });
+    const tclient = twitterClinet.readOnly;    
     let userId = await tclient.v2.userByUsername(username);
     let followers = await tclient.v2.followers(userId.data.id, {
       max_results: 1000,
     });
+    if(followers.data.length <= 999){
+      user = await client
+      .db("hookup")
+      .collection("followers")
+      .findOne({ username: username });
     if (!user) {
       await client.db("hookup").collection("followers").insertOne({
         username: username,
@@ -123,6 +124,13 @@ router.get("/unfollowers", async (req, res) => {
         data: unfollowers,
       });
     }
+  }else{
+    res.send({
+      status: false,
+      message:
+        "We currently dont support users with more than 1000 followers",
+    });
+  }
 
     //res.send({ length: followers.data.length });
   }
