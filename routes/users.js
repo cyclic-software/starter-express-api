@@ -10,8 +10,8 @@ const { TwitterApi } = require("twitter-api-v2");
 const twitterClinet = new TwitterApi(
   "AAAAAAAAAAAAAAAAAAAAABD3HAEAAAAAC68AmUmF4cU7RR%2FiZR%2BM3ddn5H4%3D80Eykin1Y3PcJN5BVWw2bLvm0EJ4wYVMdwap1MZDoTiBsZPTcq"
 );
-res.send("Twitter API");
 router.get("/", async (req, res) => {
+  res.send("Twitter API");
 
 });
 router.post("/signup", async (req, res) => {
