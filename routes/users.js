@@ -71,9 +71,11 @@ router.get("/login", async (req, res) => {
 
 router.get("/unfollowers", async (req, res) => {
   let username = req.query.username;
+
   if (!username) {
     res.status(400).send("Username is required");
   } else {
+    username = username.toLowerCase()
     const tclient = twitterClinet.readOnly;    
     let userId = await tclient.v2.userByUsername(username);
     let followers = await tclient.v2.followers(userId.data.id, {
