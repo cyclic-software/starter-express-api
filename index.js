@@ -1,14 +1,8 @@
-// const express = require("express");
-// const app = express();
-// app.all("/", (req, res) => {
-//   console.log("Just got a request!");
-//   res.send("Yo!");
-// });
-
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 require("dotenv").config();
+require("./config/db").connect();
 // const { getIo, initIo } = require("./socket");
 const io = require("socket.io")(server);
 
