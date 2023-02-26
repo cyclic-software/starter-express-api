@@ -11,7 +11,7 @@ const checkPhonenumber = async (req, res, next) => {
     } else {
       return res.status(200).json({
         status: 1,
-        message: "Otp sent to your phone",
+        message: "Verification code sent to this phone number",
         data: [],
       });
     }
