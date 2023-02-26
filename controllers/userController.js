@@ -47,6 +47,7 @@ const userRegister = async (req, res, next) => {
       let Userregister = await User.create({
         phoneno,
         signupmethod,
+        isPhoneVerified: true,
         firebase_token,
         created_at: new Date(),
         updated_at: new Date(),
