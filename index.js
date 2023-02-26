@@ -1,20 +1,20 @@
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
+const cors = require("cors");
+app.use(express.json());
+app.use(cors());
 require("dotenv").config();
 require("./config/db").connect();
 // const { getIo, initIo } = require("./socket");
 const io = require("socket.io")(server);
 
-// import { createClient } from "redis";
-
 const client = require("redis");
 
-// const client = createClient();
-
-// await client.connect();
-
 app.use(express.static(__dirname + "/public"));
+
+const userRouterjs = require("./routes/userRouter");
+const adminRouterjs = require("./routes/adminRouter");
 
 app.all("/", async (req, res, next) => {
   return res.status(200).json({
@@ -23,6 +23,9 @@ app.all("/", async (req, res, next) => {
     data: "success",
   });
 });
+
+app.use("/", userRouterjs);
+app.use("/", adminRouterjs);
 
 io.on("connection", (socket) => {
   console.log("a user connected");
