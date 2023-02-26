@@ -6,9 +6,10 @@ require("./config/db").connect();
 // const { getIo, initIo } = require("./socket");
 const io = require("socket.io")(server);
 
-import { createClient } from "redis";
+// import { createClient } from "redis";
+const client = require("redis");
 
-const client = createClient();
+// const client = createClient();
 
 await client.connect();
 
