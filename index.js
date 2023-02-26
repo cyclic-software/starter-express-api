@@ -8,6 +8,10 @@ const io = require("socket.io")(server);
 
 app.use(express.static(__dirname + "/public"));
 
+app.all("/", (req, res, next) => {
+  res.send("Welcome to Dater app!");
+});
+
 io.on("connection", (socket) => {
   console.log("a user connected");
 
