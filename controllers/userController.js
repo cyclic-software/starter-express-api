@@ -17,7 +17,7 @@ const userRegister = async (req, res, next) => {
       throw new Error("This phone number already exist please login");
     }
 
-    if (phoneno && firebaseConfirmation) {
+    if (phoneno !== "" && firebaseConfirmation) {
       let Userregister = await User.create({
         phoneno,
         signupmethod,
