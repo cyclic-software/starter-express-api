@@ -1,6 +1,30 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
+const checkPhonenumber = async (req, res, next) => {
+  try {
+    let { phonenum } = req.body;
+    let checkgiventhis = await User.find({ phoneno: phonenum });
+
+    if (checkgiventhis && checkgiventhis.length > 0) {
+      throw new Error("This phone number already exist, please login");
+    } else {
+      return res.status(200).json({
+        status: 1,
+        message: "Otp sent to your phone",
+        data: [],
+      });
+    }
+  } catch (err) {
+    console.log(err.message);
+    return res.status(200).json({
+      status: 0,
+      message: err.message,
+      data: [],
+    });
+  }
+};
+
 const userRegister = async (req, res, next) => {
   try {
     let {
@@ -122,4 +146,5 @@ module.exports = {
   userRegister,
   userLogin,
   updateDetails,
+  checkPhonenumber,
 };
