@@ -7,22 +7,22 @@ require("./config/db").connect();
 const io = require("socket.io")(server);
 
 // import { createClient } from "redis";
+
 const client = require("redis");
+
 
 // const client = createClient();
 
-await client.connect();
+// await client.connect();
 
 app.use(express.static(__dirname + "/public"));
 
 app.all("/", async (req, res, next) => {
-  await client.set("Welcome data", "Welcome to Dater app");
-  const value = await client.get("key");
-  if (value) {
-    res.send(value);
-  } else {
-    res.send("Welcome to Dater app!");
-  }
+  return res.status(200).json({
+    status: 1,
+    message: "Dater App",
+    data: "success",
+  });
 });
 
 io.on("connection", (socket) => {
