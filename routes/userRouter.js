@@ -1,5 +1,5 @@
 const express = require("express");
-// const auth = require("../middleware/auth");
+const auth = require("../middlewares/auth");
 // const rateLimit = require("express-rate-limit");
 const config = process.env;
 const router = express.Router();
@@ -13,6 +13,8 @@ router.post("/signup", userController.userRegister);
 
 router.post("/login", userController.userLogin);
 
-router.post("/updateDetails", userController.updateDetails);
+router.post("/updateDetails", auth, userController.updateDetails);
+
+router.post("/userdetails", auth, userController.userdetails);
 
 module.exports = router;
