@@ -145,9 +145,39 @@ const updateDetails = async (req, res, next) => {
   }
 };
 
+const userdetails = async (req, res, next) => {
+  try {
+    let user_id = req.user.user_id;
+
+    let findUserbuuserid = await User.findOne({ _id: user_id });
+
+    if (findUserbuuserid) {
+      return res.status(200).json({
+        status: 1,
+        message: "User details",
+        data: findUserbuuserid,
+      });
+    } else {
+      return res.status(200).json({
+        status: 3,
+        message: "User not found",
+        data: [],
+      });
+    }
+  } catch (err) {
+    console.log(err.message);
+    return res.status(200).json({
+      status: 0,
+      message: err.message,
+      data: [],
+    });
+  }
+};
+
 module.exports = {
   userRegister,
   userLogin,
   updateDetails,
   checkPhonenumber,
+  userdetails,
 };
