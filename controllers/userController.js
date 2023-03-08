@@ -53,13 +53,9 @@ const userRegister = async (req, res, next) => {
 
       let token = jwt.sign(
         { user_id: `${Userregister._id}` },
-        "DATERAPPNATIVE1110",
-        {
-          expiresIn: "30d",
-        }
+        "DATERAPPNATIVE1110"
       );
 
-      console.log("tokendata ========> ", token);
       let fresponse = {
         ...Userregister._doc,
         accesstoken: token,
