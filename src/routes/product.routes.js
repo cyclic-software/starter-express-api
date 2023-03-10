@@ -12,7 +12,7 @@ exports.userRoutes = (app) => {
     app.post("/product", create);
     app.get("/product", getAll);
     app.get("/product/:id", productId);
-    app.get("/", (req, res) => {
+    app.get("/home", (req, res) => {
         return res.status(200).send("deu tudo certo");
     });
 };
