@@ -1,16 +1,30 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const { PrismaClient } = require("@prisma/client");
 const port = 3001;
 
+const prisma = new PrismaClient();
 dotenv.config();
+prisma
+    .$connect()
+    .then(() => {
+        const expressApp = express();
 
-const app = express();
+        // defina suas rotas e middlewares do Cyclic aqui
 
-app.use(cors());
-app.use(express.json());
+        expressApp.use(cors());
+        expressApp.use(express.json());
 
-require("./routes/index.js")(app);
+        // defina suas rotas e middlewares do Express aqui
 
-app.listen(port);
-console.log(`api na ${port}`);
+        require("./routes/index.js")(expressApp);
+
+        expressApp.listen(port, () => {
+            console.log(`Servidor Express iniciado na porta ${port}`);
+        });
+    })
+    .catch((err) => {
+        console.log("Erro ao conectar ao banco de dados: " + err);
+        process.exit(1);
+    });
