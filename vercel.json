@@ -18,7 +18,8 @@
     "functions": {
         "api": {
             "memory": 512,
-            "maxDuration": 10
+            "maxDuration": 10,
+            "timeout": 300
         }
     }
 }
