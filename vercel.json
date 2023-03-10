@@ -1,18 +1,24 @@
 {
-    "env": {
-        "MONGODB_URI": "@mongodb-uri",
-        "mongodb-uri": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/test"
-    },
+    "version": 2,
     "builds": [
         {
             "src": "src/index.js",
             "use": "@vercel/node"
         }
     ],
+    "env": {
+        "MONGODB_URI": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/?retryWrites=true&w=majority"
+    },
     "routes": [
         {
-            "src": "/.*",
+            "src": "/api/(.*)",
             "dest": "src/index.js"
         }
-    ]
+    ],
+    "functions": {
+        "api": {
+            "memory": 512,
+            "maxDuration": 10
+        }
+    }
 }
