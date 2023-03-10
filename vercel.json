@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "src/index.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "env": {
+        "DATABASE_URL": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "src/index.js"
+        }
+    ],
+    "functions": {
+        "api": {
+            "memory": 512,
+            "maxDuration": 10,
+            "timeout": 300
+        }
+    }
+}
