@@ -7,7 +7,7 @@
         }
     ],
     "env": {
-        "MONGODB_URI": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/?retryWrites=true&w=majority"
+        "MONGODB_URI": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/test?authMechanism=SCRAM-SHA-1"
     },
     "routes": [
         {

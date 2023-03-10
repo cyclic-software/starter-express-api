@@ -4,7 +4,7 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "dev": "node index.js",
+        "dev": "node src/index.js",
         "build": "npm run prisma:generate && vercel --prod",
         "prisma:generate": "npx prisma generate"
     },
