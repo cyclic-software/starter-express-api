@@ -9,6 +9,7 @@ exports.createProduct = async (data) => {
 };
 
 exports.getProduct = async () => {
+    await prisma.$connect();
     const product = await prisma.product.findMany({});
 
     return product;
