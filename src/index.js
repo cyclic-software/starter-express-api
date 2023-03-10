@@ -16,7 +16,7 @@ prisma
         require("./routes/index.js")(expressApp);
 
         expressApp.listen(port, () => {
-            console.log(`Servidor Express iniciado na porta a${port}`);
+            console.log(`Servidor Express iniciado na porta ${port}`);
         });
     })
     .catch((err) => {
