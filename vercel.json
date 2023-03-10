@@ -1,5 +1,8 @@
 {
-    "version": 2,
+    "env": {
+        "MONGODB_URI": "@mongodb-uri",
+        "mongodb-uri": "mongodb+srv://alexcubas10:alexcubas@custerbackendtest.w6x5obu.mongodb.net/test"
+    },
     "builds": [
         {
             "src": "src/index.js",
@@ -8,7 +11,7 @@
     ],
     "routes": [
         {
-            "src": "(.*)",
+            "src": "/.*",
             "dest": "src/index.js"
         }
     ]
