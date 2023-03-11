@@ -89,13 +89,30 @@ const userRegister = async (req, res, next) => {
 
 const userLogin = async (req, res, next) => {
   try {
-    let { phoneno, signupmethod, googleAuthToken } = req.body;
+    let { phoneno, signinmethod, googleAuthToken } = req.body;
 
-    return res.status(200).json({
-      status: 1,
-      message: "Hitted Login",
-      data: ["success"],
+    let getLogin = await User.findOne({
+      $and: [{ phoneno: phoneno }, { signupmethod: signinmethod }],
     });
+
+    if (!getLogin) {
+      throw new Error("This phone number does not exist. Please sign up first");
+    } else {
+      let token = jwt.sign(
+        { user_id: `${getLogin._id}` },
+        "DATERAPPNATIVE1110"
+      );
+
+      let loginresponse = {
+        ...getLogin._doc,
+        accesstoken: token,
+      };
+      return res.status(200).json({
+        status: 1,
+        message: "Login successful",
+        data: loginresponse,
+      });
+    }
   } catch (err) {
     console.log(err.message);
     return res.status(200).json({
