@@ -10,7 +10,7 @@ const verifyToken = async (req, res, next) => {
       req.body.token || req.query.token || req.headers["x-access-token"];
     const decodedjwttoken = jwt.verify(token, "DATERAPPNATIVE1110");
     req.user = decodedjwttoken;
-    // console.log("user  =======>", req.user)
+    console.log("user  =======>", req.user);
 
     if (!token) {
       return res.status(403).send({

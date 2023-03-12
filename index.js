@@ -27,26 +27,26 @@ app.all("/", async (req, res, next) => {
 app.use("/", userRouterjs);
 app.use("/", adminRouterjs);
 
+let clients = {};
+
 io.on("connection", (socket) => {
   console.log("a user connected");
+  console.log(`id of user connected is : ${socket.id}`);
 
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
+  socket.on("/testevent", (iddata) => {
+    clients[iddata] = socket;
+    // console.log("In the event =========> " + clients[iddata]);
+    console.log(clients);
   });
 
-  socket.on("offer", (id, message) => {
-    socket.to(id).emit("offer", socket.id, message);
-  });
-
-  socket.on("answer", (id, message) => {
-    socket.to(id).emit("answer", socket.id, message);
-  });
-
-  socket.on("candidate", (id, message) => {
-    socket.to(id).emit("candidate", socket.id, message);
+  socket.on("/messagesend", (messagedata) => {
+    console.log("message obj ===========> " + messagedata.message);
+    let targetedid = messagedata.targetid;
+    if (clients[targetedid])
+      clients[targetedid].emit("messagesend", messagedata);
   });
 });
 
-app.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on ${process.env.PORT}`);
 });
