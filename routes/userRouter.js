@@ -6,6 +6,7 @@ const router = express.Router();
 
 // controllers listed here --tejasborate1110 //
 const userController = require("../controllers/userController");
+const chatUsersController = require("../controllers/chatUsers");
 
 router.post("/checkPhonenumber", userController.checkPhonenumber);
 
@@ -17,4 +18,10 @@ router.post("/updateDetails", auth, userController.updateDetails);
 
 router.post("/userdetails", auth, userController.userdetails);
 
+router.post("/getchatusers", auth, chatUsersController.getmessageableusers);
+
+router.post("/addChats", auth, chatUsersController.addChats);
+
+// getmychats
+router.post("/getmychats", auth, chatUsersController.getmychats);
 module.exports = router;
