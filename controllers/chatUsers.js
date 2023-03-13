@@ -68,14 +68,25 @@ const getmychats = async (req, res) => {
   try {
     let user_id = req.user.user_id;
     let { recevier_id } = req.body;
-    let getChatsall = await UserChat.find({
+
+    let getChatsallsend = await UserChat.find({
       $and: [{ recevier_id: recevier_id }, { sender_id: user_id }],
     });
-    if (getChatsall && getChatsall.length > 0) {
+
+    let getChatsallreceived = await UserChat.find({
+      $and: [{ recevier_id: user_id }, { sender_id: recevier_id }],
+    });
+
+    if (
+      (getChatsallsend && getChatsallsend.length > 0) ||
+      (getChatsallreceived && getChatsallreceived.length > 0)
+    ) {
       return res.status(200).json({
         status: 1,
-        message: "Chat Created",
-        data: getChatsall,
+        message: "Got my chats",
+        // data: getChatsall,
+        receivedmsg: getChatsallreceived,
+        sentmsg: getChatsallsend,
       });
     } else {
       return res.status(200).json({
