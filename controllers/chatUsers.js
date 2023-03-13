@@ -40,6 +40,8 @@ const addChats = async (req, res) => {
       recevier_id: recevier_id,
       message: message,
       sender_id: user_id,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
     if (createChat) {
       return res.status(200).json({
