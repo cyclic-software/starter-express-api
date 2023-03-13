@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
     console.log("message obj ===========> " + messagedata.message);
     let targetedid = messagedata.targetid;
     if (clients[targetedid])
-      clients[targetedid].emit("messagesend", messagedata);
+      clients[targetedid].emit("/messagesend", messagedata);
   });
 });
 
