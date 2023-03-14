@@ -1,17 +1,18 @@
 const express = require("express");
 const app = express();
-const server = require("http").createServer(app);
+
 const cors = require("cors");
 app.use(express.json());
 app.use(cors());
+
+app.use(express.static(__dirname + "/public"));
 require("dotenv").config();
 require("./config/db").connect();
+const server = require("http").createServer(app);
 // const { getIo, initIo } = require("./socket");
 const io = require("socket.io")(server);
 
 const client = require("redis");
-
-app.use(express.static(__dirname + "/public"));
 
 const userRouterjs = require("./routes/userRouter");
 const adminRouterjs = require("./routes/adminRouter");
@@ -41,9 +42,12 @@ io.on("connection", (socket) => {
 
   socket.on("/messagesend", (messagedata) => {
     console.log("message obj ===========> " + messagedata.message);
-    let targetedid = messagedata.targetid;
-    if (clients[targetedid])
-      clients[targetedid].emit("/messagesend", messagedata);
+    let targetedid = messagedata.senderid;
+    console.log("Target id ======> " + targetedid);
+    if (clients[targetedid]) {
+      console.log(`getting this client =======> ${clients[targetedid]}`);
+      clients[targetedid].emit("/messagesendreceive", messagedata);
+    }
   });
 });
 
