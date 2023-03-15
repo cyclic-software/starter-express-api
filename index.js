@@ -35,8 +35,11 @@ io.on("connection", (socket) => {
   console.log(`id of user connected is : ${socket.id}`);
 
   socket.on("/testevent", (iddata) => {
-    clients[iddata] = socket;
-    // console.log("In the event =========> " + clients[iddata]);
+    if (clients[iddata] !== iddata) {
+      clients[iddata] = socket;
+    } else {
+      console("ID already registered");
+    }
     console.log(clients);
   });
 
