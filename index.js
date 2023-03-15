@@ -52,6 +52,15 @@ io.on("connection", (socket) => {
       clients[targetedid].emit("/messagesendreceive", messagedata);
     }
   });
+  socket.on("/typing", (tyingdata) => {
+    console.log("typing ===========> " + tyingdata.message);
+    let targetedid = tyingdata.senderid;
+    console.log("Target id ======> " + targetedid);
+    if (clients[targetedid]) {
+      console.log(`getting this client =======> ${clients[targetedid]}`);
+      clients[targetedid].emit("/typing", tyingdata);
+    }
+  });
 });
 
 server.listen(process.env.PORT || 3000, () => {
