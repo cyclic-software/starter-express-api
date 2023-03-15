@@ -34,7 +34,9 @@ const userRegister = async (req, res, next) => {
       firebaseConfirmation,
       firebase_token,
     } = req.body;
-
+    
+    console.log("Data ================> ", phoneno);
+    console.log("Data2================> ", firebaseConfirmation);
     let checkPhone = await User.findOne({ phoneno: phoneno });
 
     if (checkPhone) {
