@@ -1,7 +1,13 @@
-const express = require('express')
-const app = express()
-app.all('/', (req, res) => {
-    console.log("Just got a request!")
-    res.send('Yo!')
-})
-app.listen(process.env.PORT || 3000)
+const server = require("./src/app.js");
+const mongoose = require("mongoose");
+const connectionString =
+  "mongodb+srv://admin:U4GRvBSVc8J1EViD@pf-henry.vzbpdsv.mongodb.net/test";
+server.listen(3000, () => {
+  mongoose
+    .connect(connectionString, {
+      useNewUrlParser: true,
+    })
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.log(err));
+  console.log("%s listening at 3000"); // eslint-disable-line no-console
+});
