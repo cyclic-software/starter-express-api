@@ -79,16 +79,14 @@ const getmychats = async (req, res) => {
       $and: [{ recevier_id: user_id }, { sender_id: recevier_id }],
     });
 
-    if (
-      (getChatsallsend && getChatsallsend.length > 0) ||
-      (getChatsallreceived && getChatsallreceived.length > 0)
-    ) {
+    let allChats = [...getChatsallsend, ...getChatsallreceived];
+
+    if (getChatsallreceived && getChatsallreceived.length > 0) {
       return res.status(200).json({
         status: 1,
         message: "Got my chats",
         // data: getChatsall,
-        receivedmsg: getChatsallreceived,
-        sentmsg: getChatsallsend,
+        data: allChats,
       });
     } else {
       return res.status(200).json({
