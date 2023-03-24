@@ -81,7 +81,7 @@ const getmychats = async (req, res) => {
 
     let allChats = [...getChatsallsend, ...getChatsallreceived];
 
-    if (getChatsallreceived && getChatsallreceived.length > 0) {
+    if (allChats && allChats.length > 0) {
       return res.status(200).json({
         status: 1,
         message: "Got my chats",
