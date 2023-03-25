@@ -28,37 +28,37 @@ app.all("/", async (req, res, next) => {
 app.use("/", userRouterjs);
 app.use("/", adminRouterjs);
 
-let clients = {};
+let clientsdata = {};
 
 io.on("connection", (socket) => {
   console.log("a user connected");
   console.log(`id of user connected is : ${socket.id}`);
-
+  // let actualClientSocketid =
   socket.on("/testevent", (iddata) => {
-    if (clients[iddata] !== iddata) {
-      clients[iddata] = socket;
+    if (clientsdata[iddata] !== iddata) {
+      clientsdata[iddata] = socket;
     } else {
       console("ID already registered");
     }
-    console.log(clients);
+    console.log("connected user ++++++" + clientsdata);
   });
 
   socket.on("/messagesend", (messagedata) => {
     console.log("message obj ===========> " + messagedata.message);
     let targetedid = messagedata.senderid;
     console.log("Target id ======> " + targetedid);
-    if (clients[targetedid]) {
-      console.log(`getting this client =======> ${clients[targetedid]}`);
-      clients[targetedid].emit("/messagesendreceive", messagedata);
+    if (clientsdata[targetedid]) {
+      console.log(`getting this client =======> ${clientsdata[targetedid]}`);
+      clientsdata[targetedid].emit("/messagesendreceive", messagedata);
     }
   });
   socket.on("/typing", (tyingdata) => {
     console.log("typing ===========> " + tyingdata.message);
     let targetedid = tyingdata.senderid;
     console.log("Target id ======> " + targetedid);
-    if (clients[targetedid]) {
-      console.log(`getting this client =======> ${clients[targetedid]}`);
-      clients[targetedid].emit("/typing", tyingdata);
+    if (clientsdata[targetedid]) {
+      console.log(`getting this client =======> ${clientsdata[targetedid]}`);
+      clientsdata[targetedid].emit("/typing", tyingdata);
     }
   });
 });
