@@ -6,17 +6,9 @@ const clientSchema = new mongoose.Schema({
     type: String,
     default: uuidv4,
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  surname: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   address: {
     type: String,

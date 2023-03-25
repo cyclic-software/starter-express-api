@@ -20,11 +20,9 @@ const productSchema = new mongoose.Schema({
   },
   model: {
     type: String,
-    required: true,
   },
   brand: {
     type: String,
-    required: true,
   },
   category: {
     type: String,
@@ -38,13 +36,31 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
   numReviews: {
     type: Number,
+  },
+  reviews: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      rating: {
+        type: Number,
+      },
+      comment: {
+        type: String,
+      },
+    },
+  ],
+  ratingProduct: {
+    type: Number,
+    default: 0,
     required: true,
+  },
+  sales: {
+    type: Number,
+    default: 0,
   },
 });
 
