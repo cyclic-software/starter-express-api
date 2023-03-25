@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
     console.log("Target id ======> " + targetedid);
     if (clients[targetedid]) {
       console.log(`getting this client =======> ${clients[targetedid]}`);
-      clients[targetedid].emit("/messagesendreceive", messagedata);
+      clients[targetedid].broadcast.emit("/messagesendreceive", messagedata);
     }
   });
   socket.on("/typing", (tyingdata) => {
@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
     console.log("Target id ======> " + targetedid);
     if (clients[targetedid]) {
       console.log(`getting this client =======> ${clients[targetedid]}`);
-      clients[targetedid].emit("/typing", tyingdata);
+      clients[targetedid].broadcast.emit("/typing", tyingdata);
     }
   });
 });
