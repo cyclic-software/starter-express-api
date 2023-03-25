@@ -35,11 +35,12 @@ const getmessageableusers = async (req, res, next) => {
 const addChats = async (req, res) => {
   try {
     let user_id = req.user.user_id;
-    let { recevier_id, message } = req.body;
+    let { recevier_id, message, messageType } = req.body;
     let createChat = await UserChat.create({
       recevier_id: recevier_id,
       message: message,
       sender_id: user_id,
+      type: messageType,
       created_at: new Date(),
       updated_at: new Date(),
     });
