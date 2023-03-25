@@ -71,22 +71,44 @@ const getmychats = async (req, res) => {
     let user_id = req.user.user_id;
     let { recevier_id } = req.body;
 
-    let getChatsallsend = await UserChat.find({
-      $and: [{ recevier_id: recevier_id }, { sender_id: user_id }],
-    });
+    let getChatsallsend = await UserChat.aggregate([
+      {
+        $match: {
+          $or: [
+            { sender_id: user_id, recevier_id: recevier_id },
+            { recevier_id: user_id, sender_id: recevier_id },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: "tbl_users",
+          let: { pid: "$sender_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$_id", { $toObjectId: "$$pid" }],
+                },
+              },
+            },
+          ],
+          as: "userData",
+        },
+      },
+      {
+        $sort: { created_date: -1 },
+      },
+    ]).read("secondary");
 
-    let getChatsallreceived = await UserChat.find({
-      $and: [{ recevier_id: user_id }, { sender_id: recevier_id }],
-    });
+    // let allChats = [...getChatsallsend, ...getChatsallreceived];
 
-    let allChats = [...getChatsallsend, ...getChatsallreceived];
-
-    if (allChats && allChats.length > 0) {
+    if (getChatsallsend && getChatsallsend.length > 0) {
       return res.status(200).json({
         status: 1,
         message: "Got my chats",
         // data: getChatsall,
-        data: allChats,
+        data: getChatsallsend,
       });
     } else {
       return res.status(200).json({
