@@ -26,34 +26,10 @@ const sendNotifications = async (req, res) => {
     }
 
     let userDetails = await User.findOne({ _id: req.user_id });
-
+    let senderdetails = await User.findOne({ _id: req.sender_id });
     console.log("userdetails :" + req.title);
 
     if (userDetails) {
-      //   let request = require("request");
-      //   let options = {
-      //     method: "POST",
-      //     url: "https://fcm.googleapis.com/fcm/send",
-      //     headers: {
-      //       Authorization:
-      //         "key=AAAAQVTxZPo:APA91bFUB2TKisdnbIyeFwd4c41k0Ef2GrpATbDFdJCk-DpjmLtzhTxzLWKVJgK044dd6Z6FuUQNbVcKe69bMep9i6-n26112dq_F45cZGbUv436JoEGA5HcmHdBBvc9FU5dqeouRY7_",
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       registration_ids: [`${userDetails.firebase_token}`],
-      //       notification: {
-      //         body: `${req.description}`,
-      //         title: `${req.title}`,
-      //         android_channel_id: "pushnotificationapp",
-      //         sound: true,
-      //       },
-      //     }),
-      //   };
-      //   await request(options, function (error, response) {
-      //     if (error) throw new Error(error);
-      //     console.log("notification response +++++++++>" + response);
-      //   });
-
       let message = {
         //this may vary according to the message type (single recipient, multicast, topic, et cetera)
         to: userDetails.firebase_token,
@@ -67,8 +43,8 @@ const sendNotifications = async (req, res) => {
           //you can send only notification or only data(or include both)
           page: `${req.page}`,
           extradata: {
-            userid: userDetails._id,
-            name: userDetails.name,
+            userid: senderdetails._id,
+            name: senderdetails.name,
           },
         },
       };
