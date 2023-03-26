@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const UserChat = require("../models/userchats");
 const jwt = require("jsonwebtoken");
+const common_helper = require("../helper/common_helper");
 
 const getmessageableusers = async (req, res, next) => {
   try {
@@ -45,6 +46,17 @@ const addChats = async (req, res) => {
       updated_at: new Date(),
     });
     if (createChat) {
+      let receiverUser = await User.findOne({ _id: recevier_id });
+      console.log(receiverUser);
+      if (receiverUser) {
+        await common_helper.sendNotifications({
+          user_id: recevier_id,
+          description: `You have a new message from ${receiverUser.name} 💬`,
+          title: `You have a new message`,
+          page: `CHATDETAILS`,
+        });
+      }
+
       return res.status(200).json({
         status: 1,
         message: "Chat Created",
