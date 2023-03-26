@@ -46,12 +46,12 @@ const addChats = async (req, res) => {
       updated_at: new Date(),
     });
     if (createChat) {
-      let receiverUser = await User.findOne({ _id: recevier_id });
-      console.log(receiverUser);
-      if (receiverUser) {
+      let senderdata = await User.findOne({ _id: user_id });
+      console.log(senderdata);
+      if (senderdata) {
         await common_helper.sendNotifications({
           user_id: recevier_id,
-          description: `You have a new message from ${receiverUser.name} 💬`,
+          description: `You have a new message from ${senderdata.name} 💬`,
           title: `You have a new message`,
           page: `CHATDETAILS`,
         });
