@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,8 @@
     "cloudinary": "^1.35.0",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
+    "fcm-node": "^1.6.1",
+    "firebase": "^9.18.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
     "multer": "^1.4.5-lts.1",

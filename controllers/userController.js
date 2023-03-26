@@ -34,7 +34,7 @@ const userRegister = async (req, res, next) => {
       firebaseConfirmation,
       firebase_token,
     } = req.body;
-    
+
     console.log("Data ================> ", phoneno);
     console.log("Data2================> ", firebaseConfirmation);
     let checkPhone = await User.findOne({ phoneno: phoneno });
@@ -48,7 +48,7 @@ const userRegister = async (req, res, next) => {
         phoneno,
         signupmethod,
         isPhoneVerified: true,
-        firebase_token,
+        firebase_token: "",
         created_at: new Date(),
         updated_at: new Date(),
       });
@@ -128,14 +128,14 @@ const userLogin = async (req, res, next) => {
 const updateDetails = async (req, res, next) => {
   try {
     let user_id = req.user.user_id;
-    let { name, email, phoneno, dob } = req.body;
+    let { name, email, phoneno, dob, firebase_token } = req.body;
 
     if (!user_id) {
       throw new Error("Invalid Request");
     }
     let updateUserDetails = await User.findOneAndUpdate(
       { _id: user_id },
-      { name, email, phoneno, dob },
+      { name, email, phoneno, dob, firebase_token },
       { new: true }
     );
 
