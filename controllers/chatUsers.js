@@ -50,7 +50,7 @@ const addChats = async (req, res) => {
       console.log(receiverUser);
       if (receiverUser) {
         await common_helper.sendNotifications({
-          user_id: user_id,
+          user_id: recevier_id,
           description: `You have a new message from ${receiverUser.name} 💬`,
           title: `You have a new message`,
           page: `CHATDETAILS`,
