@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const UserChat = require("../models/userchats");
 const jwt = require("jsonwebtoken");
-const common_helper = require("../helper/common_helper");
+const common_helper = require("../helper/common_helper")
 
 const getmessageableusers = async (req, res, next) => {
   try {
