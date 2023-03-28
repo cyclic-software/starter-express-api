@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   signupmethod: { type: String, default: "" },
   isPhoneVerified: { type: Boolean, default: false },
   isverifiedUser: { type: Boolean, default: false },
-  userProfileimage: { type: String },
+  userProfileimage: { type: String, default: "" },
   clientIp: { type: String },
   resetpassword_code: { type: String },
   firebase_token: { type: String, default: "" },

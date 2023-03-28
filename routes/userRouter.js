@@ -24,4 +24,7 @@ router.post("/addChats", auth, chatUsersController.addChats);
 
 // getmychats
 router.post("/getmychats", auth, chatUsersController.getmychats);
+
+// uploadProfile
+router.post("/uploadProfile", auth, userController.uploadProfile);
 module.exports = router;

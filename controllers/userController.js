@@ -1,5 +1,14 @@
+const cloudinary = require("cloudinary").v2;
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+
+const uploadprofileimg = require("../middlewares/uploadProfilePics");
+
+cloudinary.config({
+  cloud_name: "dsb6hxs2q",
+  api_key: "332881871931773",
+  api_secret: "7FVQNp0lXZ5XipPVOhqoDcu0WuA",
+});
 
 const checkPhonenumber = async (req, res, next) => {
   try {
@@ -187,10 +196,58 @@ const userdetails = async (req, res, next) => {
   }
 };
 
+const uploadProfile = async (req, res) => {
+  try {
+    let user_id = req.user.user_id;
+    if (!user_id)
+      return res.status(200).json({
+        status: 0,
+        data: [],
+        message: "Invalid Request",
+      });
+
+    await uploadprofileimg(req, res);
+
+    let result = await cloudinary.uploader.upload(req.file.path, {
+      public_id: `${user_id}_profile`,
+      width: 500,
+      height: 500,
+      crop: "fill",
+    });
+
+    let updatedUser = await User.findByIdAndUpdate(
+      { _id: user_id },
+      { userProfileimage: result.url },
+      { new: true }
+    );
+    if (updatedUser) {
+      return res.status(200).json({
+        status: 1,
+        data: updatedUser,
+        message: "Profile image uploaded!",
+      });
+    } else {
+      return res.status(200).json({
+        status: 0,
+        data: [],
+        message: "Unknown error occurred, please try again",
+      });
+    }
+  } catch (err) {
+    console.log("Error while uploading profile image ======>", err.message);
+    return res.status(200).json({
+      status: 1,
+      data: [],
+      message: "server error, try after some time",
+    });
+  }
+};
+
 module.exports = {
   userRegister,
   userLogin,
   updateDetails,
   checkPhonenumber,
   userdetails,
+  uploadProfile,
 };
