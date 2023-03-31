@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -23,6 +24,8 @@ app.use(express.json());
 
 app.use('/api/course', UserRoute)
 
-app.listen(6000, () => {
-    console.log('Server is running on port 6000')
+const port = process.env.APP_PORT
+
+app.listen(port, () => {
+    console.log('Server is running on port ', port)
 })
