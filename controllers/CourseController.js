@@ -52,7 +52,7 @@ const store = (req, res, next) => {
 
 const update = (req, res, next) => {
     let id = req.body.id
-
+    
     let updatedData = {
         course_id: req.body.course_id,
         course_name: req.body.course_name,

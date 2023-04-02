@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const UserRoute = require('./routes/CourseRoute')
+const CourseRoute = require('./routes/CourseRoute')
+const UserRoute = require('./routes/user.router')
 const app = express()
 const PORT = process.env.PORT || 5000
 app.use(express.json());
@@ -19,7 +20,8 @@ const conn = await mongoose.connect(process.env.MONGO_URL)
     }
 }
 
-app.use('/api/course', UserRoute)
+app.use('/api/course', CourseRoute)
+app.use('/api/users',UserRoute)
 
 connectDB().then(() => {
     app.listen(PORT, () => {
