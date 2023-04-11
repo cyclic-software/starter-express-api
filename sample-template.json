@@ -1,0 +1,33 @@
+{
+  "type": "template",
+  "template": {
+    "name": "sv_confirmation",
+    "language": {
+      "code": "en"
+    },
+    "components": [
+      {
+        "type": "body",
+        "parameters": [
+          {
+            "type": "text",
+            "text": "Prestige Garden City"
+          },
+          {
+            "type": "text",
+            "text": "Prestige Garden City"
+          },
+          {
+            "type": "text",
+            "text": "https://play.google.com/store/apps/details?id=com.mypresitge&hl=en&gl=US"
+          },
+          {
+            "type": "text",
+            "text": "https://play.google.com/store/apps/details?id=com.mypresitge&hl=en&gl=US"
+          }
+        ]
+      }
+    ]
+  },
+  "to": "917285061176"
+}
