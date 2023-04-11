@@ -18,13 +18,13 @@ module.exports = (app) => {
 
   app.post("/media/create", async (req, res, next) => {
     try {
-      const v = new Validator(req.body, {
-        file: "required",
-      });
-      const matched = await v.check();
-      if (!matched) {
-        return res.status(400).send(v.errors);
-      }
+      // const v = new Validator(req.body, {
+      //   file: "required",
+      // });
+      // const matched = await v.check();
+      // if (!matched) {
+      //   return res.status(400).send(v.errors);
+      // }
       var uploadfile = await uploadFile(req, res);
       
       req.body.media_file = req.media_file;
