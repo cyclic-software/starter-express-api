@@ -6,7 +6,9 @@ const {
   GetSortByFromRequest,
   GetUploadFullPath
 } = require("../utils");
-const uploadFile = require("./middlewares/upload");
+const upload = require("./middlewares/upload");
+
+const singleUpload = upload.single("image");
 
 const { Validator } = require("node-input-validator");
 
@@ -18,21 +20,25 @@ module.exports = (app) => {
 
   app.post("/media/create", async (req, res, next) => {
     try {
-      // const v = new Validator(req.body, {
-      //   file: "required",
-      // });
-      // const matched = await v.check();
-      // if (!matched) {
-      //   return res.status(400).send(v.errors);
-      // }
-      var uploadfile = await uploadFile(req, res);
-      
-      req.body.media_file = req.media_file;
-      req.body.full_path = GetUploadFullPath(req.body.folder_name,req.body.media_file);
-      var data = await service.AddMedia(req.body);
 
-      data =  await GetApiResponse(data);
-      return res.json(data);
+
+      singleUpload(req, res, function (err) {
+        if (err) {
+          res.json({
+            success: false,
+            errors: {
+              title: "Image Upload Error",
+              detail: err.message,
+              error: err,
+            },
+          });
+        }
+      });
+    
+        // let update = { profilePicture: req.file.location };
+        // console.log(update)
+         res.json(req.file);
+    
     } catch (error) {
       next(error);
     }

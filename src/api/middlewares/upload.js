@@ -1,30 +1,45 @@
-const util = require("util");
 const multer = require("multer");
-var path = require('path');
-var fs = require('fs');
+const multerS3 = require("multer-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
+const { AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY, AWS_REGION} = require('../../utils');
 
-const maxSize = 2 * 1024 * 1024;
-let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    var dir =  "./public/uploads/"+req.body.folder_name;
-    if (!fs.existsSync(dir)){
-      fs.mkdirSync(dir);
-    }
-    cb(null,  dir  );
-  },
-  filename: (req, file, cb) => {
-    req.media_file = `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`;
-    
-    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-  },
+// create s3 instance using S3Client 
+// (this is how we create s3 instance in v3)
+
+
+const aws = require("aws-sdk");
+
+const s3 = new aws.S3();
+
+aws.config.update({
+  secretAccessKey: AWS_ACCESS_KEY_ID,
+  accessKeyId: AWS_SECRET_ACCESS_KEY,
+  region: AWS_REGION,
 });
 
-let uploadFile = multer({
-  storage: storage,
-  limits: { fileSize: maxSize },
-}).single("file");
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type, only JPEG and PNG is allowed!"), false);
+  }
+};
 
+const upload = multer({
+  fileFilter,
+  storage: multerS3({
+    acl: "public-read",
+    s3,
+    bucket: "cyclic-lonely-tank-top-colt-eu-north-1",
+    metadata: function (req, file, cb) {
+      console.log(file)
+      cb(null, { fieldName: "TESTING_METADATA" });
+    },
+    key: function (req, file, cb) {
+      console.log(file)
+      cb(null, Date.now().toString());
+    },
+  }),
+});
 
-    // create the exported middleware object
-let uploadFileMiddleware = util.promisify(uploadFile);
-module.exports = uploadFileMiddleware;
+module.exports = upload;
