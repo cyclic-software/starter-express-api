@@ -7,7 +7,8 @@ const {
   cagtegory,
   tag,
   media,
-  user
+  user,
+  post,
 } = require('./api');
 const { SubscribeMessage } = require('./utils');
 
@@ -31,6 +32,7 @@ module.exports = async (app) => {
     tag(app);
     media(app);
     user(app);
+    post(app);
   } catch (error) {
     console.log(error);
   }

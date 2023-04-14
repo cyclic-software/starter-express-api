@@ -33,6 +33,12 @@ class CategoryRepository {
     );
     return template;
   }
+  async SearchCategory(category_name) {
+    const category = await CategoryModel.findOne(
+      { category_name: category_name },
+    );
+    return category;
+  }
 }
 
 module.exports = CategoryRepository;

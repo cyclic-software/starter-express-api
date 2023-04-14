@@ -11,27 +11,33 @@ class TagRepository {
   }
 
   async GetTags(query) {
-    const templates = await TagModel.aggregate(query);
-    return templates;
+    const tags = await TagModel.aggregate(query);
+    return tags;
   }
   async FindTagById(id) {
     const tags = await TagModel.find({ is_del: 0, _id: id });
     return tags;
   }
   async UpdateTag(formdata) {
-    const template = await TagModel.updateOne(
+    const tag = await TagModel.updateOne(
       { _id: formdata['id'] },
       { $set: formdata },
     );
-    const templatedata = await TagModel.find({ _id: formdata['id'] });
-    return templatedata;
+    const tagdata = await TagModel.find({ _id: formdata['id'] });
+    return tagdata;
   }
   async DeleteTag(formdata) {
-    const template = await TagModel.updateOne(
+    const tag = await TagModel.updateOne(
       { _id: formdata['id'] },
       { $set: { is_del: true } },
     );
-    return template;
+    return tag;
+  }
+  async SearchTag(tag_name) {
+    const tag = await TagModel.findOne(
+      { tag_name: tag_name },
+    );
+    return tag;
   }
 }
 
