@@ -8,7 +8,7 @@ const {
 } = require("../utils");
 const upload = require("./middlewares/upload");
 
-const singleUpload = upload.single("image");
+const uploadFile = require("./middlewares/upload");
 
 const { Validator } = require("node-input-validator");
 
@@ -22,20 +22,15 @@ module.exports = (app) => {
     try {
 
 
-      singleUpload(req, res, function (err) {
-        if (err) {
-          res.json({
-            success: false,
-            errors: {
-              title: "Image Upload Error",
-              detail: err.message,
-              error: err,
-            },
-          });
-        }
-      });
-    
-        // let update = { profilePicture: req.file.location };
+      var uploadfile = await uploadFile(req, res);
+      
+      req.body.media_file = req.media_file;
+      req.body.full_path = GetUploadFullPath(req.body.folder_name,req.body.media_file);
+      var data = await service.AddMedia(req.body);
+
+      data =  await GetApiResponse(data);
+      return res.json(data);
+
         // console.log(update)
          res.json(req.file);
     
