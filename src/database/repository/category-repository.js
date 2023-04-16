@@ -15,7 +15,7 @@ class CategoryRepository {
     return templates;
   }
   async FindCategoryById(id) {
-    const categorys = await CategoryModel.find({ is_del: 0, _id: id });
+    const categorys = await CategoryModel.find({ is_del: false, _id: id });
     return categorys;
   }
   async UpdateCategory(formdata) {

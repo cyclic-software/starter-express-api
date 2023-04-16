@@ -15,7 +15,7 @@ class MediaRepository {
     return templates;
   }
   async FindMediaById(id) {
-    const medias = await MediaModel.find({ is_del: 0, _id: id });
+    const medias = await MediaModel.find({ is_del: false, _id: id });
     return medias;
   }
   async UpdateMedia(formdata) {

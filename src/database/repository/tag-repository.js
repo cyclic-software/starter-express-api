@@ -15,7 +15,7 @@ class TagRepository {
     return tags;
   }
   async FindTagById(id) {
-    const tags = await TagModel.find({ is_del: 0, _id: id });
+    const tags = await TagModel.find({ is_del: false, _id: id });
     return tags;
   }
   async UpdateTag(formdata) {

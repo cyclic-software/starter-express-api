@@ -4,6 +4,7 @@ const {
 } = require("../../utils");
 const Schema = mongoose.Schema;
 
+
 const UserSchema = new Schema(
   {
     user_name: { type: String ,default:''},
@@ -13,9 +14,9 @@ const UserSchema = new Schema(
     user_birthdate: { type: String ,default:''},
     user_slug: { type: String, default:''},
     user_media_url: { type: String,default:'' },
-    user_media_id: { type: String,default:'' },
     is_user_has_button: { type: Boolean,default:false },
-    user_button_text: { type: String,default:'' },
+    user_role: { type: String,enum: ['admin', 'author','publisher','editor','poet','cretor','public'],default:'public' },
+    
     is_del: { type: Boolean, default: false },
   },
   {

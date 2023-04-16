@@ -30,6 +30,17 @@ class UserService {
     var data = this.UserById(formdata['id']);
     return data;
   }
+  async CheckUserIfnotThenInsert(userInputs) {
+    const userdata = await this.repository.FindUserByMobile(userInputs.user_mobile);
+    console.log(userdata)
+    if(userdata == null){
+
+      const UserResult = await this.repository.CreateUser(userInputs);
+      return UserResult;
+    }else{
+      return userdata;
+    }
+  }
 }
 
 module.exports = UserService;

@@ -19,6 +19,8 @@ const PostSchema = new Schema(
     post_tags: [String],
     is_del: { type: Boolean, default: false },
     is_admin_post: { type: Boolean, default: false },
+    likeCount: { type: Number, default: 0 },
+    wishlistCount: { type: Number, default: 0 },
   },
   {
     timestamps: true,
@@ -34,5 +36,13 @@ PostSchema.pre('aggregate', function() {
   // Add a $match state to the beginning of each pipeline.
   this.pipeline().unshift({ $match: { is_del: { $ne: true } } });
 });
+
+PostSchema.pre('remove', async function(next) {
+  const postId = this._id;
+  await mongoose.model('postlike').deleteMany({ post: postId });
+  await mongoose.model('postwishlist').deleteMany({ post: postId });
+  next();
+});
+
 
 module.exports = mongoose.model('post', PostSchema);

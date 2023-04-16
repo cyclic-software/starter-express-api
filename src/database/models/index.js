@@ -1,6 +1,8 @@
 module.exports = {
   SliderModel: require('./slider'),
   PostModel: require('./post'),
+  PostLikeModel: require('./postlike'),
+  PostWishlistModel: require('./postwishlist'),
   CategoryModel: require('./category'),
   TagModel: require('./tag'),
   MediaModel: require('./media'),

@@ -15,7 +15,7 @@ class SliderRepository {
     return templates;
   }
   async FindSliderById(id) {
-    const sliders = await SliderModel.find({ is_del: 0, _id: id });
+    const sliders = await SliderModel.find({ is_del: false, _id: id });
     return sliders;
   }
   async UpdateSlider(formdata) {
