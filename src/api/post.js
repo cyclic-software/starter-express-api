@@ -102,7 +102,7 @@ module.exports = (app) => {
       if (!matched) {
         return res.status(400).send(v.errors);
       }
-      var data = await service.GetAllPostWishlists();
+      var data = await service.GetAllPostWishlist();
       data = data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {
