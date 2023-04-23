@@ -1,0 +1,10 @@
+<h1 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4"><%=socials.title%></h1>
+<div class="d-flex">
+    <% for(var i=0; i < socials.socials.length; i++) { %>
+        
+        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="<%= socials.socials[i].link %>"><i class="<%= socials.socials[i].iconClassName %>"></i></a>
+          
+        <% } %>
+  
+  
+</div>

@@ -1,0 +1,36 @@
+
+    <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="<%=about.imageUrl %>"
+                        style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="mb-4">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5"> <%=about.title%></h5>
+                    <h1 class="display-4"><%=about.titleLine%></h1>
+                </div>
+                <p><%=about.description%></p>
+                <div class="row g-3 pt-3">
+                   
+                    <% for(var i=0; i < about.icons.length; i++) { %>
+                        <div class="col-sm-3 col-6">
+                            <div class="bg-light text-center rounded-circle py-4">
+                                <i class="<%=about.icons[i].iconClass%> text-primary mb-3"></i>
+                                <h6 class="mb-0"><%= about.icons[i].title %><small class="d-block text-primary">
+                                    <%= about.icons[i].IconName %></small>
+                                </h6>
+                            </div>
+                        </div>
+
+                     <% } %>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

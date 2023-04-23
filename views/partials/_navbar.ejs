@@ -1,0 +1,45 @@
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="/" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>DAMVEV</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="/" class="nav-item nav-link <%= link === 'index' && 'active' %>">Home</a>
+                    <a href="/about" class="nav-item nav-link <%= link === 'about' && 'active' %>">About</a>
+                    <a href="projects" class="nav-item nav-link <%= link === 'projects' && 'active' %>">projects</a>
+                    <a href="price.html" class="nav-item nav-link <%= link === 'price' && 'active' %>">Pricing</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="detail.html" class="dropdown-item">Blog Detail</a>
+                            <a href="team.html" class="dropdown-item">The Team</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="appointment.html" class="dropdown-item">Appointment</a>
+                            <a href="search.html" class="dropdown-item">Search</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link <%= link === 'contact' && 'active' %>">Contact</a>
+                    <% if(user){ %>
+                        <a href="/users/dashboard"class="nav-item nav-link <%= link === 'dashboard' && 'active' %>">Dashboard</a>
+
+                        <a href="/logout" class="nav-item nav-link">Logout</a>
+                        <%} else{ %>
+
+                            <a href="/login" class="nav-item nav-link <%= link === 'login' && 'active' %>">Login</a>
+                            <a href="/register"
+                                class="nav-item nav-link <%= link === 'register' && 'active' %>">Register</a>
+                            <%} %>
+
+
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

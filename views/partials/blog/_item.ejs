@@ -1,0 +1,35 @@
+
+<% for(var i=0; i < blogItem.post.length; i++) { %>
+<div class="col-xl-4 col-lg-6">
+    <div class="bg-light rounded overflow-hidden">
+   
+
+        <%
+        if(blogItem.post[i].postVideo){%>
+          
+        <div style="height: 18em;" >
+            <%- blogItem.post[i].postVideo%>
+            </div>
+          <% }else{%>
+ 
+              <img style="height: 18em;" class="img-fluid w-100 " src="<%=blogItem.post[i].postImg%>" alt="">
+              <%  }
+        %>
+        <div class="p-4">
+            <a class="h3 d-block mb-3" href=""><%=blogItem.post[i].postTitle%></a>
+            <p class="m-0"><%=blogItem.post[i].postDsc%></p>
+        </div>
+        <div class="d-flex justify-content-between border-top p-4">
+            <div class="d-flex align-items-center">
+                <img class="rounded-circle me-2" src="<%=blogItem.post[i].postCeoImg%>" width="25" height="25"
+                    alt="">
+                <small><%=blogItem.post[i].posCeoName%></small>
+            </div>
+            <div class="d-flex align-items-center">
+                <small class="ms-3"><i class="far fa-eye text-primary me-1"></i><%=blogItem.post[i].postRev%></small>
+                <small class="ms-3"><i class="far fa-comment text-primary me-1"></i><%=blogItem.post[i].postComment%></small>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>

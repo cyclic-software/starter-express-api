@@ -1,0 +1,162 @@
+<!-- head Start -->
+<%- include("partials/_header") %>
+    <!-- head end -->
+
+    <body>
+        
+
+
+        <!-- Navbar Start -->
+        <%- include("partials/_navbar") %>
+
+            <!-- Navbar End -->
+
+
+            <!-- Hero Start -->
+            <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+                <div class="container py-5">
+                    <div class="row justify-content-start">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5"
+                                style="border-color: rgba(256, 256, 256, .3) !important;"><%=sliderData.titleLine%></h5>
+                            <h1 class="display-1 text-white mb-md-4"><%=sliderData.title%></h1>
+                            <div class="pt-2">
+                                <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2"><%=sliderData.formName%></a>
+                                <a href="/about" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2"><%=sliderData.aboutName%></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hero End -->
+     <!-- Services Start -->
+     <%- include("partials/services/_services")  %>
+     <!-- Services End -->
+
+            <!-- About Start -->
+            <%- include("partials/about/_about") %>
+            <!-- About End -->
+
+
+       
+
+
+            <!-- Appointment Start -->
+       
+            <!-- Appointment End -->
+
+
+            <!-- Pricing Plan Start -->
+      
+            <!-- Pricing Plan End -->
+
+
+            <!-- Team Start -->
+            <%- include("partials/qualified/_mainCmp") %>
+            <!-- Team End -->
+
+
+            <!-- Search Start -->
+            <div class="container-fluid bg-primary my-5 py-5">
+                <div class="container py-5">
+                    <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                        <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Find A Doctor
+                        </h5>
+                        <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
+                        <h5 class="text-white fw-normal">Duo ipsum erat stet dolor sea ut nonumy tempor. Tempor duo
+                            lorem eos sit sed ipsum takimata ipsum sit est. Ipsum ea voluptua ipsum sit justo</h5>
+                    </div>
+                    <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                        <div class="input-group">
+                            <select class="form-select border-primary w-25" style="height: 60px;">
+                                <option selected>Department</option>
+                                <option value="1">Department 1</option>
+                                <option value="2">Department 2</option>
+                                <option value="3">Department 3</option>
+                            </select>
+                            <input type="text" class="form-control border-primary w-50" placeholder="Keyword">
+                            <button class="btn btn-dark border-0 w-25">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Search End -->
+
+
+            <!-- Testimonial Start -->
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Testimonial
+                        </h5>
+                        <h1 class="display-4">Patients Say About Our Services</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="owl-carousel testimonial-carousel">
+                                <div class="testimonial-item text-center">
+                                    <div class="position-relative mb-5">
+                                        <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-1.jpg"
+                                            alt="">
+                                        <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                            style="width: 60px; height: 60px;">
+                                            <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem
+                                        kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore
+                                        et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                    <hr class="w-25 mx-auto">
+                                    <h3>Patient Name</h3>
+                                    <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                                </div>
+                                <div class="testimonial-item text-center">
+                                    <div class="position-relative mb-5">
+                                        <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-2.jpg"
+                                            alt="">
+                                        <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                            style="width: 60px; height: 60px;">
+                                            <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem
+                                        kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore
+                                        et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                    <hr class="w-25 mx-auto">
+                                    <h3>Patient Name</h3>
+                                    <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                                </div>
+                                <div class="testimonial-item text-center">
+                                    <div class="position-relative mb-5">
+                                        <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-3.jpg"
+                                            alt="">
+                                        <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                            style="width: 60px; height: 60px;">
+                                            <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem
+                                        kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore
+                                        et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                    <hr class="w-25 mx-auto">
+                                    <h3>Patient Name</h3>
+                                    <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial End -->
+
+
+            <!-- Blog Start -->
+            <%- include("partials/blog/_mainCmp") %>
+            <!-- Blog End -->
+
+
+
+            <!-- Footer Start -->
+            <%- include("partials/footer/_footer") %>
+
+                <!-- Footer End -->

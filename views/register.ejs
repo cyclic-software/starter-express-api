@@ -1,0 +1,106 @@
+<%- include("partials/_header") %>
+
+
+<body>
+
+    <!-- navbar Start -->
+    <%- include("partials/_navbar") %>
+
+    <!-- Navbar End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="text-center mx-auto  " style="max-width: 500px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">register</h5>
+            </div>
+
+            
+            <div class="row justify-content-center position-relative" style=" z-index: 1;">
+                <div class="col-lg-8">
+                    <div class="bg-white rounded p-5 m-5 mb-0">
+                        <form action="users/register" method="POST">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <input type="text" name="username" class="form-control bg-light border-0" placeholder="Username" style="height: 55px;">
+                                </div>
+                                <div class="col-md-12">
+                                    <div style="display: none;" class="alert alert-danger" id="username"></div>
+                                 </div>
+                                <div class="col-12">
+                                    <input type="email" name="email" class="form-control bg-light border-0" placeholder="Email" style="height: 55px;">
+                                </div>
+                                <div class="col-md-12">
+                                    <div style="display: none;" class="alert alert-danger" id="email"></div>
+                                 </div>
+                                <div class="col-12">
+                                    <input type="password" name="password" class="form-control bg-light border-0" placeholder="Password" style="height: 55px;">
+                                </div>
+                                <div class="col-md-12">
+                                    <div style="display: none;" class="alert alert-danger" id="password"></div>
+                                 </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+    
+    
+    
+    <script>
+        const form = document.querySelector('form')
+        const emailError = document.querySelector('#email')
+        const passwordError = document.querySelector('#password')
+        const usernameError = document.querySelector('#username')
+        form.addEventListener("submit", async (e) => {
+           e.preventDefault();
+           emailError.textContent = "";
+           passwordError.textContent = "";
+           usernameError.textContent = "";
+           emailError.style.display = "none"
+           passwordError.style.display = "none"
+           usernameError.style.display = "none"
+           const email = form.email.value
+           const password = form.password.value
+           const username = form.username.value
+           try {
+              const res = await fetch('users/register', {
+                 method: "POST",
+                 body: JSON.stringify({ email, password, username }),
+                 headers: { "Content-Type": "application/json" }
+              })
+              const data = await res.json();
+              if (data) {
+                 if (data.email) {
+                    emailError.textContent = data.email
+                    emailError.style.display = "block"
+                 }
+                 if (data.password) {
+                    passwordError.textContent = data.password
+                    passwordError.style.display = "block"
+                 }
+                 if (data.username) {
+                    usernameError.textContent = data.username
+                    usernameError.style.display = "block"
+                 }
+              }
+              if (data.user) {
+                 location.assign("/login")
+              }
+           } catch (err) {
+              console.log("ERR::", err)
+           }
+        })
+     </script>
+
+
+    <!-- Footer Start -->
+    <%- include("partials/_footer") %>
+    <!-- Footer end -->

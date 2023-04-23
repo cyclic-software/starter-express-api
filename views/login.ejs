@@ -1,0 +1,47 @@
+<%- include("partials/_header") %>
+
+
+<body>
+
+    <!-- navbar Start -->
+    <%- include("partials/_navbar") %>
+
+    <!-- Navbar End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="text-center mx-auto  " style="max-width: 500px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Login</h5>
+            </div>
+
+            
+            <div class="row justify-content-center position-relative" style=" z-index: 1;">
+                <div class="col-lg-8">
+                    <div class="bg-white rounded p-5 m-5 mb-0">
+                        <form action="users/login" method="POST">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <input type="text" name="username" class="form-control bg-light border-0" placeholder="Username" style="height: 55px;">
+                                </div>
+                                <div class="col-12">
+                                    <input type="password" name="password" class="form-control bg-light border-0" placeholder="Password" style="height: 55px;">
+                                </div>
+                               
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">LOGIN</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+    <!-- Footer Start -->
+    <%- include("partials/_footer") %>
+    <!-- Footer end -->

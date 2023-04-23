@@ -1,0 +1,90 @@
+<!-- head Start -->
+<%- include("partials/_header") %>
+    <!-- head end -->
+
+    <body>
+
+
+
+        <!-- Navbar Start -->
+        <%- include("partials/_navbar") %>
+
+            <!-- Navbar End -->
+
+
+            <!-- Testimonial Start -->
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">WELCOME</h5>
+                        <h1 class="display-4"><%= user.username %></h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            
+                                <div class="testimonial-item text-center">
+                                    <div class="position-relative mb-5">
+                                        <img class="img-fluid rounded-circle mx-auto" src="/img/testimonial-1.jpg"
+                                            alt="">
+                                        <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                            style="width: 60px; height: 60px;">
+                                            <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-4 fw-normal">user name</p>
+                                    <hr class="w-25 mx-auto">
+                                    <h3>user workname</h3>
+                                    <h6 class="fw-normal text-primary mb-3">about user</h6>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">add new project</button>
+
+                                </div>
+
+
+
+                               
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial End -->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"> about project </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form id="request" class="main-form" method="POST" action="/projects" enctype="multipart/form-data">
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">title</label>
+                          <input type="text" placeholder="title" class="form-control" id="recipient-name" name="project_title">
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">description</label>
+                          <textarea name="project_description" placeholder="description" class="form-control" id="message-text"></textarea>
+                          
+                        </div>
+                        <div style="margin-bottom: 20px ;" class="col-md-12">
+                            <input type="file" name="image" class="form-control-file">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit"  class="btn btn-primary">add</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           
+
+
+            
+            <!-- Footer Start -->
+            <%- include("partials/_footer") %>
+
+                <!-- Footer End -->

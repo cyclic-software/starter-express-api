@@ -1,0 +1,25 @@
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5"><%=service.title %></h5>
+            <h1 class="display-4"><%=service.titleLine %></h1>
+        </div>
+        <div class="row g-5">
+            <% for(var i=0; i < service.serviceIcons.length; i++) { %>
+            <div class="col-lg-4 col-md-6">
+                <div
+                    class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="service-icon mb-4">
+                        <i class="<%=service.serviceIcons[i].iconClass%>"></i>
+                    </div>
+                    <h4 class="mb-3"><%= service.serviceIcons[i].title %></h4>
+                    <p class="m-0"> <%= service.serviceIcons[i].IconName %></p>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
