@@ -5,7 +5,6 @@ const cron = require("node-cron");
 const request = require("request");
 const moment = require("moment");
 const fs = require("fs");
-(path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
   cors({
@@ -31,7 +30,7 @@ const allowedOrigins = [
 
 app.get("/standings", async (req, res) => {
   console.log("GET - Requesting standings...");
-  fs.readFile(filePath, function (err, data) {
+  fs.readFile("standings.json", function (err, data) {
     if (!err) {
       const json = JSON.parse(data);
       res.send(JSON.stringify(json));
