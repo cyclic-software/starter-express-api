@@ -181,6 +181,8 @@ module.exports.ApiRequest = async (url, method, headers, data = []) => {
 };
 
 module.exports.convertToSlug =  (text) => {
+  return text.toLowerCase().replace(text, text).replace(/^-+|-+$/g, '')
+  .replace(/\s/g, '-').replace(/\-\-+/g, '-');
   return text.toLowerCase()
              .replace(/ /g, '-')
              .replace(/[^\w-]+/g, '');

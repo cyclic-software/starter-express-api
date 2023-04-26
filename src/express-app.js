@@ -9,6 +9,9 @@ const {
   media,
   user,
   post,
+  poet,
+  feedback,
+  contactus,
 } = require('./api');
 const { SubscribeMessage } = require('./utils');
 
@@ -28,8 +31,11 @@ module.exports = async (app) => {
 
     });
     slider(app);
+    poet(app);
     cagtegory(app);
     tag(app);
+    feedback(app);
+    contactus(app);
     media(app);
     user(app);
     post(app);

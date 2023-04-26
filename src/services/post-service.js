@@ -78,7 +78,9 @@ class PostService {
     return PostResult;
   }
   async UpdatePost(formdata) {
-    this.SaveMasterTag(userInputs.post_tags)
+    this.SaveMasterTag(formdata.post_tags)
+    var categorydata = await this.SavePostCategory(formdata.category_name);
+    formdata.category_slug = categorydata.category_slug;
 
     const PostResult = await this.repository.UpdatePost(formdata);
     return PostResult;

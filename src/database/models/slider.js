@@ -12,6 +12,7 @@ const SliderSchema = new Schema(
     slider_type: { type: String,default:'home' },
     slider_description: { type: String,default:'' },
     slider_media_url: { type: String,default:'' },
+    slider_media_mime_type: { type: String,default:'image' },
     slider_media_id: { type: String,default:'' },
     is_slider_has_button: { type: Boolean,default:false },
     slider_button_text: { type: String,default:'' },

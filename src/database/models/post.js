@@ -15,6 +15,8 @@ const PostSchema = new Schema(
     post_button_text: { type: String,default:'' },
     category_name: { type: String,default:'' },
     category_slug : { type: String,default:'' },
+    poet_id : { type:  mongoose.Schema.Types.ObjectId, ref: 'poet'  },
+    poet_name: { type:  String, default:''  },
     post_media_url: [String],
     post_tags: [String],
     is_del: { type: Boolean, default: false },
