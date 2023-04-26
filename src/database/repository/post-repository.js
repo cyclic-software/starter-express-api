@@ -19,26 +19,52 @@ class PostRepository {
   }
   async GetPostWithLikes(userInputs) {
     
-
-    const postresult = await PostLikeModel.find()
-    .populate({
-      path: 'user',
-      select: '-__v',
-
-      model: 'user',
-      options: {
-        strictPopulate: false
+    var query =  [
+      {
+        '$match': {
+          'user': mongoose.Types.ObjectId(userInputs.user)
+        }
+      }, {
+        '$lookup': {
+          'from': 'users', 
+          'localField': 'user', 
+          'foreignField': '_id', 
+          'as': 'result'
+        }
+      }, {
+        '$lookup': {
+          'from': 'posts', 
+          'localField': 'post', 
+          'foreignField': '_id', 
+          'as': 'posts'
+        }
+      }, {
+        '$replaceRoot': {
+          'newRoot': {
+            '$mergeObjects': [
+              {
+                '$arrayElemAt': [
+                  '$posts', 0
+                ]
+              }, '$$ROOT'
+            ]
+          }
+        }
+      }, {
+        '$replaceRoot': {
+          'newRoot': {
+            '$mergeObjects': [
+              {
+                '$arrayElemAt': [
+                  '$result', 0
+                ]
+              }, '$$ROOT'
+            ]
+          }
+        }
       }
-    }).populate({
-      path: 'post',
-      model: 'post',
-      select: '-__v',
-
-      options: {
-        strictPopulate: false
-      }
-    })
-    .lean();
+    ]
+    const postresult = await PostLikeModel.aggregate(query);
     
     // populate the author reference
     return postresult;
@@ -53,26 +79,54 @@ class PostRepository {
   }
   async GetPostWithWishlists(userInputs) {
     
-
-    const postresult = await PostWishlistModel.find()
-    .populate({
-      path: 'user',
-      select: '-__v',
-
-      model: 'user',
-      options: {
-        strictPopulate: false
+   var query =  [
+      {
+        '$match': {
+          'user': mongoose.Types.ObjectId(userInputs.user)
+        }
+      }, {
+        '$lookup': {
+          'from': 'users', 
+          'localField': 'user', 
+          'foreignField': '_id', 
+          'as': 'result'
+        }
+      }, {
+        '$lookup': {
+          'from': 'posts', 
+          'localField': 'post', 
+          'foreignField': '_id', 
+          'as': 'posts'
+        }
+      }, {
+        '$replaceRoot': {
+          'newRoot': {
+            '$mergeObjects': [
+              {
+                '$arrayElemAt': [
+                  '$posts', 0
+                ]
+              }, '$$ROOT'
+            ]
+          }
+        }
+      }, {
+        '$replaceRoot': {
+          'newRoot': {
+            '$mergeObjects': [
+              {
+                '$arrayElemAt': [
+                  '$result', 0
+                ]
+              }, '$$ROOT'
+            ]
+          }
+        }
       }
-    }).populate({
-      path: 'post',
-      model: 'post',
-      select: '-__v',
+    ]
+    const postresult = await PostWishlistModel.aggregate(query);
 
-      options: {
-        strictPopulate: false
-      }
-    })
-    .lean();
+    
     
     // populate the author reference
     return postresult;
