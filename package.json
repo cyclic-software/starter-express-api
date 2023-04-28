@@ -1,5 +1,5 @@
 {
-  "name": "starter-express-api",
+  "name": "alokhospital",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
+    "url": "git+https://github.com/alokalok10/alokhospital.git"
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
