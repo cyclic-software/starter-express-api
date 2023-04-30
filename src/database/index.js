@@ -7,6 +7,7 @@ module.exports = {
   CategoryRepository: require('./repository/category-repository'),
   PoetRepository: require('./repository/poet-repository'),
   TagRepository: require('./repository/tag-repository'),
+  NotificationRepository: require('./repository/notification-repository'),
   AdminregistryRepository: require('./repository/adminregistry-repository'),
   ContactusRepository: require('./repository/contactus-repository'),
   FeedbackRepository: require('./repository/feedback-repository'),

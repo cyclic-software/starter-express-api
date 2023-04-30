@@ -21,6 +21,7 @@ const PostSchema = new Schema(
     post_tags: [String],
     is_del: { type: Boolean, default: false },
     is_admin_post: { type: Boolean, default: false },
+    post_status: { type: String, enum: ['Draft', 'Published'],default: "Draft" },
     likeCount: { type: Number, default: 0 },
     wishlistCount: { type: Number, default: 0 },
   },

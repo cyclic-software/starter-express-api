@@ -6,6 +6,7 @@ module.exports = {
   CategoryModel: require('./category'),
   PoetModel: require('./poet'),
   TagModel: require('./tag'),
+  NotificationModel: require('./notification'),
   AdminregistryModel: require('./adminregistry'),
   FeedbackModel: require('./feedback'),
   ContactusModel: require('./contactus'),

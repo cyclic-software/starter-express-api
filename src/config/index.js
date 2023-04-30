@@ -1,16 +1,16 @@
-// const dotEnv = require("dotenv");
+const dotEnv = require("dotenv");
 
-// if (process.env.NODE_ENV !== "prod") {
-//   const configFile = `./.env.${process.env.NODE_ENV}`;
-//   dotEnv.config({ path: configFile });
-// } else {
-//   dotEnv.config();
-// }
+if (process.env.NODE_ENV !== "prod") {
+  const configFile = `./.env.${process.env.NODE_ENV}`;
+  dotEnv.config({ path: configFile });
+} else {
+  dotEnv.config();
+}
 
+console.log(process.env.MONGODB_URI)
 module.exports = {
   PORT: 8086,
-  DB_URL:
-    "mongodb+srv://trushitgadhavi99133:Trushit%40123@cluster0.fs1sl8q.mongodb.net/sarvusahitya",
+  DB_URL:process.env.MONGODB_URI,
   APP_SECRET: "sarvusahitya",
   EXCHANGE_NAME: "SAHITYA",
   MSG_QUEUE_URL:

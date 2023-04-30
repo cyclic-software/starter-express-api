@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/repo.midnight/prestige-microservices-whatsapp.git"
+    "url": "git@github.com:trushitgadhavi/Sarvu-Sahitya-Node-js.git"
   },
   "keywords": [],
   "author": "",
