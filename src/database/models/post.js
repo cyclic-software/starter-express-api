@@ -24,6 +24,10 @@ const PostSchema = new Schema(
     post_status: { type: String, enum: ['Draft', 'Published'],default: "Draft" },
     likeCount: { type: Number, default: 0 },
     wishlistCount: { type: Number, default: 0 },
+    seo_title: { type: String,default:'' },
+    seo_description: { type: String,default:'' },
+    seo_media_url: { type: String,default:'' },
+    seo_keywords: { type: String,default:'' },
   },
   {
     timestamps: true,

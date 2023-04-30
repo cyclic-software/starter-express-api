@@ -14,6 +14,13 @@ class UserRepository {
     const templates = await UserModel.aggregate(query);
     return templates;
   }
+  async GetUserFcmtoken(useridlist) {
+
+    const userdata = await UserModel.find({is_del: false,  _id: { $in: useridlist }
+    }).select("user_fcm_token");
+    const user_fcm_token_list = userdata.map(doc => doc.user_fcm_token); // get only 'name' field
+    return user_fcm_token_list;
+  }
   async FindUserById(id) {
     const users = await UserModel.find({ is_del: false, _id: id });
     return users;
