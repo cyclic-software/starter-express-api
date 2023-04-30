@@ -32,12 +32,13 @@ class UserService {
   }
   async CheckUserIfnotThenInsert(userInputs) {
     const userdata = await this.repository.FindUserByMobile(userInputs.user_mobile);
-    console.log(userdata)
     if(userdata == null){
 
       const UserResult = await this.repository.CreateUser(userInputs);
       return UserResult;
     }else{
+      userInputs.id = userdata._id;
+      const UserResult = await this.repository.UpdateUser(userInputs);
       return userdata;
     }
   }

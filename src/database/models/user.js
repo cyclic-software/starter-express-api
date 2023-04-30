@@ -15,7 +15,9 @@ const UserSchema = new Schema(
     user_slug: { type: String, default:''},
     user_media_url: { type: String,default:'' },
     is_user_has_button: { type: Boolean,default:false },
-    user_role: { type: String,enum: ['admin', 'author','publisher','editor','poet','cretor','public'],default:'public' },
+    user_fcm_token: { type: String,default:false },
+    user_device_info: { type: Object },
+    user_role: { type: String,enum: ['admin', 'author','publisher','editor','poet','creator','public'],default:'public' },
     
     is_del: { type: Boolean, default: false },
   },

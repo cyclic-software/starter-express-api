@@ -12,6 +12,7 @@ const {
   poet,
   feedback,
   contactus,
+  adminregistry,
 } = require('./api');
 const { SubscribeMessage } = require('./utils');
 
@@ -39,6 +40,7 @@ module.exports = async (app) => {
     media(app);
     user(app);
     post(app);
+    adminregistry(app);
   } catch (error) {
     console.log(error);
   }

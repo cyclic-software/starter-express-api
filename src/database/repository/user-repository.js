@@ -29,7 +29,6 @@ class UserRepository {
         { _id: formdata['id'] },
         { $set: formdata },
       );
-      console.log(template)
       const templatedata = await UserModel.find({ _id: formdata['id'] });
       return templatedata;
     }catch(error){

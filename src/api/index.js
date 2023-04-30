@@ -4,6 +4,7 @@ module.exports = {
   cagtegory: require('./category'),
   poet: require('./poet'),
   tag: require('./tag'),
+  adminregistry: require('./adminregistry'),
   contactus: require('./contactus'),
   feedback: require('./feedback'),
   user: require('./user'),
