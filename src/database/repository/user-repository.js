@@ -15,9 +15,13 @@ class UserRepository {
     return templates;
   }
   async GetUserFcmtoken(useridlist) {
-
-    const userdata = await UserModel.find({is_del: false,  _id: { $in: useridlist }
-    }).select("user_fcm_token");
+    useridlist = useridlist.map(useridlist => mongoose.Types.ObjectId(useridlist)); // get only 'name' field
+    const userdata = await UserModel.find({  _id: { $in: useridlist }}).select("user_fcm_token");
+    const user_fcm_token_list = userdata.map(doc => doc.user_fcm_token); // get only 'name' field
+    return user_fcm_token_list;
+  }
+  async GetAllFcmToken() {
+    const userdata = await UserModel.find({is_del: false}).select("user_fcm_token");
     const user_fcm_token_list = userdata.map(doc => doc.user_fcm_token); // get only 'name' field
     return user_fcm_token_list;
   }

@@ -8,7 +8,7 @@ const NotificationSchema = new Schema(
   {
     title: { type: String, required: true, },
     body: { type: String,default:'' },
-    type: { type: String,default:'General',enum:["General","Categorywise",] },
+    type: { type: String,default:'General',enum:["Single","General"] },
     media_url: { type: String,default:'' },
     data: { type: Object },
     user_id_list: [ String],

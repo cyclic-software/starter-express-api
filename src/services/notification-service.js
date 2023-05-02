@@ -18,7 +18,41 @@ class NotificationService {
 
   async SendNotificationUser(userInputs,user_id_list){
     try{
+
         var user_fcm_token_list = await this.userrepository.GetUserFcmtoken(user_id_list)
+        console.log(user_fcm_token_list)
+        userInputs.user_fcm_token_list = user_fcm_token_list
+        
+        // for Firebase Send All Data Which has string not send boolean data it must be in String
+        userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
+        
+        var message = {
+            notification: {
+              title:userInputs.title,
+              body: userInputs.body,
+              image: userInputs.media_url,
+    
+            },
+            data: userInputs.data,
+    
+            tokens: user_fcm_token_list
+          };
+    
+        var notifcation = await  admin.messaging().sendMulticast(message)
+        const NotificationResult =   this.repository.CreateNotification(userInputs);
+          return NotificationResult
+           
+    }catch(error){
+        console.log(error)
+        return false;
+    }
+
+  }
+  async SendNotificationToAllUser(userInputs){
+    try{
+        
+        var user_fcm_token_list = await this.userrepository.GetAllFcmToken()
+        console.log(user_fcm_token_list)
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
@@ -48,7 +82,12 @@ class NotificationService {
   }
   async AddNotification(userInputs) {
    
-   var NotificationResult = await this.SendNotificationUser(userInputs,userInputs.user_id_list)
+        if(userInputs.type == "General" && userInputs.user_id_list.length == 0){
+            var NotificationResult = await this.SendNotificationToAllUser(userInputs)
+        }else{
+            console.log("ds")
+            var NotificationResult = await this.SendNotificationUser(userInputs,userInputs.user_id_list)
+        }
 
     return NotificationResult;
   }
