@@ -1,7 +1,6 @@
 // database related modules
 module.exports = {
   databaseConnection: require('./connection'),
-
   SliderRepository: require('./repository/slider-repository'),
   PostRepository: require('./repository/post-repository'),
   CategoryRepository: require('./repository/category-repository'),
