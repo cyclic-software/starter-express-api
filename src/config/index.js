@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== "prod") {
   dotEnv.config();
 }
 
-console.log(process.env.MONGODB_URI)
 module.exports = {
   PORT: 8086,
   DB_URL:process.env.MONGODB_URI,
