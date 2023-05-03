@@ -68,7 +68,7 @@ module.exports.GetApiResponse = async (
   }
 };
 //for filter sorting and pagination code
-module.exports.PaginateResults = async (
+module.exports.paginateResults = async (
   limit = 20,
   skip = 0,
   matcharray = [],

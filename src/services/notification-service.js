@@ -92,9 +92,16 @@ class NotificationService {
     return NotificationResult;
   }
   async Notifications(size, skip, matchdata, sortob) {
-    var q = await paginateResults(size, skip, matchdata, sortob);
-    const NotificationResult = await this.repository.GetNotifications(q);
-    return NotificationResult;
+    try{
+
+      var q = await paginateResults(size, skip, matchdata, sortob);
+      console.log(q)
+      const NotificationResult = await this.repository.GetNotifications(q);
+      return NotificationResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
   }
   async NotificationById(id) {
     const NotificationResult = await this.repository.FindNotificationById(id);
