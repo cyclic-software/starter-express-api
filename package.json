@@ -21,21 +21,16 @@
     "amqplib": "^0.10.3",
     "aws-sdk": "^2.1354.0",
     "axios": "^1.3.3",
-    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-fileupload": "^1.4.0",
     "firebase-admin": "^11.7.0",
     "firebase-functions": "^4.3.1",
-    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.1",
-    "multer": "^1.4.5-lts.1",
     "multer-s3": "^3.0.1",
     "node-input-validator": "^4.5.1",
-    "nodemon": "^2.0.20",
-    "socket.io": "^4.6.0"
+    "nodemon": "^2.0.20"
   },
   "optionalDependencies": {
     "win-node-env": "^0.6.1"

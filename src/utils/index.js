@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose");
 const amqplib = require("amqplib");
@@ -6,15 +5,6 @@ const moment = require("moment");
 
 const Objectid = ObjectId.Types.ObjectId;
 
-
-//Utility functions
-module.exports.GenerateSalt = async () => {
-  return await bcrypt.genSalt();
-};
-
-module.exports.GeneratePassword = async (password, salt) => {
-  return await bcrypt.hash(password, salt);
-};
 
 module.exports.GetPagination = async (page, size) => {
   if (page == undefined) {
