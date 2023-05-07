@@ -9,9 +9,13 @@ const likeSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post',
       index: true // add index to post field
+    },  
+     is_del: { type: Boolean, default: false },
+  },
+     {
+      timestamps: true,
     },
-    timestamp: Date
-  });
+  );
   likeSchema.post('save', async function(like) {
     const postId = like.post;
     const likeCount = await mongoose.model('postlike').countDocuments({ post: postId });

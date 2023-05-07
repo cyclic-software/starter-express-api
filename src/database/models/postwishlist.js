@@ -10,8 +10,12 @@ const likeSchema = new mongoose.Schema({
       ref: 'Post',
       index: true // add index to post field
     },
-    timestamp: Date
-  });
+    is_del: { type: Boolean, default: false },
+  },
+    {
+     timestamps: true,
+   },
+  );
   likeSchema.post('save', async function(like) {
     const postId = like.post;
     const likeCount = await mongoose.model('postwishlist').countDocuments({ post: postId });

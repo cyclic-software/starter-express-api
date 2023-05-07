@@ -82,34 +82,38 @@ module.exports.paginateResults = async (
         var deletpipeline = { $match: { is_del: false } }; //for by default it will get all undeleted data
         pipeline.push(deletpipeline);
       }
+      var exclude_keysarray = [];
+      if(matcharray.exclude_keys !=undefined){
+        exclude_keysarray = matcharray.exclude_keys;
+      }
       Object.entries(matcharray).forEach(async ([key, value]) => {
         if (
           key != "page" &&
           key != "size" &&
           key != "orderbycolumnname" &&
-          key != "orderby"
+          key != "orderby" 
         ) {
-          // var checkobjectid = await this.ValidateObjectId(value);
-          var checkobjectid = false;
-          const Objectid = require("mongoose").Types.ObjectId;
-          if (Objectid.isValid(value)) {
-            if (String(new Objectid(value)) === value) {
-              checkobjectid = true;
+          if(key != "exclude_keys"){
+            if(!exclude_keysarray.includes(key)){
+            var checkobjectid = false;
+            const Objectid = require("mongoose").Types.ObjectId;
+            if (Objectid.isValid(value)) {
+              if (String(new Objectid(value)) === value) {
+                checkobjectid = true;
+              }
             }
+            if (value == 1 || value == "1" || typeof value == "boolean") {
+              var js = { [key]: value };
+            } else if (checkobjectid) {
+              var js = { [key]: mongoose.Types.ObjectId(value) }; //for validating object id
+            } else {
+              value = String(value);
+              var js = { [key]: { $regex: value, $options: "i" } };
+            }
+            var matchdata = { $match: js }; // Use this to sort documents by newest first
+            pipeline.push(matchdata);
           }
-
-          // await checkobjectid;
-          if (value == 1 || value == "1" || typeof value == "boolean") {
-            var js = { [key]: value };
-          } else if (checkobjectid) {
-            var js = { [key]: mongoose.Types.ObjectId(value) }; //for validating object id
-          } else {
-            value = String(value);
-            var js = { [key]: { $regex: value, $options: "i" } };
-          }
-          var matchdata = { $match: js }; // Use this to sort documents by newest first
-          pipeline.push(matchdata);
-        }
+          }}
       });
     }
   }
@@ -609,4 +613,9 @@ module.exports.CheckCountExist = async (data) => {
     var count = 0;
   }
   return count;
+};
+module.exports.convertToSlug =  (text) => {
+  return text.toLowerCase().replace(text, text).replace(/^-+|-+$/g, '')
+  .replace(/\s/g, '-').replace(/\-\-+/g, '-');
+  
 };

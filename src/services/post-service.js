@@ -1,3 +1,4 @@
+const { user } = require('firebase-functions/v1/auth');
 const { PostRepository, TagRepository, CategoryRepository } = require('../database');
 const { FormateData, paginateResults } = require('../utils');
 
@@ -45,20 +46,39 @@ class PostService {
     return PostResult;
   }
   async AddPostLike(userInputs) {
+    var checkexist = await this.CheckPostIsLikedOrNOt(userInputs.user,userInputs.post)
+    if(checkexist == null){
 
-    const PostResult = await this.repository.PostLikeAdd(userInputs);
-    return PostResult;
+      const PostResult = await this.repository.PostLikeAdd(userInputs);
+      return PostResult;
+    }else{
+      return checkexist;
+    }
   }
   async GetAllPostLikes(userInputs) {
 
     const PostResult = await this.repository.GetPostWithLikes(userInputs);
     return PostResult;
   }
+  async CheckPostIsLikedOrNOt(user,post) {
 
-  async AddPostWishlist(userInputs) {
-
-    const PostResult = await this.repository.PostWishlistAdd(userInputs);
+    const PostResult = await this.repository.GetLikePostByUserId(user,post);
     return PostResult;
+  }
+  async CheckPostIsWishlistOrNOt(user,post) {
+
+    const PostResult = await this.repository.GetWishlistostByUserId(user,post);
+    return PostResult;
+  }
+  async AddPostWishlist(userInputs) {
+    var checkexist = await this.CheckPostIsWishlistOrNOt(userInputs.user,userInputs.post)
+    if(checkexist == null){
+      const PostResult = await this.repository.PostWishlistAdd(userInputs);
+      return PostResult;
+    }else{
+      return checkexist;
+
+    }
   }
   async GetAllPostWishlist(userInputs) {
 
@@ -69,9 +89,51 @@ class PostService {
   
 
   async Posts(size, skip, matchdata, sortob) {
-    var q = await paginateResults(size, skip, matchdata, sortob);
-    const PostResult   = await this.repository.GetPosts(q);
-    return PostResult;
+    try{
+
+      var q = await paginateResults(size, skip, matchdata, sortob);
+      var PostResult   = await this.repository.GetPosts(q);
+      const myInstance = this;
+
+      async function myFunction(PostResult,user) {
+      
+        for (const item of PostResult) {
+          var is_like  = await EveryPostCheckLikedOrNot(item,user,myInstance);
+          item.is_like =is_like; 
+          var is_wishlist  = await EveryPostCheckWishlistOrNot(item,user,myInstance);
+          item.is_wishlist =is_wishlist; 
+        }
+      
+        return PostResult;
+      }
+      
+      async function EveryPostCheckLikedOrNot(item,user,myInstance) {
+        var checkexist = await myInstance.CheckPostIsLikedOrNOt(user,item._id);
+        if(checkexist == null){
+          return false;
+        }else{
+          return true;
+        }
+        // synchronous code here
+      }
+      async function EveryPostCheckWishlistOrNot(item,user,myInstance) {
+        var checkexist = await myInstance.CheckPostIsWishlistOrNOt(user,item._id);
+        if(checkexist == null){
+          return false;
+        }else{
+          return true;
+
+        }
+        // synchronous code here
+      }
+      if(matchdata.user != undefined){
+        PostResult =  await myFunction(PostResult,matchdata.user);
+      }
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
   }
   async PostById(id) {
     const PostResult = await this.repository.FindPostById(id);

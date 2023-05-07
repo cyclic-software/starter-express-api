@@ -70,6 +70,17 @@ class PostRepository {
     return postresult;
   }
 
+
+  async GetLikePostByUserId(user,post) {
+    const posts = await PostLikeModel.findOne({  user: user,post:post });
+    return posts
+
+  }
+  async GetWishlistostByUserId(user,post) {
+    const posts = await PostWishlistModel.findOne({  user: user,post:post });
+    return posts
+
+  }
   async PostWishlistAdd(userInputs) {
     
     const postwishlist = new PostWishlistModel(userInputs);
