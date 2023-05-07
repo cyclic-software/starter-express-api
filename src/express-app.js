@@ -19,8 +19,8 @@ const { SubscribeMessage } = require('./utils');
 
 module.exports = async (app) => {
   try {
+    
     app.use(express.json());
-    app.use(cors());
     app.use("/public", express.static(path.join(__dirname, 'public')));
     app.use('/uploads', express.static('uploads'));
     app.use(express.static('public'));
