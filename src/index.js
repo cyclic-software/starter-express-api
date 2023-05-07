@@ -7,7 +7,13 @@ const errorHandler = require('./utils/errors');
 
 const StartServer = async () => {
   const app = express();
-
+  const cors = require('cors');
+  app.use(cors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: '*'
+  }));
+  
   await databaseConnection();
 
   // const channel = await CreateChannel();
