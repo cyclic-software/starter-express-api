@@ -22,10 +22,10 @@ module.exports = (app) => {
     try {
 
 
-      var uploadfile = await uploadFile(req, res);
+      // var uploadfile = await uploadFile(req, res);
       
-      req.body.media_file = req.media_file;
-      req.body.full_path = GetUploadFullPath(req.body.folder_name,req.body.media_file);
+      // req.body.media_file = req.media_file;
+      // req.body.full_path = GetUploadFullPath(req.body.folder_name,req.body.media_file);
       var data = await service.AddMedia(req.body);
 
       data =  await GetApiResponse(data);
