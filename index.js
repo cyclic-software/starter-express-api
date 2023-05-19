@@ -1,4 +1,5 @@
 const express = require('express')
+const cors =require('cors')
 const db = require('./src/db')
 
 const app = express()
@@ -7,6 +8,8 @@ const app = express()
 //     console.log("Just got a request!")
 //     res.send('Yo!')
 // })
+
+app.use(cors())
 
 db.connect()
 
