@@ -18,7 +18,14 @@ try {
   const token = process.env.ACCESS_TOKEN;
  const response = await BLL.calculateTotalVideoLength(folderID, token);
  console.log(response)
- res.status(200).json(response)
+
+  if (response.status !== 400) {
+    res.status(200).json(response.time)
+  } else {
+    res.status(400).json(response.message)
+  }
+
+
 
 }catch(e) {
   console.log(e)

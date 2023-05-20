@@ -52,10 +52,10 @@ async function calculateTotalVideoLength(folderId, accessToken) {
 
     console.log(`Total length of videos in Folder ${folderId}: ${formatTime(totalLength)}`);
     const time = formatTime(totalLength)
-    return {time}
+    return {status: 200, time: time}
   } catch (error) {
-    console.error('Error occurred:', error.message);
-  }
+    return {status: 400, message: error.message}
+}
 }
 
 
