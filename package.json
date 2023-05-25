@@ -2,7 +2,7 @@
   "name": "starter-express-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "email.js",
   "scripts": {
     "start": "node email.js"
   },
