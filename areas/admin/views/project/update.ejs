@@ -1,0 +1,32 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>projecti guncellemek</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+               project
+            </div>
+            <div class="card-body">
+                <form action="<%=project._id%>" method="post" >
+                    <div class="mb-3">
+                        <label for="name" class="form-label">title</label>
+                        <input type="text" class="form-control" id="name" value="<%=project.title %>" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">aciqlama</label>
+                        <input type="description" class="form-control"  value="<%=project.description  %>" name="description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">aciqlama</label>
+                        <input type="description" class="form-control"  value="<%=project.videoUrl  %>" name="videoUrl">
+                    </div>
+                 
+                    <button type="submit" class="btn btn-primary">update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

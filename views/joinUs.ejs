@@ -1,0 +1,52 @@
+<%- include("partials/_header") %>
+
+
+    <body>
+        <!-- Topbar Start -->
+
+        <!-- Topbar End -->
+
+
+        <!-- Navbar Start -->
+        <%- include("partials/_navbar") %>
+
+            <!-- Navbar End -->
+
+
+            <div class="container">
+                <div class="mb-4 mt-5 d-flex justify-content-center">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Bizə qoşul</h5>
+                    <h1 class="display-4"></h1>
+                </div>
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-4 d-flex justify-content-center">
+                    <div class="card mb-3">
+                      <div class="card-body ">
+                        <iframe src="/files/<%= joinUs[0].files[0].file_id%>" width="200" height="200"></iframe>
+
+                        <h5 class="card-title"><%= joinUs[0].files[0].file_id%></h5>
+                        <a href="/files/<%= joinUs[0].files[0].file_id%>" class="btn btn-primary" download>İndir</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 d-flex justify-content-center">
+                    <div class="card mb-3">
+                      <div class="card-body ">
+                        <iframe src="/files/<%= joinUs[0].files[1].file_id%>" width="200" height="200"></iframe>
+
+                        <h5 class="card-title"><%= joinUs[0].files[1].file_id%></h5>
+                        <a href="/files/<%= joinUs[0].files[1].file_id%>" class="btn btn-primary" download>İndir</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mt-4">
+                  <div class="card-body">
+                    <h3 class="card-title">Bizə qoşulmaq üçün</h3>
+                    <p class="card-text">Açıklama metni buraya gelecek.</p>
+                  </div>
+                </div>
+              </div>
+
+                <!-- Footer Start -->
+                <%- include("partials/_footer") %>

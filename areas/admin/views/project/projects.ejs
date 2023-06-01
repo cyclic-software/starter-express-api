@@ -1,0 +1,147 @@
+<style>
+    .pointer {
+        cursor: pointer;
+      }
+    </style>
+    
+    
+    <%- include("../partials/_nav") %>
+    
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <h1>projektin elave olunmasi</h1>
+            <div class="card mt-4 ">
+                <div class="card-header bg-primary text-light pointer"onclick="toggleCardContent()">
+                   project elave etmek ucun klik edin
+                </div>
+                <div class="card-body bg-dark" id="cardContent" style="display: none;">
+    
+                    <form action="/admin/projects" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-light">basliq az</label>
+                            <input type="text" class="form-control" placeholder="projectin basliqi az" id="name" name="titleAz">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-light">basliq dee</label>
+                            <input type="text" class="form-control" placeholder="projectin basliqi az" id="name" name="titleGe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-light">aciqlama az</label>
+                            <input type="text" class="form-control" placeholder="projectin kontenti"  name="descriptionAz">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-light">aciqlama de</label>
+                            <input type="text" class="form-control" placeholder="projectin kontenti"  name="descriptionGe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-light">video linki</label>
+                            <input type="text" class="form-control" placeholder="projectin video linki"  name="videoUrl">
+                        </div>
+                   
+                        <button type="submit" class="btn btn-primary">elave et</button>
+                    </form>
+                </div>
+            </div>
+         
+            <!-- Kullanıcı Listesi -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    sira
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>adi</th>
+                                <th>aciqlamasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <p class="d-none">
+                                <%= count=1 %>
+                            </p>
+                            <%for(project of projects) { %>
+                                <tr>
+                                    <td>
+                                        <%=count++%>
+                                    </td>
+                                    <td>
+                                        <%=project.title %>
+                                    </td>
+                                    <td>
+                                        <%=project.description %>
+                                    </td>
+                                   
+    
+                                    <td  >
+                                        <a href="project/<%=project._id %>" class="btn btn-success detail-btn"><i class="fa fa-eye"></i></a>
+    
+                                        <a href="project/update/<%=project._id %>" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                        <form class="my-1" id="deleteForm" action="project/delete/<%=project._id%>" method="POST">
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                              <i class="fa fa-trash"></i> 
+                                            </button>
+                                          </form>
+    
+    
+                                    </td>
+                                </tr>
+                                <% } %>
+    
+                                    <% %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Silme İşlemi Onayı</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Gerçekten silmek istediğinize emin misiniz?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kullanıcı Ekleme Formu -->
+    
+        </div>
+    
+        <script>
+            var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+            var deleteForm = document.getElementById("deleteForm");
+    
+            confirmDeleteButton.addEventListener("click", function () {
+                deleteForm.submit();
+            });
+    
+    
+    
+            function toggleCardContent() {
+                const cardContent = document.getElementById("cardContent");
+                if (cardContent.style.display === "none") {
+                    cardContent.style.display = "block";
+                } else {
+                    cardContent.style.display = "none";
+                }
+            }
+            function toggleCardContentCat() {
+                const cardContent1 = document.getElementById("cardContent1");
+                if (cardContent1.style.display === "none") {
+                    cardContent1.style.display = "block";
+                } else {
+                    cardContent1.style.display = "none";
+                }
+            }
+        </script>
+    
+        <%- include("../partials/_footer") %>

@@ -1,90 +1,113 @@
-<!-- head Start -->
-<%- include("partials/_header") %>
-    <!-- head end -->
-
-    <body>
+<%- include("partials/_header")  %>
 
 
+<body>
+    <!-- Topbar Start -->
+   
+    <!-- Topbar End -->
 
-        <!-- Navbar Start -->
-        <%- include("partials/_navbar") %>
 
-            <!-- Navbar End -->
+    <!-- Navbar Start -->
+    <%- include("partials/_navbar")  %>
+
+    <!-- Navbar End -->
 
 
-            <!-- Testimonial Start -->
-            <div class="container-fluid py-5">
-                <div class="container">
-                    <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">WELCOME</h5>
-                        <h1 class="display-4"><%= user.username %></h1>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            
-                                <div class="testimonial-item text-center">
-                                    <div class="position-relative mb-5">
-                                        <img class="img-fluid rounded-circle mx-auto" src="/img/testimonial-1.jpg"
-                                            alt="">
-                                        <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
-                                            style="width: 60px; height: 60px;">
-                                            <i class="fa fa-quote-left fa-2x text-primary"></i>
-                                        </div>
-                                    </div>
-                                    <p class="fs-4 fw-normal">user name</p>
-                                    <hr class="w-25 mx-auto">
-                                    <h3>user workname</h3>
-                                    <h6 class="fw-normal text-primary mb-3">about user</h6>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">add new project</button>
-
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h3 class="d-inline-block text-primary text-uppercase border-bottom border-5">Welcome</h3>
+                <h1 class="display-4"><%= user.name%>   <%= user.surname%></h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle mx-auto" src="<%= user.url%>" alt="">
+                                <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
+                                    <i class="fa fa-quote-left fa-2x text-primary"></i>
                                 </div>
-
-
-
-                               
+                            </div>
+                            <p class="fs-4 fw-normal"><%= user.description%></p>
+                            <div class="d-flex mt-auto border-top p-4 justify-content-center">
+                             
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="<%= user.fb%>"><i class="fab fa-facebook-f"> </i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="<%= user.inst%>"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                            <hr class="w-25 mx-auto">
+                            <h3>Patient Name</h3>
+                            <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                melumatlari doldur
+                            </button>
+                            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalLabel">Haqqimda</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        
+                                        <div class="modal-body">
+                                            <!-- Form -->
+                                            <form id="request" class="main-form" method="POST" action="/users/<%= user._id%>" enctype="multipart/form-data">
+                                                <!-- ad -->
+                                                <div class="mb-3">
+                                                    <label for="input1" class="form-label">ad</label>
+                                                    <input type="text" value="<%= user.name %>"  name="name"  class="form-control" >
+                                                </div>
+                        
+                                                <!--soyad -->
+                                                <div class="mb-3">
+                                                    <label for="input" class="form-label">soyad</label>
+                                                    <input type="text"  value="<%= user.surname %>" name="surname" class="form-control" >
+                                                </div>
+                                                <!-- haqqimda -->
+                                                <div class="mb-3">
+                                                    <label for="input" class="form-label">haqqimda az</label>
+                                                    <textarea  style="text-align:left !important;" class="form-control" id="exampleFormControlTextarea1"  name="descriptionAz" rows="3">
+                                                        <%= user.descriptionAz  %>
+                                                    </textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="input" class="form-label">haqqimda de</label>
+                                                    <textarea  style="text-align:left !important;" class="form-control" id="exampleFormControlTextarea1"  name="descriptionGe" rows="3">
+                                                        <%= user.descriptionGe  %>
+                                                    </textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="input1" class="form-label">facebook</label>
+                                                    <input type="text" value="<%= user.fb %>"  name="fb"  class="form-control" >
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="input1" class="form-label">instagram</label>
+                                                    <input type="text" value="<%= user.inst %>"  name="inst"  class="form-control" >
+                                                </div>
+                                                <!-- Resim Girişi -->
+                                                <div class="mb-3">
+                                                    <label for="imageInput" class="form-label">profil fotosu</label>
+                                                    <input type="file" name="image" class="form-control" >
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        
                 </div>
             </div>
-            <!-- Testimonial End -->
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel"> about project </h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form id="request" class="main-form" method="POST" action="/projects" enctype="multipart/form-data">
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">title</label>
-                          <input type="text" placeholder="title" class="form-control" id="recipient-name" name="project_title">
-                        </div>
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">description</label>
-                          <textarea name="project_description" placeholder="description" class="form-control" id="message-text"></textarea>
-                          
-                        </div>
-                        <div style="margin-bottom: 20px ;" class="col-md-12">
-                            <input type="file" name="image" class="form-control-file">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="submit"  class="btn btn-primary">add</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-           
+        </div>
+    </div>
+    <!-- Testimonial End -->
 
 
-            
-            <!-- Footer Start -->
-            <%- include("partials/_footer") %>
-
-                <!-- Footer End -->
+    <!-- Footer Start -->
+    <%- include("partials/_footer")  %>

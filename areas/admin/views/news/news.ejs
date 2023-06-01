@@ -1,0 +1,230 @@
+<style>
+.pointer {
+    cursor: pointer;
+  }
+</style>
+
+
+<%- include("../partials/_nav") %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>xeberlerin elave olunmasi</h1>
+        <div class="card mt-4 ">
+            <div class="card-header bg-primary text-light pointer"onclick="toggleCardContent()">
+                xeber elave etmek ucun klik edin
+            </div>
+            <div class="card-body bg-dark" id="cardContent" style="display: none;">
+
+                <form action="/admin/news" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-light">basliq az</label>
+                        <input type="text" class="form-control" placeholder="xenerin basliqi az" id="name" name="titleAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-light">basliq de</label>
+                        <input type="text" class="form-control" placeholder="xenerin basliqi de" id="name" name="titleGe">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-light">aciqlama az</label>
+                        <input type="text" class="form-control" placeholder="xeberin kontenti az"  name="descriptionAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-light">aciqlama de</label>
+                        <input type="text" class="form-control" placeholder="xeberin kontenti de"  name="descriptionGe">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label text-light">xeberin kategoriyasi</label>
+                        <select class="form-control" id="role" name="categoryId">
+                            <% newsCats.forEach(function(category) { %>
+                                <option value="<%= category._id %>">
+                                    <%= category.catNameAz %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="photo" class="form-label text-light">foto secin</label>
+                        <input class="form-control" type="file" id="photo" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="photo" class="form-label text-light ">fotolar secin</label>
+                        <input class="form-control" type="file" id="photo" name="images" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">elave et</button>
+                </form>
+            </div>
+        </div>
+        <div class="card mt-4  ">
+            <div class="card-header bg-primary text-light pointer" onclick="toggleCardContentCat()">
+                kategoriya elave etmek ucun klik edin
+            </div>
+            <div class="card-body bg-dark" id="cardContent1" style="display: none;">
+                <form action="/admin/newscat" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-light" >kategoriya adi qeyd edin</label>
+                        <input type="text" placeholder="kategoriyanin adi az" class="form-control" id="name" name="catNameAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-light" >kategoriya adi qeyd edin</label>
+                        <input type="text" placeholder="kategoriyanin adi ge" class="form-control" id="name" name="catNameGe">
+                    </div>
+                    <button type="submit" class="btn btn-primary">elave et</button>
+                </form>
+            </div>
+        </div>
+<!-- category -->
+<div class="card mt-4">
+    <div class="card-header">
+        sira
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>title</th>
+                    <th>short description</th>
+                    <th>category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <p class="d-none">
+                    <%= count=1 %>
+                </p>
+                <%for(cat of newsCats) { %>
+                    <tr>
+                        <td>
+                            <%=count++%>
+                        </td>
+                        <td>
+                            <%=cat.catNameAz %>
+                        </td>
+                        <td>
+                            <%=cat.catNameGe %>
+                        </td>
+                        
+
+                        <td  >
+
+                            <a href="news/updateCat/<%=cat._id %>" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                        
+                        </td>
+                    </tr>
+                    <% } %>
+
+                        <% %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+        <!-- Kullanıcı Listesi -->
+        <div class="card mt-4">
+            <div class="card-header">
+                sira
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>title</th>
+                            <th>short description</th>
+                            <th>category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <p class="d-none">
+                            <%= count=1 %>
+                        </p>
+                        <%for(news of newses) { %>
+                            <tr>
+                                <td>
+                                    <%=count++%>
+                                </td>
+                                <td>
+                                    <%=news.titleAz %>
+                                </td>
+                                <td>
+                                    <%=news.shortDescAz %>
+                                </td>
+                                <td>
+                                    <%= news.categoryId.catNameAz %>
+                                </td>
+
+                                <td  >
+                                    <a href="news/<%=news._id %>" class="btn btn-success detail-btn"><i class="fa fa-eye"></i></a>
+
+                                    <a href="news/update/<%=news._id %>" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                    <form class="my-1" id="deleteForm" action="news/delete/<%=news._id%>" method="post">
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                          <i class="fa fa-trash"></i> 
+                                        </button>
+                                      </form>
+
+
+                                </td>
+                            </tr>
+                            <% } %>
+
+                                <% %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Silme İşlemi Onayı</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Gerçekten silmek istediğinize emin misiniz?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Kullanıcı Ekleme Formu -->
+
+    </div>
+
+    <script>
+        var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        var deleteForm = document.getElementById("deleteForm");
+
+        confirmDeleteButton.addEventListener("click", function () {
+            deleteForm.submit();
+        });
+
+
+
+        function toggleCardContent() {
+            const cardContent = document.getElementById("cardContent");
+            if (cardContent.style.display === "none") {
+                cardContent.style.display = "block";
+            } else {
+                cardContent.style.display = "none";
+            }
+        }
+        function toggleCardContentCat() {
+            const cardContent1 = document.getElementById("cardContent1");
+            if (cardContent1.style.display === "none") {
+                cardContent1.style.display = "block";
+            } else {
+                cardContent1.style.display = "none";
+            }
+        }
+    </script>
+
+    <%- include("../partials/_footer") %>

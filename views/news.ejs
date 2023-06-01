@@ -1,0 +1,266 @@
+<%- include("partials/_header") %>
+
+  <style>
+    .newsImg {
+      height: 150px;
+      width: 100%;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pagination li {
+      display: inline-block;
+    }
+
+    .pagination a {
+      display: block;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: #333;
+      border: 1px solid #ccc;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination a:hover {
+      background-color: #f4f4f4;
+    }
+
+    .pagination .active a {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
+
+  <body>
+    <!-- Topbar Start -->
+
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <%- include("partials/_navbar") %>
+      <!-- Navbar End -->
+
+      <!-- Blog Start -->
+      <div class="container-fluid pt-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+          <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5">Xeberler</h4>
+         
+      </div>
+        <div class="container ">
+          <div class="row g-5">
+            <div class="col-lg-4">
+              <!-- Search Form Start -->
+              <!-- <div class="mb-5"> -->
+              <!-- <form id="search-form" class="input-group"> -->
+
+              <!-- <button class="btn btn-primary px-3" type="submit"><i class="fa fa-search"></i></button> -->
+              <!-- </form> -->
+              <!-- </div> -->
+              <!-- Search Form End -->
+
+              <!-- Category Start -->
+              <div class="mb-5">
+                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 mb-3">
+                  xeber axtar
+                </h4>
+                <form action="/news" method="GET" class="input-group">
+                  <input type="text" class="form-control p-3" name="search" placeholder="xeber axtar">
+                  <button class="btn btn-primary px-3" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 mt-3 mb-3">
+                  Categories
+                </h4>
+                <div class="d-flex flex-column justify-content-start">
+                  <form action="/news" method="GET" class="input-group">
+                    <select id="categorySelect" class="form-select" name="category" aria-label="Güzel Seçenek Kutusu">
+                      <option value="" selected disabled>Seçenek Seçin</option>
+                      <% for(cat of cats) { %>
+                        <option class="custom-option" value="<%= cat._id %>">
+                          <%= cat.catName %>
+                        </option>
+                        <% } %>
+                    </select>
+                    <button class="btn btn-primary px-3" type="submit"><i class="fa fa-arrow-right"></i></button>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-lg-8">
+              <div id="newsContainer" class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
+                <% for(n of news) { %>
+                  <div class="col-md-6 itttem" id="search-results" data-category="<%= n.categoryId.catNameAz%>"
+                    onclick="goToPage('/news/<%=n._id %>')">
+
+                    <div class="card mb-3">
+                      <% if (n.images && n.images.length> 0) { %>
+                        <img class="card-img-top" src="<%= n.images[0].url %>" alt="">
+                        <% } %>
+                          <div class="card-body" style="padding: 10px;
+                            padding-bottom: 0px;">
+                            <h6 style="color:#001329; font-size: small;">
+                              <%=n.formattedDate%>
+                            </h6>
+                            <h2 style="color:#001329; font-size:medium;">
+                              <%=n.title %>
+                            </h2>
+                            <p style="font-size: small;">
+                              <%=n.description.substring(0,30)%>.......
+                            </p>
+                          </div>
+                    </div>
+                  </div>
+                  <% } %>
+              </div>
+
+              <div class="pagination">
+                <ul>
+                  <% if (currentPage> 1) { %>
+                    <li>
+                      <a
+                        href="/news?search=<%= searchTerm %>&category=<%= category %>&page=<%= currentPage - 1 %>">&laquo;</a>
+                    </li>
+                    <% } %>
+                      <% for (let i=1; i <=totalPages; i++) { %>
+                        <li <% if (i===currentPage) { %>class="active"<% } %>>
+                            <a href="/news?search=<%= searchTerm %>&category=<%= category %>&page=<%= i %>">
+                              <%= i %>
+                            </a>
+                        </li>
+                        <% } %>
+                          <% if (currentPage < totalPages) { %>
+                            <li>
+                              <a
+                                href="/news?search=<%= searchTerm %>&category=<%= category %>&page=<%= currentPage + 1 %>">&raquo;</a>
+                            </li>
+                            <% } %>
+                </ul>
+              </div>
+            </div>
+
+
+            <!-- Sidebar Start -->
+
+            <!-- Sidebar End -->
+          </div>
+        </div>
+      </div>
+      <!-- Blog End -->
+
+
+
+      <style>
+        .itttem {
+          cursor: pointer;
+        }
+
+        .search-form {
+          display: flex;
+          align-items: center;
+        }
+
+        .search-form input[type="text"] {
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-right: 8px;
+        }
+
+        .search-form button {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        .card {
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+          object-fit: cover;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          height: 200px;
+        }
+
+        .card-body {
+          padding: 1.25rem;
+        }
+
+        .card-title {
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+          font-size: 1rem;
+          color: #555;
+        }
+
+        @media (max-width: 767.98px) {
+          .card-img-top {
+            height: 150px;
+          }
+
+          .card-body {
+            padding: 1rem;
+          }
+
+          .card-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .card-text {
+            font-size: 0.875rem;
+          }
+        }
+      </style>
+      <script>
+        function goToPage(url) {
+          window.location.href = url;
+        }
+      </script>
+      <!-- <script>
+        function filterNewsByCategory() {
+            var selectedCategory = document.getElementById("categorySelect").value;
+            var newsItems = document.getElementsByClassName("itttem");
+
+            for (var i = 0; i < newsItems.length; i++) {
+                var newsItem = newsItems[i];
+                var newsCategory = newsItem.getAttribute("data-category");
+                if (selectedCategory !== "" && newsCategory !== selectedCategory) {
+                    
+                    newsItem.style.display = "none";
+                } else {
+                    newsItem.style.display = "block";
+                }
+            }
+        }
+
+        document.getElementById("categorySelect").addEventListener("change", filterNewsByCategory);
+    </script> -->
+      <!-- Footer Start -->
+      <%- include("partials/_footer") %>

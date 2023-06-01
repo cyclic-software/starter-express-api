@@ -1,0 +1,40 @@
+<%- include("../partials/_nav")  %>
+
+<!-- Main Content -->
+<div class="container m-5 p-3 row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <form action="<%=user._id%>" method="post">
+                    <p><b><%=user.username%></b> kullanıcısının statüsünü değiştirin</p>
+                    <label for="role">Statü Seç:</label>
+                    <select id="role" name="role">
+                        <% const roles = ['user', 'admin', 'reyaset_heyyyeti_uzvleri', 'heqiqi_uzvler', 'assosiasiyali_uzvler', 'fexri_uzvler', 'komekci_uzvler']; %>
+                        <% for (let role of roles) { %>
+                            <option value="<%= role %>" <% if (role === user.role) { %>selected <% } %>>
+                                <%= role %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var roleSelect = document.getElementById('role');
+        var userRole = '<%= user.role %>'; // Kullanıcının mevcut rolü
+
+        for (var i = 0; i < roleSelect.options.length; i++) {
+            if (roleSelect.options[i].value === userRole) {
+                roleSelect.selectedIndex = i; // Mevcut rolü seçili hale getir
+                break;
+            }
+        }
+    });
+</script>
+
+<%- include("../partials/_footer")  %>

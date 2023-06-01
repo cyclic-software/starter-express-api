@@ -1,0 +1,46 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>update news</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+               update news
+            </div>
+            <div class="card-body">
+                <form action="<%=contact._id%>" method="post" >
+                    <div class="mb-3">
+                        <label for="name" class="form-label">mekan</label>
+                        <input type="text" class="form-control" id="name" value="<%=contact.location  %>" name="location">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">e-poct unvani</label>
+                        <input type="text" class="form-control" id="name" value="<%=contact.gmail  %>" name="gmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">telefon</label>
+                        <input type="text" class="form-control"  value="<%=contact.tel%>" name="tel">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">facebook linki</label>
+                        <input type="text" class="form-control"  value="<%=contact.fb%>" name="fb">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">instagram linki</label>
+                        <input type="text" class="form-control"  value="<%=contact.inst%>" name="inst">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">youtube linki</label>
+                        <input type="text" class="form-control"  value="<%=contact.youtube%>" name="youtube">
+                    </div>
+                    
+                    
+                   
+                    <button type="submit" class="btn btn-primary">update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

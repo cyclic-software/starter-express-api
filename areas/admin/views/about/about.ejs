@@ -1,0 +1,62 @@
+<style>
+    .pointer {
+        cursor: pointer;
+      }
+    </style>
+    
+
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>Kullanıcı Yönetimi</h1>
+        
+         <!-- Kullanıcı Ekleme Formu -->
+         
+        <!-- Kullanıcı Listesi -->
+        <div class="card mt-4">
+            <div class="card-header">
+                Kullanıcı Listesi
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>basliq</th>
+                            <th>aciqlama</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(abo of about) { %>
+                            <tr>
+                                <td>1</td>
+                            <td><%=abo.titleAz  %></td>
+                            <td><%=abo.descriptionAz  %></td>
+                            
+                            <td>
+                                <a href="about/update/<%=abo._id  %>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="about/<%=abo._id %>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <script>
+          function toggleCardContent() {
+            const cardContent = document.getElementById("cardContent");
+            if (cardContent.style.display === "none") {
+                cardContent.style.display = "block";
+            } else {
+                cardContent.style.display = "none";
+            }
+        }
+    </script>
+    <%- include("../partials/_footer")  %>

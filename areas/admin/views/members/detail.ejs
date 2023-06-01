@@ -1,0 +1,29 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>Kullanıcı Detayları</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                Kullanıcı Detayları
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="<%=user.url  %>" class="img-fluid " alt="Kullanıcı Fotoğrafı">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">Kullanıcı Adı: <%= user.username %></h5>
+                        <p class="card-text">Email: <%= user.email %></p>
+                        <p class="card-text">Telefon: 555-1234567</p>
+                        <p class="card-text">Adres: İstanbul, Türkiye</p>
+                        <a href="#" class="btn btn-primary">Düzenle</a>
+                        <a href="#" class="btn btn-danger">Sil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

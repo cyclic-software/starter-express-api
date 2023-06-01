@@ -1,0 +1,142 @@
+<style>
+    .pointer {
+        cursor: pointer;
+    }
+</style>
+
+
+<%- include("../partials/_nav") %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>xeberlerin elave olunmasi</h1>
+        <div class="card mt-4 ">
+            <div class="card-header bg-primary text-light pointer" onclick="toggleCardContent()">
+                xeber elave etmek ucun klik edin
+            </div>
+            <div class="card-body bg-dark" id="cardContent" style="display: none;">
+
+                <form action="/admin/joinUs" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="descriptionAz" class="form-label text-light">Açıklama (Azerbaycanca)</label>
+                        <input type="text" class="form-control" placeholder="Açıklama (AZ)" id="descriptionAz"
+                            name="descriptionAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descriptionGe" class="form-label text-light">Açıklama (Almanca)</label>
+                        <input type="text" class="form-control" placeholder="Açıklama (DE)" id="descriptionGe"
+                            name="descriptionGe">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label text-light">Fotoğraf Seçin</label>
+                        <input class="form-control" type="file" id="image" name="file">
+                    </div>
+                    <div class="mb-3">
+                        <label for="images" class="form-label text-light">Fotoğraflar Seçin</label>
+                        <input class="form-control" type="file" id="images" name="files" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Kullanıcı Listesi -->
+        <div class="card mt-4">
+            <div class="card-header">
+                sira
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>aciqlama</th>
+                            <th>islemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <%for(join of joinUs) { %>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    <%=join.descriptionAz %>
+                                </td>
+                                <td>
+                                    <a href="joinUS/<%=join._id %>" class="btn btn-success detail-btn"><i
+                                            class="fa fa-eye"></i></a>
+
+                                    <a href="joinUs/update/<%=join._id %>" class="btn btn-primary"><i
+                                            class="fa fa-pencil-alt"></i></a>
+
+                                </td>
+                                <td>
+                                    <% for (const file of join.files) { %>
+                                        <a href="/files/<%= file.file_id %>" download>
+                                            az
+                                        </a>
+                                        <% } %>
+                                </td>
+
+                            </tr>
+                            <% } %>
+
+                                <% %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Silme İşlemi Onayı</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Gerçekten silmek istediğinize emin misiniz?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Kullanıcı Ekleme Formu -->
+
+    </div>
+
+    <script>
+        var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        var deleteForm = document.getElementById("deleteForm");
+
+        confirmDeleteButton.addEventListener("click", function () {
+            deleteForm.submit();
+        });
+
+
+
+        function toggleCardContent() {
+            const cardContent = document.getElementById("cardContent");
+            if (cardContent.style.display === "none") {
+                cardContent.style.display = "block";
+            } else {
+                cardContent.style.display = "none";
+            }
+        }
+        function toggleCardContentCat() {
+            const cardContent1 = document.getElementById("cardContent1");
+            if (cardContent1.style.display === "none") {
+                cardContent1.style.display = "block";
+            } else {
+                cardContent1.style.display = "none";
+            }
+        }
+    </script>
+
+    <%- include("../partials/_footer") %>

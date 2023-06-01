@@ -1,80 +1,170 @@
-<!-- head Start -->
-<%- include("partials/_header") %>
-    <!-- head end -->
+<%- include("partials/_header")  %>
+<style>
+  .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 
-    <body>
-        <!-- Navbar Start -->
-        <%- include("partials/_navbar") %>
+.pagination a,
+.pagination span {
+  display: inline-block;
+  padding: 8px 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+}
 
-            <!-- Navbar End -->
+.pagination a:hover {
+  background-color: #f4f4f4;
+}
+
+.pagination .current-page {
+  background-color: #007bff;
+  color: #fff;
+}
+  .modal-content{
+    height: 35rem;
+  }
+  .hay{
+    width: 100%;
+    height: 100%;
+  }
+  .project {
+    margin-bottom: 20px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+  }
+  .project iframe {
+    width: 100%;
+  }
+  .project .play-btn {
+    position: absolute;
+    color: #fff;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+   
+    cursor: pointer;
+  }
+  .modal-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 en boy oranı için */
+  height: 0;
+}
+
+.modal-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<body>
+    <!-- Topbar Start -->
+   
+    <!-- Topbar End -->
 
 
+    <!-- Navbar Start -->
+    <%- include("partials/_navbar")  %>
 
+    <!-- Navbar End -->
+    
 
-
-
-                <!-- About Start -->
-                <% for (project of projects) { %>
-                    <a  href="/projects/<%= project._id %>">
-
-                        <div class="container-fluid py-5">
-                            <div class="container">
-                                <div class="row gx-5">
-                                    <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
-                                        
-                                        <div class="position-relative h-100">
-                                            <img class="position-absolute w-100 h-100 rounded" src="<%= project.url  %>"
-                                                style="object-fit: cover;">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="mb-4">
-                                            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">ABOUT PROJECT</h5>
-                                            <h1 class="display-4">  <%= project.project_title %></h1>
-                                        </div>
-                                        <p> <%= project.project_description.substring(0,20)+"..." %> </p>
-                                        <div class="row g-3 pt-3">
-                                            <div class="col-sm-3 col-6">
-                                                <div class="bg-light text-center rounded-circle py-4">
-                                                    <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                                    <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 col-6">
-                                                <div class="bg-light text-center rounded-circle py-4">
-                                                    <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
-                                                    <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 col-6">
-                                                <div class="bg-light text-center rounded-circle py-4">
-                                                    <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                                    <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 col-6">
-                                                <div class="bg-light text-center rounded-circle py-4">
-                                                    <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
-                                                    <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Services Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Services</h5>
+                <h1 class="display-4">Excellent Medical Services</h1>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+              <% for (let i = 0; i < projects.length; i++) { %>
+                <div class="col">
+                  <div class="project ">
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <div class="play-btn" data-bs-toggle="modal" data-bs-target="#projectModal-<%= i %>">
+                        <i class="bi bi-play-circle-fill"></i>
+                      </div>
+                      <div class="embed-responsive-item">
+                        <img src="https://img.youtube.com/vi/<%= projects[i].videoUrl %>/maxresdefault.jpg" alt="Video Vorschaubild" style="width: 100%;" >
+                      </div>
+                    </div>
+                    <h5 class="text-center pt-2"> <%= projects[i].description %></h5> 
+                  </div>
+                  
+                </div>
+              <% } %>
+                            
+              
+              <% for (let i = 0; i < projects.length; i++) { %>
+              <div class="modal fade" id="projectModal-<%= i %>" tabindex="-1" aria-labelledby="projectModalLabel-<%= i %>" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="projectModalLabel-<%= i %>"><%= projects[i].title %></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="embed-responsive embed-responsive-16by9 h-100">
+                        <div class="embed-responsive-item h-100">
+                          <iframe class="video-frame hay" src="https://www.youtube.com/embed/<%= projects[i].videoUrl %>"></iframe>
                         </div>
-                    </a>
-                <%} %>
-                <!-- About End -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            
+                <!-- Diğer projeleri buraya ekleyebilirsiniz -->
+              </div>
+        </div>
+        <div class="pagination d-flex justify-content-center">
+          <% if (currentPage > 1) { %>
+            <a href="/projects?page=<%= currentPage - 1 %>">&laquo;</a>
+          <% } %>
+          
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <% if (i === parseInt(currentPage)) { %>
+              <a href="/projects?page=<%= i %>" class="current-page"><%= i %></a>
+            <% } else { %>
+              <a href="/projects?page=<%= i %>"><%= i %></a>
+            <% } %>
+          <% } %>
+          
+          <% if (currentPage < totalPages) { %>
+            <a href="/projects?page=<%= parseInt(currentPage) + 1 %>">&raquo;</a>
+          <% } %>
+        </div>
+    </div>
+    <!-- Services End -->
+
+  <!-- Modal 1 -->
 
 
+  <!-- Modal 2 -->
+  
 
+  <script>
+    document.querySelectorAll('.modal').forEach(function (modal) {
+      modal.addEventListener('hidden.bs.modal', function (event) {
+        const iframe = modal.querySelector('iframe');
+        const videoSrc = iframe.getAttribute('src');
+        iframe.setAttribute('src', '');
+        iframe.setAttribute('src', videoSrc);
+      });
+    });
+  </script>
 
-
-<!-- Footer Start -->
-<%- include("partials/_footer") %>
-<!-- Footer End -->
+   
+    <!-- Footer Start -->
+    <%- include("partials/_footer")  %>

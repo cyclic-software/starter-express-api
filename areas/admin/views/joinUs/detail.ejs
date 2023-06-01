@@ -1,0 +1,33 @@
+<%- include("../partials/_nav") %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>bize Qosul</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                news details </div>
+            <div class="card-body col-md-12  d-flex" >
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <% for (const file of joinUs.files) { %>
+                            <iframe src="/files/<%= file.file_id %>" width="200" height="200"></iframe>
+                            <a href="/files/<%= file.file_id %>" download>
+                                <%= file.file_id %>
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="card-title"><b>haqqında azerbaycan dilinde:</b> <%= joinUs.descriptionAz %>
+                    </p>
+                    <p class="card-text"> <b>haqqında alman dilinde: </b><%= joinUs.descriptionGe %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <%- include("../partials/_footer") %>

@@ -1,0 +1,41 @@
+<%- include("../partials/_nav") %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>
+            <%= news_.title%>
+        </h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                news details </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-4 ">
+                        <% for (const image of news_.images) { %>
+                            <img src="<%= image.url %>" class="img-fluid mt-2" alt="<%= news_.name %>">
+                            <% } %>
+                    </div>%>
+                    <div class="col-md-2 ">
+                            <p class="d-none">gizli sahe</p>
+                    </div>%>
+                    <div class="col-md-6">
+                        <h5 class="card-title">title az: <%= news_.titleAz %>
+                        </h5>
+                        <h5 class="card-title">title de: <%= news_.titleGe %>
+                        </h5>
+                        <p class="card-text">description az: <%= news_.descriptionAz %>
+                        </p>
+    
+                        <p class="card-text">description de: <%= news_.descriptionGe %>
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <%- include("../partials/_footer") %>

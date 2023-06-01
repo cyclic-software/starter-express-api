@@ -1,0 +1,127 @@
+<style>
+    .pointer {
+        cursor: pointer;
+      }
+    </style>
+    
+    
+    <%- include("../partials/_nav") %>
+    
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- <div class="card mt-4 ">
+                <div class="card-header bg-primary text-light pointer"onclick="toggleCardContent()">
+                   project elave etmek ucun klik edin
+                </div>
+                <div class="card-body bg-dark" id="cardContent" style="display: none;">
+    
+                    <form action="/admin/contact" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-light">basliq</label>
+                            <input type="text" class="form-control" placeholder="projectin basliqi" id="name" name="location">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-light">aciqlama</label>
+                            <input type="text" class="form-control" placeholder="projectin kontenti"  name="gmail">
+                        </div>
+
+                   
+                        <button type="submit" class="btn btn-primary">elave et</button>
+                    </form>
+                </div>
+            </div> -->
+         
+            <!-- Kullanıcı Listesi -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    sira
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>locasiya</th>
+                                <th>e-poct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <%for(cont of contact) { %>
+                                <tr>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        <%=cont.location%>
+                                    </td>
+                                    <td>
+                                        <%=cont.gmail%>
+                                    </td>
+                                   
+    
+                                    <td  >
+                                        <a href="contact/<%=cont._id %>" class="btn btn-success detail-btn"><i class="fa fa-eye"></i></a>
+    
+                                        <a href="contact/update/<%=cont._id %>" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                    
+                                    </td>
+                                </tr>
+                                <% } %>
+    
+                                    <% %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Silme İşlemi Onayı</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Gerçekten silmek istediğinize emin misiniz?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kullanıcı Ekleme Formu -->
+    
+        </div>
+    
+        <script>
+            var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+            var deleteForm = document.getElementById("deleteForm");
+    
+            confirmDeleteButton.addEventListener("click", function () {
+                deleteForm.submit();
+            });
+    
+    
+    
+            function toggleCardContent() {
+                const cardContent = document.getElementById("cardContent");
+                if (cardContent.style.display === "none") {
+                    cardContent.style.display = "block";
+                } else {
+                    cardContent.style.display = "none";
+                }
+            }
+            function toggleCardContentCat() {
+                const cardContent1 = document.getElementById("cardContent1");
+                if (cardContent1.style.display === "none") {
+                    cardContent1.style.display = "block";
+                } else {
+                    cardContent1.style.display = "none";
+                }
+            }
+        </script>
+    
+        <%- include("../partials/_footer") %>

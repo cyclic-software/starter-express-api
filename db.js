@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
-const conn  = ()=>{
-    mongoose.set("strictQuery", false);
+
+const conn = ()=>{
     mongoose.connect(process.env.DB_URI,{
-        dbName: "damvev",
+        dbName: "damv",
         useNewUrlParser:true,
         useUnifiedTopology:true,
     }).then(()=>{
-        console.log("connected to db succesful")
+        console.log("connected damv db")
     }).catch((err)=>{
-        console.log(`db connection error  ${err}`)
-    });
-};
+        console.log("error verdi",err)
+    })
+}
 
 export default conn;

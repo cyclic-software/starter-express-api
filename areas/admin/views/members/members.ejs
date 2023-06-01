@@ -1,0 +1,82 @@
+<style>
+    .pointer {
+        cursor: pointer;
+      }
+    </style>
+    
+
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>Kullanıcı Yönetimi</h1>
+        
+         <!-- Kullanıcı Ekleme Formu -->
+         <div class="card mt-4">
+            <div class="card-header pointer bg-primary text-light" onclick="toggleCardContent()">
+                Kullanıcı Ekle
+            </div>
+            <div class="card-body " id="cardContent" style="display: none;">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ad</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </form>
+            </div>
+        </div>
+        <!-- Kullanıcı Listesi -->
+        <div class="card mt-4">
+            <div class="card-header">
+                Kullanıcı Listesi
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ad</th>
+                            <th>Email</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <p class="d-none"><%= count=1 %></p>
+                        <%for(user of users) { %>
+                            <tr>
+                            <td><%=count++%></td>
+                            <td><%=user.username  %></td>
+                            <td><%=user.email  %></td>
+                            <td>
+                                <a href="members/update/<%=user._id %>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+                                <a href="members/<%=user._id %>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        <% } %>
+
+                        <%  %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <script>
+          function toggleCardContent() {
+            const cardContent = document.getElementById("cardContent");
+            if (cardContent.style.display === "none") {
+                cardContent.style.display = "block";
+            } else {
+                cardContent.style.display = "none";
+            }
+        }
+    </script>
+    <%- include("../partials/_footer")  %>

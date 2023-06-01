@@ -1,0 +1,32 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>kontakt</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                kontakt melumatlari
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    
+                    <div class="col-md-8">
+                        
+                        <p class="card-text">mekanimiz: <%= contact.location %></p>
+
+                        <p class="card-text">e-poct unvanimiz: <%= contact.gmail %></p>
+                        <p class="card-text">telefon nomremiz : <%= contact.tel %></p>
+
+                        <p class="card-text">facebook linki :  <%= contact.fb %></p>
+                        <p class="card-text">instagram linki:  <%= contact.inst %></p>
+                        <p class="card-text">youtube linki:  <%= contact.youtube %></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

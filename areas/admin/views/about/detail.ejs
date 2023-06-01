@@ -1,0 +1,34 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>Kullanıcı Detayları</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                Kullanıcı Detayları
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="<%=about.url  %>" class="img-fluid " alt="Kullanıcı Fotoğrafı">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">basliq azerbaycan dilinde : <%= about.titleAz %></h5>
+                        <h5 class="card-title">basliq alman dilinde : <%= about.titleGe %></h5>
+
+                        <p class="card-text">aciqlama azerbaycan dilinde: <%= about.descriptionAz %></p>
+                        <p class="card-text">aciqlama alman dilinde : <%= about.descriptionGe %></p>
+
+                        <p class="card-text">facebook linki :  <%= about.fb %></p>
+                        <p class="card-text">instagram linki:  <%= about.inst %></p>
+                        <p class="card-text">youtube linki:  <%= about.youtube %></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

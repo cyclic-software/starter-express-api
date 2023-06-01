@@ -1,0 +1,34 @@
+<%- include("../partials/_nav") %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>
+            <%= project.title%>
+        </h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                project detail
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <iframe class="embed-responsive-item"
+                            src="https://www.youtube.com/embed/<%=project.videoUrl %>">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h5 class="card-title">title: <%= project.title %>
+                    </h5>
+                    <p class="card-text">description: <%= project.description %>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <%- include("../partials/_footer") %>

@@ -1,0 +1,41 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>update news</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+               update news
+            </div>
+            <div class="card-body">
+                <form action="<%=about._id%>" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">title az</label>
+                        <input type="text" class="form-control" id="name" value="<%=about.titleAz  %>" name="titleAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">title de</label>
+                        <input type="text" class="form-control" id="name" value="<%=about.titleGe  %>" name="titleGe">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">description az</label>
+                        <input type="description" class="form-control"  value="<%=about.descriptionAz%>" name="descriptionAz">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">description de</label>
+                        <input type="description" class="form-control"  value="<%=about.descriptionGe%>" name="descriptionGe">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">choose photo</label>
+                        <input class="form-control" type="file" id="photo" name="image" >
+                    </div>
+                   
+                    <button type="submit" class="btn btn-primary">update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>

@@ -1,0 +1,35 @@
+<%- include("../partials/_nav")  %>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1>Uzvluk anketi</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">
+               update joinUs
+            </div>
+            <div class="card-body">
+                <form action="<%= joinUs._id %>" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="descriptionAz" class="form-label">Açıklama (Azerbaycanca)</label>
+                      <input type="text" class="form-control" id="descriptionAz" value="<%= joinUs.descriptionAz %>" name="descriptionAz">
+                    </div>
+                    <div class="mb-3">
+                      <label for="descriptionGe" class="form-label">Açıklama (Almanca)</label>
+                      <input type="text" class="form-control" id="descriptionGe" value="<%= joinUs.descriptionGe %>" name="descriptionGe">
+                    </div>
+                    <div class="mb-3">
+                      <label for="file" class="form-label">Dosya Seçin</label>
+                      <input class="form-control" type="file" id="file" name="file">
+                    </div>
+                    <div class="mb-3">
+                      <label for="files" class="form-label">Dosyaları Seçin</label>
+                      <input class="form-control" type="file" id="files" name="files" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/_footer")  %>
