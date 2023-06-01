@@ -1,0 +1,94 @@
+{
+  "name": "mongoose-paginate-v2",
+  "version": "1.7.1",
+  "description": "A custom pagination library for Mongoose with customizable labels.",
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "./node_modules/.bin/mocha tests/*.js -R spec --ui bdd --timeout 9999999",
+    "build": "babel src -d dist",
+    "lint": "./node_modules/.bin/eslint \"tests\" \"src\" \".eslintrc.js\" --fix",
+    "prettier": "./node_modules/.bin/prettier --write \"{src,tests}/**/*.js\" \"*.md\"",
+    "prepublish": "npm run test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./node_modules/.bin/lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "./node_modules/.bin/eslint --fix",
+      "./node_modules/.bin/prettier --write"
+    ],
+    "*.md": [
+      "./node_modules/.bin/prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aravindnc/mongoose-paginate-v2.git"
+  },
+  "keywords": [
+    "mongoose",
+    "pagination",
+    "plugin",
+    "mongodb",
+    "paginate",
+    "paging",
+    "next",
+    "prev",
+    "nextpage",
+    "prevpage",
+    "total",
+    "paginator",
+    "plugin",
+    "helper"
+  ],
+  "author": "Aravind NC <aravind_n_c@yahoo.co.in> (https://aravindnc.com)",
+  "contributors": [
+    "Fernando López Guevara (fernando.lguevara@gmail.com)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aravindnc/mongoose-paginate-v2/issues"
+  },
+  "homepage": "https://github.com/aravindnc/mongoose-paginate-v2#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "@babel/plugin-proposal-do-expressions": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-proposal-function-bind": "^7.14.5",
+    "@babel/plugin-proposal-function-sent": "^7.14.5",
+    "@babel/plugin-proposal-json-strings": "^7.14.5",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.14.5",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.14.5",
+    "@babel/plugin-proposal-numeric-separator": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/plugin-proposal-pipeline-operator": "^7.14.5",
+    "@babel/plugin-proposal-throw-expressions": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/preset-env": "^7.14.7",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^6.15.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "mocha": "^8.4.0",
+    "mongoose": "^5.13.2",
+    "prettier": "^2.3.2",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
