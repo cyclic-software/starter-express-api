@@ -350,8 +350,8 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
-                                        <li class="breadcrumb-item disabled"><a href="#">Produk saya</a></li>
+                                        <li class="breadcrumb-item"><a href="index.html">Pemesanan</a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">AR (Roti)</a></li>
                                     </ol>
                                 </div>
                             </div>                          
@@ -377,254 +377,432 @@
                                                     Selesai
                                                 </a>
                                             </li>
-                                            <div class="ms-auto" style="margin-right: 15vh;">
-                                                <p>Maksimal Harian</p>
+                                            <div class="ms-auto" style="padding-right:5px">
+                                                <p>Maksimal Harian : </p>
+                                                
                                             </div>
+                                                <input type="text" style="display: flex; width: 78px;height: 35px; margin-right:5px; border: 0.3px solid rgba(137, 137, 137, 0.3); align-items: center;">
+                                                <a href="" type="button" class="btn" style="color: rgba(0, 0, 0, 0.4);">update</a>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane" id="home-b1">
-
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
+                                            <div class="tab-pane show active" id="home-b1">
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terbanyak</a>
+                                                        <a class="dropdown-item" href="#">Tersedikit</a>
+                                                    </div>
                                                 </div>
-
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terlama</a>
+                                                        <a class="dropdown-item" href="#">Terbaru</a>
+                                                    </div>
+                                                    <div class="input-group ms-3">
+                                                       <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
+                                                    </div>
+                                                </div>
+  
+                                                <table class="table">
                                                     <thead style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>PRODUCT ID</th>
-                                                            <th >GAMBAR</th>
-                                                            <th >NAMA PRODUCT</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
-                                                            <th>AKSI</th>
-                                                
+                                                            <th>GAMBAR</th>
+                                                            <th>NAMA PRODUCT</th>
+                                                            <th>POINT</th>
+                                                            <th>HARGA</th>
+                                                            <th>TOTAL</th>
+                                                            <th>HARGA TAWARAN</th>
+                                                            <th>TANGGAL PENGIRIMAN</th>
+                                                            <th>ALAMAT</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#12598</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>kue sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(107, 235, 164, 0.1); color: #6BEBA4;">In Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
-                                            </div>
-                                            <div class="tab-pane show active" id="profile-b1">
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
+                                                <div class="card">
+                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
+                                                            class="img-fluid avatar-sm rounded-circle"/>
+                                                            <span class="ms-2">Fika wardah</span>
+                                                            <span class="ms-2">0856712979</span>
+                                                        </div>
+                                                        <div class="col-lg-6" style="text-align:end;"> 
+                                                            <span>No pemesanan</span>
+                                                            <span>:</span>
+                                                            <span>30HSFKAKHF</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-1">
+                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <p>Roti sisir</p>
+                                                                <p style="margin-top:-15px;">#1231</p>
+                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: 10%;">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: -2%;">
+                                                                <p>Rp. 4.000</p>
+                                                            </div>
+                                                            <div class="col-1 text-center">
+                                                                <p>Rp. 100.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-7">
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="received">
+                                                                    <span>Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
+                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                                <div class="card">
+                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
+                                                            class="img-fluid avatar-sm rounded-circle"/>
+                                                            <span class="ms-2">Fika wardah</span>
+                                                            <span class="ms-2">0856712979</span>
+                                                        </div>
+                                                        <div class="col-lg-6" style="text-align:end;"> 
+                                                            <span>No pemesanan</span>
+                                                            <span>:</span>
+                                                            <span>30HSFKAKHF</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-1">
+                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <p>Roti sisir</p>
+                                                                <p style="margin-top:-15px;">#1231</p>
+                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: 10%;">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: -2%;">
+                                                                <p>Rp. 4.000</p>
+                                                            </div>
+                                                            <div class="col-1 text-center">
+                                                                <p>Rp. 100.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-7">
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="received">
+                                                                    <span>Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
+                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane show " id="profile-b1">
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terbanyak</a>
+                                                        <a class="dropdown-item" href="#">Tersedikit</a>
+                                                    </div>
+                                                </div>
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terlama</a>
+                                                        <a class="dropdown-item" href="#">Terbaru</a>
+                                                    </div>
+                                                    <div class="input-group ms-3">
+                                                       <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
+                                                    </div>
+                                                </div>
+  
+                                                <table class="table">
                                                     <thead style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>PRODUCT ID</th>
-                                                            <th >GAMBAR</th>
-                                                            <th >NAMA PRODUCT</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
-                                                            <th>AKSI</th>
-                                                
+                                                            <th>GAMBAR</th>
+                                                            <th>NAMA PRODUCT</th>
+                                                            <th>POINT</th>
+                                                            <th>HARGA</th>
+                                                            <th>TOTAL</th>
+                                                            <th>HARGA TAWARAN</th>
+                                                            <th>TANGGAL PENGIRIMAN</th>
+                                                            <th>ALAMAT</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#12598</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>kue sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(107, 235, 164, 0.1); color: #6BEBA4;">In Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
+                                                <div class="card">
+                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
+                                                            class="img-fluid avatar-sm rounded-circle"/>
+                                                            <span class="ms-2">Fika wardah</span>
+                                                            <span class="ms-2">0856712979</span>
+                                                        </div>
+                                                        <div class="col-lg-6" style="text-align:end;"> 
+                                                            <span>No pemesanan</span>
+                                                            <span>:</span>
+                                                            <span>30HSFKAKHF</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-1">
+                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <p>Roti sisir</p>
+                                                                <p style="margin-top:-15px;">#1231</p>
+                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: 10%;">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: -2%;">
+                                                                <p>Rp. 4.000</p>
+                                                            </div>
+                                                            <div class="col-1 text-center">
+                                                                <p>Rp. 100.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col" style="margin-left: 5%;">
+                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-7">
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="received">
+                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
+                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light px-3 float-end" style="margin-right: 50px;">Selesai</button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
+                                                            class="img-fluid avatar-sm rounded-circle"/>
+                                                            <span class="ms-2">Fika wardah</span>
+                                                            <span class="ms-2">0856712979</span>
+                                                        </div>
+                                                        <div class="col-lg-6" style="text-align:end;"> 
+                                                            <span>No pemesanan</span>
+                                                            <span>:</span>
+                                                            <span>30HSFKAKHF</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-1">
+                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <p>Roti sisir</p>
+                                                                <p style="margin-top:-15px;">#1231</p>
+                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: 10%;">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: -2%;">
+                                                                <p>Rp. 4.000</p>
+                                                            </div>
+                                                            <div class="col-1 text-center">
+                                                                <p>Rp. 100.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col" style="margin-left: 5%;">
+                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-7">
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="received">
+                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
+                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light px-3 float-end" style="margin-right: 50px;">Selesai</button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
+
                                             <div class="tab-pane" id="messages-b1">
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terbanyak</a>
+                                                        <a class="dropdown-item" href="#">Tersedikit</a>
+                                                    </div>
                                                 </div>
-
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                                <div class="btn-group mb-2">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                      <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Terlama</a>
+                                                        <a class="dropdown-item" href="#">Terbaru</a>
+                                                    </div>
+                                                    <div class="input-group ms-3">
+                                                       <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
+                                                    </div>
+                                                </div>
+  
+                                                <table class="table">
                                                     <thead style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>PRODUCT ID</th>
-                                                            <th >GAMBAR</th>
-                                                            <th >NAMA PRODUCT</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
-                                                            <th>AKSI</th>
-                                                
+                                                            <th>GAMBAR</th>
+                                                            <th>NAMA PRODUCT</th>
+                                                            <th>POINT</th>
+                                                            <th>HARGA</th>
+                                                            <th>TOTAL</th>
+                                                            <th>HARGA TAWARAN</th>
+                                                            <th>TANGGAL PENGIRIMAN</th>
+                                                            <th>ALAMAT</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#12598</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>kue sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(107, 235, 164, 0.1); color: #6BEBA4;">In Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
+                                                <div class="card">
+                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
+                                                            class="img-fluid avatar-sm rounded-circle"/>
+                                                            <span class="ms-2">Fika wardah</span>
+                                                            <span class="ms-2">0856712979</span>
+                                                        </div>
+                                                        <div class="col-lg-6" style="text-align:end;"> 
+                                                            <span>No pemesanan</span>
+                                                            <span>:</span>
+                                                            <span>30HSFKAKHF</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-1">
+                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <p>Roti sisir</p>
+                                                                <p style="margin-top:-15px;">#1231</p>
+                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: 10%;">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col-1" style="margin-left: -2%;">
+                                                                <p>Rp. 4.000</p>
+                                                            </div>
+                                                            <div class="col-1 text-center">
+                                                                <p>Rp. 100.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col" style="margin-left: 5%;">
+                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-7"></div>
+                                                            <div class="col-lg-5">
+                                                                <div class="received float-end">
+                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
