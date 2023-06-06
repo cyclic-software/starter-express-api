@@ -1,0 +1,55 @@
+/* header */
+body {
+    background-color: black !important;
+
+
+}
+
+.main_border {
+    border: orange 2px solid;
+    border-radius: 27px;
+    margin-top: 15%;
+}
+
+.header {
+    background-color: orange;
+    border-radius: 27px;
+
+}
+
+header h1 {
+    color: black;
+    border: rgb(0, 0, 0) 2px solid;
+}
+/* /header */
+
+/* section-1 */
+
+section h4 {
+    color: orange;
+    width: 123px;
+}
+
+.typer {
+    padding: 0%;
+}
+
+form button {
+    background: orange;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 9px;
+    width: 100px;
+
+}
+
+form input {
+    background-color: orange;
+    border-radius: 9px;
+}
+
+.input_container {
+    width: 255px;
+
+}
+
+/* /section -1 */
