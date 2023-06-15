@@ -245,7 +245,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Produk saya</span>
+                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Pemesanan Jajan</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -299,10 +299,10 @@
                                         <a href="pemesanan_roti.html">AR (Roti)</a>
                                     </li>
                                     <li>
-                                        <a href="ecommerce-products.html">JN (Jajanan & Nasi)</a>
+                                        <a href="pemesanan_jajan">JN (Jajanan & Nasi)</a>
                                     </li>
                                     <li>
-                                        <a href="ecommerce-product-detail.html">Riwayat Pemesanan</a>
+                                        <a href="riwayat_pemesanan.html">Riwayat Pemesanan</a>
                                     </li>
                                 </ul>
                             </div>
@@ -317,7 +317,7 @@
                             <div class="collapse" id="sidebarCrm">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="crm-dashboard.html">Gudang Saya</a>
+                                        <a href="gudang.html">Gudang Saya</a>
                                     </li>
                                 </ul>
                             </div>
@@ -350,7 +350,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="index.html">Pemesanan</a></li>
-                                        <li class="breadcrumb-item disabled"><a href="#">AR (Roti)</a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">JN (Jajanan & Nasi)</a></li>
                                     </ol>
                                 </div>
                             </div>                          
@@ -362,17 +362,17 @@
                                     <div class="card-body">
                                         <ul class="nav nav-tabs nav-bordered">
                                             <li class="nav-item">
-                                                <a href="#home-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                                                <a href="#pesanan_masuk" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
                                                     Pesanan Masuk
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                                                <a href="#belum_selesai" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
                                                     Belum diselesaikan 
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="#messages-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                                <a href="#selesai" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                                     Selesai
                                                 </a>
                                             </li>
@@ -384,7 +384,7 @@
                                                 <a href="" type="button" class="btn" style="color: rgba(0, 0, 0, 0.4);">update</a>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane show active" id="home-b1">
+                                            <div class="tab-pane show active" id="pesanan_masuk">
                                                 <div class="btn-group mb-2">
                                                     <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
                                                         <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
@@ -475,7 +475,7 @@
                                                             <div class="col-lg-5">
                                                                 <div class="received">
                                                                     <span>Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <span class="ms-3">Max Point</span><span> : </span><span>70/100</span>
                                                                     <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
                                                                     <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
                                                                 </div>
@@ -538,7 +538,7 @@
                                                             <div class="col-lg-5">
                                                                 <div class="received">
                                                                     <span>Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
+                                                                    <span class="ms-3">Max Point</span><span> : </span><span>70/100</span>
                                                                     <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
                                                                     <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
                                                                 </div>
@@ -549,7 +549,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane show " id="profile-b1">
+                                            <div class="tab-pane show " id="belum_selesai">
                                                 <div class="btn-group mb-2">
                                                     <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
                                                       <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
@@ -709,7 +709,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane" id="messages-b1">
+                                            <div class="tab-pane" id="selesai">
                                                 <div class="btn-group mb-2">
                                                     <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
                                                         <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
