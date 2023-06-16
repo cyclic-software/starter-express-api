@@ -245,7 +245,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Gudang</span> / <span style="color: orange; font-size:15px;">Gudang Saya</span>
+                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Produk saya</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -303,7 +303,7 @@
                                         <a href="pemesanan_jajan.html">JN (Jajanan & Nasi)</a>
                                     </li>
                                     <li>
-                                        <a href="">Riwayat Pemesanan</a>
+                                        <a href="riwayat_pemesanan.html">Riwayat Pemesanan</a>
                                     </li>
                                 </ul>
                             </div>
@@ -318,7 +318,7 @@
                             <div class="collapse" id="sidebarCrm">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="crm-dashboard.html">Gudang Saya</a>
+                                        <a href="gudang.html">Gudang Saya</a>
                                     </li>
                                 </ul>
                             </div>
@@ -361,72 +361,52 @@
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <ul class="nav nav-tabs nav-bordered">
-                                            <li class="nav-item">
-                                                <a href="#home-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
-                                                    Semua
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#ar_roti" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
-                                                    AR (Roti)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#KJ" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                                    KJ (Kue&Jajan)
-                                                </a>
+                                        <div class="d-flex">
+                                        <ul class="nav">
+                                            <li class="nav-item text-black fs-4">
+                                                <a>165 Bahan</a>
                                             </li>
                                         </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="home-b1">
 
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
+                                        <div class="col-2 mx-4">
+                                        <input class="form-control me-2" type="search" placeholder="Search" 
+                                        aria-label="Search">
+                                        </div>
+
+                                        <div class="btn-group">
+                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
+                                                    <span class="point"><i>Expired: None </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Lama</a>
+                                                        <a class="dropdown-item" href="#">Pendek</a>
+                                                    </div>
+
+                                                    <div class="input-group ms-3">
+                                                        <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
+                                                    </div>
                                                 </div>
+                                                <a class="btn btn-sm text-white pt-2"style="background: #F7BC00; margin-left: 30em;"><i class="fa fa-plus"></i> Tambah Produk Baru</a>
+                                                </div>
+                                            </div>
 
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active text-center" id="home-b1">
+                                                <table data-toggle="table">
                                                     <thead style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
                                                             <th>BAHAN ID</th>
                                                             <th >NAMA BAHAN</th>
                                                             <th >JUMLAH</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
                                                             <th>AKSI</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             <td>#12598</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>kue sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
+                                                            <td>Bawang</td>
+                                                            <td>5000</td>
                                                             <td>
                                                                 <a class="btn btn-info" type="button" href="">
                                                                  <i class="fas fa-pencil-alt"></i>
@@ -434,25 +414,7 @@
                                                                <a class="btn btn-danger" type="button" href="">
                                                                  <i class="fas fa-trash"></i>
                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
+                                                               </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
