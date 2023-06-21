@@ -1,0 +1,125 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container">
+        <h4>Nama Produk: <%= produk.namaProduk %>
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Jenis Pemesanan</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <%= produk.namaProduk %>
+                    </td>
+                    <td>
+                        <%= produk.kategori %>
+                    </td>
+                    <td>
+                        <%= produk.jenisPemesanan %>
+                    </td>
+                    <td>
+                        <%= produk.hargaProduk %>
+                    </td>
+                    <td>
+                        <%= produk.stok %>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="POST" action="/admin/produk/<%= produk._id %>/resep/new">
+            <table class="table table-bordered" id="ingredientTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Bahan</th>
+                        <th scope="col">Jumlah Pakai</th>
+                        <th scope="col">Satuan</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="ingredientTableBody">
+                    <tr>
+                        <td>
+                            <select class="form-control" name="resep[0][idBahan]">
+                                <% bahan.forEach(function(item) { %>
+                                    <option value="<%= item._id %>">
+                                        <%= item.namaBahan %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="resep[0][jumlahPakai]" min="0" required>
+                        </td>
+                        <td>
+                            <select class="form-control" name="resep[0][satuan]">
+                                <option value="kg">Kilogram (kg)</option>
+                                <option value="gr">Gram (gr)</option>
+                                <option value="ons">Ons</option>
+                                <option value="ml">Mililiter (ml)</option>
+                                <option value="liter">Liter</option>
+                                <option value="pcs">Pieces (pcs)</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="addIngredientRow()">Tambah</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary">Tambah Resep</button>
+        </form>
+    </div>
+
+    <script>
+        let ingredientIndex = 1;
+
+        function addIngredientRow() {
+            const ingredientTableBody = document.getElementById('ingredientTableBody');
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+        <td>
+            <select class="form-control" name="resep[${ingredientIndex}][idBahan]">
+                <% bahan.forEach(function(item) { %>
+                <option value="<%= item._id %>"><%= item.namaBahan %></option>
+                <% }) %>
+            </select>
+        </td>
+        <td>
+            <input type="number" class="form-control" name="resep[${ingredientIndex}][jumlahPakai]" min="0" required>
+        </td>
+        <td>
+            <select class="form-control" name="resep[${ingredientIndex}][satuan]">
+                <option value="kg">Kilogram (kg)</option>
+                <option value="gr">Gram (gr)</option>
+                <option value="ons">Ons</option>
+                <option value="ml">Mililiter (ml)</option>
+                <option value="liter">Liter</option>
+                <option value="pcs">Pieces (pcs)</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger" onclick="removeIngredientRow(this)">Hapus</button>
+        </td>
+        `;
+
+            ingredientTableBody.appendChild(newRow);
+            ingredientIndex++;
+        }
+
+        function removeIngredientRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
