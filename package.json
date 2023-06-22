@@ -1,5 +1,5 @@
 {
-  "name": "starter-express-api",
+  "name": "njwaterworks",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
+    "url": "git+https://github.com/njwaterworks/njwaterworks.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
+    "url": "https://github.com/njwaterworks/njwaterworks/issues"
   },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
+  "homepage": "https://github.com/njwaterworks/njwaterworks#readme",
   "dependencies": {
     "express": "^4.18.2"
   }
