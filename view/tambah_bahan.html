@@ -277,8 +277,19 @@
                         <li class="py-4">
                             <a href="#sidebarDashboards" data-bs-toggle="collapse">
                                 <i data-feather="airplay"></i>
-                                <span> Informasi Bahan </span>
+                                <span class="menu-arrow"></span>
+                                <span> Bahan Produk </span>
                             </a>
+                            <div class="collapse" id="sidebarDashboards">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="#Informasi">Informasi Bahan</a>
+                                    </li>
+                                    <li>
+                                        <a href="#rincian">Rincian Bahan</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -382,13 +393,78 @@
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
+
+                        <!-- card Rincian Bahan -->
+                         <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body" id="Rincian">
+                                        <h4 class="header-title">Rincian Bahan</h4>
+                                        
+                                        <form>
+                                            <ul>
+                                                <div class="mt-4 mb-3 mt-3 row">
+                                                    <li>
+                                                        <div class="text">
+                                                            <label for="text" class="col-sm-2 col-form-label">Nama Bahan</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control " id="floatingInput" placeholder="Masukan Nama Bahan" style="margin-left: 22vh; margin-top: -4vh;">
+                                                        </div>
+                                                    </li>
+                                                </div>
+                                                
+                                                <div class="mt-4 mb-3 row">
+                                                    <li>
+                                                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">ID Bahan</label>
+                                                        <div class="col-sm-10">
+                                                          <input type="text" class="form-control " id="floatingInput" placeholder="Masukan ID Bahan" style="margin-left: 22vh; margin-top: -5vh;">
+                                                        </div>
+                                                    </li>
+                                                </div>
+
+                                                <div class="mt-4 mb-3 row">
+                                                    <li>
+                                                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Stock</label>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control " id="floatingInput" placeholder="40" style="margin-left: 22vh; margin-top: -4vh; width: 5%;">
+                                                        </div>
+                                                    </li>
+                                                </div>
+
+                                                <div class="mt-4 mb-3 row">
+                                                    <li>
+                                                        <label for="text" class="col-sm-2">Expired</label>
+                                                        <div class="col-sm-10">
+                                                        <div class="btn-group" style="margin-left: 22vh";>
+                                                          <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                            style="background: rgba(255, 255, 255, 0.8); margin-top: -4vh;">
+                                                            <span class="point"><i>Expired: None</i></span>
+                                                            <i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
+                                                          </button>
+                                                          <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#">Lama</a>
+                                                            <a class="dropdown-item" href="#">Pendek</a>
+                                                          </div>
+                                                        </div>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </form>
+
+                                        <div class="mt-4 mb-3">
+                                          <div class="btn-group float-end gap-3">
+                                            <button type="button" class="border border-secondary btn-lg rounded-3" style="background-color: #FFFFFF; color: #F52525;">Batal</button>
+                                            <a href="gudang.html" class="btn btn-lg rounded-3" style="background-color: #FF9A02; color: #FFFFFF;">Update</a>
+                                          </div>
+                                        </div>
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
                     </div>       
                     <!-- end page title -->
-
-
-                    
                 </div> <!-- container -->
-
             </div> <!-- content -->
 
             <!-- Footer Start -->
