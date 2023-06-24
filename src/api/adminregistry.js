@@ -39,7 +39,7 @@ module.exports = (app) => {
       if (!matched) {
         return res.status(400).send(v.errors);
       }
-      var data = await service.GetRegistryData(req.body);
+      var data = await service.GetRegistryData(req.body.adminregistry_email,req.body.adminregistry_password);
       data = data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {

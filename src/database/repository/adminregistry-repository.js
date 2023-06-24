@@ -23,7 +23,6 @@ class AdminregistryRepository {
         }
       }
     ]
-    console.log()
     const tags = await AdminregistryModel.aggregate(query);
     return tags;
   }
