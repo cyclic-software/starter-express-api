@@ -38,6 +38,7 @@ const CategorySchema = new Schema(
     category_textlist:  [String],
     refrences: { type: Object },
     poet_gallery:{ type: Object },
+    poet_status: { type: String, enum: ['Draft', 'Published'],default: "Draft" },
 
     awards: { type: Object }, 
     profile_media_url: {type:String},
