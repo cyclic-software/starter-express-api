@@ -14,6 +14,19 @@ class AdminregistryRepository {
     const tags = await AdminregistryModel.aggregate(query);
     return tags;
   }
+  async GetDataWithEmailAndPassword(email,password) {
+    var query = [
+      {
+        '$match': {
+          'adminregistry_email': email, 
+          'adminregistry_password': password
+        }
+      }
+    ]
+    console.log()
+    const tags = await AdminregistryModel.aggregate(query);
+    return tags;
+  }
   async FindAdminregistryById(id) {
     const tags = await AdminregistryModel.find({ is_del: false, _id: id });
     return tags;

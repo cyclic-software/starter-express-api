@@ -7,9 +7,12 @@ const Schema = mongoose.Schema;
 const AdminregistrySchema = new Schema(
   {
     adminregistry_name: { type: String, required: true,unique:true },
+    adminregistry_email: { type: String, required: true,unique:true },
+    adminregistry_mobile: { type: String,unique:true },
+    adminregistry_password: { type: String,required: true },
     adminregistry_slug: { type: String, default:'',unique:true},
     adminregistry_description: { type: String,default:'' },
-    social_link: [ String],
+    social_link: {type:Object},
     is_del: { type: Boolean, default: false }
    
   },

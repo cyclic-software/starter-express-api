@@ -29,6 +29,24 @@ module.exports = (app) => {
     }
   });
 
+  app.post("/adminregistrylogin",  async (req, res, next) => {
+    try {
+      const v = new Validator(req.body, {
+        adminregistry_email: "required",
+        adminregistry_password: "required",
+      });
+      const matched = await v.check();
+      if (!matched) {
+        return res.status(400).send(v.errors);
+      }
+      var data = await service.GetRegistryData(req.body);
+      data = data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   app.post("/adminregistrys",  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);

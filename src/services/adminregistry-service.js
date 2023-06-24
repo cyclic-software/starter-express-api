@@ -16,11 +16,16 @@ class AdminregistryService {
     const AdminregistryResult = await this.repository.GetAdminregistrys(q);
     return AdminregistryResult;
   }
+  async GetRegistryData(email,password) {
+ const AdminregistryResult = await this.repository.GetDataWithEmailAndPassword(email,password);
+    return AdminregistryResult;
+  }
   async AdminregistryById(id) {
     const AdminregistryResult = await this.repository.FindAdminregistryById(id);
     return AdminregistryResult;
   }
   async UpdateAdminregistry(formdata) {
+    
     const AdminregistryResult = await this.repository.UpdateAdminregistry(formdata);
     return AdminregistryResult;
   }
