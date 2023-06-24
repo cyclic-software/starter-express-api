@@ -106,9 +106,15 @@ module.exports.paginateResults = async (
               var js = { [key]: value };
             } else if (checkobjectid) {
               var js = { [key]: mongoose.Types.ObjectId(value) }; //for validating object id
-            } else {
-              value = String(value);
-              var js = { [key]: { $regex: value, $options: "i" } };
+            } else if (typeof value == "object") {
+              console.log(value)
+              var js = { [key]: {$in:value} };
+            } else{
+              
+
+                value = String(value);
+                var js = { [key]: { $regex: value, $options: "i" } };
+              
             }
             var matchdata = { $match: js }; // Use this to sort documents by newest first
             pipeline.push(matchdata);

@@ -13,6 +13,7 @@ class TagService {
   }
   async Tags(size, skip, matchdata, sortob) {
     var q = await paginateResults(size, skip, matchdata, sortob);
+    console.log(JSON.stringify(q))
     const TagResult = await this.repository.GetTags(q);
     return TagResult;
   }
