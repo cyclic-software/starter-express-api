@@ -87,7 +87,19 @@ class PostService {
   }
 
   
+  async AdminPosts(size, skip, matchdata, sortob) {
+    try{
 
+      var q = await paginateResults(size, skip, matchdata, sortob);
+      var PostResult   = await this.repository.GetPosts(q);
+
+      
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
+  }
   async Posts(size, skip, matchdata, sortob) {
     try{
 
