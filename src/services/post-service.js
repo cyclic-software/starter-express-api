@@ -91,6 +91,7 @@ class PostService {
   async Posts(size, skip, matchdata, sortob) {
     try{
 
+      matchdata["post_status"] = "Published";
       var q = await paginateResults(size, skip, matchdata, sortob);
       var PostResult   = await this.repository.GetPosts(q);
       const myInstance = this;

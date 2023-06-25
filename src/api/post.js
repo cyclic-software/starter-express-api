@@ -43,6 +43,21 @@ module.exports = (app) => {
       next(error);
     }
   });
+
+  app.post("/adminposts",  async (req, res, next) => {
+    try {
+      const { limit, skip } = await GetPagination(req.body.page, req.body.size);
+      var sortarray = await GetSortByFromRequest(
+        req.body.orderbycolumnname,
+        req.body.orderby
+      );
+      var data = await service.Posts(limit, skip, req.body, sortarray);
+      data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
   app.post("/postlike",  async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
