@@ -1,0 +1,78 @@
+<!-- PAGE 2 -->
+<div class="tab-pane show" id="ar_roti">
+    <div class="produk">
+        <h5 class="header-title" style="margin-bottom: -20vh; ">105 Produk</h5>
+        <a class="btn btn-sm text-white" href=""
+            style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah
+            Produk Baru</a>
+    </div>
+    <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id"
+        data-page-list="[5, 10, 20]" data-page-size="5" data-pagination="true" data-show-pagination-switch="true"
+        class="table-borderless">
+        <thead style="background: #FF9C22;">
+            <tr style="color: #fff;">
+                <th>NO</th>
+                <th>GAMBAR</th>
+                <th>NAMA PRODUCT</th>
+                <th>KATEGORI</th>
+                <th>HARGA</th>
+                <th>STOK</th>
+                <th>TERJUAL</th>
+                <th data-field="user-status">STATUS</th>
+                <th>AKSI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% var i=1; %>
+                <% produk.forEach((item)=> { %>
+                    <tr>
+                        <td>
+                            <%= i++ %>
+                        </td>
+                        <td>
+                            <img src="/images/toko/kue.png" alt="Gambar Produk" width="50" height="50">
+                        </td>
+                        <td>
+                            <%= item.namaProduk %>
+                        </td>
+                        <td>
+                            <%= item.kategori %>
+                        </td>
+                        <td>
+                            <%= item.hargaProduk %>
+                        </td>
+                        <td>
+                            <%= item.stok %>
+                        </td>
+                        <td>
+                            <%= item.terjual %>
+                        </td>
+                        <td>
+                            <% if (produk.stok===0) { %>
+                                %><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out
+                                    of Stock</span>
+                                <% } else if(produk.stok<=5){%>
+                                    <span class="badge"
+                                        style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span>
+                                    <% }else{ %>
+                                        <span class="badge"
+                                            style="background: rgba(107, 235, 164, 0.1); color: #6BEBA4;">In
+                                            Stock</span>
+                                        <% } %>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" type="button" href="">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <form action="/produk/delete/<%= item._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
+                    <% }) %>
+        </tbody>
+    </table>
+</div>
