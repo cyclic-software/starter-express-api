@@ -282,7 +282,7 @@
                                         <a href="#Informasi">Informasi produk</a>
                                     </li>
                                     <li>
-                                        <a href="rincian_bahan.html">Rincian Bahan Produk</a>
+                                        <a href="#rincian">Rincian Bahan Produk</a>
                                     </li>
                                 </ul>
                             </div>
@@ -315,7 +315,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
-                                        <li class="breadcrumb-item disabled"><a href="#">Informasi produk</a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">Rincian Produk</a></li>
                                     </ol>
                                 </div>
                             </div>                          
@@ -325,126 +325,17 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-body" id="Informasi">
-                                        <h4 class="header-title">Tambah Produk | Informasi Produk</h4> 
+                                    <div class="card-body" id="rincian">
+                                        <h4 class="header-title">Tambah Produk | Rincian Bahan Produk</h4>
                                         <form>
-                                            <ul>
-                                                <div class="mt-4 mb-3 mt-3 row">
-                                                    <li>
-                                                        <div class="text">
-                                                            <label for="text" class="col-sm-2 col-form-label">Nama Produk</label>
-                                                        </div>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control " id="floatingInput" placeholder="masukan nama Produk" style="margin-left: 22vh; margin-top: -5vh;">
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                
-                                                <div class="mt-4 mb-3 row">
-                                                    <li>
-                                                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Deskripsi Produk</label>
-                                                        <div class="col-sm-10">
-                                                          <textarea class="form-control" placeholder="masukan deskripsi produk" id="floatingTextarea2" style="height: 100px;
-                                                           margin-left: 22vh; margin-top: -5vh;"></textarea>
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                <div class="mt-4 mb-3 row">
-                                                    <li>
-                                                        <label for="text" class="col-sm-2 col-form-label">Jenis Pemasanan</label>
-                                                        <div class="col-sm-10" style="margin-top: -30px;">
-                                                            <div class="form-check form-check-inline" style="margin-left: 22vh;">
-                                                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                              <label class="form-check-label" for="inlineRadio1">Pre Order</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline">
-                                                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                              <label class="form-check-label" for="inlineRadio2">Ready</label>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                <div class="mt-4 mb-3 row">
-                                                    <li>
-                                                        <label for="text" class="col-sm-2 col-form-label">Kategori</label>
-                                                        <div class="col-sm-10" style="margin-top: -30px;">
-                                                            <div class="form-check form-check-inline" style="margin-left: 22vh;">
-                                                            <input type="radio" name="makanan" id="rotiM" value="roti" required="" class="form-check-input">
-                                                            <label for="rotiM">Roti</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline" style="margin-left: 5vh;">
-                                                            <input type="radio" name="makanan" id="jajanF" value="snack" class="form-check-input">
-                                                            <label for="jajanF">Jajanan</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline" style="margin-left: 5vh;">
-                                                            <input type="radio" name="makanan" id="nasiA" value="nasi" class="form-check-input">
-                                                            <label for="nasiA">Nasi</label>
-                                                        </div>
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                <div class="mt-4 mb-3 row">
-                                                    <li>
-                                                        <div class="text">
-                                                            <label for="text" class="col-sm-2 col-form-label">Bobot Produk</label>
-                                                        </div>
-                                                        <div class="col-sm-1">
-                                                            <input type="text" class="form-control " id="floatingInput" placeholder="27" style="margin-left: 22vh; margin-top: -5vh;">
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                <div class="mt-4 mb-3 row">
-                                                    <li>
-                                                        <div class="text">
-                                                            <label for="text" class="col-sm-2 col-form-label">Foto Produk</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="input-group" style="margin-left: 22vh; margin-top: -5vh;">
-                                                                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" 
-                                                                aria-label="Upload">
-                                                                <span class="input-group-text">
-                                                                  <i class="fas fa-camera"></i>
-                                                                </span>
-                                                            </div>
-                                                            <span class="dimensi">Remokendasi Dimensi Adalah 1920px X 700px Dengan Format .jpg, .png</span>
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                                <div class="mt-4 row">
-                                                        <div class="row">
-                                                            <div class="col-xl-3">
-                                                                <li>
-                                                                    <div>
-                                                                        <label for="text" class="form-label">Harga Produk</label>
-                                                                        <input class="form-control" type="text" id="text"  style="margin-left: 22vh; margin-top: -4vh;">
-                                                                    </div>
-                                                                </li>
-                                                            </div>
-                                                                <div class="col-xl-3"style="margin-left:24vh;">
-                                                                    <li>
-                                                                        <div>
-                                                                            <label for="text" class="form-label">Stok</label>
-                                                                            <input class="form-control" type="text" id="text" style="margin-left: 8vh; margin-top: -4vh;">
-                                                                        </div>
-                                                                    </li>
-                                                                </div>
-                                                                <div class="mt-4 mb-3">
-                                                                  <div class="btn-group float-end gap-3">
-                                                                    <button type="button" class="border border-secondary btn-lg rounded-3" style="background-color: #FFFFFF; color: #F52525;">Batal</button>
-                                                                    <a href="#" class="btn btn-lg rounded-3" style="background-color: #FF9A02; color: #FFFFFF;">Update</a>
-                                                                  </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
-                                                </form>
-                                            </div> <!-- end card-body -->
-                                        </div> <!-- end card-->
-                                    </div> <!-- end col -->
-                                </div> <!-- end row -->   
-                            </div> <!-- end page title -->
-                        </div> <!-- container -->
-                    </div> <!-- content -->
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end row -->                    
+                    </div> <!-- container -->
+                </div> <!-- content -->
 
             <!-- Footer Start -->
             <footer class="footer">
