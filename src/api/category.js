@@ -51,7 +51,7 @@ module.exports = (app) => {
         req.body.orderbycolumnname,
         req.body.orderby
       );
-      var data = await service.Categorys(limit, skip, req.body, sortarray);
+      var data = await service.AdminCategorys(limit, skip, req.body, sortarray);
       data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {

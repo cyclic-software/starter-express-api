@@ -43,6 +43,20 @@ module.exports = (app) => {
       next(error);
     }
   });
+  app.post("/adminpoets",  async (req, res, next) => {
+    try {
+      const { limit, skip } = await GetPagination(req.body.page, req.body.size);
+      var sortarray = await GetSortByFromRequest(
+        req.body.orderbycolumnname,
+        req.body.orderby
+      );
+      var data = await service.Poets(limit, skip, req.body, sortarray);
+      data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
   app.post("/poet/:id",  async (req, res, next) => {
     try {
       var data = await service.poetById(req.params.id);

@@ -40,6 +40,11 @@ class CategoryRepository {
     const templates = await PostModel.aggregate(query);
     return templates;
   }
+  async GetAdminCategorys(query) {
+   
+    const templates = await CategoryModel.aggregate(query);
+    return templates;
+  }
   async FindCategoryById(id) {
     const categorys = await CategoryModel.find({ is_del: false, _id: id });
     return categorys;

@@ -16,6 +16,11 @@ class CategoryService {
     const CategoryResult = await this.repository.GetCategorys(q);
     return CategoryResult;
   }
+  async AdminCategorys(size, skip, matchdata, sortob) {
+    var q = await paginateResults(size, skip, matchdata, sortob);
+    const CategoryResult = await this.repository.GetAdminCategorys(q);
+    return CategoryResult;
+  }
   async CategoryById(id) {
     const CategoryResult = await this.repository.FindCategoryById(id);
     return CategoryResult;
