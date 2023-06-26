@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { CategoryModel } = require('../models');
+const { CategoryModel,PostModel } = require('../models');
 
 //Dealing with data base operations
 class CategoryRepository {
@@ -37,7 +37,7 @@ class CategoryRepository {
         }
       }
     ];
-    const templates = await CategoryModel.aggregate(query);
+    const templates = await PostModel.aggregate(query);
     return templates;
   }
   async FindCategoryById(id) {
