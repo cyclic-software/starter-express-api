@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { PoetModel } = require('../models');
+const { PoetModel,PostModel } = require('../models');
 
 //Dealing with data base operations
 class PoetRepository {
@@ -11,6 +11,36 @@ class PoetRepository {
   }
 
   async GetPoets(query) {
+    var query = [
+      {
+        '$group': {
+          '_id': '$poet_id'
+        }
+      }, {
+        '$match': {
+          '_id': {
+            '$ne': null
+          }
+        }
+      }, {
+        '$lookup': {
+          'from': 'poets', 
+          'localField': '_id', 
+          'foreignField': '_id', 
+          'as': 'result'
+        }
+      }, {
+        '$unwind': '$result'
+      }, {
+        '$replaceRoot': {
+          'newRoot': '$result'
+        }
+      }
+    ];
+    const templates = await PoetModel.aggregate(query);
+    return templates;
+  }
+  async GetAdminPoets(query) {
     const templates = await PoetModel.aggregate(query);
     return templates;
   }

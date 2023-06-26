@@ -50,7 +50,7 @@ module.exports = (app) => {
         req.body.orderbycolumnname,
         req.body.orderby
       );
-      var data = await service.Poets(limit, skip, req.body, sortarray);
+      var data = await service.AdminPoets(limit, skip, req.body, sortarray);
       data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {

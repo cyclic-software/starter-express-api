@@ -16,6 +16,11 @@ class PoetService {
     const PoetResult = await this.repository.GetPoets(q);
     return PoetResult;
   }
+  async AdminPoets(size, skip, matchdata, sortob) {
+    var q = await paginateResults(size, skip, matchdata, sortob);
+    const PoetResult = await this.repository.GetAdminPoets(q);
+    return PoetResult;
+  }
   async PoetById(id) {
     const PoetResult = await this.repository.FindPoetById(id);
     return PoetResult;
