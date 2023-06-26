@@ -11,6 +11,32 @@ class CategoryRepository {
   }
 
   async GetCategorys(query) {
+    var query = [
+      {
+        '$group': {
+          '_id': '$category_id'
+        }
+      }, {
+        '$match': {
+          '_id': {
+            '$ne': null
+          }
+        }
+      }, {
+        '$lookup': {
+          'from': 'categories', 
+          'localField': '_id', 
+          'foreignField': '_id', 
+          'as': 'result'
+        }
+      }, {
+        '$unwind': '$result'
+      }, {
+        '$replaceRoot': {
+          'newRoot': '$result'
+        }
+      }
+    ];
     const templates = await CategoryModel.aggregate(query);
     return templates;
   }

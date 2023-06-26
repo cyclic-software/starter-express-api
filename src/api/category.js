@@ -43,6 +43,21 @@ module.exports = (app) => {
       next(error);
     }
   });
+  
+  app.post("/admincategorys",  async (req, res, next) => {
+    try {
+      const { limit, skip } = await GetPagination(req.body.page, req.body.size);
+      var sortarray = await GetSortByFromRequest(
+        req.body.orderbycolumnname,
+        req.body.orderby
+      );
+      var data = await service.Categorys(limit, skip, req.body, sortarray);
+      data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
   app.post("/category/:id",  async (req, res, next) => {
     try {
       var data = await service.categoryById(req.params.id);

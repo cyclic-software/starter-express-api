@@ -16,6 +16,7 @@ const PostSchema = new Schema(
     category_name: { type: String,default:'' },
     category_slug : { type: String,default:'' },
     poet_id : { type:  mongoose.Schema.Types.ObjectId, ref: 'poet'  },
+    category_id : { type:  mongoose.Schema.Types.ObjectId, ref: 'post'  },
     poet_name: { type:  String, default:''  },
     post_media_url: [String],
     post_tags: [String],
