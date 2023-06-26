@@ -37,7 +37,7 @@ class PoetRepository {
         }
       }
     ];
-    const templates = await PoetModel.aggregate(query);
+    const templates = await PostModel.aggregate(query);
     return templates;
   }
   async GetAdminPoets(query) {
