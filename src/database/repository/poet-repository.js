@@ -13,6 +13,11 @@ class PoetRepository {
   async GetPoets(query) {
     var query = [
       {
+        '$match': {
+          'post_status': 'Published'
+        }
+      },
+      {
         '$group': {
           '_id': '$poet_id'
         }

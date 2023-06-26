@@ -12,7 +12,12 @@ class CategoryRepository {
 
   async GetCategorys(query) {
     var query = [
+      
       {
+        '$match': {
+          'post_status': 'Published'
+        }
+      },{
         '$group': {
           '_id': '$category_id'
         }
