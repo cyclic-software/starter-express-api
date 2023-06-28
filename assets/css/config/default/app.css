@@ -1886,13 +1886,14 @@ body.authentication-bg-pattern {
   background: url("../../../images/bg-auth.jpg") center;
   background-size: cover; }
   .auth-fluid .auth-fluid-form-box {
-    max-width: 480px;
+    max-width: 45rem;
     border-radius: 0;
     z-index: 2;
-    padding: 3rem 2rem;
+    /*padding: 3rem 4rem;*/
+    padding-right: 15rem;
     background-color: #ffffff;
     position: relative;
-    width: 100%; }
+    width: 100vh; }
   .auth-fluid .auth-fluid-right {
     padding: 6rem 3rem;
     flex: 1;
