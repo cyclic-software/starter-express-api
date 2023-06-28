@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+		<!-- App css -->
+		<link href="../assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+		<link href="../assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+		<link href="../assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+		<link href="../assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+		<!-- icons -->
+		<link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    </head>
+
+    <body>
+
+        <div class="auth-fluid">
+            <!--Auth fluid left content -->
+            <div class="auth-fluid-form-box">
+                <div class="align-items-center d-flex h-100">
+                    <div class="card-body">
+
+                        <!-- title-->
+                        <h4 class="mt-0">Masuk Akun</h4>
+                        <p class="text-muted mb-4">Masukkan email dan password akun anda disini.</p>
+
+                        <!-- form -->
+                        <form action="#">
+                            <div class="mb-3">
+                                <label for="emailaddress" class="form-label">Email</label>
+                                <input class="form-control" type="email" id="emailaddress" placeholder="Masukkan email anda.">
+                            </div>
+                            <div class="mb-3">
+                                <a href="auth-recoverpw-2.html" class="text-muted float-end"><small>Lupa sandi anda?</small></a>
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" class="form-control" placeholder="Masukkan password anda.">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center d-grid">
+                                <button class="btn text-white" style="background-color: #FAA424;" type="submit">Log In </button>
+                            </div>
+                            <!-- social-->
+                            <div class="text-center mt-4">
+                                <p class="text-muted font-16">- OR -</p>
+                                <i class="fa-brands fa-google"></i>
+                                <button class="btn btn-light" type="submit">Lanjutkan dengan Google</button>
+
+                            </div>
+                        </form>
+                        <!-- end form-->
+
+                        <!-- Footer-->
+                        <footer class="footer footer-alt">
+                            <p class="text-muted">Belum punya akun? <a class="ms-1" style="color: #FAA424;;"><b>Buat akun disini.</b></a></p>
+                        </footer>
+                    </div> <!-- end .card-body -->
+                </div> <!-- end .align-items-center.d-flex.h-100-->
+            </div>
+            <!-- end auth-fluid-form-box-->
+
+            <!-- Auth fluid right content -->
+            <div class="auth-fluid-right text-center" style="background-color: #FAA424;">
+                <h2 class="text-white float-end">Temukan Rasa Baru di Ini Toko</h2>
+                <img src="../assets/images/donat.png" width="300">
+            </div>
+        </div>
+        <!-- end auth-fluid-->
+
+        <!-- Vendor js -->
+        <script src="../assets/js/vendor.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.min.js"></script>
+        
+    </body>
+</html>
