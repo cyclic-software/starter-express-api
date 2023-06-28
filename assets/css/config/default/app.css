@@ -1887,19 +1887,21 @@ body.authentication-bg-pattern {
   background-size: cover; }
   .auth-fluid .auth-fluid-form-box {
     max-width: 45rem;
-    border-radius: 0;
     z-index: 2;
     /*padding: 3rem 4rem;*/
     padding-right: 15rem;
     background-color: #ffffff;
     position: relative;
-    width: 100vh; }
+    width: 100vh; 
+  }
   .auth-fluid .auth-fluid-right {
     padding: 6rem 3rem;
     flex: 1;
     position: relative;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.3); }
+    border-radius: 35px 0px 0px 35px;
+    color: #fff  !important;
+    background-color: rgba(0, 0, 0, 0.3); 
+  }
 
 .auth-brand {
   margin-bottom: 2rem; }
