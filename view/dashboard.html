@@ -15,6 +15,7 @@
 
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- App css -->
         <link href="../assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -245,7 +246,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Gudang Saya</span>
+                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Dashboard Saya</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -283,7 +284,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li>
                             <a href="#sidebarDashboards" data-bs-toggle="collapse">
                                 <i data-feather="airplay"></i>
@@ -326,7 +327,7 @@
 
                         <li>
                             <a href="#sidebarCrm" data-bs-toggle="collapse">
-                                <i class="fas fa-warehouse"></i>
+                                 <i class="fas fa-warehouse"></i>
                                 <span> Gudang </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -363,149 +364,233 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
+                                <div class="page-title-left" style="float: left;">
+                                    <h1>Welcome,Admin AR (Roti)</h1>
+                                    <p class="ms-1 fs-5">Tetap Semangat Jangan Berputus Asa</p>
+                                </div>
+                                <div class="col-2" style="padding-top:20px; margin-left: 20vh; display: inline-block;">
+                                    <input class="form-control me-2" type="search" placeholder="Search" 
+                                    aria-label="Search">
+                                </div>
+                                <div class="input-group" style="padding-top:20px; margin-left: 10px; display:inline;">
+                                    <button type="button" class="btn btn-warning text-white">Cari</button>
+                                    <button type="button" class="btn btn-warning" style="margin-left: -4px;">
+                                        <i data-feather="refresh-cw" class="icon-dual text-white"></i>
+                                    </button>
+                                </div>
                                 <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
-                                        <li class="breadcrumb-item disabled"><a href="#">Produk saya</a></li>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">Dashboard saya</a></li>
                                     </ol>
                                 </div>
                             </div>                          
                         </div>
 
                         <div class="row m-2">
-                            <div class="col-xl-12">
-                                <div class="card">
+                            <div class="col-xl-8">
+                                <div class="card" style="min-height:100vh;">
                                     <div class="card-body">
-                                        <div class="d-flex">
-                                        <ul class="nav">
-                                            <li class="nav-item text-black fs-4">
-                                                <a>165 Bahan</a>
+        
+                                        <ul class="nav nav-pills navtab-bg">
+                                            <li class="nav-item">
+                                                <a href="#semua" data-bs-toggle="tab" aria-expanded="false" class="btn btn-outline-warning waves-effect waves-light rounded">
+                                                    Semua
+                                                </a>
+                                            </li>
+                                            <li class="nav-item px-2">
+                                                <a href="#roti" data-bs-toggle="tab" aria-expanded="true" class="btn btn-outline-warning waves-effect waves-light rounded">
+                                                    <i class="fas fa-bread-slice me-2"></i>Roti
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#jajanan" data-bs-toggle="tab" aria-expanded="false" class="btn btn-outline-warning waves-effect waves-light rounded">
+                                                    <i class="fa-solid fa-cookie me-2"></i>Jajanan
+                                                </a>
+                                            </li> 
+                                            <li class="nav-item px-2">
+                                                <a href="#nasi" data-bs-toggle="tab" aria-expanded="false" class="btn btn-outline-warning waves-effect waves-light rounded">
+                                                    <i class="fa-solid fa-bowl-rice me-2"></i>Nasi
+                                                </a> 
                                             </li>
                                         </ul>
 
-                                        <div class="col-2 mx-4">
-                                        <input class="form-control me-2" type="search" placeholder="Search" 
-                                        aria-label="Search">
-                                        </div>
-
-                                        <div class="btn-group">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                    <span class="point"><i>Expired: None </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Lama</a>
-                                                        <a class="dropdown-item" href="#">Pendek</a>
-                                                    </div>
-
-                                                    <div class="input-group ms-3">
-                                                        <button type="button" class="btn btn-warning text-white">Cari</button>
-                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
-                                                    </div>
-                                                </div>
-                                                <a class="btn btn-sm text-white pt-2"href="tambah_bahan.html" style="background: #F7BC00; margin-left: 55em;"><i class="fa fa-plus"></i> Tambah Produk Baru</a>
-                                            </div>
-                                        </div>
-
                                         <div class="tab-content">
-                                            <div class="tab-pane active text-center" id="home-b1">
-                                                <table data-toggle="table">
-                                                    <thead style="background: #FF9C22;">
-                                                        <tr style="color: #fff;">
-                                                            <th>BAHAN ID</th>
-                                                            <th >NAMA BAHAN</th>
-                                                            <th >JUMLAH</th>
-                                                            <th>AKSI</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#12598</td>
-                                                            <td>Bawang</td>
-                                                            <td>5000</td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                               </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="tab-pane show" id="ar_roti">
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
-                                                </div>
+                                            <div class="tab-pane" id="semua">
+                                                <div class="row ">
+                                                    <div class="col-md-2 col-xl-3">
+                                                        <div class="card shadow product-box">
+                                                            <div class="card-body">
+                                                                <div class="product-action">
+                                                                    <a href="" class="btn btn-success btn-md waves-effect waves-light"><i class="fa-solid fa-cart-shopping" style="color: #fff;"></i></a>
+                                                                </div>
+                            
+                                                                <div class="bg-light">
+                                                                    <img src="../assets/images/products/nasi.png" alt="product-pic" class="img-fluid" />
+                                                                </div>
+                            
+                                                                <div class="product-info">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <h5 class="font-16 mt-0 sp-line-1">
+                                                                                <span>Nasi Katsu</span>
+                                                                            </h5>
+                                                                            <p>Lorem ipsum dolor, sit, amet consectetur adipisicing elit. Alias, asperiores?</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p class="fw-bold"><span class="text-warning fs-3">Rp 10,000</span><span class="text-muted fs-5"> /1pcs</span></p>
+                                                                        </div>
+                                                                    </div> <!-- end row -->
+                                                                </div> <!-- end product info-->
+                                                            </div>
+                                                        </div> <!-- end card-->
+                                                    </div> <!-- end col-->
 
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
-                                                    <thead style="background: #FF9C22;">
-                                                        <tr style="color: #fff;">
-                                                            <th>PRODUCT ID</th>
-                                                            <th >GAMBAR</th>
-                                                            <th >NAMA PRODUCT</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
-                                                            <th>AKSI</th>
-                                                
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                    <div class="col-md-2 col-xl-3">
+                                                        <div class="card shadow product-box">
+                                                            <div class="card-body">
+                                                                <div class="product-action">
+                                                                    <a href="" class="btn btn-success btn-md waves-effect waves-light"><i class="fa-solid fa-cart-shopping" style="color: #fff;"></i></a>
+                                                                </div>
+                            
+                                                                <div class="bg-light">
+                                                                    <img src="../assets/images/products/nasi.png" alt="product-pic" class="img-fluid" />
+                                                                </div>
+                            
+                                                                <div class="product-info">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <h5 class="font-16 mt-0 sp-line-1">
+                                                                                <span>Nasi Katsu</span>
+                                                                            </h5>
+                                                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, rem.</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p class="fw-bold "><span class="text-warning fs-3">Rp 10,000</span><span class="text-muted fs-5"> /1pcs</span></p>
+                                                                        </div>
+                                                                    </div> <!-- end row -->
+                                                                </div> <!-- end product info-->
+                                                            </div>
+                                                        </div> <!-- end card-->
+                                                    </div> <!-- end col-->
+                                                </div>
                                             </div>
+
+                                            <div class="tab-pane show active" id="roti">
+                                                <div class="row " >
+                                                    <div class="col-md-2 col-xl-3">
+                                                        <div class="card shadow product-box">
+                                                            <div class="card-body">
+                                                                <div class="product-action">
+                                                                     <a href="" class="btn btn-success btn-md waves-effect waves-light"><i class="fa-solid fa-cart-shopping" style="color: #fff;"></i></a>
+                                                                </div>
+                            
+                                                                <div class="bg-light">
+                                                                    <img src="../assets/images/products/nasi.png" alt="product-pic" class="img-fluid" />
+                                                                </div>
+                            
+                                                                <div class="product-info">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <h5 class="font-16 mt-0 sp-line-1">
+                                                                                <span>Nasi Katsu</span>
+                                                                            </h5>
+                                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, incidunt.</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p class="fw-bold "><span class="text-warning fs-3">Rp 10,000</span><span class="text-muted fs-5"> /1pcs</span></p>
+                                                                        </div>
+                                                                    </div> <!-- end row -->
+                                                                </div> <!-- end product info-->
+                                                            </div>
+                                                        </div> <!-- end card-->
+                                                    </div> <!-- end col-->
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane" id="jajanan">
+                                                <div class="row " >
+                                                    <div class="col-md-2 col-xl-3">
+                                                        <div class="card shadow product-box">
+                                                            <div class="card-body">
+                                                                <div class="product-action">
+                                                                     <a href="" class="btn btn-success btn-md waves-effect waves-light"><i class="fa-solid fa-cart-shopping" style="color: #fff;"></i></a>
+                                                                </div>
+                            
+                                                                <div class="bg-light">
+                                                                    <img src="../assets/images/products/nasi.png" alt="product-pic" class="img-fluid" />
+                                                                </div>
+                            
+                                                                <div class="product-info">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <h5 class="font-16 mt-0 sp-line-1">
+                                                                                <span>Nasi Katsu</span>
+                                                                            </h5>
+                                                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing, elit. Eum, voluptates.</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p class="fw-bold "><span class="text-warning fs-3">Rp 10,000</span><span class="text-muted fs-5"> /1pcs</span></p>
+                                                                        </div>
+                                                                    </div> <!-- end row -->
+                                                                </div> <!-- end product info-->
+                                                            </div>
+                                                        </div> <!-- end card-->
+                                                    </div> <!-- end col-->
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane" id="nasi">
+                                                <div class="row " >
+                                                    <div class="col-md-2 col-xl-3">
+                                                        <div class="card shadow product-box">
+                                                            <div class="card-body">
+                                                                <div class="product-action">
+                                                                    <a href="" class="btn btn-success btn-md waves-effect waves-light"><i class="fa-solid fa-cart-shopping" style="color: #fff;"></i></a>
+                                                                </div>
+                            
+                                                                <div class="bg-light">
+                                                                    <img src="../assets/images/products/nasi.png" alt="product-pic" class="img-fluid" />
+                                                                </div>
+                            
+                                                                <div class="product-info">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <h5 class="font-16 mt-0 sp-line-1">
+                                                                                <span>Nasi Katsu</span>
+                                                                            </h5>
+                                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, voluptatem?</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p class="fw-bold "><span class="text-warning fs-3">Rp 10,000</span><span class="text-muted fs-5"> /1pcs</span></p>
+                                                                        </div>
+                                                                    </div> <!-- end row -->
+                                                                </div> <!-- end product info-->
+                                                            </div>
+                                                        </div> <!-- end card-->
+                                                    </div> <!-- end col-->
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div> <!-- end card-->
-                            </div> <!-- end col -->                  
+                            </div> <!-- end col --> 
+
+                            <div class="col-xl-4">
+                                <div class="card" style="min-height:100vh;">
+                                    <div class="card-body">
+                                       
+                                    </div>
+                                </div>
+                            </div>                 
                         </div>
                         <!-- end row -->
+                        
                     </div>       
                     <!-- end page title -->
 
+                    
                     
                 </div> <!-- container -->
 
