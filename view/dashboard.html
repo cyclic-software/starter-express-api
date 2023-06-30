@@ -580,7 +580,86 @@
                             <div class="col-xl-4">
                                 <div class="card" style="min-height:100vh;">
                                     <div class="card-body">
-                                       
+                                        <div class="">
+                                            <a href="#">
+                                                <i class="fa-solid fa-arrow-left fa-2xl" style="color: #ff8000;"></i>
+                                                <span class="fs-4 text-dark fw-bold ms-2">Current Order</span>
+                                            </a>
+                                        </div>
+                                        <div class="row  mt-4">
+                                            <div class="col mt-1">
+                                                <img src="../assets/images/products/nasi.png" alt="" width="120" height="120">        
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="ms-3">Nasi Udon</h4>
+                                                <p class="fw-bold text-warning ms-3 mt-5 fs-4">Rp.10,000.00</p>
+                                            </div>
+                                            <div class="col mt-2">
+                                                <a href="">
+                                                    <i class="fa-solid fa-tags fa-lg ms-4" style="color: #ff8000;"></i>
+                                                </a>
+                                                <div class="row mt-5">
+                                                    <div class="col-3">
+                                                        <button id="decrementBtn" class="btn btn-xs btn-warning">-</button>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <p class="fs-7" id="count">0</p>
+                                                    </div>
+                                                    <div class="col-4" style="margin-left: -30px;">
+                                                        <button id="incrementBtn" class="btn btn-xs btn-warning">+</button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        <div class="row  mt-4">
+                                            <div class="col mt-1">
+                                                <img src="../assets/images/products/nasi.png" alt="" width="120" height="120">        
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="ms-3">Nasi Udon</h4>
+                                                <p class="fw-bold text-warning ms-3 mt-5 fs-4">Rp.10,000.00</p>
+                                            </div>
+                                            <div class="col mt-2">
+                                                <a href="">
+                                                    <i class="fa-solid fa-tags fa-lg ms-4" style="color: #ff8000;"></i>
+                                                </a>
+                                                <div class="row mt-5">
+                                                    <div class="col-3">
+                                                        <button id="decrementBtn" class="btn btn-xs btn-warning">-</button>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <p class="fs-7" id="count">0</p>
+                                                    </div>
+                                                    <div class="col-4" style="margin-left: -30px;">
+                                                        <button id="incrementBtn" class="btn btn-xs btn-warning">+</button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        <div class="row" style="margin-top:20rem; margin-left: 25px;">
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <p class="text-dark" style="margin-bottom: -8vh; margin-left:7vh; display: flex;">Total Sales Tax</p>
+
+                                                </div>
+                                                <div class="col">
+                                                    <p class="text-dark" style="margin-bottom: -7vh; margin-left:7vh; display: flex;">Discount</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="text-dark" style="margin-bottom: -5vh; margin-left:7vh; display: flex;">Sub total</p>
+                                                    
+                                                </div>
+                                                <img src="../assets/images/products/tiket.png" alt="">
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="margin-left:13rem; margin-top:10px">
+                                                <button class="btn btn-success">Pesan</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>                 
@@ -619,16 +698,33 @@
     <!-- END wrapper -->
 
 
-    <!-- Vendor js -->
-        <script src="../assets/js/vendor.min.js"></script>
+<!-- Vendor js -->
+<script src="../assets/js/vendor.min.js"></script>
 
-        <!-- Bootstrap Tables js -->
-        <script src="../assets/libs/bootstrap-table/bootstrap-table.min.js"></script>
+<!-- Bootstrap Tables js -->
+<script src="../assets/libs/bootstrap-table/bootstrap-table.min.js"></script>
 
-        <!-- Init js -->
-        <script src="../assets/js/pages/bootstrap-tables.init.js"></script>
+<!-- Init js -->
+<script src="../assets/js/pages/bootstrap-tables.init.js"></script>
 
-        <!-- App js -->
-        <script src="../assets/js/app.min.js"></script>
+<!-- App js -->
+<script src="../assets/js/app.min.js"></script>
+
+    <script>
+    var count = 0;
+    var countElement = document.getElementById("count");
+
+    document.getElementById("incrementBtn").addEventListener("click", function() {
+      count++;
+      countElement.innerHTML = count;
+    });
+
+    document.getElementById("decrementBtn").addEventListener("click", function() {
+      if (count > 0) {
+        count--;
+        countElement.innerHTML = count;
+      }
+    });
+    </script>
 </body>
 </html>
