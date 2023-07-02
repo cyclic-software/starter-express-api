@@ -41,15 +41,16 @@ module.exports.CreateProduct = async (req, res, next) => {
         })
     })
 }
+
 module.exports.UpdateProduct = async (req, res) => {
     let _id = new mongoose.Types.ObjectId(req.params.id)
     await Product.findOneAndUpdate({_id:_id},body,{new:true}).then(e => {
         return res.status(200).json(e)
     }).catch(err => {
-      
         return res.json({message: "Error"})
     })
 }
+
 module.exports.DeleteProduct = async (req, res) => {
     let _id = new mongoose.Types.ObjectId(req.params.id)
     await Product.deleteOne({_id:_id}).then(e => {
