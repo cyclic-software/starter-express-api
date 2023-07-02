@@ -137,6 +137,7 @@ module.exports = (app) => {
     try {
       const id = req.params.id;
       var formdata = req.body;
+      console.log(formdata)
       formdata["id"] = id;
       var data = await service.UpdatePost(formdata);
       data = await GetApiResponse(data);
