@@ -82,7 +82,6 @@ const updateProfile = async (req, res) => {
             first_name: body.first_name,
             last_name: body.last_name,
             telephone: body.telephone,
-            modified_at: Date()
         }
         User.findByIdAndUpdate(id, { $set: update })
             .then(()=> {

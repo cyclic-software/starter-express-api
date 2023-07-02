@@ -34,7 +34,6 @@ module.exports.CreateProduct_inventory = async (req, res, next) => {
         })
     })
 }
-
 module.exports.UpdateProduct_inventory = async (req, res) => {
     let _id = new mongoose.Types.ObjectId(req.params.id)
     const body = req.body
@@ -44,7 +43,6 @@ module.exports.UpdateProduct_inventory = async (req, res) => {
         return res.json({message: "Error"})
     })
 }
-
 module.exports.DeleteProduct_inventory = async (req, res) => {
     let _id = new mongoose.Types.ObjectId(req.params.id)
     await Product_inventory.deleteOne({_id:_id}).then(e => {

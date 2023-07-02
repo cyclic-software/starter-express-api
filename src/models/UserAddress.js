@@ -22,10 +22,10 @@ const userAddressSchema = new Schema({
         type: String
     },
     telephone: {
-        type: String
+        type: Date
     },
     mobile: {
-        type: String
+        type: Date
     },
 }, {timeseries: true})
 

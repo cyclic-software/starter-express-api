@@ -6,23 +6,25 @@ const Productschema = new Schema({
         type: String,
         required:true
     },
+    imageSrc: {
+        type: Array,
+        default: []
+    },
     desc: {
         type: String,
         required:true
+    },
+    quantity:{
+        type: Number,
+        default: 0
     },
     SKU: {
         type: String,
         required:true,
         unique:true
-
     },
     category_id: {
         type: String,
-       
-    },
-    inventory_id: {
-        type: String,
-        default:0
     },
     price: {
         type:Number,
