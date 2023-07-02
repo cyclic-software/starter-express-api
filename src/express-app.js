@@ -27,7 +27,6 @@ module.exports = async (app) => {
     app.use('/images', express.static('images'));
 
     // app.use(express.static(__dirname + '/public'));
-    // const channel = await CreateChannel();
     app.get("/",  async (req, res, next) => {
       return res.json({data:"running"});
 

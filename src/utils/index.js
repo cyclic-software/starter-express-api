@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose");
-const amqplib = require("amqplib");
 const moment = require("moment");
 
 const Objectid = ObjectId.Types.ObjectId;
@@ -310,16 +309,7 @@ module.exports.ResponseMessage = (message_type) => {
   }
 };
 //message broker
-module.exports.CreateChannel = async () => {
-  try {
-    const connection = await amqplib.connect(MSG_QUEUE_URL);
-    const channel = await connection.createChannel();
-    await channel.assertQueue(EXCHANGE_NAME, "direct", { durable: true });
-    return channel;
-  } catch (err) {
-    throw err;
-  }
-};
+
 
 module.exports.PublishMessage = (channel, service, msg) => {
   channel.publish(EXCHANGE_NAME, service, Buffer.from(msg));
