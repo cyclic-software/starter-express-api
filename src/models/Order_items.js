@@ -2,12 +2,12 @@ const { Schema, model,ObjectIdSchemaDefinition:ObjectId  } = require('mongoose')
 
 const Order_items_Schema = new Schema({
     order_id :{
-        type:Number,
+        type:String,
         required:true,
         unique:false
     },
     product_id:{
-        type:Number,
+        type:String,
         default:0
     },
     quantity:{
