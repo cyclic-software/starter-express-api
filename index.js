@@ -27,7 +27,7 @@ app.get("/nearby", async (req, res) => {
             type: "Point",
             coordinates: [parseFloat("80.2707"), parseFloat("13.0827")],
           },
-          $maxDistance: parseInt("2"),
+          $maxDistance: parseInt("200"),
         },
       },
     });
