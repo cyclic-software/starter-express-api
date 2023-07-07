@@ -29,6 +29,7 @@ const PostSchema = new Schema(
     seo_description: { type: String,default:'' },
     seo_media_url: { type: String,default:'' },
     seo_keywords: { type: String,default:'' },
+    reel_video_link: { type: String,default:'' },
     is_photo_with_lyrics: { type: Boolean, default: false }
 
   },
