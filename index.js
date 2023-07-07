@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.get('/', (req, res) => {
     console.log("Just got a request!")
-    res.send("./index.html")
+    res.sendFile(path.join(__dirname, '/index.html'));
 })
 
 app.get('/status', (req, res) => {
