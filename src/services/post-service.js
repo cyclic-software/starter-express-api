@@ -104,16 +104,16 @@ class PostService {
     try{
 
       matchdata["post_status"] = "Published";
-      var extra_query = {
-        '$match': {
-            $or:[
-              {reel_video_link: { $eq: ""}},
-              {reel_video_link: { $eq: null}},
-              {reel_video_link:{$exists:false}}
-            ]
-        }
-      };
-        matchdata["extra_query"] =   extra_query  
+      // var extra_query = {
+      //   '$match': {
+      //       $or:[
+      //         {reel_video_link: { $eq: ""}},
+      //         {reel_video_link: { $eq: null}},
+      //         {reel_video_link:{$exists:false}}
+      //       ]
+      //   }
+      // };
+      //   matchdata["extra_query"] =   extra_query  
       var q = await paginateResults(size, skip, matchdata, sortob);
       console.log(JSON.stringify(q))
       var PostResult   = await this.repository.GetPosts(q);
