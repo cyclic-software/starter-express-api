@@ -18,19 +18,17 @@ app.all("/", (req, res) => {
 
 app.get("/nearby", async (req, res) => {
   try {
-    //const { latitude, longitude, maxDistance } = req.query; // Assuming the latitude, longitude, and maxDistance are provided as query parameters
-
-    const drivers = await User.find({
+    const { latitude, longitude } = req.query; // Assuming the latitude, longitude, and maxDistance are provided as query parameters
+    //console.log("get latitude longitude", { latitude, longitude });
+    const options = {
       location: {
-        $near: {
-          $geometry: {
-            type: "Point",
-            coordinates: [parseFloat("80.2707"), parseFloat("13.0827")],
-          },
-          $maxDistance: parseInt("200"),
+        $geoWithin: {
+          $centerSphere: [[longitude, latitude], 10 / 3963.2],
         },
       },
-    });
+    };
+
+    const drivers = await User.find(options);
 
     res.status(200).json(drivers);
   } catch (error) {
