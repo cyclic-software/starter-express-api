@@ -44,6 +44,22 @@ module.exports = (app) => {
     }
   });
 
+  
+  app.post("/getallreels",  async (req, res, next) => {
+    try {
+      const { limit, skip } = await GetPagination(req.body.page, req.body.size);
+      var sortarray = await GetSortByFromRequest(
+        req.body.orderbycolumnname,
+        req.body.orderby
+      );
+      var data = await service.GetAllReels(limit, skip, req.body, sortarray);
+      data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   app.post("/adminposts",  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);

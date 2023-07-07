@@ -86,12 +86,17 @@ module.exports.paginateResults = async (
         exclude_keysarray = matcharray.exclude_keys;
       }
       Object.entries(matcharray).forEach(async ([key, value]) => {
+        if(key == "extra_query"){
+          pipeline.push(value);
+        }
         if (
           key != "page" &&
           key != "size" &&
           key != "orderbycolumnname" &&
-          key != "orderby" 
+          key != "orderby"  && 
+          key != "extra_query" 
         ) {
+          
           if(key != "exclude_keys"){
             if(!exclude_keysarray.includes(key)){
             var checkobjectid = false;

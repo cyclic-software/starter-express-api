@@ -104,7 +104,88 @@ class PostService {
     try{
 
       matchdata["post_status"] = "Published";
+      var extra_query = {
+        '$match': {
+            $or:[
+              {reel_video_link: { $eq: ""}},
+              {reel_video_link: { $eq: null}},
+              {reel_video_link:{$exists:false}}
+            ]
+        }
+      };
+        matchdata["extra_query"] =   extra_query  
       var q = await paginateResults(size, skip, matchdata, sortob);
+      console.log(JSON.stringify(q))
+      var PostResult   = await this.repository.GetPosts(q);
+      const myInstance = this;
+
+      async function myFunction(PostResult,user) {
+      
+        for (const item of PostResult) {
+          var is_like  = await EveryPostCheckLikedOrNot(item,user,myInstance);
+          item.is_like =is_like; 
+          var is_wishlist  = await EveryPostCheckWishlistOrNot(item,user,myInstance);
+          item.is_wishlist =is_wishlist; 
+        }
+      
+        return PostResult;
+      }
+      
+      async function EveryPostCheckLikedOrNot(item,user,myInstance) {
+        var checkexist = await myInstance.CheckPostIsLikedOrNOt(user,item._id);
+        if(checkexist == null){
+          return false;
+        }else{
+          return true;
+        }
+        // synchronous code here
+      }
+      async function EveryPostCheckWishlistOrNot(item,user,myInstance) {
+        var checkexist = await myInstance.CheckPostIsWishlistOrNOt(user,item._id);
+        if(checkexist == null){
+          return false;
+        }else{
+          return true;
+
+        }
+        // synchronous code here
+      }
+      if(matchdata.user != undefined){
+        PostResult =  await myFunction(PostResult,matchdata.user);
+      }
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
+  }
+  async GetAllReels(size, skip, matchdata, sortob) {
+    try{
+
+      matchdata["post_status"] = "Published";
+      var extra_query =  {
+        '$match': {
+          '$and': [
+            {
+              'reel_video_link': {
+                '$ne': ''
+              }
+            },
+            {
+              'reel_video_link': {
+                '$ne': null
+              }
+            }, {
+              'reel_video_link': {
+                '$exists': true
+              }
+            }
+          ]
+        }
+      };
+        matchdata["extra_query"] =   extra_query  
+      var q = await paginateResults(size, skip, matchdata, sortob);
+      console.log(JSON.stringify(q))
       var PostResult   = await this.repository.GetPosts(q);
       const myInstance = this;
 
