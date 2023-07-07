@@ -15,6 +15,7 @@
 
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- App css -->
         <link href="../assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -283,7 +284,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li>
                             <a href="#sidebarDashboards" data-bs-toggle="collapse">
                                 <i data-feather="airplay"></i>
@@ -326,7 +327,7 @@
 
                         <li>
                             <a href="#sidebarCrm" data-bs-toggle="collapse">
-                                <i class="fas fa-warehouse"></i>
+                                 <i class="fas fa-warehouse"></i>
                                 <span> Gudang </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -334,6 +335,21 @@
                                 <ul class="nav-second-level">
                                     <li>
                                         <a href="gudang.html">Gudang Saya</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a href="#sidebarCrm" data-bs-toggle="collapse">
+                                 <i class="fa-sharp fa-solid fa-clock-rotate-left"></i>
+                                <span> History </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCrm">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="#">Produk</a>
                                     </li>
                                 </ul>
                             </div>
@@ -413,6 +429,7 @@
                                                         <tr style="color: #fff;">
                                                             <th>BAHAN ID</th>
                                                             <th >NAMA BAHAN</th>
+                                                            <th>EXPIRED</th>
                                                             <th >JUMLAH</th>
                                                             <th>AKSI</th>
                                                         </tr>
@@ -421,6 +438,7 @@
                                                         <tr>
                                                             <td>#12598</td>
                                                             <td>Bawang</td>
+                                                            <td>7/3/2023</td>
                                                             <td>5000</td>
                                                             <td>
                                                                 <a class="btn btn-info" type="button" href="">
