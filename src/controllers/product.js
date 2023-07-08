@@ -18,16 +18,7 @@ module.exports.AllProducts = (req, res) => {
 module.exports.CreateProduct = async (req, res, next) => {
     const body = req.body
 
-    const product = new Product({
-            name: body.name,
-            desc: body.desc,
-            imageSrc: body.imageSrc,
-            SKU:body.SKU,
-            quantity:body.quantity,
-            category_id: body.category_id,
-            price:body.price,
-            discount_id:body.discount_id
-    })
+    const product = new Product(body)
     
     await product.save()
     .then(response => {

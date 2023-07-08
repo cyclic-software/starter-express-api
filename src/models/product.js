@@ -11,8 +11,16 @@ const Productschema = new Schema({
         default: []
     },
     desc: {
-        type: String,
-        required:true
+        type: Object,
+        default:{
+            color:'white',
+            type:'cotton',
+            brand:{
+                name:'nike',
+                logo:'#'
+            },
+            descreption:'high quality cloth.'
+        }
     },
     quantity:{
         type: Number,
@@ -26,14 +34,25 @@ const Productschema = new Schema({
     category_id: {
         type: String,
     },
-    price: {
+    price_before: {
         type:Number,
         default:0
     },
-    discount_id: {
-        type: String
+    price_after: {
+        type: Number,
+        default: 0
+    },
+    sizes: {
+        type:Object,
+        default: {
+            s:0,
+            m:0,
+            l:0,
+            xl:0,
+            xxl:0
+        }
     }
-   
+    
 }, { timeseries: true })
 
 

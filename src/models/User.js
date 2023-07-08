@@ -19,6 +19,15 @@ const userSchema = new Schema({
     },
     telephone: {
         type: String
+    },
+    country: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    address: {
+        type: String
     }
 }, {timeseries: true})
 
