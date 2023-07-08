@@ -21,9 +21,6 @@ const userAddressSchema = new Schema({
     country: {
         type: String
     },
-    telephone: {
-        type: Date
-    },
     mobile: {
         type: Date
     },

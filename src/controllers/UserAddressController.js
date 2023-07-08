@@ -51,7 +51,6 @@ const createUserAddress = async (req, res) => {
             city: body.city,
             postal_code: body.postal_code,
             country: body.country,
-            telephone: body.telephone,
             mobile: body.mobile,
         })
         userAddress.save()
@@ -76,7 +75,6 @@ const updateUserAddress = async (req, res) => {
             city: body.city,
             postal_code: body.postal_code,
             country: body.country,
-            telephone: body.telephone,
             mobile: body.mobile,
         }
 
