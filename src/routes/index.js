@@ -7,6 +7,9 @@ const product_inventory_router=require('./api/product_inventory')
 const UserRoute = require('./api/UserRouter')
 const UserAddressRoute = require('./api/UserAddressRouter')
 const UserPaymentRoute = require('./api/UserPaymentRouter')
+const mainCategoryRouter = require('./api/main_category')
+const adsSliderRouter = require('./api/ads_slider')
+const subCategoryRouter = require('./api/subcategory') 
 const {Router} = require('express')
 
 const router = Router()
@@ -20,5 +23,7 @@ router.use('/product_inventory',product_inventory_router)
 router.use('/user', UserRoute)
 router.use('/user-address', UserAddressRoute)
 router.use('/user-payment', UserPaymentRoute)
-
+router.use('/main_category', mainCategoryRouter)
+router.use('/ads_slider', adsSliderRouter)
+router.use('/subcategory', subCategoryRouter)
 module.exports = router
