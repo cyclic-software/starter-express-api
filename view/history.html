@@ -14,7 +14,8 @@
         <link href="../assets/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
 
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
+       <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- App css -->
         <link href="../assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -245,7 +246,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Pemesanan AR (Roti)</span>
+                                <span>History</span> / <span style="color: orange; font-size:15px;">History Saya</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -332,7 +333,7 @@
                             <div class="collapse">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="history.html">Produk</a>
+                                        <a href="history.html">History Saya</a>
                                     </li>
                                 </ul>
                             </div>
@@ -375,20 +376,21 @@
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
+                                        <p class="fs-4 text-dark mx-1">History Saya</p>
                                         <ul class="nav nav-tabs nav-bordered">
                                             <li class="nav-item">
                                                 <a href="#home-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
-                                                    Pesanan Masuk
+                                                    Semua
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
-                                                    Belum diselesaikan 
+                                                    Produk
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#messages-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                                    Selesai
+                                                    Bahan
                                                 </a>
                                             </li>
                                             <div class="ms-auto" style="padding-right:5px">
@@ -399,23 +401,7 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="home-b1">
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                        <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terbanyak</a>
-                                                        <a class="dropdown-item" href="#">Tersedikit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                        <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terlama</a>
-                                                        <a class="dropdown-item" href="#">Terbaru</a>
-                                                    </div>
+                                                <div class="btn-group mb-2 float-end">
                                                     <div class="input-group ms-3">
                                                         <button type="button" class="btn btn-warning text-white">Cari</button>
                                                         <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
@@ -423,419 +409,206 @@
                                                 </div>
   
                                                 <table class="table">
-                                                    <thead style="background: #FF9C22;">
+                                                    <thead class="text-center"style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>NOMOR ANTRIAN</th>
                                                             <th>GAMBAR</th>
                                                             <th>NAMA PRODUCT</th>
+                                                            <th>QUANTITY</th>
                                                             <th>POINT</th>
+                                                            <th>KATEGORI</th>
                                                             <th>HARGA</th>
-                                                            <th>TOTAL</th>
-                                                            <th>HARGA TAWARAN</th>
-                                                            <th>TANGGAL PENGIRIMAN</th>
-                                                            <th>ALAMAT</th>
+                                                            <th>EXPIRED</th>
+                                                            <th>CREATED AT</th>
+                                                            <th>LAST EDIT</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
                                                 <div class="card">
-                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
-                                                        <div class="row">
-                                                        <div class="col-lg-6" style="margin-left: 14vh;">
-                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
-                                                            class="img-fluid avatar-sm rounded-circle"/>
-                                                            <span class="ms-2">Fika wardah</span>
-                                                            <span class="ms-2">0856712979</span>
-                                                        </div>
-                                                        <div class="col-lg-4" style="text-align:end;"> 
-                                                            <span>No pemesanan</span>
-                                                            <span>:</span>
-                                                            <span>30HSFKAKHF</span>
-                                                        </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-1 text-center">
-                                                                <span>1</span>
-                                                            </div>
-
                                                             <div class="col-1">
                                                                 <img src="../assets/images/Toko/kue.png" alt="" width="75">
                                                             </div>
-                                                            <div class="col-1">
-                                                                <p>Roti sisir</p>
-                                                                <p style="margin-top:-15px;">#1231</p>
-                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            <div class="col" style="margin-left: 5vh;">
+                                                                <p class="text-dark fs-4">Roti sisir</p>
+                                                                <p class="fs-6"style="margin-top:-7px;">Pre order</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: 10%;">
+                                                            <div class="col text-center" style="margin-left: 8vh;">
+                                                                <p>90x</p>
+                                                            </div>
+                                                            <div class="col text-center">
                                                                 <p>30</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: -2%;">
-                                                                <p>Rp. 4.000</p>
+                                                            <div class="col" style="margin-left: 2vh;">
+                                                                <p>Produk</p>
                                                             </div>
-                                                            <div class="col-1 text-center">
-                                                                <p>Rp. 100.000</p>
-                                                            </div>
-                                                            <div class="col text-center">
+                                                            <div class="col">
                                                                 <p>Rp. 90.000</p>
                                                             </div>
-                                                            <div class="col text-center">
+                                                            <div class="col">
                                                                 <p>07/03/2023</p>
                                                             </div>
                                                             <div class="col">
-                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                                <p>07/03/2023</p>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-7">
-                                                               
-                                                            </div>
-                                                            <div class="col-lg-5">
-                                                                <div class="received">
-                                                                    <span>Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
-                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
-                                                                </div>
-                                                              
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="card">
-                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
-                                                        <div class="row">
-                                                        <div class="col-lg-6" style="margin-left: 14vh;">
-                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
-                                                            class="img-fluid avatar-sm rounded-circle"/>
-                                                            <span class="ms-2">Fika wardah</span>
-                                                            <span class="ms-2">0856712979</span>
-                                                        </div>
-                                                        <div class="col-lg-4" style="text-align:end;"> 
-                                                            <span>No pemesanan</span>
-                                                            <span>:</span>
-                                                            <span>30HSFKAKHF</span>
-                                                        </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-1 text-center">
-                                                                <span>2</span>
-                                                            </div>
                                                             <div class="col-1">
                                                                 <img src="../assets/images/Toko/kue.png" alt="" width="75">
                                                             </div>
-                                                            <div class="col-1">
-                                                                <p>Roti sisir</p>
-                                                                <p style="margin-top:-15px;">#1231</p>
-                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            <div class="col" style="margin-left: 5vh;">
+                                                                <p class="text-dark fs-4">Bawang Merah</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: 10%;">
+                                                            <div class="col text-center" style="margin-left: 8vh;">
+                                                                <p>90x</p>
+                                                            </div>
+                                                            <div class="col text-center">
                                                                 <p>30</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: -2%;">
-                                                                <p>Rp. 4.000</p>
+                                                            <div class="col" style="margin-left: 2vh;">
+                                                                <p>Bahan</p>
                                                             </div>
-                                                            <div class="col-1 text-center">
-                                                                <p>Rp. 100.000</p>
-                                                            </div>
-                                                            <div class="col text-center">
+                                                            <div class="col">
                                                                 <p>Rp. 90.000</p>
                                                             </div>
-                                                            <div class="col text-center">
+                                                            <div class="col">
                                                                 <p>07/03/2023</p>
                                                             </div>
                                                             <div class="col">
-                                                                <p>veteran gg 3 no.xxx Gresik</p>
+                                                                <p>07/03/2023</p>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-7">
-                                                               
-                                                            </div>
-                                                            <div class="col-lg-5">
-                                                                <div class="received">
-                                                                    <span>Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <span class="ms-3">Received</span><span> : </span><span>01/03/2023</span>
-                                                                    <button type="button" class="btn btn-danger rounded-pill waves-effect waves-light ms-5">Tolak</button>
-                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light">Terima</button>
-                                                                </div>
-                                                              
+                                                            <div class="col text-center">
+                                                                <p>07/03/2023</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane show " id="profile-b1">
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                      <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terbanyak</a>
-                                                        <a class="dropdown-item" href="#">Tersedikit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                      <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terlama</a>
-                                                        <a class="dropdown-item" href="#">Terbaru</a>
-                                                    </div>
+                                            <div class="tab-pane show" id="profile-b1">
+                                                <div class="btn-group mb-2 float-end">
                                                     <div class="input-group ms-3">
-                                                       <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning text-white">Cari</button>
                                                         <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
                                                     </div>
                                                 </div>
   
                                                 <table class="table">
-                                                    <thead style="background: #FF9C22;">
+                                                    <thead class="text-center"style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>NOMOR ANTRIAN</th>
                                                             <th>GAMBAR</th>
                                                             <th>NAMA PRODUCT</th>
+                                                            <th>QUANTITY</th>
                                                             <th>POINT</th>
+                                                            <th>KATEGORI</th>
                                                             <th>HARGA</th>
-                                                            <th>TOTAL</th>
-                                                            <th>HARGA TAWARAN</th>
-                                                            <th>TANGGAL PENGIRIMAN</th>
-                                                            <th>ALAMAT</th>
+                                                            <th>EXPIRED</th>
+                                                            <th>CREATED AT</th>
+                                                            <th>LAST EDIT</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
                                                 <div class="card">
-                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
-                                                        <div class="row">
-                                                        <div class="col-lg-6" style="margin-left: 14vh;">
-                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
-                                                            class="img-fluid avatar-sm rounded-circle"/>
-                                                            <span class="ms-2">Fika wardah</span>
-                                                            <span class="ms-2">0856712979</span>
-                                                        </div>
-                                                        <div class="col-lg-4" style="text-align:end;"> 
-                                                            <span>No pemesanan</span>
-                                                            <span>:</span>
-                                                            <span>30HSFKAKHF</span>
-                                                        </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-1 text-center">
-                                                                <span>1</span>
-                                                            </div>
-
                                                             <div class="col-1">
                                                                 <img src="../assets/images/Toko/kue.png" alt="" width="75">
                                                             </div>
-                                                            <div class="col-1">
-                                                                <p>Roti sisir</p>
-                                                                <p style="margin-top:-15px;">#1231</p>
-                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            <div class="col" style="margin-left: 5vh;">
+                                                                <p class="text-dark fs-4">Roti sisir</p>
+                                                                <p class="fs-6"style="margin-top:-7px;">Pre order</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: 10%;">
-                                                                <p>30</p>
-                                                            </div>
-                                                            <div class="col-1" style="margin-left: -2%;">
-                                                                <p>Rp. 4.000</p>
-                                                            </div>
-                                                            <div class="col-1 text-center">
-                                                                <p>Rp. 100.000</p>
+                                                            <div class="col text-center" style="margin-left: 8vh;">
+                                                                <p>90x</p>
                                                             </div>
                                                             <div class="col text-center">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col" style="margin-left: 2vh;">
+                                                                <p>Bahan</p>
+                                                            </div>
+                                                            <div class="col">
                                                                 <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>07/03/2023</p>
                                                             </div>
                                                             <div class="col text-center">
                                                                 <p>07/03/2023</p>
                                                             </div>
-                                                            <div class="col" style="margin-left: 5%;">
-                                                                <p>veteran gg 3 no.xxx Gresik</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-7">
-                                                               
-                                                            </div>
-                                                            <div class="col-lg-5">
-                                                                <div class="received">
-                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
-                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light px-3 float-end" style="margin-right: 50px;">Selesai</button>
-                                                                </div>
-                                                              
-                                                            </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
-                                                        <div class="row">
-                                                        <div class="col-lg-6" style="margin-left: 14vh;">
-                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
-                                                            class="img-fluid avatar-sm rounded-circle"/>
-                                                            <span class="ms-2">Fika wardah</span>
-                                                            <span class="ms-2">0856712979</span>
-                                                        </div>
-                                                        <div class="col-lg-4" style="text-align:end;"> 
-                                                            <span>No pemesanan</span>
-                                                            <span>:</span>
-                                                            <span>30HSFKAKHF</span>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-1 text-center">
-                                                                <span>2</span>
-                                                            </div>
-                                                            <div class="col-1">
-                                                                <img src="../assets/images/Toko/kue.png" alt="" width="75">
-                                                            </div>
-                                                            <div class="col-1">
-                                                                <p>Roti sisir</p>
-                                                                <p style="margin-top:-15px;">#1231</p>
-                                                                <p style="margin-top:-20px;">Pre order</p>
-                                                            </div>
-                                                            <div class="col-1" style="margin-left: 10%;">
-                                                                <p>30</p>
-                                                            </div>
-                                                            <div class="col-1" style="margin-left: -2%;">
-                                                                <p>Rp. 4.000</p>
-                                                            </div>
-                                                            <div class="col-1 text-center">
-                                                                <p>Rp. 100.000</p>
-                                                            </div>
-                                                            <div class="col text-center">
-                                                                <p>Rp. 90.000</p>
-                                                            </div>
-                                                            <div class="col text-center">
-                                                                <p>07/03/2023</p>
-                                                            </div>
-                                                            <div class="col" style="margin-left: 5%;">
-                                                                <p>veteran gg 3 no.xxx Gresik</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-7">
-                                                               
-                                                            </div>
-                                                            <div class="col-lg-5">
-                                                                <div class="received">
-                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
-                                                                    <button type="button" class="btn btn-success rounded-pill waves-effect waves-light px-3 float-end" style="margin-right: 50px;">Selesai</button>
-                                                                </div>
-                                                              
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane" id="messages-b1">
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                      <span class="point"><i>  Point: terbanyak </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terbanyak</a>
-                                                        <a class="dropdown-item" href="#">Tersedikit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-group mb-2">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                      <span class="point"><i>  Sort By: Date </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Terlama</a>
-                                                        <a class="dropdown-item" href="#">Terbaru</a>
-                                                    </div>
+                                            <div class="tab-pane show" id="messages-b1">
+                                                <div class="btn-group mb-2 float-end">
                                                     <div class="input-group ms-3">
-                                                       <button type="button" class="btn btn-warning text-white">Cari</button>
+                                                        <button type="button" class="btn btn-warning text-white">Cari</button>
                                                         <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
                                                     </div>
                                                 </div>
   
                                                 <table class="table">
-                                                    <thead style="background: #FF9C22;">
+                                                    <thead class="text-center"style="background: #FF9C22;">
                                                         <tr style="color: #fff;">
-                                                            <th>NOMOR ANTRIAN</th>
                                                             <th>GAMBAR</th>
                                                             <th>NAMA PRODUCT</th>
+                                                            <th>QUANTITY</th>
                                                             <th>POINT</th>
+                                                            <th>KATEGORI</th>
                                                             <th>HARGA</th>
-                                                            <th>TOTAL</th>
-                                                            <th>HARGA TAWARAN</th>
-                                                            <th>TANGGAL PENGIRIMAN</th>
-                                                            <th>ALAMAT</th>
+                                                            <th>EXPIRED</th>
+                                                            <th>CREATED AT</th>
+                                                            <th>LAST EDIT</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
+
                                                 <div class="card">
-                                                    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
-                                                        <div class="row">
-                                                        <div class="col-lg-6" style="margin-left: 14vh;">
-                                                            <img src="../assets/images/users/user-7.jpg" alt="image"
-                                                            class="img-fluid avatar-sm rounded-circle"/>
-                                                            <span class="ms-2">Fika wardah</span>
-                                                            <span class="ms-2">0856712979</span>
-                                                        </div>
-                                                        <div class="col-lg-4" style="text-align:end;"> 
-                                                            <span>No pemesanan</span>
-                                                            <span>:</span>
-                                                            <span>30HSFKAKHF</span>
-                                                        </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-1 text-center">
-                                                                <span>1</span>
-                                                            </div>
                                                             <div class="col-1">
                                                                 <img src="../assets/images/Toko/kue.png" alt="" width="75">
                                                             </div>
-                                                            <div class="col-1">
-                                                                <p>Roti sisir</p>
-                                                                <p style="margin-top:-15px;">#1231</p>
-                                                                <p style="margin-top:-20px;">Pre order</p>
+                                                            <div class="col" style="margin-left: 5vh;">
+                                                                <p class="text-dark fs-4">Bawang Merah</p>
                                                             </div>
-                                                            <div class="col-1" style="margin-left: 10%;">
-                                                                <p>30</p>
-                                                            </div>
-                                                            <div class="col-1" style="margin-left: -2%;">
-                                                                <p>Rp. 4.000</p>
-                                                            </div>
-                                                            <div class="col-1 text-center">
-                                                                <p>Rp. 100.000</p>
+                                                            <div class="col text-center" style="margin-left: 8vh;">
+                                                                <p>90x</p>
                                                             </div>
                                                             <div class="col text-center">
+                                                                <p>30</p>
+                                                            </div>
+                                                            <div class="col" style="margin-left: 2vh;">
+                                                                <p>Bahan</p>
+                                                            </div>
+                                                            <div class="col">
                                                                 <p>Rp. 90.000</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>07/03/2023</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p>07/03/2023</p>
                                                             </div>
                                                             <div class="col text-center">
                                                                 <p>07/03/2023</p>
                                                             </div>
-                                                            <div class="col" style="margin-left: 5%;">
-                                                                <p>veteran gg 3 no.xxx Gresik</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-7"></div>
-                                                            <div class="col-lg-5">
-                                                                <div class="received float-end">
-                                                                    <span class="ms-2">Received By Admin</span><span> : </span><span>01/03/2023</span>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
