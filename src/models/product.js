@@ -51,6 +51,9 @@ const Productschema = new Schema({
             xl:0,
             xxl:0
         }
+    },
+    subCategory: {
+        type:String
     }
     
 }, { timeseries: true })
