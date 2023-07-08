@@ -13,6 +13,7 @@ class PoetService {
   }
   async Poets(size, skip, matchdata, sortob) {
     var q = await paginateResults(size, skip, matchdata, sortob);
+    console.log(q)
     const PoetResult = await this.repository.GetPoets(q);
     return PoetResult;
   }

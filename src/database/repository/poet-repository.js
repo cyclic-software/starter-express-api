@@ -11,37 +11,37 @@ class PoetRepository {
   }
 
   async GetPoets(query) {
-    var query = [
-      {
-        '$match': {
-          'post_status': 'Published'
-        }
-      },
-      {
-        '$group': {
-          '_id': '$poet_id'
-        }
-      }, {
-        '$match': {
-          '_id': {
-            '$ne': null
-          }
-        }
-      }, {
-        '$lookup': {
-          'from': 'poets', 
-          'localField': '_id', 
-          'foreignField': '_id', 
-          'as': 'result'
-        }
-      }, {
-        '$unwind': '$result'
-      }, {
-        '$replaceRoot': {
-          'newRoot': '$result'
-        }
-      }
-    ];
+    // var query = [
+    //   {
+    //     '$match': {
+    //       'post_status': 'Published'
+    //     }
+    //   },
+    //   {
+    //     '$group': {
+    //       '_id': '$poet_id'
+    //     }
+    //   }, {
+    //     '$match': {
+    //       '_id': {
+    //         '$ne': null
+    //       }
+    //     }
+    //   }, {
+    //     '$lookup': {
+    //       'from': 'poets', 
+    //       'localField': '_id', 
+    //       'foreignField': '_id', 
+    //       'as': 'result'
+    //     }
+    //   }, {
+    //     '$unwind': '$result'
+    //   }, {
+    //     '$replaceRoot': {
+    //       'newRoot': '$result'
+    //     }
+    //   }
+    // ];
     const templates = await PostModel.aggregate(query);
     return templates;
   }
