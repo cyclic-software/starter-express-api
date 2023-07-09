@@ -24,7 +24,7 @@ const CategorySchema = new Schema(
     poet_ancestary: { type: String,default:'' },
     poet_school_name:{ type: Object },
     poet_address: { type: Object },
-    poet_nickname: { type: String,default:'' },
+    poet_nickname:{ type: String,default:'' },
     poet_hobbies: [String],
     poet_books: { type: Object },
     poet_future_books: { type: Object },
@@ -37,8 +37,7 @@ const CategorySchema = new Schema(
     category_idlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'category' }],
     category_textlist:  [String],
     refrences: { type: Object },
-    poet_gallery:{ type: 
-     },
+    poet_gallery:{ type: Object },
     poet_status: { type: String, enum: ['Draft', 'Published'],default: "Draft" },
 
     awards: { type: Object }, 
