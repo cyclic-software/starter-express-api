@@ -27,7 +27,7 @@
         <!-- icons -->
         <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-         <!-- CSS -->
+        <!-- CSS -->
         <link rel="stylesheet" href="../assets/css/css_toko/style.css" type="text/css" />
 
 </head>
@@ -128,10 +128,10 @@
                                 <a href="" class="dropdown-item notify-item">
                                     <div class="notify-icon">
                                         <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                                    <p class="notify-details">Karen Robinson</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Wow ! this admin looks good and awesome design</small>
-                                    </p>
+                                        <p class="notify-details">Karen Robinson</p>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>Wow ! this admin looks good and awesome design</small>
+                                        </p>
                                 </a>
             
                                 <!-- item-->
@@ -189,9 +189,9 @@
                             </div>
             
                             <!-- item-->
-                            <a href="profile.html" class="dropdown-item notify-item">
+                            <a href="" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
-                                <span>Profile Saya</span>
+                                <span>My Account</span>
                             </a>
             
                             <!-- item-->
@@ -213,12 +213,8 @@
                                 <i class="fe-log-out"></i>
                                 <span>Logout</span>
                             </a>
-            
                         </div>
                     </li>
-            
-                    
-            
                 </ul>
             
                 <!-- LOGO -->
@@ -246,7 +242,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Gudang Saya</span>
+                                <span>Admin AR (Roti)</span> / <span>Produk saya</span> / <span  style="color: orange; font-size:15px;">Tambah Produk</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -268,88 +264,26 @@
 
                     <ul id="side-menu">
 
-                        <li class="menu-title">Navigation</li>
-                        
-                        <li>
-                            <a href="#sidebarDashboards" data-bs-toggle="collapse">
-                                <i class="fas fa-chart-pie"></i>
-                                <span class="menu-arrow"></span>
-                                <span> Dashboard </span>
+                        <li style="border-bottom: 1px solid #000; padding-left: 5px;">
+                            <a href="produk.html">
+                                <i class="fas fa-arrow-left"></i>
+                                <span class="mx-1">Back</span>
                             </a>
-                            <div class="collapse" id="sidebarDashboards">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="dashboard.html">Dashboard saya</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-
-                        <li>
+            
+                        <li class="py-4">
                             <a href="#sidebarDashboards" data-bs-toggle="collapse">
                                 <i data-feather="airplay"></i>
-                                <span class="badge bg-success rounded-pill float-end">4</span>
-                                <span> Produk </span>
+                                <span class="menu-arrow"></span>
+                                <span> Profile </span>
                             </a>
                             <div class="collapse" id="sidebarDashboards">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="produk.html">Produk saya</a>
+                                        <a href="#Profile">Profile Saya</a>
                                     </li>
                                     <li>
-                                        <a href="tambah_produk.html">Tambah produk</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                       
-                        <li>
-                            <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                                <i data-feather="shopping-cart"></i>
-                                <span> Pemesanan </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarEcommerce">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="pemesanan_roti.html">AR (Roti)</a>
-                                    </li>
-                                    <li>
-                                        <a href="pemesanan_jajan.html">JN (Jajanan & Nasi)</a>
-                                    </li>
-                                    <li>
-                                        <a href="riwayat_pemesanan.html">Riwayat Pemesanan</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="#sidebarCrm" data-bs-toggle="collapse">
-                                 <i class="fas fa-warehouse"></i>
-                                <span> Gudang </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarCrm">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="gudang.html">Gudang Saya</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="#sidebarCrm" data-bs-toggle="collapse">
-                                 <i class="fa-sharp fa-solid fa-clock-rotate-left"></i>
-                                <span> History </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarCrm">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="history.html">History Saya</a>
+                                        <a href="#Edit">Edit Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -381,163 +315,95 @@
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
-                                        <li class="breadcrumb-item disabled"><a href="#">Produk saya</a></li>
+                                        <li class="breadcrumb-item">Profile</a></li>
+                                        <li class="breadcrumb-item disabled">Profile Saya</li>
                                     </ol>
                                 </div>
                             </div>                          
                         </div>
 
-                        <div class="row m-2">
-                            <div class="col-xl-12">
+                       <!-- Form row -->
+                        <div class="row mt-3">
+                            <div class="col-12">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                        <ul class="nav">
-                                            <li class="nav-item text-black fs-4">
-                                                <a>165 Bahan</a>
-                                            </li>
-                                        </ul>
+                                    <div class="card-body" id="Profile">
+                                        <a href="produk.html"><i class="fa-solid fa-chevron-left"></i>
+                                        <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Beranda</span></a>
 
-                                        <div class="col-2 mx-4">
-                                        <input class="form-control me-2" type="search" placeholder="Search" 
-                                        aria-label="Search">
-                                        </div>
-
-                                        <div class="btn-group">
-                                                    <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255, 255, 255, 0.8);">
-                                                    <span class="point"><i>Expired: None </i></span><i class="mdi mdi-chevron-down" style="color: rgba(0, 0, 0, 0.2);"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Lama</a>
-                                                        <a class="dropdown-item" href="#">Pendek</a>
-                                                    </div>
-
-                                                    <div class="input-group ms-3">
-                                                        <button type="button" class="btn btn-warning text-white">Cari</button>
-                                                        <button type="button" class="btn btn-warning"><i data-feather="refresh-cw" class="icon-dual text-white"></i></button>
-                                                    </div>
-                                                </div>
-                                                <a class="btn btn-sm text-white pt-2"href="tambah_bahan.html" style="background: #F7BC00; margin-left: 55em;"><i class="fa fa-plus"></i> Tambah Produk Baru</a>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane active text-center" id="home-b1">
-                                                <table data-toggle="table">
-                                                    <thead style="background: #FF9C22;">
-                                                        <tr style="color: #fff;">
-                                                            <th>BAHAN ID</th>
-                                                            <th >NAMA BAHAN</th>
-                                                            <th>EXPIRED</th>
-                                                            <th >JUMLAH</th>
-                                                            <th>AKSI</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#12598</td>
-                                                            <td>Bawang</td>
-                                                            <td>7/3/2023</td>
-                                                            <td>5000</td>
-                                                            <td>
-                                                                <a class="btn" style="background-color: #62DCF7;" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt" style="color: #FFFFFF;"></i>
-                                                               </a>
-                                                               <a class="btn" style="background-color: #F52525;" type="button" href="">
-                                                                 <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                                               </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="tab-pane show" id="ar_roti">
-                                                <div class="produk">
-                                                    <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
-                                                    <a class="btn btn-sm text-white" href="" style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah Produk Baru</a>
-                                                </div>
-
-            
-                                                <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id" data-page-list="[5, 10, 20]"
-                                                    data-page-size="5" data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
-                                                    <thead style="background: #FF9C22;">
-                                                        <tr style="color: #fff;">
-                                                            <th>PRODUCT ID</th>
-                                                            <th >GAMBAR</th>
-                                                            <th >NAMA PRODUCT</th>
-                                                            <th >KATEGORI</th>
-                                                            <th >HARGA</th>
-                                                            <th >STOK</th>
-                                                            <th >TERJUAL</th>
-                                                            <th data-field="user-status">STATUS</th>
-                                                            <th>AKSI</th>
-                                                
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of Stock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>#1212</td>
-                                                            <td>GAMBAR</td>
-                                                            <td>Roti sisir</td>
-                                                            <td>Roti</td>
-                                                            <td>48</td>
-                                                            <td>25</td>
-                                                            <td>25</td>
-                                                            <td><span class="badge" style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span></td>
-                                                            <td>
-                                                                <a class="btn btn-info" type="button" href="">
-                                                                 <i class="fas fa-pencil-alt"></i>
-                                                               </a>
-                                                               <a class="btn btn-danger" type="button" href="">
-                                                                 <i class="fas fa-trash"></i>
-                                                               </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- end card-->
-                            </div> <!-- end col -->                  
-                        </div>
-                        <!-- end row -->
-                    </div>       
-                    <!-- end page title -->
-
-                    
-                </div> <!-- container -->
-
-            </div> <!-- content -->
+                                        <a href="profile.html"><i class="fa-solid fa-chevron-right"></i>
+                                        <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Profile Saya</span></a>
+                                        
+                                            
+                                        </div> <!-- end card-->
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->   
+                            </div> <!-- end page title -->
+                        </div> <!-- container -->
+                    </div> <!-- content -->
 
             <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
+                    <footer class="footer">
+          
+            <div class="footer-middle">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                            <script>document.write(new Date().getFullYear())</script> &copy; iniToko
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget widget-about">
+                                <img src="../assets/LandingPage/assets/images/demos/demo-4/kue_logo.png" class="footer-logo" alt="Footer Logo" width="70" height="70">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, in?</p>
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Link Cepat</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="about.html">Tentang Tukerin</a></li>
+                                    <li><a href="#">Kontak Kami</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Pelayanan Pelanggan</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="#">Metode Pembayaran</a></li>
+                                    <li><a href="#">Pengembalian</a></li>
+                                    <li><a href="#">Pengiriman</a></li>
+                                    <li><a href="#">Persyaratan dan Kondisi</a></li>
+                                    <li><a href="#">Keamanan Pribadi</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Akun Saya</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="cart.html">Keranjang Saya</a></li>
+                                    <li><a href="#">Wishlist Saya</a></li>
+                                    <li><a href="#">Lacak Pengiriman</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-copyright">Copyright © 2023 Tukerin . All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <figure class="footer-payments">
+                        <img src="../assets/LandingPage/assets/images/payments.png" alt="Payment methods" width="272" height="20">
+                    </figure><!-- End .footer-payments -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
             <!-- end Footer -->
 
         </div>
@@ -562,5 +428,6 @@
 
         <!-- App js -->
         <script src="../assets/js/app.min.js"></script>
+    
 </body>
 </html>
