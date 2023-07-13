@@ -14,6 +14,7 @@ module.exports.AllProduct_categorys = (req, res) => {
         })
     })
 }
+
 module.exports.CreateProduct_category = async (req, res, next) => {
     let body = req.body
 

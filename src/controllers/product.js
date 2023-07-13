@@ -52,6 +52,7 @@ module.exports.DeleteProduct = async (req, res) => {
         return res.json({message: "Error"})
     })
 }
+
 module.exports.getProduct = async (req, res) => {
     let _id = new mongoose.Types.ObjectId(req.params.id)
     await Product.findOne({_id:_id}).then(e => {
@@ -61,10 +62,23 @@ module.exports.getProduct = async (req, res) => {
     })
 }
 
-module.exports.getProductByCategory = async (req, res) => {
-    let _id = new mongoose.Types.ObjectId(req.params.id)
-    await Product.find({category_id: _id}).then(e => {
-        return res.json(e)
+module.exports.getProductByType = async (req, res) => {
+    let _id = req.params.id
+    await Product.find({category_id: _id, typeOfProduct: req.body.typeOfProduct}).then(e => {
+        return res.json({
+            response: e
+        })
+    }).catch(err => {
+        return res.json({message: "Error"})
+    })
+}
+
+module.exports.getProductBySubCategory = async (req, res) => {
+    let _id = req.params.id
+    await Product.find({subCategory: _id}).then(e => {
+        return res.json({
+            response: e
+        })
     }).catch(err => {
         return res.json({message: err.message})
     })

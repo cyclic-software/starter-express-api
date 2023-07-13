@@ -14,7 +14,9 @@ module.exports.add_mainCategory = async (req, res) => {
 
 module.exports.get_mainCategory = async (req, res) => {
     await MainCategory.find().then(e => {
-        res.status(200).json(e)
+        res.status(200).json({
+            response: e
+        })
     }).catch(err => {
         console.log(err.message)
         res.status(404).json({error:err.message})
