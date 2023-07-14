@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const { model } = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  userName: { type: String, required: true },
   location: {
-    type: { type: String, required: true },
+    type: { type: String },
     coordinates: [Number],
   },
 });
