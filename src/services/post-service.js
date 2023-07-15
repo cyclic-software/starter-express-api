@@ -2,6 +2,9 @@ const { user } = require('firebase-functions/v1/auth');
 const { PostRepository, TagRepository, CategoryRepository } = require('../database');
 const { FormateData, paginateResults } = require('../utils');
 
+var AnalyticsService = require('./analytics-service');
+var AnalyticsService = new AnalyticsService();
+
 // All Business logic will be here
 class PostService {
   constructor() {
@@ -50,6 +53,13 @@ class PostService {
     if(checkexist == null){
 
       const PostResult = await this.repository.PostLikeAdd(userInputs);
+      var custjson = {
+        user_id:userInputs.user,
+        post_id:userInputs.post,
+        anallytics_type:"like",
+      }
+      
+      await AnalyticsService.AddAnalytics(custjson)
       return PostResult;
     }else{
       return checkexist;
@@ -71,13 +81,27 @@ class PostService {
     return PostResult;
   }
   async AddPostWishlist(userInputs) {
-    var checkexist = await this.CheckPostIsWishlistOrNOt(userInputs.user,userInputs.post)
-    if(checkexist == null){
-      const PostResult = await this.repository.PostWishlistAdd(userInputs);
-      return PostResult;
-    }else{
-      return checkexist;
-
+    try {
+      
+      var checkexist = await this.CheckPostIsWishlistOrNOt(userInputs.user,userInputs.post)
+      if(checkexist == null){
+        const PostResult = await this.repository.PostWishlistAdd(userInputs);
+        var custjson = {
+          user_id:userInputs.user,
+          post_id:userInputs.post,
+          anallytics_type:"wishlist",
+        }
+        
+        await AnalyticsService.AddAnalytics(custjson)
+        return PostResult;
+      }else{
+        return checkexist;
+  
+      }
+    } catch (error) {
+      console.log(error)
+      return error
+      
     }
   }
   async GetAllPostWishlist(userInputs) {
