@@ -42,7 +42,13 @@ class CategoryRepository {
     //     }
     //   }
     // ];
-    var query = [];
+    var query = [
+      {
+            '$match': {
+              'is_del': false
+            }
+          },
+    ];
     const templates = await CategoryModel.aggregate(query);
     return templates;
   }
