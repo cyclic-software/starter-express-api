@@ -242,7 +242,7 @@
                         <!-- Mobile menu toggle (Horizontal Layout)-->
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span  style="color: orange; font-size:15px;">Profile Saya</span>
+                                <span>Admin AR (Roti)</span> / <span  style="color: orange; font-size:15px;">Edit Profile</span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -316,7 +316,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item">Profile</a></li>
-                                        <li class="breadcrumb-item disabled">Profile Saya</li>
+                                        <li class="breadcrumb-item disabled">Edit Profile</li>
                                     </ol>
                                 </div>
                             </div>                          
@@ -329,49 +329,47 @@
                                       <div class="card-body" id="Profile">
                                         <a href="produk.html">
                                           <i class="fa-solid fa-chevron-left"></i>
-                                          <a href="produk.html"><span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Beranda</span></a>
+                                          <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Beranda</span>
                                         </a>
 
-                                        <a href="profile.html">
+                                        <a href="editprofile.html">
                                           <i class="fa-solid fa-chevron-right"></i>
-                                          <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Profile Saya</span>
+                                          <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Edit Profile</span>
                                         </a>
 
                                         <div class="row">
                                           <div class="col-md-4">
                                             <div class="profile mt-3">
-                                                <img src="assets/images/foto.png" width="300" height="300">
+                                                <img src="assets/images/foto.png" width="400" height="400">
                                             </div>
                                           </div>
 
                                           <div class="col-md-7">
-                                            <h3>Profil Saya</h3>
-                                                <a href="editprofile.html"><p class="mb-3 text-primary float-end">Edit Profile</p></a>
-                                                    <div class="row">        
-                                                        <div class="text mt-3">
-                                                            <label for="text" class="col-sm-2 col-form-label">Username</label>
-                                                            <span class="text-dark mx-5">Rafika Wardah</span>
-                                                        </div>
-
-                                                        <div class="text mt-3">
-                                                            <label for="text" class="col-sm-2 col-form-label">Nama Email</label>
-                                                            <span class="text-dark mx-5">rafika@gmail.com</span>
-                                                        </div>
-                                                        
-                                                        <div class="text mt-3">
-                                                            <label for="text" class="col-sm-2 col-form-label">Alamat</label>
-                                                            <span class="text-dark mx-5">Jl. Los Angeles</span>
-                                                        </div>
-
-                                                        <div class="text mt-3">
-                                                            <label for="text" class="col-sm-2 col-form-label">Nomor Handphone</label>
-                                                            <span class="text-dark mx-5">0857339408201</span>
-                                                        </div>
-
+                                            <h3>Edit Profile</h3>
+                                            <div class="row">        
+                                                <div class="text mt-1">
+                                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                                                    <input type="text" id="username" class="form-control" value="Rafika Wardah">
                                                 </div>
-                                          </div>
-                                        </div>
 
+                                                <div class="text mt-1">
+                                                    <label for="email" class="col-sm-2 col-form-label">Nama Email</label>
+                                                    <input type="email" id="email" class="form-control" value="rafika@gmail.com">
+                                                </div>
+
+                                                <div class="text mt-1">
+                                                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                                                    <input type="text" id="alamat" class="form-control" value="Jl. Los Angeles">
+                                                </div>
+
+                                                <div class="text mt-1">
+                                                    <label for="nomor-hp" class="col-sm-2 col-form-label">Nomor Handphone</label>
+                                                    <input type="tel" id="nomor-hp" class="form-control" value="0857339408201">
+                                                </div>
+                                            </div>
+                                            <a href="profile.html" class="btn rounded-3 mt-3 float-end" style="background-color: #06E602; color: #FFFFFF;">Save Changes
+                                            </a>
+                                        </div>
                                       </div> <!-- end card-body -->
                                     </div> <!-- end card -->
                                   </div> <!-- end col -->
@@ -381,7 +379,7 @@
                     </div> <!-- content -->
 
             <!-- Footer Start -->
-                    <footer class="footer">
+            <footer class="footer">
           
             <div class="footer-middle">
                 <div class="container">
