@@ -12,4 +12,5 @@ module.exports = {
   ContactusModel: require('./contactus'),
   MediaModel: require('./media'),
   UserModel: require('./user'),
+  AnalyticsModel: require('./analytics'),
 };

@@ -11,5 +11,6 @@ module.exports = {
   ContactusRepository: require('./repository/contactus-repository'),
   FeedbackRepository: require('./repository/feedback-repository'),
   UserRepository: require('./repository/user-repository'),
-  MediaRepository: require('./repository/media-repository')  
+  MediaRepository: require('./repository/media-repository'),  
+  AnalyticsRepository: require('./repository/analytics-repository')  
 };

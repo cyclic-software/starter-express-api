@@ -10,4 +10,5 @@ module.exports = {
   feedback: require('./feedback'),
   user: require('./user'),
   media: require('./media'),
+  analytics: require('./analytics'),
 };
