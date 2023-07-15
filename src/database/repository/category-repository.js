@@ -11,38 +11,39 @@ class CategoryRepository {
   }
 
   async GetCategorys(query) {
-    var query = [
+    // var query = [
       
-      {
-        '$match': {
-          'post_status': 'Published'
-        }
-      },{
-        '$group': {
-          '_id': '$category_id'
-        }
-      }, {
-        '$match': {
-          '_id': {
-            '$ne': null
-          }
-        }
-      }, {
-        '$lookup': {
-          'from': 'categories', 
-          'localField': '_id', 
-          'foreignField': '_id', 
-          'as': 'result'
-        }
-      }, {
-        '$unwind': '$result'
-      }, {
-        '$replaceRoot': {
-          'newRoot': '$result'
-        }
-      }
-    ];
-    const templates = await PostModel.aggregate(query);
+    //   {
+    //     '$match': {
+    //       'post_status': 'Published'
+    //     }
+    //   },{
+    //     '$group': {
+    //       '_id': '$category_id'
+    //     }
+    //   }, {
+    //     '$match': {
+    //       '_id': {
+    //         '$ne': null
+    //       }
+    //     }
+    //   }, {
+    //     '$lookup': {
+    //       'from': 'categories', 
+    //       'localField': '_id', 
+    //       'foreignField': '_id', 
+    //       'as': 'result'
+    //     }
+    //   }, {
+    //     '$unwind': '$result'
+    //   }, {
+    //     '$replaceRoot': {
+    //       'newRoot': '$result'
+    //     }
+    //   }
+    // ];
+    var query = [];
+    const templates = await CategoryModel.aggregate(query);
     return templates;
   }
   async GetAdminCategorys(query) {
