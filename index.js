@@ -31,7 +31,7 @@ app.get("/nearby", async (req, res) => {
       },
     };
 
-    const drivers = User.find(options);
+    const drivers = await User.find(options).lean();
 
     res.status(200).json(drivers);
   } catch (error) {
