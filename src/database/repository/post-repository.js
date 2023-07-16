@@ -148,6 +148,9 @@ class PostRepository {
     return templates;
   }
   async SearchPosts(search,page,size) {
+    search= `"${search}"`;
+    console.log(search)
+
     const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size)
     ;
 
