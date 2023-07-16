@@ -11,4 +11,4 @@ module.exports = {
   user: require('./user'),
   media: require('./media'),
   analytics: require('./analytics'),
-};
+}; 
