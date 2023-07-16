@@ -62,6 +62,13 @@ module.exports = (app) => {
 
   app.post("/searchpost",  async (req, res, next) => {
     try {
+      const v = new Validator(req.body, {
+        search: "required",
+      });
+      const matched = await v.check();
+      if (!matched) {
+        return res.status(400).send(v.errors);
+      }
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
 
       var data = await service.SearchPost(req.body.search,skip,limit);
