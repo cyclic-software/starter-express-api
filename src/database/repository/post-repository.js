@@ -148,7 +148,7 @@ class PostRepository {
     return templates;
   }
   async SearchPosts(search,page,size) {
-    const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size).sort({ likeCount: -1 }) // Replace "fieldName" with the actual field to sort by
+    const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size)
     ;
 
     return templates;
