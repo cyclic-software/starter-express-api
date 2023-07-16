@@ -55,5 +55,9 @@ PostSchema.pre('remove', async function(next) {
   next();
 });
 
+PostSchema.index({ post_description_text: "text" });
+
+// PostSchema.index({ post_description_text: 1 }); // Single field index
+
 
 module.exports = mongoose.model('post', PostSchema);

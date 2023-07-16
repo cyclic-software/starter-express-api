@@ -63,11 +63,8 @@ module.exports = (app) => {
   app.post("/searchpost",  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
-      var sortarray = await GetSortByFromRequest(
-        req.body.orderbycolumnname,
-        req.body.orderby
-      );
-      var data = await service.GetAllReels(limit, skip, req.body, sortarray);
+
+      var data = await service.SearchPost(req.body.search,skip,limit);
       data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {

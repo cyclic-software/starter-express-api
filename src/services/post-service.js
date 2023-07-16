@@ -253,6 +253,20 @@ class PostService {
       return error
     }
   }
+  async SearchPost(search,page,size) {
+
+    try{
+
+      
+
+      var PostResult   = await this.repository.SearchPosts(search,page,size);
+
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
+  }
   async PostById(id) {
     const PostResult = await this.repository.FindPostById(id);
     return PostResult;

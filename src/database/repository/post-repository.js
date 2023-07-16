@@ -144,7 +144,13 @@ class PostRepository {
   }
 
   async GetPosts(query) {
+    console.log(query)
     const templates = await PostModel.aggregate(query);
+    return templates;
+  }
+  async SearchPosts(search,page,size) {
+    const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size);
+
     return templates;
   }
   async FindPostById(id) {
