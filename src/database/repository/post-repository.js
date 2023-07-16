@@ -144,12 +144,12 @@ class PostRepository {
   }
 
   async GetPosts(query) {
-    console.log(query)
     const templates = await PostModel.aggregate(query);
     return templates;
   }
   async SearchPosts(search,page,size) {
-    const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size);
+    const templates = await PostModel.find({ $text: { $search: search }}).skip(page).limit(size).sort({ likeCount: -1 }) // Replace "fieldName" with the actual field to sort by
+    ;
 
     return templates;
   }
