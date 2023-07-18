@@ -1,5 +1,5 @@
 const { user } = require('firebase-functions/v1/auth');
-const { PostRepository, TagRepository, CategoryRepository } = require('../database');
+const { PostRepository, TagRepository, CategoryRepository ,PoetRepository} = require('../database');
 const { FormateData, paginateResults } = require('../utils');
 
 var AnalyticsService = require('./analytics-service');
@@ -11,6 +11,7 @@ class PostService {
     this.repository = new PostRepository();
     this.TagRepository = new TagRepository();
     this.CategoryRepository = new CategoryRepository();
+    this.PoetRepository = new PoetRepository();
   }
   async SaveMasterTag(post_tags) {
     if (post_tags.lenth != 0) {
@@ -138,8 +139,29 @@ class PostService {
       //   }
       // };
       //   matchdata["extra_query"] =   extra_query  
+
       var q = await paginateResults(size, skip, matchdata, sortob);
-      console.log(JSON.stringify(q))
+      
+      var q2  =  {
+          '$lookup': {
+            'from': 'categories', 
+            'localField': 'category_id', 
+            'foreignField': '_id', 
+            'as': 'category_data'
+          }
+        }
+         q.push(q2)
+         var q3 = {
+          '$lookup': {
+            'from': 'poets', 
+            'localField': 'poet_id', 
+            'foreignField': '_id', 
+            'as': 'poet_data'
+          }
+        }
+        q.push(q3)
+
+      
       var PostResult   = await this.repository.GetPosts(q);
       const myInstance = this;
 
@@ -150,6 +172,21 @@ class PostService {
           item.is_like =is_like; 
           var is_wishlist  = await EveryPostCheckWishlistOrNot(item,user,myInstance);
           item.is_wishlist =is_wishlist; 
+          item.poet_image_url = ""
+          item.category_media_url = ""
+          if(item.poet_data.length !=0){
+               item.poet_image_url = item.poet_data[0].profile_media_url
+          }
+          if(item.category_data.length !=0){
+               item.category_media_url = item.category_data[0].category_media_url
+          }
+          // if(item.poet_id !="" && item.poet_id !=null ){
+          //   item.poet_data = await  myInstance.PoetRepository.FindPoetById(item.poet_id)
+          // }
+          // if(item.category_id !="" && item.category_id !=null ){
+          //   item.category_data = await  myInstance.CategoryRepository.FindCategoryById(item.category_id)
+
+          // }
         }
       
         return PostResult;
