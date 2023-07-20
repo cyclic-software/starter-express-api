@@ -1,39 +1,66 @@
 const Produk = require('../models/produkSchema');
 const Bahan = require('../models/bahanSchema');
 const Resep = require('../models/resepSchema');
+const Wishlist = require('../models/wishlistSchema');
+const moment = require('moment');
+let nav = [], subnav = [];
 
 class produkController {
+
+    static async dashboard(req, res) {
+        const produk = await Produk.find({ deleted: false });
+
+        res.render('admin/dashboard', { produk, endPoint: 'produkSaya', nav: ['Dashboard'], subnav: ['Dashboard', 'Kasir'] });
+    }
     static async index(req, res) {
-        const url = req.path; // Mendapatkan jalur URL dari objek req
-        console.log(url)
+        const url = req.path;
         let endPoint, view;
 
         if (url.includes('/produk')) {
             endPoint = 'produkSaya';
             view = 'admin/home';
         } else if (url.includes('/index')) {
-            res.send('customer page');
-            // endPoint = 'produkUmum';
-            // view = 'customer/home'; // Ganti 'customer/home' dengan template yang sesuai untuk tampilan pelanggan
+            endPoint = 'produkUmum';
+            view = 'customer/home';
         } else {
-            // Jika URL tidak sesuai dengan endpoint yang ditentukan, tangani dengan cara yang sesuai
             return res.status(403).json({ message: 'Akses ditolak' });
         }
 
-        const produk = await Produk.find({});
-        res.render(view, { endPoint, produk });
+        const produk = await Produk.find({ deleted: false }); // Menampilkan hanya produk yang tidak dihapus
+
+        // Mengubah format tanggal menggunakan moment.js
+        const formattedProduk = produk.map(item => {
+            return {
+                ...item._doc,
+                tglTambah: moment(item.tglTambah).format('DD/MM/YYYY')
+            };
+        });
+
+        res.render(view, { endPoint, produk: formattedProduk, nav: ['Produk Saya'], subnav: ['Produk', 'Produk Saya'] });
+    }
+
+    static async getHistory(req, res) {
+        const { id } = req.params;
+        const produk = await Produk.findById(id);
+        const historiUpdate = produk.historiUpdate.map(item => {
+            return {
+                ...item._doc,
+                tanggal: moment(item.tanggal).format('DD/MM/YYYY')
+            };
+        });
+        res.render('admin/history', { produk, historiUpdate });
     }
 
 
     static async renderNewForm(req, res) {
-        res.render('admin/formAddProduk', { endPoint: 'produkSaya' });
+        res.render('admin/formAddProduk', { endPoint: 'produkSaya', nav: ['Tambah Produk'], subnav: ['Produk', 'Tambah Produk'] });
     }
 
     static async renderEditForm(req, res) {
         const productId = req.params.id;
         // Lakukan pengambilan data produk dari database berdasarkan productId
         const produk = await Produk.findById(productId);
-        res.render('admin/formEditProduk', { produk });
+        res.render('admin/formEditProduk', { produk, nav: ['Edit Produk'], subnav: ['Produk', 'Edit Produk'] });
     }
 
     static async create(req, res) {
@@ -49,21 +76,51 @@ class produkController {
     static async update(req, res) {
         const { id } = req.params;
         const updatedData = req.body.produk;
+        const product = await Produk.findById(id);
+        // Simpan stok sebelumnya
+        const stokSebelumnya = product.stok;
+        // Update data produk
         const updatedProduct = await Produk.findByIdAndUpdate(id, updatedData, { new: true });
+        // Simpan stok sesudahnya
+        const stokSesudahnya = updatedProduct.stok;
+        // Tambahkan entri baru ke historiUpdate
+        updatedProduct.historiUpdate.push({
+            tanggal: Date.now(),
+            stokSebelumnya,
+            stokSesudahnya
+        });
+        // Simpan perubahan produk
+        await updatedProduct.save();
         req.flash('success', 'Successfully updated produk!');
         res.redirect(`/admin/produk`);
     }
 
+
+
     static async show(req, res) {
-        const { id } = req.params;
-        const produk = await Produk.findById(id);
-        const bahan = await Bahan.find({});
-        res.render('admin/showProduk', { produk, bahan });
+        try {
+            const { id } = req.params;
+            const produk = await Produk.findById(id);
+            const bahan = await Bahan.find({});
+            const resep = await Resep.find({ idProduk: id }).populate('idBahan').lean();
+
+            res.render('admin/showProduk', { produk, bahan, resep, nav: ['Rincian Produk & Resep'], subnav: ['Produk', 'Rincian Produk & Resep'] });
+        } catch (error) {
+            console.error(error);
+            // Handle error response
+        }
     }
+
+
 
     static async delete(req, res) {
         const { id } = req.params;
-        await Produk.findByIdAndDelete(id);
+        const product = await Produk.findByIdAndUpdate(id, {
+            deleted: true,
+            deletedAt: Date.now()
+        }, { new: true });
+        // Menghapus data produk dari wishlist
+        await Wishlist.deleteMany({ idProduk: id });
         req.flash('success', 'Successfully deleted produk');
         res.redirect(`/admin/produk`);
     }
@@ -82,6 +139,7 @@ class produkController {
                 jumlahPakai: item.jumlahPakai,
                 satuan: item.satuan
             }));
+            console.log(newResep);
 
             // Menambahkan semua resep baru ke array idBahan pada produk
             produk.idBahan.push(...newResep);

@@ -9,8 +9,7 @@ const bahanSchema = new Schema({
     },
     stokBahan: {
         type: Number,
-        required: true,
-        min: 0
+        required: true
     },
     satuan: {
         type: String,

@@ -3,14 +3,16 @@
 <!-- ============================================================== -->
 <div class="tab-pane active" id="home-b1">
     <div class="produk">
-        <h5 class="header-title" style="margin-bottom: -20vh; ">165 Produk</h5>
+        <h5 class="header-title" style="margin-bottom: -20vh; ">
+            <%= produk.length %> Produk
+        </h5>
         <a class="btn btn-sm text-white" href=""
             style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah
             Produk Baru</a>
     </div>
     <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id"
         data-page-list="[5, 10, 20]" data-page-size="5" data-pagination="true" data-show-pagination-switch="true"
-        class="table-borderless">
+        class="table-borderless table-striped">
         <thead style="background: #FF9C22;">
             <tr style="color: #fff;">
                 <th>NO</th>
@@ -47,10 +49,10 @@
                             <%= item.stok %>
                         </td>
                         <td>
-                            <%= item.terjual %>
+                            <%= item.jumlahTerjual %>
                         </td>
                         <td>
-                            <% if (item.stok===0) { %>
+                            <% if (item.stok<=0) { %>
                                 %><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out
                                     of Stock</span>
                                 <% } else if(item.stok<=5){%>
@@ -64,6 +66,8 @@
                         </td>
                         <td>
                             <div class="d-flex">
+                                <a href="/admin/produk/<%= item._id %>" class="btn btn-link text-primary"
+                                    title="Detail"><i class="fas fa-eye"></i></a>
                                 <a class="btn btn-info" type="button" href="/admin/produk/edit/<%= item._id %>">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>

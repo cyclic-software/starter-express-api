@@ -222,8 +222,9 @@
                         <a class="navbar-toggle nav-link" data-bs-toggle="collapse"
                             data-bs-target="#topnav-menu-content">
                             <div class="lines text-dark">
-                                <span>Admin AR (Roti)</span> / <span style="color: orange; font-size:15px;">Produk
-                                    saya</span>
+                                <span>Admin</span> / <span style="color: orange; font-size:15px;">
+                                    <%= nav %>
+                                </span>
                             </div>
                         </a>
                         <!-- End mobile menu toggle-->
@@ -246,6 +247,20 @@
                     <ul id="side-menu">
 
                         <li class="menu-title">Navigation</li>
+                        <li>
+                            <a href="#sidebarDashboards" data-bs-toggle="collapse">
+                                <i class="fas fa-chart-pie"></i>
+                                <span class="menu-arrow"></span>
+                                <span> Dashboard </span>
+                            </a>
+                            <div class="collapse" id="sidebarDashboards">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="/admin/dashboard/kasir">Dashboard saya</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li>
                             <a href="#sidebarDashboards" data-bs-toggle="collapse">
@@ -259,7 +274,7 @@
                                         <a href="/admin/produk">Produk saya</a>
                                     </li>
                                     <li>
-                                        <a href="tambah_produk.html">Tambah produk</a>
+                                        <a href="/admin/produk/new">Tambah produk</a>
                                     </li>
                                 </ul>
                             </div>
@@ -274,13 +289,13 @@
                             <div class="collapse" id="sidebarEcommerce">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="pemesanan_roti.html">AR (Roti)</a>
+                                        <a href="/admin/transaksiRoti">AR (Roti)</a>
                                     </li>
                                     <li>
-                                        <a href="pemesanan_jajan.html">JN (Jajanan & Nasi)</a>
+                                        <a href="/admin/transaksiSnack">JN (Jajanan & Nasi)</a>
                                     </li>
                                     <li>
-                                        <a href="riwayat_pemesanan.html">Riwayat Pemesanan</a>
+                                        <a href="/admin/riwayat/RiwayatTransaksi">Riwayat Pemesanan</a>
                                     </li>
                                 </ul>
                             </div>
@@ -295,7 +310,7 @@
                             <div class="collapse" id="sidebarCrm">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="gudang.html">Gudang Saya</a>
+                                        <a href="/admin/bahan">Gudang Saya</a>
                                     </li>
                                 </ul>
                             </div>

@@ -9,10 +9,11 @@ const wishlistSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Customer'
     },
-    idProduk: [{
+    idProduk: {
         type: Schema.Types.ObjectId,
         ref: 'Produk'
-    }],
+    },
+    jumlah: Number,
     tglTambah: Date
 });
 

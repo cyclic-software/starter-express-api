@@ -1,0 +1,119 @@
+<div class="tab-pane" id="messages-b1">
+
+    <table class="table">
+        <thead style="background: #FF9C22;">
+            <tr style="color: #fff;">
+                <th>GAMBAR</th>
+                <th>NAMA PRODUCT</th>
+                <th>POINT</th>
+                <th>HARGA</th>
+                <th>TOTAL</th>
+                <th>HARGA TAWARAN</th>
+                <th>JUMLAH</th>
+                <th>ALAMAT</th>
+            </tr>
+        </thead>
+    </table>
+    <% let no2=1; transaksiSelesai.forEach(item=> {
+        const filteredProduk = item.idProduk.filter(p =>
+        p.produk.kategori
+        ===
+        filter);
+        if (filteredProduk.length > 0) {
+        let totalBayar = 0;
+        %>
+        <!-- Konten Card Transaksi -->
+        <div class="card">
+            <!-- Header Card -->
+            <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+                <!-- Baris Header -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="/images/users/user-7.jpg" alt="image" class="img-fluid avatar-sm rounded-circle" />
+                        <span class="ms-2">
+                            <%= item.idCustomer.nama %>
+                        </span>
+                        <span class="ms-2">
+                            <%= item.idCustomer.nomorTelepon %>
+                        </span>
+                    </div>
+                    <div class="col-lg-6" style="text-align:end;">
+                        <span>No pemesanan</span>
+                        <span>:</span>
+                        <span>
+                            <%= no2++ %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Body Card -->
+            <div class="card-body">
+                <% filteredProduk.forEach(produk=> { %>
+                    <!-- Konten Produk -->
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="/images/Toko/kue.png" alt="" width="75">
+                        </div>
+                        <div class="col-2 ms-3">
+                            <p>
+                                <%= produk.produk.namaProduk %>
+                            </p>
+                        </div>
+                        <div class="col-1" style="margin-left: 4%;">
+                            <p>
+                                <%= produk.produk.bobotTenaga %>
+                            </p>
+                        </div>
+                        <div class="col-1" style="margin-left: 0%;">
+                            <%= produk.produk.hargaProduk %>
+                        </div>
+                        <div class="col-1 text-center">
+                            <%= produk.produk.hargaProduk * produk.jumlah %>
+                        </div>
+                        <div class="col text-center ms-4">
+                            <%= item.tawaranHarga %>
+                        </div>
+                        <div class="col text-center" style="margin-left: 10%;">
+                            <p>
+                                <%= produk.jumlah %>
+                            </p>
+                        </div>
+                        <div class="col d-flex align-items-start">
+                            <button type="submit" disabled
+                                class="btn btn-success hide rounded-pill waves-effect waves-light">
+                                Berhasil
+                            </button>
+                        </div>
+
+                    </div>
+                    <% totalBayar +=produk.produk.hargaProduk * produk.jumlah; }); %>
+                        <!-- Baris Received dan Pengiriman -->
+                        <div class="row ">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9 ">
+                                <div class="received">
+                                    <span>Tgl Pesan</span><span> :
+                                    </span><span>
+                                        <%= item.tglPesan %>
+                                    </span>
+                                    <span class="ms-3">Pengiriman</span><span>
+                                        :
+                                    </span>
+                                    <span>
+                                        <%= item.reqTglPesan %>
+                                    </span>
+                                    <span class="ms-3">Total
+                                        Bayar</span><span>:</span><span>
+                                        <%= totalBayar %>
+                                    </span>
+                                    <span class="ms-3">Alamat
+                                        Kirim</span><span>:</span><span>
+                                        <%= item.alamatPengiriman %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <% } }); %>
+</div>

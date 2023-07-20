@@ -9,10 +9,15 @@ const riwayatTransaksiSchema = new Schema({
     tglPesan: Date,
     reqTglPesan: Date,
     alamatPengiriman: String,
-    idProduk: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Produk'
-    }],
+    idProduk: [
+        {
+            produk: {
+                type: Schema.Types.ObjectId,
+                ref: 'Produk'
+            },
+            jumlah: { type: Number, default: 1, min: 1 }
+        }
+    ],
     idCustomer: {
         type: Schema.Types.ObjectId,
         ref: 'Customer'

@@ -1,14 +1,24 @@
 <!-- PAGE 3 -->
 <div class="tab-pane" id="KJ">
     <div class="produk">
-        <h5 class="header-title" style="margin-bottom: -20vh; ">10 Produk</h5>
-        <a class="btn btn-sm text-white" href=""
-            style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i class="fa fa-plus"></i> Tambah
-            Produk Baru</a>
+        <% let count=0; %>
+            <% produk.forEach((item)=> {
+                if (item.kategori === 'Snack') { // Periksa apakah kategori produk adalah "Snack"
+                count++;
+                %>
+                <% } });%>
+                    <h5 class="header-title" style="margin-bottom: -20vh; ">
+                        <%= count %> Produk
+                    </h5>
+                    <a class="btn btn-sm text-white" href=""
+                        style="margin-left: 20vh; margin-bottom: -35vh; background: #F7BC00; "><i
+                            class="fa fa-plus"></i>
+                        Tambah Produk Baru</a>
     </div>
+
     <table data-toggle="table" data-search="true" data-show-refresh="true" data-sort-name="id"
         data-page-list="[5, 10, 20]" data-page-size="5" data-pagination="true" data-show-pagination-switch="true"
-        class="table-borderless">
+        class="table-borderless table-striped">
         <thead style="background: #FF9C22;">
             <tr style="color: #fff;">
                 <th>NO</th>
@@ -24,7 +34,9 @@
         </thead>
         <tbody>
             <% var i=1; %>
-                <% produk.forEach((item)=> { %>
+                <% produk.forEach((item)=> {
+                    if (item.kategori === 'Snack') { // Periksa apakah kategori produk adalah "Snack"
+                    %>
                     <tr>
                         <td>
                             <%= i++ %>
@@ -45,31 +57,38 @@
                             <%= item.stok %>
                         </td>
                         <td>
-                            <%= item.terjual %>
+                            <%= item.jumlahTerjual %>
                         </td>
                         <td>
-                            <% if (produk.stok===0) { %>
-                                %><span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out
-                                    of Stock</span>
-                                <% } else if(produk.stok<=5){%>
+                            <% if (item.stok<=0) { %>
+                                <span class="badge" style="background: rgba(245, 37, 37, 0.15); color: #F52525;">Out of
+                                    Stock</span>
+                                <% } else if (item.stok <=5) { %>
                                     <span class="badge"
                                         style="background: rgba(231, 234, 104, 0.1); color: #FFC42D;">Restock</span>
-                                    <% }else{ %>
+                                    <% } else { %>
                                         <span class="badge"
                                             style="background: rgba(107, 235, 164, 0.1); color: #6BEBA4;">In
                                             Stock</span>
                                         <% } %>
                         </td>
                         <td>
-                            <a class="btn btn-info" type="button" href="">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a class="btn btn-danger" type="button" href="">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <div class="d-flex">
+                                <a href="/admin/produk/<%= item._id %>" class="btn btn-link text-primary"
+                                    title="Detail"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-info" type="button" href="/admin/produk/edit/<%= item._id %>">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <form action="/admin/produk/delete/<%= item._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger" type="submit">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
-                    <% }) %>
+                    <% } }) %>
         </tbody>
+
     </table>
 </div>

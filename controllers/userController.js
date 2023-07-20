@@ -2,7 +2,7 @@ const { Admin, Customer, User } = require('../models/userSchema');
 
 class userController {
     static renderRegister(req, res) {
-        res.render('user/register', { endPoint: 'produkSaya' });
+        res.render('user/register', { endPoint: 'none' });
     }
 
     static async register(req, res, next) {
@@ -33,7 +33,7 @@ class userController {
 
 
     static renderLogin(req, res) {
-        res.render('user/login');
+        res.render('user/login', { endPoint: 'none' });
     }
 
     static login(req, res) {

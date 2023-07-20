@@ -214,7 +214,9 @@
                     <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                         <div class="lines text-dark">
                             <span>Admin AR (Roti)</span> / <span>Produk saya</span> / <span
-                                style="color: orange; font-size:15px;">Tambah Produk</span>
+                                style="color: orange; font-size:15px;">
+                                <%= nav %>
+                            </span>
                         </div>
                     </a>
                     <!-- End mobile menu toggle-->
@@ -247,7 +249,9 @@
                         <a href="#sidebarDashboards" data-bs-toggle="collapse">
                             <i data-feather="airplay"></i>
                             <span class="menu-arrow"></span>
-                            <span> Tambah produk </span>
+                            <span>
+                                <%= nav %>
+                            </span>
                         </a>
                         <div class="collapse" id="sidebarDashboards">
                             <ul class="nav-second-level">
@@ -292,8 +296,12 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
-                                    <li class="breadcrumb-item disabled"><a href="#">Tambah produk</a></li>
+                                    <li class="breadcrumb-item"><a href="index.html">
+                                            <%= subnav[0] %>
+                                        </a></li>
+                                    <li class="breadcrumb-item disabled"><a href="#">
+                                            <%= subnav[1] %>
+                                        </a></li>
                                 </ol>
                             </div>
                         </div>

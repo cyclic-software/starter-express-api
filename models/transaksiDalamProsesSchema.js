@@ -10,10 +10,15 @@ const transaksiDalamProsesSchema = new Schema({
     reqTglPesan: Date,
     alamatPengiriman: String,
     totalBobot: Number,
-    idProduk: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Produk'
-    }],
+    idProduk: [
+        {
+            produk: {
+                type: Schema.Types.ObjectId,
+                ref: 'Produk'
+            },
+            jumlah: { type: Number, default: 1, min: 1 }
+        }
+    ],
     idCustomer: {
         type: Schema.Types.ObjectId,
         ref: 'Customer'

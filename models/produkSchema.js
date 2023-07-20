@@ -1,8 +1,17 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Bahan = require('./bahanSchema'); // Import schema Bahan
-const { Admin } = require('./userSchema'); // Import schema Admin
+const Bahan = require('./bahanSchema');
+const { Admin } = require('./userSchema');
 
+// Sub-skema untuk histori update barang
+const historiUpdateSchema = new Schema({
+    tanggal: {
+        type: Date,
+        default: Date.now
+    },
+    stokSebelumnya: Number,
+    stokSesudahnya: Number
+});
 
 // Schema utama (parent)
 const produkSchema = new Schema({
@@ -13,7 +22,10 @@ const produkSchema = new Schema({
         default: 'Roti'
     },
     stok: Number,
-    jumlahTerjual: Number,
+    jumlahTerjual: {
+        type: Number,
+        default: 0
+    },
     jenisPemesanan: {
         type: String,
         enum: ['Ready', 'Pre-Order'],
@@ -31,7 +43,16 @@ const produkSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Admin'
     },
-    tglTambah: Date
+    tglTambah: Date,
+    deleted: {
+        type: Boolean,
+        default: false
+    },
+    deletedAt: {
+        type: Date,
+        default: null
+    },
+    historiUpdate: [historiUpdateSchema] // Menambahkan sub-skema histori update
 });
 
-module.exports = mongoose.model('Produk', produkSchema);    // Export model Produk
+module.exports = mongoose.model('Produk', produkSchema);

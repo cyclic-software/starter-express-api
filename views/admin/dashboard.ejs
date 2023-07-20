@@ -1,0 +1,345 @@
+<% layout('layouts/boilerplate') %>
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content -->
+            <div class="container-fluid p-1">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-left" style="float: left;">
+                                <h2>Welcome,Admin AR (Roti)</h2>
+                                <p class="ms-1 fs-5">Tetap Semangat Jangan Berputus Asa</p>
+                            </div>
+                            <div class="col-2" style="padding-top:20px; margin-left: 10vh; display: inline-block;">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            </div>
+                            <div class="input-group" style="padding-top:20px; margin-left: 10px; display:inline;">
+                                <button type="button" class="btn btn-warning text-white">Cari</button>
+                                <button type="button" class="btn btn-warning" style="margin-left: 4px;">
+                                    <i data-feather="refresh-cw" class=" icon-dual text-white"></i>
+                                </button>
+                            </div>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item disabled"><a href="#">Dashboard saya</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="card" style="min-height:100vh;">
+                            <div class="card-body">
+                                <ul class="nav nav-pills navtab-bg">
+                                    <li class="nav-item">
+                                        <a href="#semua" data-bs-toggle="tab" aria-expanded="false"
+                                            class="btn btn-outline-warning waves-effect waves-light rounded">
+                                            Semua
+                                        </a>
+                                    </li>
+                                    <li class="nav-item px-2">
+                                        <a href="#roti" data-bs-toggle="tab" aria-expanded="true"
+                                            class="btn btn-outline-warning waves-effect waves-light rounded">
+                                            <i class="fas fa-bread-slice me-2"></i>Roti
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#jajanan" data-bs-toggle="tab" aria-expanded="false"
+                                            class="btn btn-outline-warning waves-effect waves-light rounded">
+                                            <i class="fa-solid fa-cookie me-2"></i>Jajanan
+                                        </a>
+                                    </li>
+                                    <li class="nav-item px-2">
+                                        <a href="#nasi" data-bs-toggle="tab" aria-expanded="false"
+                                            class="btn btn-outline-warning waves-effect waves-light rounded">
+                                            <i class="fa-solid fa-bowl-rice me-2"></i>Nasi
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane show active" id="semua">
+                                        <div class="row">
+                                            <% produk.forEach((item)=> { %>
+                                                <div class="col-md-2 col-xl-4">
+                                                    <div class="card shadow product-box">
+                                                        <div class="card-body">
+                                                            <div class="product-action">
+                                                                <a href="#"
+                                                                    class="btn btn-success btn-md waves-effect waves-light addToCartBtn">
+                                                                    <i class="fa-solid fa-cart-shopping"
+                                                                        style="color: #fff;"
+                                                                        data-item-id="<%= item._id %>"></i>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="bg-light">
+                                                                <img src="/images/toko/nasi.png" alt="product-pic"
+                                                                    class="img-fluid" />
+                                                            </div>
+                                                            <div class="product-info">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col">
+                                                                        <h5 class="font-16 mt-0 sp-line-1">
+                                                                            <span>
+                                                                                <%= item.namaProduk %>
+                                                                            </span>
+                                                                        </h5>
+                                                                        <p>Stok : <%= item.stok %>
+                                                                        </p>
+                                                                        <p class="fw-bold">
+                                                                            <span
+                                                                                class="fw-bold text-warning ms-4 mt-1 fs-4"
+                                                                                data-harga="<%= item.hargaProduk %>">
+                                                                                <%= item.hargaProduk %>
+                                                                            </span>
+                                                                            <span class="text-muted fs-5">/1pcs</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card m-0" style="min-height:100vh;">
+                            <div class="card-body m-0">
+                                <form action="/customer/transaksi" method="POST">
+                                    <div class="" id="currentOrder">
+                                        <a href="#">
+                                            <i class="fa-solid fa-arrow-left fa-2xl" style="color: #ff8000;"></i>
+                                            <span class="fs-4 text-dark fw-bold ms-2">Current Order</span>
+                                        </a>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <!-- background-image: url('/images/toko/tiket.png'); background-size: cover; background-position: center; -->
+                                        <div style=" width: 290px; height: 300px;">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tgl Pesan</td>
+                                                        <td><input disabled type="date" name="tglPesan" id="tglPesan"
+                                                                value=" "></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Req tgl Pesan</td>
+                                                        <td> <input type="date" name="reqTglPesan"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label for="alamatPengiriman">Alamat Kirim:</label></td>
+                                                        <td> <input type="text" style="width: 100%;"
+                                                                name="alamatPengiriman">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sub total</td>
+                                                        <td id="subtotal"> Rp. 0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Discount :</td>
+                                                        <td><input type="number" name="diskon" id="diskon" value="">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <div class="mt-2">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Total Bayar</td>
+                                                                <td id="totalBayar">Rp. 0</td>
+                                                                <input type="hidden" name="totalBayar"
+                                                                    id="totalBayarInput" value="0">
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 text-center" style=" margin-top:10px">
+                                            <button type="submit" class="btn btn-success">Pesan</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end page title -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end content -->
+    </div>
+
+    <script>
+        function increaseQuantity(button) {
+            const quantityElement = button.parentNode.previousElementSibling.querySelector('.fs-7');
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+
+            const index = button.parentNode.dataset.index;
+            const inputHidden = document.querySelector(`input[name="jumlah[${index}]"]`);
+            inputHidden.value = quantity;
+
+            updateSubtotal();
+        }
+
+        function decreaseQuantity(button) {
+            const quantityElement = button.parentNode.nextElementSibling.querySelector('.fs-7');
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 0) {
+                quantity--;
+                quantityElement.textContent = quantity;
+
+                const index = button.parentNode.dataset.index;
+                const inputHidden = document.querySelector(`input[name="jumlah[${index}]"]`);
+                inputHidden.value = quantity;
+
+                updateSubtotal();
+            }
+        }
+
+        function updateSubtotal() {
+            const quantityElements = document.querySelectorAll('.fs-7');
+            const prices = document.querySelectorAll('#currentOrder .text-warning');
+
+            const diskonInput = document.getElementById('diskon');
+            const diskon = parseInt(diskonInput.value) || 0;
+
+            let subtotal = 0;
+            for (let i = 0; i < quantityElements.length; i++) {
+                const quantity = parseInt(quantityElements[i].textContent);
+                const price = parseInt(prices[i].textContent);
+                subtotal += quantity * price;
+            }
+
+            // Kode update totalBayar
+            const totalSales = subtotal - diskon;
+
+            const subtotalElement = document.querySelector('#subtotal');
+            subtotalElement.textContent = `Rp. ${subtotal}`;
+
+            const totalBayarElement = document.querySelector('#totalBayar');
+            totalBayarElement.textContent = `Rp. ${totalSales}`;
+
+            const totalBayarInput = document.querySelector('#totalBayarInput');
+            totalBayarInput.value = totalSales;
+        }
+
+        const diskonInput = document.getElementById('diskon');
+        diskonInput.addEventListener('input', updateSubtotal);
+
+        // Menangkap klik pada tombol addToCartBtn
+        // Menangkap klik pada tombol addToCartBtn
+        let index = 0;
+        document.querySelectorAll('.addToCartBtn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Mengambil data produk dari card terkait
+                const card = this.closest('.product-box');
+                const productName = card.querySelector('h5').innerText;
+                const productPrice = card.querySelector('.text-warning').innerText;
+
+                // Mengambil nilai ID dari elemen <i> dengan menggunakan atribut dataset
+                const itemId = this.closest('.product-box').querySelector('[data-item-id]').dataset.itemId;
+
+
+
+                // Memeriksa apakah produk sudah ada dalam daftar pesanan
+                const orderItems = document.querySelectorAll('#currentOrder .row');
+                let existingItem = null;
+                for (let i = 0; i < orderItems.length; i++) {
+                    const itemName = orderItems[i].dataset.productName;
+                    if (itemName && itemName.innerText === productName) {
+                        existingItem = orderItems[i];
+                        break;
+                    }
+                }
+
+                if (existingItem) {
+                    // Jika produk sudah ada, tambahkan jumlahnya
+                    const quantityElement = existingItem.querySelector('.fs-7');
+                    let quantity = parseInt(quantityElement.textContent);
+                    quantity++;
+                    quantityElement.textContent = quantity;
+                } else {
+                    // Jika produk belum ada, buat elemen baru dan tambahkan ke dalam current order
+                    const newOrderItem = document.createElement('div');
+                    newOrderItem.classList.add('row', 'mt-4');
+                    newOrderItem.innerHTML = `
+                <div class="col-2 mt-1 me-3">
+                    <img src="/images/toko/nasi.png" alt="" width="105" height="105">
+                </div>
+                <div class="col">
+                    <input type="hidden" name="idProduk[${index}].produk" value="${itemId}">
+                    <input type="hidden" name="jumlah[${index}]" value="1">
+                    <h5 class="ms-4" data-product-name="${productName}">${productName}</h5>
+                    <p class="fw-bold text-warning ms-4 mt-1 fs-4">${productPrice}</p>
+                    <div class="ms-4 col-12">
+                        <div class="row">
+                            <div class="col" data-index="${index}">
+                                <button type="button" class="btn btn-xs btn-warning" onclick="decreaseQuantity(this)">-</button>
+                            </div>
+                            <div class="col text-center">
+                                <p class="fs-7">1</p>
+                            </div>
+                            <div class="col" data-index="${index}">
+                                <button type="button" class="btn btn-xs btn-warning" onclick="increaseQuantity(this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 mt-2 text-end">
+                    <a href="#">
+                        <i class="fa-solid fa-arrow-left fa-lg" style="color: #ff8000;"></i>
+                    </a>
+                </div>
+            `;
+
+                    // Menambahkan elemen baru ke dalam current order
+                    const currentOrder = document.querySelector('#currentOrder');
+                    currentOrder.appendChild(newOrderItem);
+                    index++;
+                }
+
+                updateSubtotal();
+            });
+
+        });
+
+
+    </script>
+    <script>
+        // Mendapatkan tanggal saat ini
+        var today = new Date();
+
+        // Mengambil referensi elemen input tanggal
+        var inputTanggal = document.getElementById("tglPesan");
+
+        // Mengatur nilai atribut value dengan tanggal saat ini
+        inputTanggal.value = formatDate(today);
+
+        // Fungsi untuk mengubah format tanggal menjadi "YYYY-MM-DD"
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = ("0" + (date.getMonth() + 1)).slice(-2);
+            var day = ("0" + date.getDate()).slice(-2);
+
+            return year + "-" + month + "-" + day;
+        }
+    </script>

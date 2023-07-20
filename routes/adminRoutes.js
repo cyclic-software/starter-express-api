@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const produk = require('../controllers/produkController');
 const bahan = require('../controllers/bahanController');
+const transaksi = require('../controllers/transaksiController');
+
 
 router.route('/produk')
     .get(produk.index)
@@ -37,10 +39,29 @@ router.route('/produk/:id')
 router.route('/produk/:id/resep/new')
     .post(produk.createResep);
 
+router.route('/:kategori')
+    .get(transaksi.getTransaksi);
+
+router.route('/moveTransaksiDalamProses/:idTransaksi/:idProduk/:jumlah')
+    .post(transaksi.moveTransaksiDalamProses);
+
+router.route('/moveTransaksiSelesai/:idTransaksi/:idProduk/:jumlah')
+    .post(transaksi.moveTransaksiSelesai);
+
+router.route('/deleteTransaksi/:idTransaksi/:idProduk/:jumlah')
+    .delete(transaksi.deleteTransaksi);
+
+router.route('/:kategori/RiwayatTransaksi')
+    .get(transaksi.RiwayatTransaksi);
+
+// router.route('/bobot')
+//     .post(transaksi.createBobot);
+router.route('/:aksi')
+    .post(transaksi.updateBobot);
+
+router.route('/dashboard/kasir')
+    .get(produk.dashboard);
 
 
-
-router.route('/bahan/:id')
-    .get(bahan.show);
 
 module.exports = router;
