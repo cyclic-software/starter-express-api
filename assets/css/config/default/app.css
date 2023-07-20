@@ -1877,28 +1877,27 @@ body.authentication-bg-pattern {
   width: 140px; }
 
 .auth-fluid {
-  position: relative;
+  display: relative;
   display: flex;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: row;
   align-items: stretch;
-  background: url("../../../images/bg-auth.jpg") center;
-  background-size: cover; }
+  }
   .auth-fluid .auth-fluid-form-box {
-    max-width: 480px;
-    border-radius: 0;
+    max-width: 45rem;
     z-index: 2;
-    padding: 3rem 2rem;
+    /*padding: 3rem 4rem;*/
+    padding-right: 10rem;
     background-color: #ffffff;
     position: relative;
-    width: 100%; }
+    width: 100vh; 
+  }
   .auth-fluid .auth-fluid-right {
-    padding: 6rem 3rem;
-    flex: 1;
-    position: relative;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.3); }
+     border-radius: 35px 0px 0px 35px;
+    color: #fff  !important;
+    background-color: rgba(0, 0, 0, 0.3); 
+  }
 
 .auth-brand {
   margin-bottom: 2rem; }

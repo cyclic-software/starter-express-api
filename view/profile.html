@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard|Toko</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+        <link rel="shortcut icon" href="../assets/images/Toko/favicon.ico">
+
+        <!-- Bootstrap Tables css -->
+        <link href="../assets/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- App css -->
+        <link href="../assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+        <link href="../assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+        <link href="../assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+        <link href="../assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+        <!-- icons -->
+        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../assets/css/css_toko/style.css" type="text/css" />
+
+</head>
+
+<!-- body start -->
+<body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Topbar Start -->
+        <div class="navbar-custom bg-light">
+            <div class="container-fluid">
+                <ul class="list-unstyled topnav-menu float-end mb-0">
+
+                    <li class="dropdown d-none d-xl-block">
+                        <a class="nav-link dropdown-toggle waves-effect  text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            Create New
+                            <i class="mdi mdi-chevron-down"></i> 
+                        </a>
+                        <div class="dropdown-menu">
+                            <!-- item-->
+                            <a href="" class="dropdown-item">
+                                <i class="fe-briefcase me-1"></i>
+                                <span>New Projects</span>
+                            </a>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item">
+                                <i class="fe-user me-1"></i>
+                                <span>Create Users</span>
+                            </a>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item">
+                                <i class="fe-bar-chart-line- me-1"></i>
+                                <span>Revenue Report</span>
+                            </a>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item">
+                                <i class="fe-settings me-1"></i>
+                                <span>Settings</span>
+                            </a>
+            
+                            <div class="dropdown-divider"></div>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item">
+                                <i class="fe-headphones me-1"></i>
+                                <span>Help & Support</span>
+                            </a>
+            
+                        </div>
+                    </li>
+
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-bell noti-icon" style="color: #000;"></i>
+                            <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+            
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="m-0">
+                                    <span class="float-end">
+                                        <a href="" class="text-dark">
+                                            <small>Clear All</small>
+                                        </a>
+                                    </span>Notification
+                                </h5>
+                            </div>
+            
+                            <div class="noti-scroll" data-simplebar>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item active">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                                    <p class="notify-details">Cristina Pride</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Hi, How are you? What about our next meeting</small>
+                                    </p>
+                                </a>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary">
+                                        <i class="mdi mdi-comment-account-outline"></i>
+                                    </div>
+                                    <p class="notify-details">Caleb Flakelar commented on Admin
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">Karen Robinson</p>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>Wow ! this admin looks good and awesome design</small>
+                                        </p>
+                                </a>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-warning">
+                                        <i class="mdi mdi-account-plus"></i>
+                                    </div>
+                                    <p class="notify-details">New user registered.
+                                        <small class="text-muted">5 hours ago</small>
+                                    </p>
+                                </a>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-info">
+                                        <i class="mdi mdi-comment-account-outline"></i>
+                                    </div>
+                                    <p class="notify-details">Caleb Flakelar commented on Admin
+                                        <small class="text-muted">4 days ago</small>
+                                    </p>
+                                </a>
+            
+                                <!-- item-->
+                                <a href="" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-secondary">
+                                        <i class="mdi mdi-heart"></i>
+                                    </div>
+                                    <p class="notify-details">Carlos Crouch liked
+                                        <b>Admin</b>
+                                        <small class="text-muted">13 days ago</small>
+                                    </p>
+                                </a>
+                            </div>
+            
+                            <!-- All-->
+                            <a href="" class="dropdown-item text-center text-primary notify-item notify-all">
+                                View all
+                                <i class="fe-arrow-right"></i>
+                            </a>
+            
+                        </div>
+                    </li>
+            
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="../assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                            <span class="pro-user-name ms-1 text-dark">
+                                Admin <i class="mdi mdi-chevron-down"></i> 
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome !</h6>
+                            </div>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item notify-item">
+                                <i class="fe-user"></i>
+                                <span>My Account</span>
+                            </a>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item notify-item">
+                                <i class="fe-settings"></i>
+                                <span>Settings</span>
+                            </a>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item notify-item">
+                                <i class="fe-lock"></i>
+                                <span>Lock Screen</span>
+                            </a>
+            
+                            <div class="dropdown-divider"></div>
+            
+                            <!-- item-->
+                            <a href="" class="dropdown-item notify-item">
+                                <i class="fe-log-out"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="index.html" class="logo logo-light text-center">
+                        <span class="logo-sm">
+                            <img src="../assets/images/Toko/kue_logo.png" alt="" width="20" height="20">
+
+                        </span>
+                        <span class="logo-lg">
+                            <img src="../assets/images/Toko/kue_logo.png" alt="" width="30" height="30">
+                            <span class="logos">IniToko</span>
+                        </span>
+                    </a>
+                </div>
+            
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                    <li>
+                        <button class="button-menu-mobile waves-effect waves-light">
+                            <i class="fe-menu" style="color: #000;"></i>
+                        </button>
+                    </li>
+
+                    <li>
+                        <!-- Mobile menu toggle (Horizontal Layout)-->
+                        <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                            <div class="lines text-dark">
+                                <span>Admin AR (Roti)</span> / <span  style="color: orange; font-size:15px;">Profile Saya</span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>   
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+
+            <div class="h-100" data-simplebar>
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+
+                    <ul id="side-menu">
+
+                        <li style="border-bottom: 1px solid #000; padding-left: 5px;">
+                            <a href="produk.html">
+                                <i class="fas fa-arrow-left"></i>
+                                <span class="mx-1">Back</span>
+                            </a>
+                        </li>
+            
+                        <li class="py-4">
+                            <a href="#sidebarDashboards" data-bs-toggle="collapse">
+                                <i data-feather="airplay"></i>
+                                <span class="menu-arrow"></span>
+                                <span> Profile </span>
+                            </a>
+                            <div class="collapse" id="sidebarDashboards">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="profile.html">Profile Saya</a>
+                                    </li>
+                                    <li>
+                                        <a href="editprofile.html">Edit Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- End Sidebar -->
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item">Profile</a></li>
+                                        <li class="breadcrumb-item disabled">Profile Saya</li>
+                                    </ol>
+                                </div>
+                            </div>                          
+                        </div>
+
+                       <!-- Form row -->
+                       <div class="row mt-3">
+                                  <div class="col-12">
+                                    <div class="card">
+                                      <div class="card-body" id="Profile">
+                                        <a href="produk.html">
+                                          <i class="fa-solid fa-chevron-left"></i>
+                                          <a href="produk.html"><span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Beranda</span></a>
+                                        </a>
+
+                                        <a href="profile.html">
+                                          <i class="fa-solid fa-chevron-right"></i>
+                                          <span class="header-title fs-4 mx-2" style="margin-right: 5px; color: #000;">Profile Saya</span>
+                                        </a>
+
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <div class="profile mt-3">
+                                                <img src="assets/images/foto.png" width="300" height="300">
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-7">
+                                            <h3>Profil Saya</h3>
+                                                <a href="editprofile.html"><p class="mb-3 text-primary float-end">Edit Profile</p></a>
+                                                    <div class="row">        
+                                                        <div class="text mt-3">
+                                                            <label for="text" class="col-sm-2 col-form-label">Username</label>
+                                                            <span class="text-dark mx-5">Rafika Wardah</span>
+                                                        </div>
+
+                                                        <div class="text mt-3">
+                                                            <label for="text" class="col-sm-2 col-form-label">Nama Email</label>
+                                                            <span class="text-dark mx-5">rafika@gmail.com</span>
+                                                        </div>
+                                                        
+                                                        <div class="text mt-3">
+                                                            <label for="text" class="col-sm-2 col-form-label">Alamat</label>
+                                                            <span class="text-dark mx-5">Jl. Los Angeles</span>
+                                                        </div>
+
+                                                        <div class="text mt-3">
+                                                            <label for="text" class="col-sm-2 col-form-label">Nomor Handphone</label>
+                                                            <span class="text-dark mx-5">0857339408201</span>
+                                                        </div>
+
+                                                </div>
+                                          </div>
+                                        </div>
+
+                                      </div> <!-- end card-body -->
+                                    </div> <!-- end card -->
+                                  </div> <!-- end col -->
+                                </div> <!-- end row -->
+                            </div> <!-- end page title -->
+                        </div> <!-- container -->
+                    </div> <!-- content -->
+
+            <!-- Footer Start -->
+                    <footer class="footer">
+          
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget widget-about">
+                                <img src="../assets/LandingPage/assets/images/demos/demo-4/kue_logo.png" class="footer-logo" alt="Footer Logo" width="70" height="70">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, in?</p>
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Link Cepat</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="about.html">Tentang Tukerin</a></li>
+                                    <li><a href="#">Kontak Kami</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Pelayanan Pelanggan</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="#">Metode Pembayaran</a></li>
+                                    <li><a href="#">Pengembalian</a></li>
+                                    <li><a href="#">Pengiriman</a></li>
+                                    <li><a href="#">Persyaratan dan Kondisi</a></li>
+                                    <li><a href="#">Keamanan Pribadi</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Akun Saya</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="cart.html">Keranjang Saya</a></li>
+                                    <li><a href="#">Wishlist Saya</a></li>
+                                    <li><a href="#">Lacak Pengiriman</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-copyright">Copyright © 2023 Tukerin . All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <figure class="footer-payments">
+                        <img src="../assets/LandingPage/assets/images/payments.png" alt="Payment methods" width="272" height="20">
+                    </figure><!-- End .footer-payments -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+
+
+    <!-- Vendor js -->
+        <script src="../assets/js/vendor.min.js"></script>
+
+        <!-- Bootstrap Tables js -->
+        <script src="../assets/libs/bootstrap-table/bootstrap-table.min.js"></script>
+
+        <!-- Init js -->
+        <script src="../assets/js/pages/bootstrap-tables.init.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.min.js"></script>
+    
+</body>
+</html>
