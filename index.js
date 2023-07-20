@@ -1,5 +1,6 @@
 const express = require('express')
 const discors = require("discord.js");
+const token = require("./token.json");
 const client = new discors.Client({
     intents: ["GUILDS", "GUILD_MESSAGES"],
 });
@@ -57,4 +58,4 @@ app.all('/', (req, res) => {
 })
 app.listen(process.env.PORT || 3000)
 
-client.login("MTEzMTY0MDI5NjcyODQ0NDkyOA.GqfbdV.FYbvBkXYcm_MUFlH7E9mIY-0IUaNTgBt4aRkM8");
+client.login(token.token);
