@@ -23,9 +23,7 @@ io.on('connection', (socket) => {
     });
     socket.on('pixel upload', (msg) => {
         
-        for(let i = 0; i < msg.length; i++) {
-            console.log("Veriler= X: " + msg[i].x_pos + ", Y: " + msg[i].y_pos + ", Color: " + msg[i].colors);
-        }
+       
         io.emit('pixel upload', msg);
     });
 
