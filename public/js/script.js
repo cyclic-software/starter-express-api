@@ -69,21 +69,17 @@ function upload(x,y) {
     let notStaticVarilable = {x_pos: x,y_pos: y,colors: colorInput.value};
     pixelHistory.push(notStaticVarilable);
     socket.emit('pixel upload',pixelHistory);
-    console.log("Color X:" + pixelHistory[VarilableBrowser].x_pos + ", Color Y:" + pixelHistory[VarilableBrowser].y_pos + ", Color:" + pixelHistory[VarilableBrowser].colors);
 }
 
 
 socket.on('pixel upload', function(msg) {
-    console.log("Varilable Alindi");
     for(let i = 0; i < msg.length; i++) {
-        
-        console.log("Veri X:" + msg[i].x_pos);
-        if(pixelHistory[i].colors !== msg[i].colors) {
+        if(pixelHistory.find(a => a.colors != msg[i].colors)) {
           pixelHistory.splice(i);
           pixelHistory.push({x_pos: msg[i].x_pos,y_pos: msg[i].y_pos,colors: msg[i].colors});
           pixelHistory.map === msg;
           fillCell(msg[i].x_pos,msg[i].y_pos,msg[i].colors);
-        } else if(pixelHistory[i].colors === msg[i].colors) {
+        } else if(pixelHistory.find(a => a.colors != msg[i].colors)) {
           pixelHistory.map === msg;
           fillCell(msg[i].x_pos,msg[i].y_pos,msg[i].colors);
         }
