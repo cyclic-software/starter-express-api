@@ -17,7 +17,7 @@ module.exports = (app) => {
       const v = new Validator(req.body, {
         post_id: "required",
         user_id: "required",
-        analytic_type: "required",
+        anallytics_type: "required",
       });
       const matched = await v.check();
       if (!matched) {

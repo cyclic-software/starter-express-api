@@ -11,8 +11,12 @@ const CategorySchema = new Schema(
     category_description: { type: String,default:'' },
     category_media_url: { type: String,default:'' },
     category_media_id: { type: String,default:'' },
-    is_del: { type: Boolean, default: false }
-   
+    is_del: { type: Boolean, default: false },
+    download:{type:Number,default:0},
+    share:{type:Number,default:0},
+    like:{type:Number,default:0},
+    copy:{type:Number,default:0},
+    wishlist:{type:Number,default:0},
   },
   {
     timestamps: true,

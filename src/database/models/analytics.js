@@ -29,5 +29,31 @@ AnalyticsSchema.pre('aggregate', function() {
   // Add a $match state to the beginning of each pipeline.
   this.pipeline().unshift({ $match: { is_del: { $ne: true } } });
 });
+AnalyticsSchema.post('save', async function(like) {
 
+
+  var anallytics_type =  this.anallytics_type
+  var poet_id =  this.poet_id
+  var category_id =  this.category_id
+  // const postId = like.post;
+  const count = await mongoose.model('analytics').countDocuments({ anallytics_type: anallytics_type,poet_id:poet_id, user_id:this.user_id});
+  var updatedocument = {}
+  if(anallytics_type == "like"){
+    updatedocument.like = count
+  }
+  if(anallytics_type == "whishlist"){
+    updatedocument.wishlist = count
+  }
+  if(anallytics_type == "download"){
+    updatedocument.download = count
+  }
+  if(anallytics_type == "share"){
+    updatedocument.share = count
+  }
+  if(anallytics_type == "copy"){
+    updatedocument.copy = count
+  }
+  await mongoose.model('poet').findByIdAndUpdate({_id:mongoose.Types.ObjectId(poet_id)}, { $set: updatedocument });
+  await mongoose.model('category').findByIdAndUpdate({_id:mongoose.Types.ObjectId(category_id)}, { $set: updatedocument });
+});
 module.exports = mongoose.model('analytics', AnalyticsSchema);

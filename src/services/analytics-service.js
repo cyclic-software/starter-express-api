@@ -16,7 +16,9 @@ class AnalyticsService {
     
     userInputs.post_name = postdata[0].post_name 
     userInputs.category_name = postdata[0].category_name 
+    userInputs.category_id = postdata[0].category_id 
     userInputs.poet_name = postdata[0].poet_name 
+    userInputs.poet_id = postdata[0].poet_id 
   }
   if(userdata.length != 0){
     userInputs.user_mobile = userdata[0].user_mobile 
