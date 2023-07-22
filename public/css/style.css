@@ -1,0 +1,21 @@
+body {
+    background: #333333;
+    color: #ffffff;
+    font-family: sans-serif;
+  }
+  
+  #canvas {
+    cursor: pointer;
+  }
+  
+  #guide {
+    display: grid;
+    pointer-events: none;
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  #guide div {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  

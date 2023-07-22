@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>r/place test</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div>
+        <div id="guide"></div>
+        <canvas width="1000" height="1000" id="canvas"></canvas>
+      </div>
+      <div>
+        <label for="colorInput">Set Color: </label>
+        <input type="color" id="colorInput">
+      </div>
+      <div>
+        <label for="toggleGuide">Show Guide: </label>
+        <input type="checkbox" id="toggleGuide" checked>
+      </div>
+      <div>
+        <button type="button" id="clearButton">Clear</button>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
