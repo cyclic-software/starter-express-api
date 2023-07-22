@@ -35,6 +35,7 @@ AnalyticsSchema.post('save', async function(like) {
   var anallytics_type =  this.anallytics_type
   var poet_id =  this.poet_id
   var category_id =  this.category_id
+  var post_id =  this.post_id
   // const postId = like.post;
   const count = await mongoose.model('analytics').countDocuments({ anallytics_type: anallytics_type,poet_id:poet_id, user_id:this.user_id});
   var updatedocument = {}
@@ -53,6 +54,7 @@ AnalyticsSchema.post('save', async function(like) {
   if(anallytics_type == "copy"){
     updatedocument.copy = count
   }
+  await mongoose.model('post').findByIdAndUpdate({_id:mongoose.Types.ObjectId(post_id)}, { $set: updatedocument });
   await mongoose.model('poet').findByIdAndUpdate({_id:mongoose.Types.ObjectId(poet_id)}, { $set: updatedocument });
   await mongoose.model('category').findByIdAndUpdate({_id:mongoose.Types.ObjectId(category_id)}, { $set: updatedocument });
 });

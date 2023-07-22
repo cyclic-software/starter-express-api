@@ -30,7 +30,10 @@ const PostSchema = new Schema(
     seo_media_url: { type: String,default:'' },
     seo_keywords: { type: String,default:'' },
     reel_video_link: { type: String,default:'' },
-    is_photo_with_lyrics: { type: Boolean, default: false }
+    is_photo_with_lyrics: { type: Boolean, default: false },
+    download:{type:Number,default:0},
+    share:{type:Number,default:0},
+    copy:{type:Number,default:0},
 
   },
   {
