@@ -1,7 +1,8 @@
 /**
  * @type HTMLCanvasElement
  */
-var socket = io();
+var socket = io("ws://calm-underclothes-boa.cyclic.app");
+
 const canvas = document.getElementById("canvas");
 const guide = document.getElementById("guide");
 const colorInput = document.getElementById("colorInput");
