@@ -5,6 +5,10 @@ const { FormateData, paginateResults } = require('../utils');
 var AnalyticsService = require('./analytics-service');
 var AnalyticsService = new AnalyticsService();
 
+
+var NotificationService = require('./notification-service');
+var NotificationService = new NotificationService();
+
 // All Business logic will be here
 class PostService {
   constructor() {
@@ -370,6 +374,34 @@ class PostService {
       if(matchdata.user != undefined){
         PostResult =  await myFunction(PostResult,matchdata.user);
       }
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
+  }
+
+  async GetPostsForNotifictaion() {
+    try{
+     
+      var PostResult   = await this.repository.NotificationGetPost();
+      var postdata  =  PostResult[0]
+      var userInputs = {
+          title:postdata.post_name,
+          body: postdata.post_description,
+          media_url: postdata.post_media_url[0],
+        data: postdata,
+      };  
+      console.log(userInputs)
+
+
+      await NotificationService.SendNotificationToAllUser(userInputs)
+      var formdata = {
+        id:postdata._id,
+        is_sent_notification:true
+      }
+      console.log(formdata)
+      await this.repository.UpdatePost(formdata)
       return PostResult;
     }catch(error){
       console.log(error)

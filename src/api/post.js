@@ -211,5 +211,14 @@ module.exports = (app) => {
       next(error);
     }
   });
-  
+  app.get("/sentnotificationpost",  async (req, res, next) => {
+    try {
+      
+      var data = await service.GetPostsForNotifictaion();
+      data = await GetApiResponse(data);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
 };

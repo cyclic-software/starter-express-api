@@ -34,6 +34,7 @@ const PostSchema = new Schema(
     download:{type:Number,default:0},
     share:{type:Number,default:0},
     copy:{type:Number,default:0},
+    is_sent_notification: { type: Boolean, default: false },
 
   },
   {

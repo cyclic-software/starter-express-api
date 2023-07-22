@@ -52,7 +52,6 @@ class NotificationService {
     try{
         
         var user_fcm_token_list = await this.userrepository.GetAllFcmToken()
-        console.log(user_fcm_token_list)
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
@@ -61,7 +60,7 @@ class NotificationService {
         var message = {
             notification: {
               title:userInputs.title,
-              body: userInputs.body,
+              body: "",
               image: userInputs.media_url,
     
             },

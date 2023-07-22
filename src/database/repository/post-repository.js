@@ -183,6 +183,32 @@ class PostRepository {
     var d = await PostWishlistModel.remove({ user: user,post: post });
     return [];
   }
+  async NotificationGetPost() {
+    var query = [
+      {
+        '$sort': {
+          'createdAt': 1
+        }
+      }, {
+        '$match': {
+          'post_status': 'Published', 
+          '$or': [
+            {
+              'is_sent_notification': {
+                '$exists': false
+              }
+            }, {
+              'is_sent_notification': false
+            }
+          ]
+        }
+      }, {
+        '$limit': 1
+      }
+    ];
+    const templates = await PostModel.aggregate(query);
+    return templates;
+  }
 }
 
 module.exports = PostRepository;
