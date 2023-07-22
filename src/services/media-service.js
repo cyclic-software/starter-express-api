@@ -18,6 +18,23 @@ class MediaService {
     const MediaResult = await this.repository.GetMedias(q);
     return MediaResult;
   }
+  async GroupByMedia() {
+    var q = [
+      {
+        '$match': {
+          'folder_name': {
+            '$exists': true
+          }
+        }
+      }, {
+        '$group': {
+          '_id': '$folder_name'
+        }
+      }
+    ];
+    const MediaResult = await this.repository.GetMedias(q);
+    return MediaResult;
+  }
   async MediaById(id) {
     const MediaResult = await this.repository.FindMediaById(id);
     return MediaResult;
