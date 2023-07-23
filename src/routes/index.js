@@ -28,9 +28,7 @@ router.use('/user-payment', UserPaymentRoute)
 router.use('/main_category', mainCategoryRouter)
 router.use('/ads_slider', adsSliderRouter)
 router.use('/subcategory', subCategoryRouter)
-
 router.use('/cart', cart)
-
 router.use('/external', externalRouter)
-=
+
 module.exports = router
