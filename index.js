@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const User = require("./models/User.js");
 const Post = require("./models/Post.js");
 var jwt = require("jsonwebtoken");
-const { cartoonNames } = require("./helpers.js");
-
+const { cartoonNames, getMongoLink } = require("./helpers.js");
+//13.0827 80.2707
 const app = express();
 app.use(express.json());
-const url =
-  "mongodb+srv://Password:Password@cluster0.m9g1x.mongodb.net/maps?retryWrites=true&w=majority";
 
+const url = getMongoLink();
+console.log(process.env.NODE_ENV);
 mongoose.connect(url).then(() => {
   console.log("connected to database");
 });
@@ -22,16 +22,16 @@ app.all("/", (req, res) => {
 app.get("/nearby", async (req, res) => {
   try {
     const { latitude, longitude } = req.query; // Assuming the latitude, longitude, and maxDistance are provided as query parameters
-    //console.log("get latitude longitude", { latitude, longitude });
+    console.log("get latitude longitude", { latitude, longitude }, req.query);
     const options = {
       location: {
         $geoWithin: {
-          $centerSphere: [[longitude, latitude], 10 / 3963.2],
+          $centerSphere: [[longitude.toString(), latitude.toString()], 10 / 3963.2],
         },
       },
     };
 
-    const drivers = await User.find(options).lean();
+    const drivers = await Post.find(options).lean();
 
     res.status(200).json(drivers);
   } catch (error) {
@@ -44,10 +44,10 @@ app.get("/nearby", async (req, res) => {
 
 app.post("/shop", async (req, res) => {
   try {
-    const { title, latitude, longitude } = req.body; // Assuming the request body contains the driver's name, latitude, and longitude
+    const { userName, latitude, longitude } = req.body; // Assuming the request body contains the driver's name, latitude, and longitude
     console.log(">>>body", req.body);
     const user = new User({
-      title,
+      userName,
       location: {
         type: "Point",
         coordinates: [longitude, latitude],
@@ -96,13 +96,21 @@ app.post("/guest-login", async (req, res) => {
 
 app.post("/post", async (req, res) => {
   try {
-    const { userName, message, createAt, maxDistance, latitude, longitude } =
-      req.body;
-
+    const {
+      userName,
+      userId,
+      message,
+      createAt,
+      maxDistance,
+      latitude,
+      longitude,
+    } = req.body;
+    console.log("req post backend", req.body);
     const post = new Post({
       userName,
       message,
       createAt,
+      userId,
       maxDistance,
       location: {
         type: "Point",
@@ -110,7 +118,7 @@ app.post("/post", async (req, res) => {
       },
     });
     const savedPost = await post.save();
-    res.status(201).json(savedPost);
+    return res.status(201).json(savedPost);
   } catch (error) {
     console.error("Error creating user:", error);
     res
