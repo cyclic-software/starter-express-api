@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 app.get('/test', async function (req, res) {
 
   await s3.putObject({
-    Body: JSON.stringify({key:"value"}),
+    Body: JSON.stringify({key:"test"}),
     Bucket: "cyclic-good-handbag-hare-eu-central-1",
     Key: "some_files/my_file.json",
 }).promise()
