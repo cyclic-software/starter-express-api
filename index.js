@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const { writeFileSync, readFileSync } = require('fs');
-
+app.use(express.json());
 const path = './db.json';
 
 app.listen(process.env.PORT || 3000)
@@ -13,19 +13,26 @@ app.get('/', async function (req, res) {
     status: "recive"
   });
 })
+app.post('/led', async function (req, res) {
+  var body = req.body; 
 
+  await writeFileSync(path, JSON.stringify(body, null, 2), 'utf8');
 
-app.get('/test', async function (req, res) {
+  res.json({
+    status: true,
+    data: body
+  });
+})
+
+app.get('/led', async function (req, res) {
   try {
 
     var data = await readFileSync('./db.json');
     data = JSON.parse(data);
 
-    await writeFileSync(path, JSON.stringify(data, null, 2), 'utf8');
-
-    res.json({ 
+    res.json({
       status: true,
-      data : data
+      data: data
     });
   } catch (error) {
     console.log('An error has occurred ', error);

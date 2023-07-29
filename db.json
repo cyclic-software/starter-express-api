@@ -1,3 +1,5 @@
 {
-  "red_led": "ON"
+  "data": {
+    "red_led": "ON"
+  }
 }
