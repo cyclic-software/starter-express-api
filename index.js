@@ -1,37 +1,24 @@
-const express = require('express')
-const app = express()
-const { writeFileSync, readFileSync } = require('fs');
+// server.js
+const http = require('http');
+const socketIO = require('socket.io');
 
-const path = './db.json';
+const server = http.createServer();
+const io = socketIO(server);
 
-app.listen(process.env.PORT || 3000)
+io.on('connection', (socket) => {
+  console.log('A client connected.');
 
-app.get('/', async function (req, res) {
-
-  console.log('recive');
-  res.json({
-    status: "recive"
+  socket.on('message', (data) => {
+    console.log('Received message:', data);
+    // You can perform any actions you need with the data received from Python.
   });
-})
 
+  socket.on('disconnect', () => {
+    console.log('A client disconnected.');
+  });
+});
 
-app.get('/test', async function (req, res) {
-  try {
-
-    var data = await readFileSync('./db.json');
-    data = JSON.parse(data);
-
-    await writeFileSync(path, JSON.stringify(data, null, 2), 'utf8');
-
-    res.json({ 
-      status: true,
-      data : data
-    });
-  } catch (error) {
-    console.log('An error has occurred ', error);
-    res.json({
-      status: false
-    });
-  }
-
-})
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
