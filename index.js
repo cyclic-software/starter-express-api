@@ -1,36 +1,37 @@
 const express = require('express')
 const app = express()
-const AWS = require("aws-sdk");
-const s3 = new AWS.S3()
-// app.all('/', (req, res) => {
-//     console.log("Just got a request!")
-//     res.send('Yo!')
-// })
+const { writeFileSync, readFileSync } = require('fs');
+
+const path = './db.json';
+
 app.listen(process.env.PORT || 3000)
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
+
   console.log('recive');
   res.json({
-    status:"recive"
+    status: "recive"
   });
 })
+
+
 app.get('/test', async function (req, res) {
+  try {
 
-  await s3.putObject({
-    Body: JSON.stringify({key:"test"}),
-    Bucket: "cyclic-good-handbag-hare-eu-central-1",
-    Key: "some_files/my_file.json",
-}).promise()
+    var data = await readFileSync('./db.json');
+    data = JSON.parse(data);
 
-// get it back
-let my_file = await s3.getObject({
-    Bucket: "cyclic-good-handbag-hare-eu-central-1",
-    Key: "some_files/my_file.json",
-}).promise()
+    await writeFileSync(path, JSON.stringify(data, null, 2), 'utf8');
 
-console.log(JSON.parse(my_file))
-  console.log('recive');
-  res.json({
-    status:"recive"
-  });
+    res.json({ 
+      status: true,
+      data : data
+    });
+  } catch (error) {
+    console.log('An error has occurred ', error);
+    res.json({
+      status: false
+    });
+  }
+
 })
