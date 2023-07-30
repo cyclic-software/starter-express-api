@@ -5,10 +5,11 @@ app.use(express.json());
 app.listen(process.env.PORT || 3000)
 
 app.get('/', async function (req, res) {
-
+  // process.env.red_led = "OFF";
   console.log('recive');
   res.json({
-    status: "recive"
+    status: "recive",
+    data:process.env.red_led
   });
 })
 app.post('/led', async function (req, res) {
