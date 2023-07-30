@@ -3,7 +3,6 @@ const { Telegraf } = require('telegraf');
 // require('dotenv').config();//"dotenv": "^16.3.1",
 // const fs = require('fs');
 const express = require('express');
-const bodyParser = require('body-parser');
 const https = require('https');
 const { MongoClient } = require('mongodb');
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
@@ -1636,8 +1635,8 @@ bot.launch()
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const port = 3000;
 // Define callback URL
