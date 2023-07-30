@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
-const { writeFileSync, readFileSync } = require('fs');
 app.use(express.json());
-const path = './db.json';
 
 app.listen(process.env.PORT || 3000)
 
@@ -14,10 +12,9 @@ app.get('/', async function (req, res) {
   });
 })
 app.post('/led', async function (req, res) {
-  var body = req.body; 
-
-  await writeFileSync(path, JSON.stringify(body, null, 2), 'utf8');
-
+  var body = req.body;
+  process.env.red_led = body.data.red_led; 
+  body.data.red_led = process.env.red_led;
   res.json({
     status: true,
     data: body
@@ -26,12 +23,8 @@ app.post('/led', async function (req, res) {
 
 app.get('/led', async function (req, res) {
   try {
-
-    var data = await readFileSync('./db.json');
-    data = JSON.parse(data);
+    var data = {};
     data.data.red_led = process.env.red_led;
-    process.env.red_led = "OFF";
-    data.data.blue_led = process.env.red_led;
     res.json({
       status: true,
       data: data
