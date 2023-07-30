@@ -24,8 +24,11 @@ app.post('/led', async function (req, res) {
 
 app.get('/led', async function (req, res) {
   try {
-    var data = {};
-    data.data.red_led = process.env.red_led;
+    var data = {
+      data:{
+        red_led : process.env.red_led
+      }
+    };
     res.json({
       status: true,
       data: data
