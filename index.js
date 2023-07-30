@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const User = require("./models/User.js");
 const Post = require("./models/Post.js");
 var jwt = require("jsonwebtoken");
+const { clusterImages } = require("./utils/clustering.js");
 const { cartoonNames, getMongoLink } = require("./helpers.js");
+
 //13.0827 80.2707
 const app = express();
 app.use(express.json());
@@ -26,14 +28,17 @@ app.get("/nearby", async (req, res) => {
     const options = {
       location: {
         $geoWithin: {
-          $centerSphere: [[longitude.toString(), latitude.toString()], 10 / 3963.2],
+          $centerSphere: [
+            [longitude.toString(), latitude.toString()],
+            10 / 3963.2,
+          ],
         },
       },
     };
 
     const drivers = await Post.find(options).lean();
 
-    res.status(200).json(drivers);
+    res.status(200).json(clusterImages(drivers));
   } catch (error) {
     console.error("Error fetching nearby user:", error);
     res
