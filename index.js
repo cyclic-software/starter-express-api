@@ -29,7 +29,7 @@ app.get('/led', async function (req, res) {
 
     var data = await readFileSync('./db.json');
     data = JSON.parse(data);
-    data.data.red_led = process.env.redled;
+    data.data.red_led = process.env.red_led;
     res.json({
       status: true,
       data: data
