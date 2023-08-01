@@ -15,14 +15,16 @@ module.exports = (app) => {
   app.post("/analytics/post/create",  async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
-        post_id: "required",
-        user_id: "required",
+        post: "required",
+        user: "required",
         anallytics_type: "required",
       });
       const matched = await v.check();
       if (!matched) {
         return res.status(400).send(v.errors);
       }
+      req.body.user_id  = req.body.user
+      req.body.post_id  = req.body.post
       var data = await service.AddAnalytics(req.body);
       data = data = await GetApiResponse(data);
       return res.json(data);
