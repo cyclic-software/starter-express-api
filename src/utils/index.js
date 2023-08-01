@@ -63,6 +63,8 @@ module.exports.paginateResults = async (
   matcharray = [],
   sortarray = {}
 ) => {
+  console.log("matcharray")
+  console.log(JSON.stringify(matcharray))
   var pipeline = [];
 
   if (
