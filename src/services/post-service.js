@@ -400,7 +400,6 @@ class PostService {
         id:postdata._id,
         is_sent_notification:true
       }
-      console.log(formdata)
       await this.repository.UpdatePost(formdata)
       return PostResult;
     }catch(error){
