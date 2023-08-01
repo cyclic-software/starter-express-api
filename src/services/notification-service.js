@@ -93,8 +93,11 @@ class NotificationService {
   async Notifications(size, skip, matchdata, sortob) {
     try{
 
+      var sortob = {
+        "orderby":-1,
+    "orderbycolumnname":"createdAt"
+      }
       var q = await paginateResults(size, skip, matchdata, sortob);
-      console.log(q)
       const NotificationResult = await this.repository.GetNotifications(q);
       return NotificationResult;
     }catch(error){
