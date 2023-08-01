@@ -86,10 +86,9 @@ module.exports.paginateResults = async (
         exclude_keysarray = matcharray.exclude_keys;
       }
       Object.entries(matcharray).forEach(async ([key, value]) => {
-        console.log(key)
+        
         if(key == "extra_query"){
           pipeline.push(value);
-          console.log(value)
         }
         if (
           key != "page" &&
