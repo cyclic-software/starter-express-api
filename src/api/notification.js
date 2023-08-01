@@ -32,6 +32,8 @@ module.exports = (app) => {
   app.post("/notifications",  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
+      req.body.orderbycolumnname = "createdAt"
+      req.body.orderby = "-1"
       var sortarray = await GetSortByFromRequest(
         req.body.orderbycolumnname,
         req.body.orderby
