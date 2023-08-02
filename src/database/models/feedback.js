@@ -7,7 +7,9 @@ const Schema = mongoose.Schema;
 const FeedbackSchema = new Schema(
   {
     feedback_text: { type: String, default:''  },
-    feedback_type: { type: String, default:''},
+    feeback_name: { type: String, default:''  },
+    feeback_mobile: { type: String, default:''  },
+    feeback_email: { type: String, default:''  },
     feedback_description: { type: String,default:'' },
     is_del: { type: Boolean, default: false }
    
