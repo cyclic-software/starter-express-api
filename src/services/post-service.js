@@ -251,6 +251,24 @@ class PostService {
         matchdata["extra_query"] =   extra_query  
       var q = await paginateResults(size, skip, matchdata, sortob);
       console.log(JSON.stringify(q))
+      var q2  =  {
+        '$lookup': {
+          'from': 'categories', 
+          'localField': 'category_id', 
+          'foreignField': '_id', 
+          'as': 'category_data'
+        }
+      }
+       q.push(q2)
+       var q3 = {
+        '$lookup': {
+          'from': 'poets', 
+          'localField': 'poet_id', 
+          'foreignField': '_id', 
+          'as': 'poet_data'
+        }
+      }
+      q.push(q3)
       var PostResult   = await this.repository.GetPosts(q);
       const myInstance = this;
 
@@ -261,6 +279,14 @@ class PostService {
           item.is_like =is_like; 
           var is_wishlist  = await EveryPostCheckWishlistOrNot(item,user,myInstance);
           item.is_wishlist =is_wishlist; 
+          item.poet_image_url = ""
+          item.category_media_url = ""
+          if(item.poet_data.length !=0){
+               item.poet_image_url = item.poet_data[0].profile_media_url
+          }
+          if(item.category_data.length !=0){
+               item.category_media_url = item.category_data[0].category_media_url
+          }
         }
       
         return PostResult;
