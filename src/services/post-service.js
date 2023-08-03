@@ -180,6 +180,7 @@ class PostService {
           item.category_media_url = ""
           if(item.poet_data.length !=0){
                item.poet_image_url = item.poet_data[0].profile_media_url
+               item.is_blue_tick = item.poet_data[0].is_blue_tick
           }
           if(item.category_data.length !=0){
                item.category_media_url = item.category_data[0].category_media_url
@@ -283,6 +284,8 @@ class PostService {
           item.category_media_url = ""
           if(item.poet_data.length !=0){
                item.poet_image_url = item.poet_data[0].profile_media_url
+               item.is_blue_tick = item.poet_data[0].is_blue_tick
+
           }
           if(item.category_data.length !=0){
                item.category_media_url = item.category_data[0].category_media_url
