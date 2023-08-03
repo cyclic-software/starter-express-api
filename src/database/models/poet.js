@@ -43,6 +43,7 @@ const CategorySchema = new Schema(
     awards: { type: Object }, 
     profile_media_url: {type:String},
     is_del: { type: Boolean, default: false },
+    is_blue_tick: { type: Boolean, default: false },
     download:{type:Number,default:0},
     share:{type:Number,default:0},
     like:{type:Number,default:0},
