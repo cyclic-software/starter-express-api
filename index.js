@@ -29,6 +29,6 @@ app.get("/ugt=:id", function(req,res) {
     res.render("ugt_item",item);
 });
 
-app.listen(80,() => {
+app.listen(3000,() => {
     console.log("Opened Server");
 })
