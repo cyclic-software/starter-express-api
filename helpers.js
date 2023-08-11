@@ -22,6 +22,7 @@ const cartoonNames = [
 ];
 
 const getMongoLink = () =>
-  "mongodb+srv://Password:Password@cluster0.m9g1x.mongodb.net/maps?retryWrites=true&w=majority";
-//: 'mongodb://localhost:27017';
+ "mongodb+srv://Password:Password@cluster0.m9g1x.mongodb.net/maps?retryWrites=true&w=majority";
+
+//const getMongoLink = () => "mongodb://localhost:27017";
 module.exports = { cartoonNames, getMongoLink };

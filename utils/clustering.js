@@ -21,8 +21,9 @@ const areImagesClose = (image1, image2) => {
     image1.location.coordinates[1],
     image1.location.coordinates[0],
     image2.location.coordinates[1],
-    image2.location.coordinates[0],
+    image2.location.coordinates[0]
   );
+
   return distance <= clusteringThreshold;
 };
 

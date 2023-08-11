@@ -5,10 +5,14 @@ const Post = require("./models/Post.js");
 var jwt = require("jsonwebtoken");
 const { clusterImages } = require("./utils/clustering.js");
 const { cartoonNames, getMongoLink } = require("./helpers.js");
+const http = require("http");
+const socketIo = require("socket.io");
 
 //13.0827 80.2707
 const app = express();
 app.use(express.json());
+const server = http.createServer(app);
+const io = socketIo(server);
 
 const url = getMongoLink();
 console.log(process.env.NODE_ENV);
@@ -24,7 +28,7 @@ app.all("/", (req, res) => {
 app.get("/nearby", async (req, res) => {
   try {
     const { latitude, longitude } = req.query; // Assuming the latitude, longitude, and maxDistance are provided as query parameters
-    console.log("get latitude longitude", { latitude, longitude }, req.query);
+    //console.log("get latitude longitude", { latitude, longitude }, req.query);
     const options = {
       location: {
         $geoWithin: {
@@ -37,7 +41,6 @@ app.get("/nearby", async (req, res) => {
     };
 
     const drivers = await Post.find(options).lean();
-
     res.status(200).json(clusterImages(drivers));
   } catch (error) {
     console.error("Error fetching nearby user:", error);
@@ -145,6 +148,77 @@ app.post("/verify-token", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () => {
+const userToSocketMap = {};
+io.on("connection", (socket) => {
+  let currentUserId;
+  console.log("user connected");
+  socket.on("update_userLocation", async (data) => {
+    userToSocketMap[data.userId] = socket.id;
+    currentUserId = data.userId;
+    console.log("update_userLocation", {
+      userId: data.userId,
+      socket: socket.id,
+    });
+    const newCoordinates = [data.longitude, data.latitude];
+
+    await User.findOneAndUpdate(
+      { _id: data.userId },
+      {
+        $set: {
+          "location.type": "Point",
+          "location.coordinates": newCoordinates,
+        },
+      },
+      { new: true }
+    );
+
+    const options = {
+      location: {
+        $geoWithin: {
+          $centerSphere: [
+            [data.longitude.toString(), data.latitude.toString()],
+            10 / 3963.2,
+          ],
+        },
+      },
+    };
+
+    const nearbyUsers = await User.find(options);
+    const currentActiveUsers = nearbyUsers
+      .filter((user) => {
+        if (!userToSocketMap[user._id] || user._id == data.userId) return false;
+        return true;
+      })
+      .map((user) => {
+        return {
+          userName: user.userName,
+          userId: user._id,
+          coordinates: user.location.coordinates,
+        };
+      });
+
+    currentActiveUsers.forEach((user) => {
+      socket.to(userToSocketMap[user.userId]).emit("locationUpdate", {
+        userId: data.userId,
+        coordinates: newCoordinates,
+      });
+    });
+
+    socket.emit("nearbyUsers", currentActiveUsers);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(">>>>>>>>>>>> User disconnected", socket.id, {
+      currentUserId,
+    });
+    delete userToSocketMap[currentUserId];
+  });
+});
+
+server.listen(process.env.PORT || 3000, () => {
   console.log("Server is Running");
 });
+
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log("Server is Running");
+// });
