@@ -70,7 +70,7 @@ class NotificationService {
           };
     
           console.log(userInputs)
-        // var notifcation = await  admin.messaging().sendMulticast(message)
+        var notifcation = await  admin.messaging().sendMulticast(message)
         const NotificationResult =   this.repository.CreateNotification(userInputs);
           return NotificationResult
            
