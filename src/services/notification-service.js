@@ -69,7 +69,8 @@ class NotificationService {
             tokens: user_fcm_token_list
           };
     
-        var notifcation = await  admin.messaging().sendMulticast(message)
+          console.log(userInputs)
+        // var notifcation = await  admin.messaging().sendMulticast(message)
         const NotificationResult =   this.repository.CreateNotification(userInputs);
           return NotificationResult
            

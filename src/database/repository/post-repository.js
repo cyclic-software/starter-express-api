@@ -21,6 +21,11 @@ class PostRepository {
     
     var query =  [
       {
+        '$sort': {
+          'createdAt': -1
+        }
+      },
+      {
         '$match': {
           'user': mongoose.Types.ObjectId(userInputs.user)
         }
@@ -91,6 +96,11 @@ class PostRepository {
   async GetPostWithWishlists(userInputs) {
     
    var query =  [
+    {
+      '$sort': {
+        'createdAt': -1
+      }
+    },
       {
         '$match': {
           'user': mongoose.Types.ObjectId(userInputs.user)
