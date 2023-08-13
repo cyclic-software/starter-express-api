@@ -564,7 +564,7 @@ module.exports.FilterNullValuesJsonForNotifiction = async (json) => {
   const entries = Object.entries(json); // 1️⃣
   const nonEmptyOrNull = entries.filter(
     ([key, val]) =>
-      val != "" && val != null && val != undefined && val != "undefined" 
+      val != "" && val != null && val != undefined && val != "undefined" && typeof val ==  "string"
   ); // 2️⃣
   const output = Object.fromEntries(nonEmptyOrNull); // 3️⃣
   return output;

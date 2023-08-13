@@ -379,11 +379,11 @@ class PostService {
 
 
       await NotificationService.SendNotificationToAllUser(userInputs)
-      // var formdata = {
-      //   id:postdata._id,
-      //   is_sent_notification:true
-      // }
-      // await this.repository.UpdatePost(formdata)
+      var formdata = {
+        id:postdata._id,
+        is_sent_notification:true
+      }
+      await this.repository.UpdatePost(formdata)
       return PostResult;
     }catch(error){
       console.log(error)

@@ -24,7 +24,6 @@ class NotificationService {
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
-        userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
         
         var message = {
             notification: {
@@ -38,8 +37,20 @@ class NotificationService {
             tokens: user_fcm_token_list
           };
     
-        var notifcation = await  admin.messaging().sendMulticast(message)
-        const NotificationResult =   this.repository.CreateNotification(userInputs);
+          const NotificationResult =   this.repository.CreateNotification(userInputs);
+          userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
+          var finalmessage = {
+            notification: {
+              title:userInputs.title,
+              body: "",
+              image: userInputs.media_url,
+    
+            },
+            data: userInputs.data,
+    
+            tokens: user_fcm_token_list
+          };
+        var notifcation = await  admin.messaging().sendMulticast(finalmessage)
           return NotificationResult
            
     }catch(error){
@@ -55,7 +66,6 @@ class NotificationService {
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
-        userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
         
         var message = {
             notification: {
@@ -69,9 +79,20 @@ class NotificationService {
             tokens: user_fcm_token_list
           };
     
-          console.log(userInputs)
-        var notifcation = await  admin.messaging().sendMulticast(message)
-        const NotificationResult =   this.repository.CreateNotification(userInputs);
+          const NotificationResult =   this.repository.CreateNotification(userInputs);
+          userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
+          var finalmessage = {
+            notification: {
+              title:userInputs.title,
+              body: "",
+              image: userInputs.media_url,
+    
+            },
+            data: userInputs.data,
+    
+            tokens: user_fcm_token_list
+          };
+        var notifcation = await  admin.messaging().sendMulticast(finalmessage)
           return NotificationResult
            
     }catch(error){
