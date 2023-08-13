@@ -37,8 +37,12 @@ class NotificationService {
             tokens: user_fcm_token_list
           };
     
+          var data = userInputs.data
+
           const NotificationResult =   this.repository.CreateNotification(userInputs);
           userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
+          userInputs.data._id = String(data._id)
+
           var finalmessage = {
             notification: {
               title:userInputs.title,
@@ -78,9 +82,11 @@ class NotificationService {
     
             tokens: user_fcm_token_list
           };
+          var data = userInputs.data
     
           const NotificationResult =   this.repository.CreateNotification(userInputs);
           userInputs.data  = await FilterNullValuesJsonForNotifiction(userInputs.data)
+          userInputs.data._id = String(data._id)
           var finalmessage = {
             notification: {
               title:userInputs.title,
@@ -92,6 +98,7 @@ class NotificationService {
     
             tokens: user_fcm_token_list
           };
+          console.log(finalmessage)
         var notifcation = await  admin.messaging().sendMulticast(finalmessage)
           return NotificationResult
            
