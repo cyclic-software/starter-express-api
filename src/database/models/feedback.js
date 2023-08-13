@@ -11,6 +11,8 @@ const FeedbackSchema = new Schema(
     feeback_mobile: { type: String, default:''  },
     feeback_email: { type: String, default:''  },
     feedback_description: { type: String,default:'' },
+    user : { type:  mongoose.Schema.Types.ObjectId, ref: 'users'  },
+
     is_del: { type: Boolean, default: false }
    
   },
