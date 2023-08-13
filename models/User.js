@@ -3,6 +3,7 @@ const { model } = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   userName: { type: String, required: true },
+  imageId: { type: Number, required: true },
   location: {
     type: { type: String },
     coordinates: [Number],

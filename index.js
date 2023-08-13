@@ -12,7 +12,9 @@ const socketIo = require("socket.io");
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: "*",
+});
 
 const url = getMongoLink();
 console.log(process.env.NODE_ENV);
@@ -84,16 +86,22 @@ app.post("/guest-login", async (req, res) => {
       exists = await User.findOne({ userName });
       console.log("while", { userName, exists });
     } while (exists);
-
+    const imageId = Math.floor(Math.random() * 8);
     const user = new User({
       userName,
+      imageId: imageId,
     });
     const savedUser = await user.save();
     const token = jwt.sign({ _id: savedUser._id, userName }, "SECRET_KEY");
 
     res
       .status(201)
-      .json({ token, userName: savedUser.userName, userId: savedUser._id });
+      .json({
+        token,
+        userName: savedUser.userName,
+        userId: savedUser._id,
+        imageId: savedUser.imageId,
+      });
   } catch (error) {
     console.error("Error creating user:", error);
     res
@@ -148,18 +156,47 @@ app.post("/verify-token", async (req, res) => {
   }
 });
 
+const getNearByUsersActiveUsers = async (userId, longitude, latitude) => {
+  const options = {
+    location: {
+      $geoWithin: {
+        $centerSphere: [
+          [longitude.toString(), latitude.toString()],
+          10 / 3963.2,
+        ],
+      },
+    },
+  };
+
+  const nearbyUsers = await User.find(options);
+  return nearbyUsers
+    .filter((user) => {
+      if (!userToSocketMap[user._id] || user._id == userId) return false;
+      return true;
+    })
+    .map((user) => {
+      console.log("user.userName", user.userName);
+      return {
+        userName: user.userName,
+        userId: user._id,
+        coordinates: user.location.coordinates,
+      };
+    });
+};
+
 const userToSocketMap = {};
 io.on("connection", (socket) => {
   let currentUserId;
+  let newCoordinates;
+
   console.log("user connected");
   socket.on("update_userLocation", async (data) => {
+    socket.user = data.userId;
+    socket.location = [data.longitude, data.latitude];
     userToSocketMap[data.userId] = socket.id;
     currentUserId = data.userId;
-    console.log("update_userLocation", {
-      userId: data.userId,
-      socket: socket.id,
-    });
-    const newCoordinates = [data.longitude, data.latitude];
+
+    newCoordinates = [data.longitude, data.latitude];
 
     await User.findOneAndUpdate(
       { _id: data.userId },
@@ -171,46 +208,33 @@ io.on("connection", (socket) => {
       },
       { new: true }
     );
-
-    const options = {
-      location: {
-        $geoWithin: {
-          $centerSphere: [
-            [data.longitude.toString(), data.latitude.toString()],
-            10 / 3963.2,
-          ],
-        },
-      },
-    };
-
-    const nearbyUsers = await User.find(options);
-    const currentActiveUsers = nearbyUsers
-      .filter((user) => {
-        if (!userToSocketMap[user._id] || user._id == data.userId) return false;
-        return true;
-      })
-      .map((user) => {
-        return {
-          userName: user.userName,
-          userId: user._id,
-          coordinates: user.location.coordinates,
-        };
-      });
-
+    const currentActiveUsers = await getNearByUsersActiveUsers(
+      data.userId,
+      data.longitude,
+      data.latitude
+    );
     currentActiveUsers.forEach((user) => {
       socket.to(userToSocketMap[user.userId]).emit("locationUpdate", {
+        userName: data.userName,
         userId: data.userId,
         coordinates: newCoordinates,
       });
     });
-
     socket.emit("nearbyUsers", currentActiveUsers);
   });
 
-  socket.on("disconnect", () => {
-    console.log(">>>>>>>>>>>> User disconnected", socket.id, {
-      currentUserId,
+  socket.on("disconnect", async () => {
+    const currentActiveUsers = await getNearByUsersActiveUsers(
+      socket.user,
+      socket?.location?.[0] || 0,
+      socket?.location?.[1] || 0
+    );
+    currentActiveUsers.forEach((user) => {
+      socket.to(userToSocketMap[user.userId]).emit("locationUpdate_left_user", {
+        userId: socket.user,
+      });
     });
+    console.log(">>>>>>>>>>>> User disconnected");
     delete userToSocketMap[currentUserId];
   });
 });
