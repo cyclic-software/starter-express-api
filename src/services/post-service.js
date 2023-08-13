@@ -368,6 +368,7 @@ class PostService {
      
       var PostResult   = await this.repository.NotificationGetPost();
       var postdata  =  PostResult[0]
+      
       var userInputs = {
           title:postdata.post_name,
           body: postdata.post_description,
