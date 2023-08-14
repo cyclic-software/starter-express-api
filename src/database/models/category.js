@@ -16,6 +16,7 @@ const CategorySchema = new Schema(
     share:{type:Number,default:0},
     like:{type:Number,default:0},
     copy:{type:Number,default:0},
+    view:{type:Number,default:0},
     wishlist:{type:Number,default:0},
   },
   {

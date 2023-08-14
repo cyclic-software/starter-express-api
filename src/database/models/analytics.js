@@ -39,23 +39,40 @@ AnalyticsSchema.post('save', async function(like) {
   // const postId = like.post;
   const count = await mongoose.model('analytics').countDocuments({ anallytics_type: anallytics_type,poet_id:poet_id, user_id:this.user_id});
   var updatedocument = {}
+  var updatepostdocument = {}
+  var updatepoetcount = {}
   if(anallytics_type == "like"){
     updatedocument.like = count
+    updatepostdocument.likeCount = count
+    updatepoetcount.likeCount = count
   }
   if(anallytics_type == "whishlist"){
     updatedocument.wishlist = count
+    updatepostdocument.wishlistCount = count
+    updatepoetcount.wishlistCount = count
+  }
+  if(anallytics_type == "view"){
+    updatedocument.view = count
+    updatepostdocument.view = count
+    updatepoetcount.view = count
   }
   if(anallytics_type == "download"){
     updatedocument.download = count
+    updatepostdocument.download = count
+    updatepoetcount.download = count
   }
   if(anallytics_type == "share"){
     updatedocument.share = count
+    updatepostdocument.share = count
+    updatepoetcount.share = count
   }
   if(anallytics_type == "copy"){
     updatedocument.copy = count
+    updatepostdocument.copy = count
+    updatepoetcount.copy = count
   }
-  await mongoose.model('post').findByIdAndUpdate({_id:mongoose.Types.ObjectId(post_id)}, { $set: updatedocument });
-  await mongoose.model('poet').findByIdAndUpdate({_id:mongoose.Types.ObjectId(poet_id)}, { $set: updatedocument });
+  await mongoose.model('post').findByIdAndUpdate({_id:mongoose.Types.ObjectId(post_id)}, { $set: updatepostdocument });
+  await mongoose.model('poet').findByIdAndUpdate({_id:mongoose.Types.ObjectId(poet_id)}, { $set: updatepoetcount });
   await mongoose.model('category').findByIdAndUpdate({_id:mongoose.Types.ObjectId(category_id)}, { $set: updatedocument });
 });
 module.exports = mongoose.model('analytics', AnalyticsSchema);
