@@ -22,7 +22,7 @@ app.post('/led', async function (req, res) {
   });
 })
 
-app.get('/led', async function (req, res) {
+app.get('/led', async function (req, res) { 
   try {
     var data = {
       data:{
