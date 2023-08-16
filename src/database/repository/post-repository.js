@@ -27,6 +27,13 @@ class PostRepository {
       },
       {
         '$match': {
+          'reel_video_link': {
+            $eq:""
+          }
+        }
+      }, 
+      {
+        '$match': {
           'user': mongoose.Types.ObjectId(userInputs.user)
         }
       }, {
