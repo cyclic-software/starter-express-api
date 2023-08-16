@@ -30,21 +30,7 @@ class PostRepository {
           'user': mongoose.Types.ObjectId(userInputs.user)
         }
       },
-      {
-        '$match': {
-          '$or': [
-            {
-              'reel_video_link': {
-                '$eq': ''
-              }
-            }, {
-              'reel_video_link': {
-                '$eq': null
-              }
-            }
-          ]
-        }
-      }, {
+       {
         '$lookup': {
           'from': 'users', 
           'localField': 'user', 
@@ -81,6 +67,21 @@ class PostRepository {
               }, '$$ROOT'
             ]
           }
+        }
+      },
+      {
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            }, {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
         }
       }
     ]
@@ -120,20 +121,6 @@ class PostRepository {
         '$match': {
           'user': mongoose.Types.ObjectId(userInputs.user)
         }
-      },{
-        '$match': {
-          '$or': [
-            {
-              'reel_video_link': {
-                '$eq': ''
-              }
-            }, {
-              'reel_video_link': {
-                '$eq': null
-              }
-            }
-          ]
-        }
       }, {
         '$lookup': {
           'from': 'users', 
@@ -171,6 +158,20 @@ class PostRepository {
               }, '$$ROOT'
             ]
           }
+        }
+      },{
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            }, {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
         }
       }
     ]
