@@ -27,14 +27,22 @@ class PostRepository {
       },
       {
         '$match': {
-          'reel_video_link': {
-            $eq:""
-          }
+          'user': mongoose.Types.ObjectId(userInputs.user)
         }
-      }, 
+      },
       {
         '$match': {
-          'user': mongoose.Types.ObjectId(userInputs.user)
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            }, {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
         }
       }, {
         '$lookup': {
@@ -111,6 +119,20 @@ class PostRepository {
       {
         '$match': {
           'user': mongoose.Types.ObjectId(userInputs.user)
+        }
+      },{
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            }, {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
         }
       }, {
         '$lookup': {
