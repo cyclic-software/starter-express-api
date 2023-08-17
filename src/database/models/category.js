@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const CategorySchema = new Schema(
   {
     category_name: { type: String, required: true,unique:true },
+    category_english_name: { type: String,default:''   },
     category_slug: { type: String, default:'',unique:true},
     category_description: { type: String,default:'' },
     category_media_url: { type: String,default:'' },
