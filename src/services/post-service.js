@@ -392,6 +392,31 @@ class PostService {
       return error
     }
   }
+  async ScriptPOST() {
+
+    try{
+      var PostResult   = await this.repository.GetALLPOSTFORScript();
+
+      for (const item of PostResult) {
+        var categorydata=  await this.CategoryRepository.FindCategoryById(item.category_id)
+        var poetdata=  await this.PoetRepository.FindPoetById(item.poet_id)
+        var poet_english_name = poetdata[0].poet_english_name
+        var category_english_name = categorydata[0].category_english_name
+        
+        var formdata = {
+          poet_english_name:poet_english_name,
+          id:item._id,
+          category_english_name:category_english_name
+        }
+        await this.repository.UpdatePostScript(formdata)
+      }
+      
+      return PostResult;
+    }catch(error){
+      console.log(error)
+      return error
+    }
+  }
 }
 
 module.exports = PostService;

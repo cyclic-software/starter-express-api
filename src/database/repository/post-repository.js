@@ -249,6 +249,24 @@ class PostRepository {
     const templates = await PostModel.aggregate(query);
     return templates;
   }
+  async GetALLPOSTFORScript() {
+    var query = [
+      {
+        '$limit': 200
+      }
+    ]
+
+      
+    const templates = await PostModel.aggregate(query);
+    return templates;
+  }
+  async UpdatePostScript(formdata) {
+    const template = await PostModel.updateOne(
+      { _id: formdata['id'] },
+      { $set: formdata },
+    );
+    return template;
+  }
 }
 
 module.exports = PostRepository;

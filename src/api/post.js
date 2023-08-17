@@ -221,4 +221,14 @@ module.exports = (app) => {
       next(error);
     }
   });
+  app.post("/script/updatepoetandcategory",  async (req, res, next) => {
+    try {
+      console.log("Sdsf")
+      var data = await service.ScriptPOST();
+      data = await GetApiResponse([]);
+      return res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  });
 };
