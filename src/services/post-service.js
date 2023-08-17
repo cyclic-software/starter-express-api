@@ -249,9 +249,11 @@ class PostService {
           ]
         }
       };
-        matchdata["extra_query"] =   extra_query  
+      matchdata["extra_query"] =   extra_query  
+      
       var q = await paginateResults(size, skip, matchdata, sortob);
-      console.log(JSON.stringify(q))
+      var js = { '$sample': { 'size': size } };
+      q.push(js)
       var q2  =  {
         '$lookup': {
           'from': 'categories', 
