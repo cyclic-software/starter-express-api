@@ -14,6 +14,7 @@ const galleryschema = new mongoose.Schema({
 const CategorySchema = new Schema(
   {
     poet_name: { type: String, required: true,unique:true },
+    poet_english_name: { type: String,default:'' },
     poet_slug: {  type: String, default:'',unique:true},
     poet_description: { type: String,default:'' },
     poet_birthdate: { type: String,default:'' },
