@@ -50,12 +50,8 @@ module.exports = (app) => {
   
   app.post("/adminanalyticss",  async (req, res, next) => {
     try {
-      const { limit, skip } = await GetPagination(req.body.page, req.body.size);
-      var sortarray = await GetSortByFromRequest(
-        req.body.orderbycolumnname,
-        req.body.orderby
-      );
-      var data = await service.AdminAnalyticss(limit, skip, req.body, sortarray);
+     
+      var data = await service.AdminAnalyticss();
       data = await GetApiResponse(data);
       return res.json(data);
     } catch (error) {
@@ -95,4 +91,6 @@ module.exports = (app) => {
       next(error);
     }
   });
+
+  
 };

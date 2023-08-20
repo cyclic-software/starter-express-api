@@ -35,8 +35,7 @@ class AnalyticsService {
     const AnalyticsResult = await this.repository.GetAnalyticss(q);
     return AnalyticsResult;
   }
-  async AdminAnalyticss(size, skip, matchdata, sortob) {
-    var q = await paginateResults(size, skip, matchdata, sortob);
+  async AdminAnalyticss() {
     const AnalyticsResult = await this.repository.GetAdminAnalyticss(q);
     return AnalyticsResult;
   }
