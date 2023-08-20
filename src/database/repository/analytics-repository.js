@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { AnalyticsModel,PostModel } = require('../models');
+const { AnalyticsModel,PostModel ,UserModel,PoetModel,CategoryModel,FeedbackModel,MediaModel} = require('../models');
 
 //Dealing with data base operations
 class AnalyticsRepository {
@@ -52,11 +52,150 @@ class AnalyticsRepository {
     const templates = await AnalyticsModel.aggregate(query);
     return templates;
   }
-  async GetAdminAnalyticss(query) {
+  async GetAdminAnalyticss() {
    
+    var query = [
+      {
+        '$group': {
+          '_id': '$anallytics_type', 
+          'count': {
+            '$count': {}
+          }
+        }
+      }, {
+        '$sort': {
+          'count': -1
+        }
+      }, {
+        '$project': {
+          '_id': 0, 
+          'label': {
+            '$toUpper': '$_id'
+          }, 
+          'count': 1
+        }
+      }
+    ]
     const templates = await AnalyticsModel.aggregate(query);
+    var finaldata = [];
+    var totalusercount = await this.TotalUsersCount();
+    var totalpublishedpost = await this.TotalPublishedPOST();
+    var totaldraftpost = await this.TotalDraftPOST();
+    var totalpoet = await this.TotalPoet();
+    var totalcategoy = await this.TotalCagtegory();
+    var totalfeedback = await this.TotalFeedback();
+    templates.unshift(totalpublishedpost);
+    templates.unshift(totalpoet);
+    templates.unshift(totaldraftpost);
+    templates.unshift(totalusercount);
+    templates.unshift(totalcategoy);
+    templates.unshift(totalfeedback);
+
+    templates.sort((a, b) => b.count - a.count);
+
     return templates;
   }
+  async TotalUsersCount() {
+   var query =  [
+      {
+        '$count': 'usercount'
+      }, {
+        '$project': {
+          'count': '$usercount', 
+          'label': 'Total USERS'
+        }
+      }
+    ]
+    const analyticss = await UserModel.aggregate(query);
+    return analyticss[0];
+  }
+  async TotalPublishedPOST() {
+    var query =  [
+      {
+        '$match': {
+          'post_status': 'Published'
+        }
+      },
+       {
+         '$count': 'postcount'
+       }, {
+         '$project': {
+           'count': '$postcount', 
+           'label': 'Total Published POST'
+         }
+       }
+     ]
+     const analyticss = await PostModel.aggregate(query);
+     return analyticss[0];
+   }
+   async TotalDraftPOST() {
+    var query =  [
+      {
+        '$match': {
+          'post_status': 'Draft'
+        }
+      },
+       {
+         '$count': 'postcount'
+       }, {
+         '$project': {
+           'count': '$postcount', 
+           'label': 'Total Draft POST'
+         }
+       }
+     ]
+     const analyticss = await PostModel.aggregate(query);
+     return analyticss[0];
+   }
+   async TotalPoet() {
+    var query =  [
+      {
+        '$match': {
+          'poet_status': 'Published'
+        }
+      },
+       {
+         '$count': 'postcount'
+       }, {
+         '$project': {
+           'count': '$postcount', 
+           'label': 'Total Poet'
+         }
+       }
+     ]
+     const analyticss = await PoetModel.aggregate(query);
+     return analyticss[0];
+   }
+   async TotalCagtegory() {
+    var query =  [
+      
+       {
+         '$count': 'cateogorycount'
+       }, {
+         '$project': {
+           'count': '$cateogorycount', 
+           'label': 'Total Category'
+         }
+       }
+     ]
+     const analyticss = await CategoryModel.aggregate(query);
+     return analyticss[0];
+   }
+   async TotalFeedback() {
+    var query =  [
+      
+       {
+         '$count': 'feedback'
+       }, {
+         '$project': {
+           'count': '$feedback', 
+           'label': 'Total Feedback'
+         }
+       }
+     ]
+     const analyticss = await FeedbackModel.aggregate(query);
+     return analyticss[0];
+   }
   async FindAnalyticsById(id) {
     const analyticss = await AnalyticsModel.find({ is_del: false, _id: id });
     return analyticss;

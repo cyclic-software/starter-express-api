@@ -36,7 +36,8 @@ class AnalyticsService {
     return AnalyticsResult;
   }
   async AdminAnalyticss() {
-    const AnalyticsResult = await this.repository.GetAdminAnalyticss(q);
+
+    const AnalyticsResult = await this.repository.GetAdminAnalyticss();
     return AnalyticsResult;
   }
   async AnalyticsById(id) {
