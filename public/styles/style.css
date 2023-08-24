@@ -1,0 +1,213 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+h1{
+  font-family: 'Cedarville Cursive', cursive;
+  animation: 10s pulse infinite;
+  margin-top: auto;
+  text-decoration: underline;
+  text-shadow: 1.5rem;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+footer {
+  
+  color: aqua;
+  
+  background-color: blueviolet;
+  text-align: center;
+  
+}
+footer>div{
+  animation: 3s pulse infinite;
+  font-weight: bolder;
+}
+
+.center-container {
+  display: grid;
+  place-items: center;
+  /* Horizontally and vertically center */
+  height: 100vh;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  mix-blend-mode: exclusion;
+  position: relative;
+  background-image: url(/images/background_big.jfif);
+  
+  /* filter: blur(4px); */
+  /* Adjust the height as needed */
+}
+
+.center-content {
+  position: absolute;
+  opacity: 1;
+  animation: 5s pulseDance infinite;
+  color: rgb(18, 2, 34);
+  height: fit-content;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(0);
+  /* Move the element to the center */
+  background: transparent;
+  border: 5px solid wheat;
+  box-shadow: 10px 5px 5px red;
+  padding: 2rem 0;
+  border-radius: 2rem;
+  
+}
+
+
+.text-area {
+  margin-top: 1rem;
+  margin-left: 3rem;
+  border-radius: 0.5rem;
+  height: 5vh;
+  width: max-content;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 1px rgb(194, 9, 9);
+}
+
+.ulItems, .no-item{
+  list-style-type: none;
+  /* margin-left: 2rem; */
+  position: relative;
+  z-index: 1;
+}
+.no-item{
+  font-size: xx-large;
+    font-weight: bolder;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}
+ul li{
+  
+  font-size: x-large;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+li{
+  display: table-row-group;
+  width: 100%;
+  position: relative;
+  left: 3rem;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+button {
+  box-shadow: 2px 2px 2px 1px rgb(114, 233, 9);
+}
+
+.taskCheckbox{
+  height: 16px;
+  width: 16px;
+}
+.work {
+ font-size: larger;
+ font-weight: bolder;
+ font-style: italic;
+ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.today{
+  font-size: larger;
+  font-weight: bolder;
+  font-style: italic;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.work:hover{
+  border-bottom: 2px solid rgb(6, 182, 94);
+}
+
+.today:hover{
+  border-bottom: 2px solid red;
+}
+.work:active, .today:active{
+  border-bottom: 2px solid aqua;
+}
+.all-content{
+  background-color: rgba(244, 244, 244, 0.66);
+  background-size: cover;
+  filter: opacity(1);
+  image-rendering: optimizeQuality;
+  z-index: 1;
+  
+}
+
+@media (max-width:608px){
+  ul{
+      margin: 0.2rem;
+  }
+  .no-item{
+    margin-left: 2.6rem;
+    font-size: xx-large;
+    font-weight: bolder;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .submitBtn{
+    margin-top: 5%;
+    position: relative;
+    /* left: 3.5rem; */
+  }
+  .center-content{
+    width: max-content;
+    margin: auto;
+    /* left: 50%; */
+  }
+  .center-container{
+    background-image: url(/images/background_small.jfif);
+  }
+  form.item{
+    position: relative;
+    padding: 2rem;
+  }
+  
+}
+/* animation */
+li, p{
+  animation: 5s pulse infinite;
+  font-size: x-large;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+@keyframes pulse{
+  0%{
+    color: aqua;
+  }
+  25%{
+    color: blue;
+  }
+  50%{
+    color: green;
+  }
+  75%{
+    color: yellow;
+  }
+  100%{
+    color: orange;
+  }
+}
+@keyframes pulseDance{
+  0%{
+    border-color: aqua;
+  }
+  25%{
+    border-color: blue;
+  }
+  50%{
+    border-color: green;
+  }
+  75%{
+    border-color: yellow;
+  }
+  100%{
+    border-color: orange;
+  }
+}
