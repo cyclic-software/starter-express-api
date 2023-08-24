@@ -1,22 +1,24 @@
 {
-  "name": "starter-express-api",
+  "name": "todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "this is a project for my self to make a todo main focus is the style and activity",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyclic-software/starter-express-api.git"
   },
-  "author": "",
+  "author": "subhajit",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
-  },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.3"
   }
 }
