@@ -13,7 +13,10 @@ const app = express();
 app.use(express.json());
 const server = http.createServer(app);
 const io = socketIo(server, {
-    cors: "*",
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    },
 });
 
 const url = getMongoLink();
@@ -273,6 +276,7 @@ io.on("connection", (socket) => {
             callback({ newPost: savedPost, status: 200 });
         } catch (e) {
             console.log(e);
+            callback({ status: 500 });
         }
         // socket.emit("realTimeNewPostUpdates", {
         //     data: "hello recieved new post",
