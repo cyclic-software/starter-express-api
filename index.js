@@ -18,6 +18,12 @@ app.get("/", function(req,res) {
     });
 });
 
+app.get("/feedback=:id", function(req,res) {
+    res.render("index",{
+        user: users
+    });
+});
+
 app.get("/ugt", function(req,res) {
     res.render("ugt",{
         item: ugt_items
