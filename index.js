@@ -38,7 +38,7 @@ const mailOptions = {
     }
 
 
-    res.send(info.response);
+    res.send(info);
 });
 });
 
