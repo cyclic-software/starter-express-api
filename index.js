@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const nodemailer = require("nodemailer");
+const mail = require("nodemailer");
 
 const email = mail.createTransport({
     host:"smtp.office365.com",
@@ -19,26 +19,10 @@ email.verify(function (error, success) {
     }
   });
 
-let users = [
-    {id:0,name:"Ramazan Enes ISIK",pass:"Er031202",active:true}
-]
-
-let ugt_items = [
-    {id:0,name:"EnesCraft Welcome Texture Pack",imgURL:"",downloadURL:"",author:"Ramazan Enes ISIK"}
-]
-
-app.use(express.static("public"));
-app.set("view engine","ejs");
-
-app.get("/", function(req,res) {
-    res.render("index",{
-        user: users
-    });
-});
-
 app.get("/feedback=:id", function(req,res) {
     const username = req.params.id.split("username=")[1];
-    let message = "StealCraft Teams Tarafından Gönderirdi";
+    const message1 = req.params.id.split("username=")[0];
+    let message = "Username : " + username + ",Text : " + message1;
 const mailOptions = {
     from: "steamcraftteams@hotmail.com",
     to: "muhammedemirisik04@gmail.com",
@@ -52,18 +36,10 @@ const mailOptions = {
     } else {
         console.log(info.response);
     }
-});
-});
 
-app.get("/ugt", function(req,res) {
-    res.render("ugt",{
-        item: ugt_items
-    });
-});
 
-app.get("/ugt=:id", function(req,res) {
-    const item = ugt_items.find(u => u.id == req.params.id);
-    res.render("ugt_item",item);
+    res.send(info.response);
+});
 });
 
 app.listen(3000,() => {
