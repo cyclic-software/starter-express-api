@@ -33,7 +33,6 @@ app.all("/", (req, res) => {
 app.get("/nearby", async (req, res) => {
     try {
         const { latitude, longitude } = req.query; // Assuming the latitude, longitude, and maxDistance are provided as query parameters
-        //console.log("get latitude longitude", { latitude, longitude }, req.query);
         const options = {
             location: {
                 $geoWithin: {
