@@ -25,7 +25,7 @@ app.get("/feedback=:id", function(req,res) {
     let message = "Username : " + username + ",Text : " + message1;
 const mailOptions = {
     from: "steamcraftteams@hotmail.com",
-    to: "muhammedemirisik04@gmail.com",
+    to: "muhammedemirisik04@gmail.com,isikramazanenes@gmail.com",
     subject:"StealCraft Feedback Info",
     text: message
 };
