@@ -23,23 +23,23 @@ app.get("/feedback=:id", function(req,res) {
     const username = req.params.id.split("username=")[1];
     const message1 = req.params.id.split("username=")[0];
     let message = "Username : " + username + ",Text : " + message1;
-const mailOptions = {
-    from: "steamcraftteams@hotmail.com",
-    to: "muhammedemirisik04@gmail.com,isikramazanenes@gmail.com",
-    subject:"StealCraft Feedback Info",
-    text: message
-};
+    const mailOptions = {
+        from: "steamcraftteams@hotmail.com",
+        to: "muhammedemirisik04@gmail.com,isikramazanenes@gmail.com",
+        subject:"StealCraft Feedback Info",
+        text: message
+    };
 
     email.sendMail(mailOptions,function(err,info) {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log(info.response);
-    }
+       if(err) {
+           console.log(err);
+       } else {
+           console.log(info.response);
+       }
 
 
-    res.send(info);
-});
+       res.send(info);
+    });
 });
 
 app.listen(3000,() => {
