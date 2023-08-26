@@ -10,13 +10,6 @@ const email = mail.createTransport({
         pass:"Er030303"
     }
 });
-let message = "StealCraft Teams Tarafından Gönderirdi";
-const mailOptions = {
-    from: "steamcraftteams@hotmail.com",
-    to: "muhammedemirisik04@gmail.com",
-    subject:"StealCraft Feedback Info",
-    text: message
-};
 
 email.verify(function (error, success) {
     if (error) {
@@ -45,6 +38,21 @@ app.get("/", function(req,res) {
 
 app.get("/feedback=:id", function(req,res) {
     const username = req.params.id.split("username=")[1];
+    let message = "StealCraft Teams Tarafından Gönderirdi";
+const mailOptions = {
+    from: "steamcraftteams@hotmail.com",
+    to: "muhammedemirisik04@gmail.com",
+    subject:"StealCraft Feedback Info",
+    text: message
+};
+
+    email.sendMail(mailOptions,function(err,info) {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(info.response);
+    }
+});
 });
 
 app.get("/ugt", function(req,res) {
