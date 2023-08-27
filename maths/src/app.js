@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const PORT = process.env.Port || 3000;
+const PORT = process.env.Port || 3001;
 
 app.use("/", (req, res) => {
   return res.json({ messgae: "Hello Dude I am here" });
