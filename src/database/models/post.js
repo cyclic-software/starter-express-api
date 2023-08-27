@@ -38,6 +38,7 @@ const PostSchema = new Schema(
     copy:{type:Number,default:0},
     view:{type:Number,default:0},
     is_sent_notification: { type: Boolean, default: false },
+    is_reviewed_by_admin: { type: Boolean, default: false },
 
   },
   {

@@ -119,13 +119,80 @@ class PostService {
   async AdminPosts(size, skip, matchdata, sortob) {
     try{
 
+      
+      
+      if(matchdata.getallposttype == "onlypostwithoutreel"){
+        var extra_query = await this.GetOnlyPOSTWithoutReelQueryExtraQuery();
+        matchdata["extra_query"] =   extra_query
+      }
+
+      if(matchdata.getallposttype == "getonlyreels"){
+        var extra_query = await this.GetOnlyPostReel();
+        matchdata["extra_query"] =   extra_query
+      }
+      
+
       var q = await paginateResults(size, skip, matchdata, sortob);
+      console.log(JSON.stringify(q))
       var PostResult   = await this.repository.GetPosts(q);
 
       
       return PostResult;
     }catch(error){
       console.log(error)
+      return error
+    }
+  }
+  async GetOnlyPOSTWithoutReelQueryExtraQuery() {
+    try{
+      var extra_query =  {
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            },
+            {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
+        }
+      };
+      return  extra_query
+  }catch(error){
+    console.log(error)
+    return error
+  }
+
+  }
+
+  async GetOnlyPostReel(){
+    try{
+      var extra_query =  {
+        '$match': {
+          '$and': [
+            {
+              'reel_video_link': {
+                '$ne': ''
+              }
+            },
+            {
+              'reel_video_link': {
+                '$ne': null
+              }
+            }, {
+              'reel_video_link': {
+                '$exists': true
+              }
+            }
+          ]
+        }
+      };
+      return extra_query;
+    }catch(error){
       return error
     }
   }
