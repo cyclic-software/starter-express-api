@@ -83,6 +83,7 @@ module.exports = (app) => {
 
   app.post("/adminposts",  async (req, res, next) => {
     try {
+      console.log("working")
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
       var sortarray = await GetSortByFromRequest(
         req.body.orderbycolumnname,
