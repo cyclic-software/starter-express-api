@@ -13,6 +13,7 @@ const app = express();
 app.use(express.json());
 const server = http.createServer(app);
 const io = socketIo(server, {
+    rejectUnauthorized: false,
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
