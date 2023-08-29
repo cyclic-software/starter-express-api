@@ -5,14 +5,19 @@ const Post = require("./models/Post.js");
 var jwt = require("jsonwebtoken");
 const { clusterImages } = require("./utils/clustering.js");
 const { cartoonNames, getMongoLink } = require("./helpers.js");
+const cors = require("cors");
+
 const http = require("http");
+
 const socketIo = require("socket.io");
 
 //13.0827 80.2707
 const app = express();
 app.use(express.json());
+app.use(cors());
 const server = http.createServer(app);
 const io = socketIo(server, {
+    path: "/myapp/socket.io",
     rejectUnauthorized: false,
     cors: {
         origin: "*",
