@@ -1,4 +1,4 @@
-const logger = require('./common-logger')
+//const logger = require('./common-logger')
 
 const infoLog = (message) => {
     //return logger.infoLogger.info(message);
