@@ -8,9 +8,9 @@
                     <div class="card-body" id="Informasi">
                         <h4 class="header-title">Tambah Produk | Informasi Produk</h4>
 
-                        <form action="/admin/produk/new" method="POST">
+                        <form action="/admin/produk/new" method="POST" enctype="multipart/form-data">
                             <ul>
-                                <div class="mt-4 mb-3 mt-3 row">
+                                <div class=" mt-4 mb-3 mt-3 row">
                                     <li>
                                         <div class="text">
                                             <label for="text" class="col-sm-2 col-form-label">Nama
@@ -101,8 +101,9 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="input-group" style="margin-left: 22vh; margin-top: -5vh;">
-                                                <input type="file" class="form-control" id="inputGroupFile04"
-                                                    aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                <input type="file" class="form-control" id="image"
+                                                    aria-describedby="inputGroupFileAddon04" name="gambar" multiple
+                                                    aria-label="Upload">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-camera"></i>
                                                 </span>

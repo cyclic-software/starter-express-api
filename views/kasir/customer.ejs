@@ -1,0 +1,195 @@
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+  crossorigin="anonymous"
+/>
+<% layout('layouts/boilerplate') %>
+
+<!-- Tampilan untuk menampilkan total untuk pelanggan -->
+<section class="p-2" style="background-color: rgb(220, 229, 228)">
+  <div class="row mb-2">
+    <div class="col-md-6 p-5">
+      <table class="table table-striped table-hover custom-table">
+        <tr class="text-center fs-3">
+          <th colspan="2">Detail Pemesan</th>
+        </tr>
+        <tr>
+          <th>Tanggal Selesai</th>
+          <td id="reqTglPesanValue"></td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
+          <td id="alamatValue"></td>
+        </tr>
+        <tr>
+          <th>Sub Total</th>
+          <td id="subTotalValue"></td>
+        </tr>
+        <tr>
+          <th>Diskon</th>
+          <td id="diskonValue"></td>
+        </tr>
+        <tr class="fs-4">
+          <th>Total</th>
+          <td id="strukPesananValue"></td>
+        </tr>
+      </table>
+      <hr />
+      <div id="produk">
+        <table id="produkTable" class="table table-striped table-hover">
+          <thead>
+            <tr class="text-center fs-3">
+              <th colspan="4">Detail Produk</th>
+            </tr>
+            <tr>
+              <th>Nama Produk</th>
+              <th>Jumlah</th>
+              <th>Harga</th>
+              <th>Harga Total</th>
+            </tr>
+          </thead>
+          <tbody id="nameProdukBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- <div class="text-center">
+        <h2>---- Best Selling Products ----</h2>
+      </div> -->
+      <div id="carouselExampleDark" class="carousel carousel-dark slide mt-3">
+        <div class="carousel-indicators text-white">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <% if (iklan && iklan.gambar && iklan.gambar.length > 0) { %> <%
+          iklan.gambar.forEach((item, index) => { %>
+          <div
+            class="carousel-item <%= index === 0 ? 'active' : '' %>"
+            data-bs-interval="10000"
+          >
+            <img
+              src="/<%= item.filename %>"
+              class="d-block w-100"
+              alt="Slide <%= index + 1 %>"
+              style="height: 500px"
+            />
+            <div class="carousel-caption d-none d-md-block text-white">
+              <h5><%= item.deskripsi %></h5>
+            </div>
+          </div>
+          <% }); %> <% } %>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="row mt-3">
+        <% if (iklan && iklan.gambar && iklan.gambar.length > 0) { %> <%
+        iklan.gambar.forEach((item, index) => { %>
+        <div class="col-md-4">
+          <img
+            src="/<%= item.filename %>"
+            class="img-fluid"
+            alt="Product <%= index + 1 %>"
+          />
+          <h5 class="mt-2"><%= item.nama %></h5>
+        </div>
+        <% }); %> <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const subTotalValue = document.getElementById("subTotalValue");
+  const alamatValue = document.getElementById("alamatValue");
+  const nameProdukBody = document.getElementById("nameProdukBody");
+  const reqTglPesanValue = document.getElementById("reqTglPesanValue");
+
+  function formatDate(date) {
+    if (date === "Empty") {
+      return "Empty"; // Return "Empty" if the date is falsy (null, undefined, etc.)
+    }
+    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+    const formattedDate = new Date(date).toLocaleDateString("en-US", options);
+    return formattedDate.replace(/\//g, "-"); // Replace slashes with dashes
+  }
+
+  function updateStruktur() {
+    fetch("/kasir/api/strukTransaksi")
+      .then((response) => response.json())
+      .then((data) => {
+        const totalBayar = data.struk.totalBayar || 0;
+        strukPesananValue.textContent = `Rp ${totalBayar}`;
+        const reqTglPesan = data.struk.reqTglPesan || "Empty";
+        // reqTglPesanValue.textContent = `${reqTglPesan}`;
+        reqTglPesanValue.textContent = formatDate(reqTglPesan);
+        const subTotal = data.struk.subtotal || 0;
+        subTotalValue.textContent = `Rp ${subTotal}`;
+        const diskon = data.struk.diskon || 0;
+        diskonValue.textContent = `Rp ${diskon}`;
+        const alamat = data.struk.alamatPengiriman || "Empty";
+        alamatValue.textContent = `${alamat}`;
+
+        console.log("Data received:", data);
+        // Menampilkan data produk ke dalam elemen dengan id nameProdukBody (tabel body)
+        let produkRows = "";
+        data.strukProduk.forEach((produk) => {
+          produkRows += `
+            <tr>
+              <td> ${produk.name || "Nama Produk Tidak Tersedia"}</td>
+              <td>Rp. ${produk.jumlah || 0}</td>
+              <td>Rp. ${produk.harga || 0}</td>
+              <td>Rp. ${produk.jumlah * produk.harga || 0}</td>
+            </tr>
+          `;
+        });
+        nameProdukBody.innerHTML = produkRows;
+      })
+      .catch((error) => {
+        console.error("Error fetching struk transaksi:", error);
+      });
+  }
+
+  // Pemanggilan pertama kali saat halaman dimuat
+  updateStruktur();
+
+  // Pemanggilan updateStruktur setiap 1000 ms (1 detik)
+  setInterval(updateStruktur, 100);
+</script>

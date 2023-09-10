@@ -33,26 +33,7 @@
                                                 Riwayat Transaksi
                                             </a>
                                         </li>
-                                        <div class="ms-auto" style="padding-right:5px">
-                                            <p>Maksimal Harian : </p>
-                                        </div>
-                                        <form action="/admin/updateBobot" class="d-flex" method="POST">
-                                            <input readonly type="number" value="<%= bobot.pointNow %>"
-                                                class="form-control text-end <%= bobot.pointNow > bobot.pointMax ? 'bg-danger' : 'bg-success' %> text-white"
-                                                style="width: 78px; height: 37px; border: 0.3px solid rgba(137, 137, 137, 0.3);">
 
-                                            <input type="number" name="pointMax" value="<%= bobot.pointMax %>"
-                                                class="form-control text-start <%= bobot.pointNow > bobot.pointMax ? 'bg-danger' : 'bg-success' %> text-white"
-                                                style="width: 78px; height: 37px; margin-right: 5px; border: 0.3px solid rgba(137, 137, 137, 0.3);">
-
-                                            <button type="submit" class="btn btn-warning text-white"
-                                                style="height: 37px; color: rgba(0, 0, 0, 0.4);">Update</button>
-                                        </form>
-                                        <form action="/admin/resetPointNow" class="d-flex " method="POST">
-                                            <input type="hidden" name="resetPointNow" value="true">
-                                            <button type="submit" class="btn btn-dark ms-1 text-white"
-                                                style="height: 37px; color: rgba(0, 0, 0, 0.4);">Reset</button>
-                                        </form>
 
 
 

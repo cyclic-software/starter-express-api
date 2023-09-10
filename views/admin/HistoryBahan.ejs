@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate') %>
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="index.html">
+                                                <%= subnav[0] %>
+                                            </a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">
+                                                <%= subnav[1] %>
+                                            </a></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="produk mb-4">
+                                    <h5 class="header-title" style="margin-bottom: -21vh;">
+                                        History Update Produk
+                                    </h5>
+                                    <a class="btn btn-sm text-white" href="#">
+
+                                    </a>
+                                </div>
+                                <table class="table mt-3">
+                                    <thead style="background: #FF9C22;">
+                                        <tr>
+                                            <th scope="col" style="color: #fff;">NAMA BAHAN</th>
+                                            <th scope="col" style="color: #fff;">STOK SEBELUM</th>
+                                            <th scope="col" style="color: #fff;">STOK SESUDAH</th>
+                                            <th scope="col" style="color: #fff;">TANGGAL UBAH</th>
+                                            <th scope="col" style="color: #fff;">ACTION</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% history.forEach((b)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= b.namaBahan %>
+                                                </td>
+                                                <td>
+                                                    <%= b.stokSebelumnya %>
+                                                </td>
+                                                <td>
+                                                    <%= b.stokSesudahnya %>
+                                                </td>
+                                                <td>
+                                                    <%= b.tanggal %>
+                                                </td>
+                                                <td>
+                                                    <form action="/admin/deleteHistoryBahan/<%= b._id %>?_method=DELETE" method="POST">
+                                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal" data-id="<%= b._id %>">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

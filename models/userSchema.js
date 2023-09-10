@@ -28,6 +28,14 @@ const customerSchema = new Schema({
         default: 'Customer'
     }
 });
+// Schema customer (child)
+const kasirSchema = new Schema({
+    role: {
+        required: true,
+        type: String,
+        default: 'Kasir'
+    }
+});
 
 userSchema.plugin(passportLocalMongoose);
 // Model user
@@ -36,6 +44,8 @@ const User = mongoose.model('User', userSchema);
 const Admin = User.discriminator('Admin', adminSchema);
 // Model customer (mewarisi User)
 const Customer = User.discriminator('Customer', customerSchema);
+// Model kasir (mewarisi User)
+const Kasir = User.discriminator('Kasir', kasirSchema);
 
 
-module.exports = { User, Admin, Customer };
+module.exports = { User, Admin, Customer, Kasir };

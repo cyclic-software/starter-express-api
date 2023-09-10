@@ -16,8 +16,10 @@ class TransaksiController {
         var idCust = '';
         if (req.user.role == 'Customer') {
             idCust = req.user.id;
-        } else {
-            idCust = '64a92c2a12adf8b2016edc9e';
+        } else if (req.user.role == 'Admin') {
+            idCust = null;
+        }else if (req.user.role == 'Kasir') {
+            idCust = null;
         }
         // Membuat transaksi baru
         const transaksi = new Transaksi({
@@ -37,9 +39,12 @@ class TransaksiController {
         await transaksi.save();
         if (req.user.role == 'Customer') {
             res.redirect(`/customer/index`);
-        } else {
+        } else if (req.user.role == 'Admin') {
             req.flash('success', 'Transaksi berhasil dibuat!');
             res.redirect(`/admin/dashboard/kasir`);
+        }else if (req.user.role == 'Kasir') {
+            req.flash('success', 'Transaksi berhasil dibuat!');
+            res.redirect(`/kasir/dashboard`);
         }
     }
 
@@ -201,7 +206,7 @@ class TransaksiController {
         } else {
             tglKerja = moment(tgl).format('YYYY-MM-DD');
         }
-        console.log(tglKerja);
+
 
         const bobot = await Bobot.findOne({ tglKerja: tglKerja });
         // console.log(bobot.tglKerja);
@@ -243,9 +248,10 @@ class TransaksiController {
         if (bobot) {
             bobotDate = {
                 ...bobot.toObject(),
-                tglKerja: moment(bobot.tglKerja).format('YYYY-MM-DD')
+                tglKerja: moment(tglKerja).format('YYYY-MM-DD')
             };
         }
+        console.log(bobotDate);
 
         res.render('admin/transaksi', { transaksi: formatDate, transaksiDalamProses: formatDateDalamProses, transaksiSelesai: formatDateSelesai, filter, bobot: bobotDate, tglKerja, moment, endPoint: 'produkSaya', nav: [inav], subnav: ['Pemesanan', isubnav] });
         // res.status(200).json({ transaksi: filteredTransaksi });
@@ -290,6 +296,7 @@ class TransaksiController {
     static async updateBobot(req, res) {
         const { aksi } = req.params;
         if (aksi === 'updateBobot') {
+            console.log(req.body.tglKerja);
             const bobot = await Bobot.findOne({ tglKerja: req.body.tglKerja });
             console.log(bobot.tglKerja);
             bobot.pointMax = req.body.pointMax;

@@ -60,7 +60,6 @@ class WishlistController {
         }
     }
 
-
     // static async createWishlist(req, res) {
     //     const { id } = req.params;
     //     const wishlist = new Wishlist();
@@ -82,7 +81,6 @@ class WishlistController {
         req.flash('success', 'Successfully deleted wishlist!');
         // res.redirect(`/admin/wishlist`);
     }
-
 }
 
 module.exports = WishlistController;

@@ -1,0 +1,158 @@
+<% layout('layouts/boilerplate') %>
+<div class="container mt-5 pt-4">
+  <div class="row ms-5 ps-5">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h4>Tambahkan Akun Admin & Kasir</h4>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/register">
+            <!-- <input type="hidden" name="role" value="Kasir" /> -->
+            <div class="form-group">
+              <label for="role">Role</label>
+              <select name="role" class="form-control">
+                <option value="Kasir">Kasir</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nama"
+                name="nama"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="alamat">Alamat</label>
+              <input
+                type="text"
+                class="form-control"
+                id="alamat"
+                name="alamat"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="nomorTelepon">Nomor Telepon</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nomorTelepon"
+                name="nomorTelepon"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-warning mt-2">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 ms-3">
+      <table class="table mb-3">
+        <thead class="thead-dark">
+          <tr class="text-center fs-4">
+            <th colspan="5">Akun Admin</th>
+          </tr>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% admin.forEach((a, index) => { %>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><%= a.nama %></td>
+            <td><%= a.username %></td>
+            <td><%= a.email %></td>
+            <td>
+              <form action="/kasir/<%= a._id %>?_method=DELETE" method="POST">
+                <button
+                  style="background-color: #f52525"
+                  class="btn btn-danger"
+                  type="submit"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <table class="table mb-5">
+        <thead class="thead-dark">
+          <tr class="text-center fs-4">
+            <th colspan="5">Akun Kasir</th>
+          </tr>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.forEach((k, index) => { %>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><%= k.nama %></td>
+            <td><%= k.username %></td>
+            <td><%= k.email %></td>
+            <td>
+              <form action="/kasir/<%= k._id %>?_method=DELETE" method="POST">
+                <button
+                  style="background-color: #f52525"
+                  class="btn btn-danger"
+                  type="submit"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -3,15 +3,7 @@ const { Schema } = mongoose;
 const Bahan = require('./bahanSchema');
 const { Admin } = require('./userSchema');
 
-// Sub-skema untuk histori update barang
-const historiUpdateSchema = new Schema({
-    tanggal: {
-        type: Date,
-        default: Date.now
-    },
-    stokSebelumnya: Number,
-    stokSesudahnya: Number
-});
+
 
 // Schema utama (parent)
 const produkSchema = new Schema({
@@ -52,7 +44,7 @@ const produkSchema = new Schema({
         type: Date,
         default: null
     },
-    historiUpdate: [historiUpdateSchema] // Menambahkan sub-skema histori update
+
 });
 
 module.exports = mongoose.model('Produk', produkSchema);

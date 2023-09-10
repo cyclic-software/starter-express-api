@@ -6,8 +6,7 @@ const moment = require('moment');
 const bobotSchema = new Schema({
     tglKerja: {
         type: Date,
-        default: Date.now,
-        get: value => moment(value).format('DD-MM-YYYY')
+        default: Date.now
     },
     pointMax: {
         type: Number,

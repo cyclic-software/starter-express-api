@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const UserController = require('../controllers/userController');
+const { isLoggedIn, isAdmin } = require('../middleware');
 
 
 router.route('/register')
@@ -14,5 +15,12 @@ router.route('/login')
 
 router.route('/logout')
     .get(UserController.logout);
+
+router.route('/admin/kasir')
+    .get(isLoggedIn, isAdmin,UserController.getAddKasir)
+    .post(isLoggedIn, isAdmin,UserController.register);
+
+router.route('/kasir/:id')
+    .delete(isLoggedIn, isAdmin,UserController.deleteKasir);
 
 module.exports = router;

@@ -1,0 +1,123 @@
+<% layout('layouts/boilerplate') %>
+<div class="" style="margin-left: 100px">
+  <div class="content">
+    <!-- Start Content -->
+    <div class="container-fluid p-1">
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card" style="min-height: 100vh">
+            <div class="card-body">
+              <!-- start page title -->
+              <%- include('./nav-dashboard') %> 
+              <%- include('./tab-content') %> 
+              </div>
+            </div>
+          </div>
+          <%- include('./card-pesanan') %>
+          <!-- end row -->
+        </div>
+        <!-- end page title -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- end content -->
+  </div>
+  <script>
+    // Inisialisasi koneksi WebSocket untuk halaman dashboard
+    const dashboardSocket = io(); // Menggunakan nama koneksi "dashboardSocket"
+  
+    const reqTglPesanInput = document.querySelector('input[name="reqTglPesan"]');
+    const subTotalInput = document.getElementById('subTotalInput');
+    const inputTglTransaksi = document.getElementById("totalBayarInput");
+    const diskonUpdate = document.getElementById("diskon");
+    const alamatInput = document.getElementById("alamatPengiriman");
+  
+    // Gabungkan event listeners dalam satu blok
+    reqTglPesanInput.addEventListener('input', function () {
+      const reqTglPesan = reqTglPesanInput.value;
+      dashboardSocket.emit('updateReqTglPesan', { reqTglPesan: reqTglPesan });
+    });
+  
+    subTotalInput.addEventListener('change', function () {
+      const subtotal = subTotalInput.value;
+      const total = inputTglTransaksi.value;
+      dashboardSocket.emit('updateSubTotal', { subTotal: subtotal, total: total });
+    });
+  
+    inputTglTransaksi.addEventListener("change", function () {
+      const totalTransaksi = inputTglTransaksi.value;
+      const subtotal = subTotalInput.value;
+      dashboardSocket.emit("updateStrukPesanan", { total: totalTransaksi, subTotal: subtotal });
+    });
+  
+    diskonUpdate.addEventListener("input", function () {
+      const diskon = diskonUpdate.value;
+      dashboardSocket.emit("updateDiskon", { diskon: diskon });
+    });
+  
+    alamatInput.addEventListener("input", function () {
+      const alamat = alamatInput.value;
+      dashboardSocket.emit("updateAlamat", { alamat: alamat });
+    });
+
+    // Mendapatkan referensi elemen <div class="col-md-12 text-center mt-3">
+      const targetDiv = document.querySelector('.col-md-12.text-center.mt-3');
+      if (targetDiv.children.length === 1) {
+        console.log('targetDiv.children.length === 1');
+        dashboardSocket.emit("kosongkanDatabase");
+      }
+
+// SEARCH BAR
+// Store the original HTML content of the product list
+const productList = document.getElementById('productList');
+const originalHTML = productList.innerHTML;
+let originalProducts = Array.from(document.querySelectorAll('#productList .product-box'));
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  let searchTerm = this.value.toLowerCase();
+  let filteredProducts = originalProducts.filter(function(product) {
+    let productName = product.querySelector('.sp-line-1 span').textContent.toLowerCase();
+    return searchTerm === '' || productName.includes(searchTerm);
+  });
+
+  productList.innerHTML = '';
+
+  if (filteredProducts.length > 0) {
+    filteredProducts.forEach(function(product) {
+      productList.appendChild(product.parentNode);
+    });
+  } else {
+    productList.innerHTML = 'No matching products found.';
+  }
+});
+
+// href roti
+// Add event listener to the "Roti" link
+document.querySelector('a[href="#roti"]').addEventListener('click', function() {
+  const currentURL = new URL(window.location.href);
+  currentURL.searchParams.set('kategori', 'Roti');
+  window.location.href = currentURL.href;
+});
+
+
+// href nasi
+// Add event listener to the "Nasi" link
+document.querySelector('a[href="#nasi"]').addEventListener('click', function() {
+  const currentURL = new URL(window.location.href);
+  currentURL.searchParams.set('kategori', 'Snack');
+  window.location.href = currentURL.href;
+});
+
+// href semua
+// Add event listener to the "Semua" link
+document.querySelector('a[href="#semua"]').addEventListener('click', function() {
+  const currentURL = new URL(window.location.href);
+  currentURL.searchParams.delete('kategori');
+  window.location.href = currentURL.href;
+});
+
+  </script>
+  
+  
+  <script src="/js/dasboardkasir.js"></script>
+</div>

@@ -3,15 +3,23 @@ const Bahan = require('../models/bahanSchema');
 const Resep = require('../models/resepSchema');
 const Wishlist = require('../models/wishlistSchema');
 const moment = require('moment');
+const History = require('../models/historiUpdateProduk');
+
 let nav = [], subnav = [];
 
 class produkController {
 
     static async dashboard(req, res) {
-        const produk = await Produk.find({ deleted: false });
-
+        const kategori = req.query.kategori;
+        var produk=null;
+        if  (kategori) {
+            produk = await Produk.find({ kategori, deleted: false });
+        } else {
+            produk = await Produk.find({ deleted: false });
+        }
         res.render('admin/dashboard', { produk, endPoint: 'produkSaya', nav: ['Dashboard'], subnav: ['Dashboard', 'Kasir'] });
     }
+    
     static async index(req, res) {
         const url = req.path;
         let endPoint, view;
@@ -26,9 +34,8 @@ class produkController {
             return res.status(403).json({ message: 'Akses ditolak' });
         }
 
-        const produk = await Produk.find({ deleted: false }); // Menampilkan hanya produk yang tidak dihapus
+        const produk = await Produk.find({ deleted: false });
 
-        // Mengubah format tanggal menggunakan moment.js
         const formattedProduk = produk.map(item => {
             return {
                 ...item._doc,
@@ -40,17 +47,30 @@ class produkController {
     }
 
     static async getHistory(req, res) {
-        const { id } = req.params;
-        const produk = await Produk.findById(id);
-        const historiUpdate = produk.historiUpdate.map(item => {
+        const history = await History.find({}).sort({ tanggal: -1 }).lean();
+        // Mengubah format tanggal menggunakan moment.js
+        const formattedHistory = history.map(item => {
             return {
-                ...item._doc,
+                ...item,
                 tanggal: moment(item.tanggal).format('DD/MM/YYYY')
             };
         });
-        res.render('admin/history', { produk, historiUpdate });
+        console.log(formattedHistory);
+        res.render('admin/HistoryProduk', { endPoint: 'produkSaya', history: formattedHistory, nav: ['History'], subnav: ['Produk', 'History'] });
     }
 
+
+
+    static async deleteHistoryProduk(req, res) {
+        const { id } = req.params;
+        const history = await History.findByIdAndDelete(id);
+        if (!history) {
+            req.flash('error', 'History entry not found');
+            return res.redirect('/admin/histori/produk');
+        }
+        req.flash('success', 'Successfully deleted produk history');
+        res.redirect('/admin/histori/produk');
+    }
 
     static async renderNewForm(req, res) {
         res.render('admin/formAddProduk', { endPoint: 'produkSaya', nav: ['Tambah Produk'], subnav: ['Produk', 'Tambah Produk'] });
@@ -66,6 +86,10 @@ class produkController {
     static async create(req, res) {
         const produk = new Produk(req.body.produk);
         produk.idAdmin = req.user._id;
+        console.log(req.file); // Add this line to check the uploaded file object
+        if (req.file) {
+            produk.gambar = req.file.filename; // Save the filename in the database
+        }
         // produk.idAdmin = '648e7d0b365741a7cee9b6af';
         produk.tglTambah = Date.now();
         await produk.save();
@@ -83,19 +107,21 @@ class produkController {
         const updatedProduct = await Produk.findByIdAndUpdate(id, updatedData, { new: true });
         // Simpan stok sesudahnya
         const stokSesudahnya = updatedProduct.stok;
+        const namaProduk = updatedProduct.namaProduk;
         // Tambahkan entri baru ke historiUpdate
-        updatedProduct.historiUpdate.push({
+        const historiUpdate = new History({
             tanggal: Date.now(),
+            namaProduk,
             stokSebelumnya,
             stokSesudahnya
         });
+        historiUpdate.save();
+
         // Simpan perubahan produk
         await updatedProduct.save();
         req.flash('success', 'Successfully updated produk!');
         res.redirect(`/admin/produk`);
     }
-
-
 
     static async show(req, res) {
         try {
@@ -110,8 +136,6 @@ class produkController {
             // Handle error response
         }
     }
-
-
 
     static async delete(req, res) {
         const { id } = req.params;
@@ -155,7 +179,6 @@ class produkController {
             res.redirect(`/admin/produk/${produkId}`);
         }
     }
-
 }
 
 module.exports = produkController;
