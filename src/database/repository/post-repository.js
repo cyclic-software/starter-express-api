@@ -244,6 +244,21 @@ class PostRepository {
         '$sort': {
           'createdAt': 1
         }
+      },
+      {
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            }, {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
+        }
       }, {
         '$match': {
           'post_status': 'Published', 
