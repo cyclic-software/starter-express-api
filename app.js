@@ -37,7 +37,7 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/Bakery', {
+mongoose.connect('mongodb+srv://azziz167:hpF6XorqXppVX2F4@cluster0.aevbadv.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
