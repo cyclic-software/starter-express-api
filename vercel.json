@@ -10,7 +10,7 @@
     "routes": [
         {
             "src": "/login",
-            "dest": "/src/app.js"},
+            "dest": "/routes/userRoutes.js"},
         {
             "src": "/(.*)",
             "dest": "/app.js"
