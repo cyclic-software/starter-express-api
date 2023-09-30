@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
     "connect-flash": "^0.1.1",
     "ejs-mate": "^4.0.0",
