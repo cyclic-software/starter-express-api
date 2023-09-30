@@ -9,7 +9,7 @@ router.route('/register')
     .get(UserController.renderRegister)
     .post(UserController.register);
 
-router.route('/')
+router.route('/login')
     .get(UserController.renderLogin)
     .post(passport.authenticate('local', { failureFlash: 'Passwordmu salah bro', failureRedirect: '/login' }), UserController.login);
 
