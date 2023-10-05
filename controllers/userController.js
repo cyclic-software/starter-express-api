@@ -2,6 +2,10 @@ const { Admin, Customer, User, Kasir } = require('../models/userSchema');
 const passport = require('passport');
 
 class userController {
+
+    static renderHome(req, res) {
+        res.redirect("/login");
+    }
     static renderRegister(req, res) {
         res.render('user/register', { endPoint: 'none' });
     }

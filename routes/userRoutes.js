@@ -4,6 +4,8 @@ const passport = require('passport');
 const UserController = require('../controllers/userController');
 const { isLoggedIn, isAdmin } = require('../middleware');
 
+router.route('/')
+    .get(UserController.renderHome);
 
 router.route('/register')
     .get(UserController.renderRegister)
