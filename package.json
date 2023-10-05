@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -17,5 +18,26 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "socket.io": "^4.7.2"
+=======
+  "name": "starter-express-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyclic-software/starter-express-api/issues"
+  },
+  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+>>>>>>> d80164897046dd1ad594a97421baa6eb72f930c2
   }
 }

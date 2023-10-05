@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const http = require('http'); // Tambahkan ini
 const app = express();
@@ -288,3 +289,12 @@ io.on('connection', (socket) => {
 server.listen(3000, () => {
     console.log('Listening on port 3000');
 });
+=======
+const express = require('express')
+const app = express()
+app.all('/', (req, res) => {
+    console.log("Just got a request!")
+    res.send('Yaaao!')
+})
+app.listen(process.env.PORT || 3000)
+>>>>>>> d80164897046dd1ad594a97421baa6eb72f930c2
