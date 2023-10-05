@@ -2,9 +2,8 @@
     "builds": [
         {
             "src": "src/app.js",
-            "use": [
+            "use":
                 "@now/node-server"
-            ]
         }
     ],
     "routes": [
