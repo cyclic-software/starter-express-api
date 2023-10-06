@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/images/Toko/favicon.ico" />
+
+    <!-- Bootstrap Tables css -->
+    <link
+      href="/libs/bootstrap-table/bootstrap-table.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="asset/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- App css -->
+    <link
+      href="/css/config/default/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="bs-default-stylesheet"
+    />
+
+    <link
+      href="/css/config/default/app.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="app-default-stylesheet"
+    />
+
+    <link
+      href="/css/config/default/bootstrap-dark.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="bs-dark-stylesheet"
+    />
+    <link
+      href="/css/config/default/app-dark.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="app-dark-stylesheet"
+    />
+
+    <!-- icons -->
+    <link href="/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/css_toko/style.css" type="text/css" />
+    <link rel="stylesheet" href="/css/kasirCustomer.css" />
+  </head>
+
+  <body>
+    <% var endPoint %> <% if (endPoint=='produkSaya' ) { %> <%-
+    include('../partials/navbar') %> <% }else if(endPoint=='kasirSaya' ){ %> <%-
+    include('../partials/navbar-kasir') %> <%}%>
+    <main class=""><%- include('../partials/flash') %> <%- body %></main>
+    <% if (endPoint=='produkSaya' ) { %> <%- include('../partials/footer') %> <%
+    }%>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Vendor js -->
+    <script src="/js/vendor.min.js"></script>
+
+    <!-- Bootstrap Tables js -->
+    <script src="/libs/bootstrap-table/bootstrap-table.min.js"></script>
+
+    <!-- Init js -->
+    <script src="/js/pages/bootstrap-tables.init.js"></script>
+
+    <!-- App js -->
+    <script src="/js/app.min.js"></script>
+  </body>
+</html>

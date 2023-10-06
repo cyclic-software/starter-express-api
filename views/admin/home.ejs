@@ -1,0 +1,122 @@
+<% layout('layouts/boilerplate') %>
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="index.html">
+                                            <%= subnav[0] %>
+                                        </a></li>
+                                    <li class="breadcrumb-item disabled"><a href="#">
+                                            <%= subnav[1] %>
+                                        </a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-2">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs nav-bordered">
+                                        <li class="nav-item">
+                                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="true"
+                                                class="nav-link active">
+                                                Semua
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#ar_roti" data-bs-toggle="tab" aria-expanded="true"
+                                                class="nav-link">
+                                                AR (Roti)
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#KJ" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                                KJ (Kue&Jajan)
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <%- include('./produk/all') %>
+                                            <%- include('./produk/roti') %>
+                                                <%- include('./produk/jajan') %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+
+
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end page title -->
+
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    <script>
+        // Pencarian pada tab "Semua"
+        const searchAllInput = document.getElementById('search-all');
+        const allItems = document.querySelectorAll('#home-b1 .produk tbody tr');
+
+        searchAllInput.addEventListener('keyup', function () {
+            const searchTerm = searchAllInput.value.toLowerCase();
+
+            allItems.forEach(function (item) {
+                const name = item.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (name.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Pencarian pada tab "AR (Roti)"
+        const searchRotiInput = document.getElementById('search-roti');
+        const rotiItems = document.querySelectorAll('#ar_roti .produk tbody tr');
+
+        searchRotiInput.addEventListener('keyup', function () {
+            const searchTerm = searchRotiInput.value.toLowerCase();
+
+            rotiItems.forEach(function (item) {
+                const name = item.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (name.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Pencarian pada tab "KJ (Kue&Jajan)"
+        const searchJajanInput = document.getElementById('search-jajan');
+        const jajanItems = document.querySelectorAll('#KJ .produk tbody tr');
+
+        searchJajanInput.addEventListener('keyup', function () {
+            const searchTerm = searchJajanInput.value.toLowerCase();
+
+            jajanItems.forEach(function (item) {
+                const name = item.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (name.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>

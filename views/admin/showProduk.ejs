@@ -1,0 +1,252 @@
+<% layout('layouts/boilerplate') %>
+    <%- include('../partials/navbar-addProduk') %>
+
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body" id="Informasi">
+                        <h4 class="header-title">Edit Produk | Informasi Produk</h4>
+                        <ul>
+                            <div class="mt-4 mb-3 mt-3 row">
+                                <li>
+                                    <div class="text">
+                                        <label for="text" class="col-sm-2 col-form-label">Nama Produk</label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input disabled name="produk[namaProduk]" required type="text"
+                                            class="form-control" id="floatingInput" placeholder="masukan nama Produk"
+                                            style="margin-left: 22vh; margin-top: -5vh;"
+                                            value="<%= produk.namaProduk %>">
+                                    </div>
+                                </li>
+                            </div>
+
+                            <div class="mt-4 mb-3 row">
+                                <li>
+                                    <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Deskripsi
+                                        Produk</label>
+                                    <div class="col-sm-8">
+                                        <textarea disabled name="produk[deskripsi]" required class="form-control"
+                                            placeholder="masukan deskripsi produk" id="floatingTextarea2"
+                                            style="height: 100px; margin-left: 22vh; margin-top: -5vh;"><%= produk.deskripsi %></textarea>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="mt-4 mb-3 row">
+                                <li>
+                                    <label for="text" class="col-sm-2 col-form-label">Jenis Pemasanan</label>
+                                    <div class="col-sm-10" style="margin-top: -30px;">
+                                        <div class="form-check form-check-inline" style="margin-left: 22vh;">
+                                            <input disabled class="form-check-input" type="radio"
+                                                name="produk[jenisPemesanan]" required id="inlineRadio1"
+                                                value="Pre-Order" <%=produk.jenisPemesanan==='Pre-Order' ? 'checked'
+                                                : '' %>>
+                                            <label class="form-check-label" for="inlineRadio1">Pre Order</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input disabled class="form-check-input" type="radio"
+                                                name="produk[jenisPemesanan]" required id="inlineRadio2" value="Ready"
+                                                <%=produk.jenisPemesanan==='Ready' ? 'checked' : '' %>>
+                                            <label class="form-check-label" for="inlineRadio2">Ready</label>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="mt-4 mb-3 row">
+                                <li>
+                                    <label for="text" class="col-sm-2 col-form-label">Kategori</label>
+                                    <div class="col-sm-12" style="margin-top: -30px; margin-left: -20px;">
+                                        <div class="form-check form-check-inline" style="margin-left: 22vh;">
+                                            <input disabled type="radio" name="produk[kategori]" required id="rotiM"
+                                                value="Roti" <%=produk.kategori==='Roti' ? 'checked' : '' %>>
+                                            <label for="rotiM">Roti</label>
+                                        </div>
+                                        <div class="form-check form-check-inline" style="margin-left: 5vh;">
+                                            <input disabled type="radio" name="produk[kategori]" required id="jajanF"
+                                                value="Snack" <%=produk.kategori==='Snack' ? 'checked' : '' %>>
+                                            <label for="jajanF">Jajanan</label>
+                                        </div>
+                                        <div class="form-check form-check-inline" style="margin-left: 5vh;">
+                                            <input disabled type="radio" name="produk[kategori]" required id="nasiA"
+                                                value="Nasi" <%=produk.kategori==='Nasi' ? 'checked' : '' %>>
+                                            <label for="nasiA">Nasi</label>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="mt-4 mb-3 row">
+                                <li>
+                                    <div class="text">
+                                        <label for="text" class="col-sm-12 col-form-label">Bobot Produk</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input disabled name="produk[bobotTenaga]" required type="text"
+                                            class="form-control" id="floatingInput" placeholder="27"
+                                            style="margin-left: 22vh; margin-top: -5vh;"
+                                            value="<%= produk.bobotTenaga %>">
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="mt-4 row">
+                                <div class="row">
+                                    <div class="col-xl-3">
+                                        <li>
+                                            <div>
+                                                <label for="text" class="form-label">Harga Produk</label>
+                                                <input disabled name="produk[hargaProduk]" required class="form-control"
+                                                    type="text" id="text" style="margin-left: 22vh; margin-top: -5vh;"
+                                                    value="<%= produk.hargaProduk %>">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="col-xl-3" style="margin-left:24vh;">
+                                        <li>
+                                            <div>
+                                                <label for="text" class="form-label">Stok</label>
+                                                <input disabled name="produk[stok]" required class="form-control"
+                                                    type="text" id="text" style="margin-left: 8vh; margin-top: -5vh;"
+                                                    value="<%= produk.stok %>">
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ul>
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </div> <!-- end col -->
+
+            <div class="col-6">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h4 class="header-title">Informasi Resep</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Bahan</th>
+                                    <th scope="col">Jumlah Pakai</th>
+                                    <th scope="col">Satuan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% resep.forEach(item=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= item.idBahan.namaBahan %>
+                                        </td>
+                                        <td>
+                                            <%= item.jumlahPakai %>
+                                        </td>
+                                        <td>
+                                            <%= item.satuan %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Masukkan Resep</h4>
+                        <form method="POST" action="/admin/produk/<%= produk._id %>/resep/new">
+                            <table class="table table-bordered" id="ingredientTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Bahan</th>
+                                        <th scope="col">Jumlah Pakai</th>
+                                        <th scope="col">Satuan</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ingredientTableBody">
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="resep[0][idBahan]">
+                                                <% bahan.forEach(function(item) { %>
+                                                    <option value="<%= item._id %>">
+                                                        <%= item.namaBahan %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" name="resep[0][jumlahPakai]"
+                                                min="0" required>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="resep[0][satuan]">
+                                                <option value="kg">Kilogram (kg)</option>
+                                                <option value="gr">Gram (gr)</option>
+                                                <option value="ons">Ons</option>
+                                                <option value="ml">Mililiter (ml)</option>
+                                                <option value="liter">Liter</option>
+                                                <option value="pcs">Pieces (pcs)</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="addIngredientRow()">Tambah</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <button type="submit" class="btn btn-primary">Tambah Resep</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <script>
+            let ingredientIndex = 1;
+
+            function addIngredientRow() {
+                const ingredientTableBody = document.getElementById('ingredientTableBody');
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+        <td>
+            <select class="form-control" name="resep[${ingredientIndex}][idBahan]">
+                <% bahan.forEach(function(item) { %>
+                <option value="<%= item._id %>"><%= item.namaBahan %></option>
+                <% }) %>
+            </select>
+        </td>
+        <td>
+            <input type="number" class="form-control" name="resep[${ingredientIndex}][jumlahPakai]" min="0" required>
+        </td>
+        <td>
+            <select class="form-control" name="resep[${ingredientIndex}][satuan]">
+                <option value="kg">Kilogram (kg)</option>
+                <option value="gr">Gram (gr)</option>
+                <option value="ons">Ons</option>
+                <option value="ml">Mililiter (ml)</option>
+                <option value="liter">Liter</option>
+                <option value="pcs">Pieces (pcs)</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger" onclick="removeIngredientRow(this)">Hapus</button>
+        </td>
+        `;
+
+                ingredientTableBody.appendChild(newRow);
+                ingredientIndex++;
+            }
+
+            function removeIngredientRow(button) {
+                const row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+        </script>

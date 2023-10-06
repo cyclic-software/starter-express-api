@@ -1,0 +1,109 @@
+<div class="tab-pane show" id="profile-b1">
+  <table class="table">
+    <thead style="background: #ff9c22">
+      <tr style="color: #fff">
+        <th>GAMBAR</th>
+        <th>NAMA PRODUCT</th>
+        <th>POINT</th>
+        <th>HARGA</th>
+        <th>TOTAL</th>
+        <th>TGL PENGIRIMAN</th>
+        <th>JUMLAH</th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+  </table>
+  <% let no1=1; transaksiDalamProses.forEach(item=> { const filteredProduk =
+  item.idProduk.filter(p => p.produk.kategori === filter); if
+  (filteredProduk.length > 0) { let totalBayar = 0; %>
+  <!-- Konten Card Transaksi -->
+  <div class="card">
+    <!-- Header Card -->
+    <div class="card-header" style="background: rgba(255, 154, 2, 0.08)">
+      <!-- Baris Header -->
+      <div class="row">
+        <div class="col-lg-6">
+          <img
+            src="/images/users/user-7.jpg"
+            alt="image"
+            class="img-fluid avatar-sm rounded-circle"
+          />
+          <% if (item.idCustomer) { %>
+          <span class="ms-2" style="color: #fd9f2c">
+            <%= item.idCustomer.nama %>
+          </span>
+          <span class="ms-2"> (<%= item.idCustomer.nomorTelepon %>) </span>
+          <% } else { %>
+          <span class="ms-2" style="color: #fd9f2c">
+            Admin/Kasir
+            <!-- Or any default value you want to display -->
+          </span>
+          <% } %>
+        </div>
+        <div class="col-lg-6" style="text-align: end">
+          <span>No pemesanan</span>
+          <span>:</span>
+          <span><%= no1++ %></span>
+        </div>
+      </div>
+    </div>
+    <!-- Body Card -->
+    <div class="card-body">
+      <% filteredProduk.forEach(produk=> { %>
+      <!-- Konten Produk -->
+      <div class="row mb-2">
+        <div class="col-1">
+          <img src="/<%= produk.produk.gambar %>" alt="" width="75" />
+        </div>
+        <div class="col-2 ms-3">
+          <p><%= produk.produk.namaProduk %></p>
+        </div>
+        <div class="col-1" style="margin-left: 4%">
+          <p><%= produk.produk.bobotTenaga %></p>
+        </div>
+        <div class="col-1" style="margin-left: 1%">
+          <%= produk.produk.hargaProduk %>
+        </div>
+        <div class="col-1 text-center">
+          <%= produk.produk.hargaProduk * produk.jumlah %>
+        </div>
+        <div class="col-2 text-center ms-4" style="color: #06e602">
+          <%= item.reqTglPesan %>
+        </div>
+        <div class="col text-center">
+          <p><%= produk.jumlah %></p>
+        </div>
+        <div class="col d-flex align-items-start">
+          <form
+            action="/admin/moveTransaksiSelesai/<%= item._id %>/<%=  produk.produk._id %>/<%= produk.jumlah %>"
+            method="POST"
+          >
+            <button
+              type="submit"
+              style="background-color: #06e602"
+              class="btn btn-success rounded-pill waves-effect waves-light"
+            >
+              Selesai
+            </button>
+          </form>
+        </div>
+      </div>
+      <% totalBayar +=produk.produk.hargaProduk * produk.jumlah; }); %>
+      <!-- Baris Received dan Pengiriman -->
+      <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-7">
+          <div class="received">
+            <span>Tgl Pesan</span><span> : </span
+            ><span> <%= item.tglPesan %> </span>
+            <span class="ms-3">Total Bayar</span><span>:</span
+            ><span> <%= totalBayar %> </span>
+            <span class="ms-3">Alamat Kirim</span><span>:</span
+            ><span style="color: #0d6efd"> <%= item.alamatPengiriman %> </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } }); %>
+</div>

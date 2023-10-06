@@ -1,0 +1,112 @@
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+<div class="tab-pane active" id="home-b1">
+  <div class="produk">
+    <h5 class="header-title" style="margin-bottom: -20vh">
+      <%= produk.length %> Produk
+    </h5>
+    <a
+      class="btn btn-sm text-white"
+      href=""
+      style="margin-left: 20vh; margin-bottom: -35vh; background: #f7bc00"
+      ><i class="fa fa-plus"></i> Tambah Produk Baru</a
+    >
+  </div>
+  <table
+    data-toggle="table"
+    data-search="true"
+    data-show-refresh="true"
+    data-sort-name="id"
+    data-page-list="[5, 10, 20]"
+    data-page-size="5"
+    data-pagination="true"
+    data-show-pagination-switch="true"
+    class="table-borderless table-striped"
+  >
+    <thead style="background: #ff9c22">
+      <tr style="color: #fff">
+        <th>NO</th>
+        <th>GAMBAR</th>
+        <th>NAMA PRODUCT</th>
+        <th>KATEGORI</th>
+        <th>HARGA</th>
+        <th>STOK</th>
+        <th>TERJUAL</th>
+        <th data-field="user-status">STATUS</th>
+        <th>AKSI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% var i=1; %> <% produk.forEach((item)=> { %>
+      <tr>
+        <td><%= i++ %></td>
+        <td>
+          <img
+            src="/<%= item.gambar %>"
+            alt="Gambar Produk"
+            width="50"
+            height="50"
+          />
+        </td>
+        <td><%= item.namaProduk %></td>
+        <td><%= item.kategori %></td>
+        <td><%= item.hargaProduk %></td>
+        <td><%= item.stok %></td>
+        <td><%= item.jumlahTerjual %></td>
+        <td>
+          <% if (item.stok<=0) { %> %><span
+            class="badge fs-5"
+            style="background: rgba(245, 37, 37, 0.15); color: #f52525"
+            >Out of Stock</span
+          >
+          <% } else if(item.stok<=5){%>
+          <span
+            class="badge fs-5"
+            style="background: rgba(231, 234, 104, 0.1); color: #ffc42d"
+            >Restock</span
+          >
+          <% }else{ %>
+          <span
+            class="badge fs-5"
+            style="background: rgba(107, 235, 164, 0.1); color: #6beba4"
+            >In Stock</span
+          >
+          <% } %>
+        </td>
+        <td>
+          <div class="d-flex">
+            <a
+              href="/admin/produk/<%= item._id %>"
+              class="btn btn-link text-primary me-1"
+              style="background-color: white"
+              title="Detail"
+              ><i class="fas fa-eye"></i
+            ></a>
+            <a
+              class="btn btn-info me-1"
+              style="background-color: #62dcf7"
+              type="button"
+              href="/admin/produk/edit/<%= item._id %>"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+            <form
+              action="/admin/produk/delete/<%= item._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button
+                style="background-color: #f52525"
+                class="btn btn-danger"
+                type="submit"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

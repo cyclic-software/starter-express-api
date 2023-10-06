@@ -1,0 +1,52 @@
+<div class="tab-content">
+  <div class="tab-pane show active" id="semua">
+    <div class="row" id="productList">
+      <% produk.forEach((item)=> { %>
+      <div class="col-md-2 col-xl-3">
+        <div class="card shadow product-box">
+          <div class="card-body">
+            <div class="product-action">
+              <a
+                href="#"
+                class="btn btn-success btn-md waves-effect waves-light addToCartBtn"
+              >
+                <i
+                  class="fa-solid fa-cart-shopping"
+                  style="color: #fff"
+                  data-item-id="<%= item._id %>"
+                ></i>
+              </a>
+            </div>
+            <div class="bg-light">
+              <img
+                src="/<%= item.gambar %>"
+                alt="product-pic"
+                class="img-fluid"
+              />
+            </div>
+            <div class="product-info">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h5 class="font-16 mt-0 sp-line-1">
+                    <span> <%= item.namaProduk %> </span>
+                  </h5>
+                  <p>Stok : <%= item.stok %></p>
+                  <p class="fw-bold">
+                    <span
+                      class="fw-bold text-warning mt-1 fs-4"
+                      data-harga="<%= item.hargaProduk %>"
+                    >
+                      <%= item.hargaProduk %>
+                    </span>
+                    <span class="text-muted fs-5">/1pcs</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

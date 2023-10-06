@@ -1,0 +1,51 @@
+<% layout('layouts/boilerplate') %>
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="index.html">
+                                            <%= subnav[0] %>
+                                        </a></li>
+                                    <li class="breadcrumb-item disabled"><a href="#">
+                                            <%= subnav[1] %>
+                                        </a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-2">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs nav-bordered">
+                                        <li class="nav-item">
+                                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="true"
+                                                class="nav-link active">
+                                                Riwayat Transaksi
+                                            </a>
+                                        </li>
+
+
+
+
+
+                                    </ul>
+                                    <div class="tab-content">
+                                        <%- include('./transaksi/transaksiSelesaiAll') %>
+
+
+                                    </div>
+                                    <!-- end row -->
+                                </div>
+                                <!-- end page title -->
+                            </div> <!-- container -->
+                        </div> <!-- content -->

@@ -1,0 +1,260 @@
+<% layout('layouts/boilerplate') %>
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="index.html">
+                                                <%= subnav[0] %>
+                                            </a></li>
+                                        <li class="breadcrumb-item disabled"><a href="#">
+                                                <%= subnav[1] %>
+                                            </a></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="produk mb-4">
+                                    <h5 class="header-title" style="margin-bottom: -21vh;">
+                                        <%= bahan.length %> Bahan
+                                    </h5>
+                                    <a class="btn btn-sm text-white" href="#"
+                                        style="margin-left: 15vh; margin-bottom: -35vh; background: #F7BC00;"
+                                        data-bs-toggle="modal" data-bs-target="#addModal">
+                                        <i class="fa fa-plus"></i> Tambah Bahan Baru
+                                    </a>
+                                </div>
+                                <table class="table mt-3">
+                                    <thead style="background: #FF9C22;">
+                                        <tr>
+                                            <th scope="col" style="color: #fff;">NAMA BAHAN</th>
+                                            <th scope="col" style="color: #fff;">STOK</th>
+                                            <th scope="col" style="color: #fff;">EXPIRED</th>
+                                            <th scope="col" style="color: #fff;">Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% bahan.forEach((b)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= b.namaBahan %>
+                                                </td>
+                                                <td>
+                                                    <%= b.stokBahan %> <i>
+                                                            <%= b.satuan %>
+                                                        </i>
+                                                </td>
+                                                <td>
+                                                    <%= b.expiredDate %>
+                                                </td>
+                                                <td>
+
+                                                    <button class="btn btn-info btn-sm me-2" data-bs-toggle="modal"
+                                                        data-bs-target="#editModal" data-id="<%= b._id %>"
+                                                        data-nama="<%= b.namaBahan %>" data-stok="<%= b.stokBahan %>"
+                                                        data-satuan="<%= b.satuan %>"
+                                                        data-expired="<%= b.expiredDate %>"> <i
+                                                            class="fas fa-pencil-alt"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal" data-id="<%= b._id %>">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Add -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Tambah Bahan Baru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addForm" method="POST" action="/admin/bahan/new">
+                            <div class="mb-3">
+                                <label for="addNamaBahan" class="form-label">Nama Bahan</label>
+                                <input type="text" class="form-control" id="addNamaBahan" name="bahan[namaBahan]"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="addStok" class="form-label">Stok</label>
+                                <input type="number" class="form-control" id="addStok" name="bahan[stokBahan]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSatuan">Satuan</label>
+                                <select class="form-control" id="addSatuan" name="bahan[satuan]">
+                                    <option value="kg">Kilogram (kg)</option>
+                                    <option value="gr">Gram (gr)</option>
+                                    <option value="ons">Ons</option>
+                                    <option value="ml">Mililiter (ml)</option>
+                                    <option value="liter">Liter</option>
+                                    <option value="pcs">Pieces (pcs)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="addExpiredDate" class="form-label">Expired Date</label>
+                                <input type="date" class="form-control" id="addExpiredDate" name="bahan[expiredDate]"
+                                    required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="addForm" class="btn btn-warning" style="color: #fff;">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Edit -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Bahan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm" method="POST" action="">
+                            <div class="mb-3">
+                                <label for="namaBahan" class="form-label">Nama Bahan</label>
+                                <input type="text" class="form-control" id="namaBahan" name="bahan[namaBahan]" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="stok" class="form-label">Stok</label>
+                                <input type="number" class="form-control" id="stok" name="bahan[stokBahan]" required>
+                                <div class="form-group">
+                                    <label for="satuan">Satuan</label>
+                                    <select class="form-control" id="satuan" name="bahan[satuan]">
+                                        <option value="kg">Kilogram (kg)</option>
+                                        <option value="gr">Gram (gr)</option>
+                                        <option value="ons">Ons</option>
+                                        <option value="ml">Mililiter (ml)</option>
+                                        <option value="liter">Liter</option>
+                                        <option value="pcs">Pieces (pcs)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="expiredDate" class="form-label">Expired Date</label>
+                                <input type="date" class="form-control" id="expiredDate" name="bahan[expiredDate]"
+                                    required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="editForm" class="btn btn-warning"
+                            style="color: #fff;">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete -->
+        <div class=" modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Bahan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this bahan?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form id="deleteForm" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+
+            const editModal = document.getElementById('editModal');
+            editModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget; // Tombol "Edit" yang membuka modal
+                const id = button.getAttribute('data-id'); // Mengambil nilai ID dari atribut data-id
+                const nama = button.getAttribute('data-nama'); // Mengambil nilai Nama Bahan dari atribut data-nama
+                const stokBahan = button.getAttribute('data-stok'); // Mengambil nilai stok dari atribut data-stok
+                const satuanBahan = button.getAttribute('data-satuan'); // Mengambil nilai satuan dari atribut data-satuan
+                const expired = button.getAttribute('data-expired'); // Mengambil nilai expired dari atribut data-expired
+
+                // Mengatur nilai action pada form edit
+                const editForm = document.getElementById('editForm');
+                editForm.action = `/admin/bahan/edit/${id}?_method=PATCH`;
+
+                // Mengisi nilai pada form edit
+                const satuanSelect = document.getElementById('satuan');
+                selectOptionByValue(satuanSelect, satuanBahan);
+
+                const namaBahan = document.getElementById('namaBahan');
+                const stok = document.getElementById('stok');
+                const expiredDate = document.getElementById('expiredDate');
+
+                namaBahan.value = nama;
+                stok.value = stokBahan;
+                expiredDate.value = formatDate(expired);
+            });
+
+            function formatDate(dateString) {
+                const parts = dateString.split('-');
+                const day = parts[0];
+                const month = parts[1];
+                const year = parts[2];
+                return `${year}-${month}-${day}`;
+            }
+
+            function selectOptionByValue(selectElement, value) {
+                console.log(value);
+                for (let option of selectElement.options) {
+                    if (option.value === value) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+
+
+
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget; // Tombol "Delete" yang membuka modal
+                const id = button.getAttribute('data-id'); // Mengambil nilai ID dari atribut data-id
+
+                // Mengatur nilai ID pada atribut action dari form delete
+                const deleteForm = document.getElementById('deleteForm');
+                deleteForm.action = `/admin/bahan/delete/${id}?_method=DELETE`;
+            });
+
+            const addModal = document.getElementById('addModal');
+            addModal.addEventListener('show.bs.modal', function (event) {
+                const form = document.getElementById('addForm');
+                form.reset(); // Mengatur formulir ke kondisi awal saat modal ditampilkan
+            });
+        </script>

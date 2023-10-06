@@ -1,0 +1,141 @@
+<% layout('layouts/boilerplate') %>
+<div class="container mt-5">
+  <h2>Form Upload Iklan</h2>
+  <form action="/kasir/iklan" method="POST" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-header">Gambar 1</div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="gambar1" class="form-label">Gambar:</label>
+              <input
+                type="file"
+                class="form-control-file"
+                name="gambar1"
+                required
+                onchange="previewImage(event, 'preview1')"
+              />
+              <small class="form-text text-muted">Disarankan size: 3:2</small>
+            </div>
+            <div class="mb-3">
+              <label for="nama1" class="form-label">Nama Gambar:</label>
+              <input type="text" class="form-control" name="nama1" required />
+            </div>
+            <div class="mb-3">
+              <label for="deskripsi1" class="form-label"
+                >Deskripsi Gambar:</label
+              >
+              <textarea
+                class="form-control"
+                name="deskripsi1"
+                required
+              ></textarea>
+            </div>
+            <div id="preview1" class="mt-3"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Formulir untuk gambar 2 -->
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-header">Gambar 2</div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="gambar2" class="form-label">Gambar:</label>
+              <input
+                type="file"
+                class="form-control-file"
+                name="gambar2"
+                required
+                onchange="previewImage(event, 'preview2')"
+              />
+              <small class="form-text text-muted">Disarankan size: 3:2</small>
+            </div>
+            <div class="mb-3">
+              <label for="nama2" class="form-label">Nama Gambar:</label>
+              <input type="text" class="form-control" name="nama2" required />
+            </div>
+            <div class="mb-3">
+              <label for="deskripsi2" class="form-label"
+                >Deskripsi Gambar:</label
+              >
+              <textarea
+                class="form-control"
+                name="deskripsi2"
+                required
+              ></textarea>
+            </div>
+            <div id="preview2" class="mt-3"></div>
+            <!-- Tambahkan elemen pratinjau -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulir untuk gambar 3 -->
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-header">Gambar 3</div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="gambar3" class="form-label">Gambar:</label>
+              <input
+                type="file"
+                class="form-control-file"
+                name="gambar3"
+                required
+                onchange="previewImage(event, 'preview3')"
+              />
+              <small class="form-text text-muted">Disarankan size: 3:2</small>
+            </div>
+            <div class="mb-3">
+              <label for="nama3" class="form-label">Nama Gambar:</label>
+              <input type="text" class="form-control" name="nama3" required />
+            </div>
+            <div class="mb-3">
+              <label for="deskripsi3" class="form-label"
+                >Deskripsi Gambar:</label
+              >
+              <textarea
+                class="form-control"
+                name="deskripsi3"
+                required
+              ></textarea>
+            </div>
+            <div id="preview3" class="mt-3"></div>
+            <!-- Tambahkan elemen pratinjau -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<style>
+  .img-preview {
+    max-width: 200px; /* Set maksimum lebar gambar */
+    max-height: 200px; /* Set maksimum tinggi gambar */
+  }
+</style>
+
+<script>
+  function previewImage(event, previewId) {
+    const input = event.target;
+    const preview = document.getElementById(previewId);
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("img-thumbnail", "img-preview"); // Tambahkan kelas img-preview
+        preview.innerHTML = "";
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      preview.innerHTML = "";
+    }
+  }
+</script>

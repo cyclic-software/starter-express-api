@@ -1,0 +1,97 @@
+<% layout('layouts/boilerplate') %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Nama Produk</th>
+                <th scope="col">Nama Customer</th>
+                <th scope="col">Tanggal Tambah</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% wishlist.forEach(function(item, index) { %>
+                <tr>
+                    <td>
+                        <%= item.idProduk.namaProduk %>
+                    </td>
+                    <td>
+                        <%= item.idCustomer.nama %>
+                    </td>
+                    <td>
+                        <%= item.tglTambah %>
+                    </td>
+                    <td>
+                        <input type="number" name="idProduk[<%= index %>].produk" value="<%= item.idProduk._id %>"
+                            hidden>
+                        <input type="number" name="idProduk[<%= index %>].jumlah" min="1" onchange="updateTotal(this)"
+                            value="<%= item.jumlah %>">
+
+                    </td>
+                    <td>
+                        <%= item.idProduk.hargaProduk %>
+                    </td>
+                    <td>
+                        <span class="subtotal">
+                            <%= item.idProduk.hargaProduk %>
+                        </span>
+                    </td>
+                </tr>
+                <% }); %>
+                    <tr>
+                        <td colspan="5" align="right">Total Bayar:</td>
+                        <td>
+                            <span id="totalBayar" class="total-bayar">0</span>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+
+    <form action="/customer/transaksi" method="POST">
+        <label for="tawaranHarga">Tawaran Harga:</label>
+        <input type="number" name="tawaranHarga" step="0.01">
+        <label for="tglPesan">Tanggal Pesan:</label>
+        <input type="date" name="tglPesan" value="<%= new Date().toISOString().substring(0, 10) %>">
+        <label for="reqTglPesan">Tanggal Pesan yang Diinginkan:</label>
+        <input type="date" name="reqTglPesan">
+        <label for="alamatPengiriman">Alamat Pengiriman:</label>
+        <input type="text" name="alamatPengiriman">
+        <% wishlist.forEach(function(item, index) { %>
+            <input type="hidden" name="idProduk[<%= index %>].produk" value="<%= item.idProduk._id %>">
+            <input type="hidden" name="jumlah[<%= index %>]" value="<%= item.jumlah %>" id="jumlahInput<%= index %>">
+            <% }); %>
+                <input type="hidden" name="totalBayar" id="totalBayarInput">
+                <button type="submit">Buat Transaksi</button>
+    </form>
+
+    <script>
+        function updateTotal(input) {
+            const row = input.parentNode.parentNode;
+            const hargaProduk = parseFloat(row.cells[4].textContent);
+            const jumlah = parseFloat(input.value);
+            const subtotal = hargaProduk * jumlah;
+            row.querySelector('.subtotal').textContent = subtotal.toFixed(2);
+            calculateTotalBayar();
+
+            // Perbarui nilai input tersembunyi (hidden input)
+            const index = parseInt(input.getAttribute('name').match(/\d+/)[0]);
+            const hiddenInput = document.getElementById(`jumlahInput${index}`);
+            hiddenInput.value = jumlah;
+
+            // Perbarui nilai totalBayarInput
+            const totalBayar = calculateTotalBayar();
+            const totalBayarInput = document.getElementById('totalBayarInput');
+            totalBayarInput.value = totalBayar;
+        }
+
+        function calculateTotalBayar() {
+            let totalBayar = 0;
+            const subtotals = document.querySelectorAll('.subtotal');
+            subtotals.forEach(function (subtotal) {
+                totalBayar += parseFloat(subtotal.textContent);
+            });
+            document.getElementById('totalBayar').textContent = totalBayar.toFixed(2);
+            return totalBayar.toFixed(2);
+        }
+    </script>

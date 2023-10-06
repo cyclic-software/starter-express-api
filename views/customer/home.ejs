@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container">
+        <h1>Home</h1>
+
+        <% produk.forEach(item=> { %>
+            <div class="card my-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= item.namaProduk %>
+                    </h4>
+                    <p class="card-text">Kategori: <%= item.kategori %>
+                    </p>
+                    <p class="card-text">Stok: <%= item.stok %>
+                    </p>
+                    <p class="card-text">Jumlah Terjual: <%= item.jumlahTerjual %>
+                    </p>
+                    <p class="card-text">Jenis Pemesanan: <%= item.jenisPemesanan %>
+                    </p>
+                    <p class="card-text">Bobot Tenaga: <%= item.bobotTenaga %>
+                    </p>
+                    <p class="card-text">Harga Produk: <%= item.hargaProduk %>
+                    </p>
+                    <p class="card-text">Gambar: <%= item.gambar %>
+                    </p>
+                    <p class="card-text">Deskripsi: <%= item.deskripsi %>
+                    </p>
+                    <p class="card-text">Tanggal Tambah: <%= item.tglTambah %>
+                    </p>
+                    <form action="/customer/wishlist/<%= item._id %>" method="post">
+                        <button>Add Keranjang</button>
+                    </form>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+
+    <script>

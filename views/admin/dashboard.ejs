@@ -1,0 +1,369 @@
+<% layout('layouts/boilerplate') %>
+<div class="content-page">
+  <div class="content">
+    <!-- Start Content -->
+    <div class="container-fluid p-1">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-left" style="float: left">
+              <h2>Welcome,Admin AR (Roti)</h2>
+              <p class="ms-1 fs-5">Tetap Semangat Jangan Berputus Asa</p>
+            </div>
+            <div
+              class="col-2"
+              style="
+                padding-top: 20px;
+                margin-left: 10vh;
+                display: inline-block;
+              "
+            >
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                id="searchInput"
+              />
+            </div>
+            <div
+              class="input-group"
+              style="padding-top: 20px; margin-left: 10px; display: inline"
+            >
+              <button type="button" class="btn btn-warning text-white">
+                Cari
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                style="margin-left: 4px"
+              >
+                <i data-feather="refresh-cw" class="icon-dual text-white"></i>
+              </button>
+            </div>
+            <div class="page-title-right">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="index.html">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item disabled">
+                  <a href="#">Dashboard saya</a>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card" style="min-height: 100vh">
+            <div class="card-body">
+              <ul class="nav nav-pills navtab-bg">
+                <li class="nav-item">
+                  <a
+                    href="#semua"
+                    data-bs-toggle="tab"
+                    aria-expanded="false"
+                    class="btn btn-outline-warning waves-effect waves-light rounded"
+                  >
+                    Semua
+                  </a>
+                </li>
+                <li class="nav-item px-2">
+                  <a
+                    href="#roti"
+                    data-bs-toggle="tab"
+                    aria-expanded="true"
+                    class="btn btn-outline-warning waves-effect waves-light rounded"
+                  >
+                    <i class="fas fa-bread-slice me-2"></i>Roti
+                  </a>
+                </li>
+                <li class="nav-item px-2">
+                  <a
+                    href="#nasi"
+                    data-bs-toggle="tab"
+                    aria-expanded="false"
+                    class="btn btn-outline-warning waves-effect waves-light rounded"
+                  >
+                    <i class="fa-solid fa-bowl-rice me-2"></i>
+                    <i class="fa-solid fa-cookie me-2"></i>Nasi & Jajanan
+                  </a>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane show active" id="semua">
+                  <div class="row" id="productList">
+                    <% produk.forEach((item)=> { %>
+                    <div class="col-md-2 col-xl-4">
+                      <div class="card shadow product-box">
+                        <div class="card-body">
+                          <div class="product-action">
+                            <a
+                              href="#"
+                              class="btn btn-success btn-md waves-effect waves-light addToCartBtn"
+                            >
+                              <i
+                                class="fa-solid fa-cart-shopping"
+                                style="color: #fff"
+                                data-item-id="<%= item._id %>"
+                              ></i>
+                            </a>
+                          </div>
+                          <div class="bg-light">
+                            <img
+                              src="/<%= item.gambar %>"
+                              alt="product-pic"
+                              class="img-fluid"
+                            />
+                          </div>
+                          <div class="product-info">
+                            <div class="row align-items-center">
+                              <div class="col">
+                                <h5 class="font-16 mt-0 sp-line-1">
+                                  <span> <%= item.namaProduk %> </span>
+                                </h5>
+                                <p>Stok : <%= item.stok %></p>
+                                <p class="fw-bold">
+                                  <span
+                                    class="fw-bold text-warning ms-4 mt-1 fs-4"
+                                    data-harga="<%= item.hargaProduk %>"
+                                  >
+                                    <%= item.hargaProduk %>
+                                  </span>
+                                  <span class="text-muted fs-5">/1pcs</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="card m-0" style="min-height: 100vh">
+            <div class="card-body m-0">
+              <form action="/customer/transaksi" method="POST">
+                <div class="" id="currentOrder">
+                  <a href="#">
+                    <i
+                      class="fa-solid fa-arrow-left fa-2xl"
+                      style="color: #ff8000"
+                    ></i>
+                    <span class="fs-4 text-dark fw-bold ms-2"
+                      >Current Order</span
+                    >
+                  </a>
+                  <hr />
+                  <!-- Di sini, tempatkan elemen-elemen produk yang sudah ada atau tambahan produk yang baru -->
+                </div>
+                <hr class="mt-5" />
+                <div class="row">
+                  <div
+                    class="col-md-12 p-2 rounded"
+                    style="background-color: #f5f5f5"
+                  >
+                    <div class="row mb-3">
+                      <div class="col-6 fw-bold">Tgl Pesan</div>
+                      <div class="col-6">
+                        <input
+                          disabled
+                          type="date"
+                          name="tglPesan"
+                          id="tglPesan"
+                          value=" "
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6 fw-bold">Req tgl Pesan</div>
+                      <div class="col-6">
+                        <input type="date" name="reqTglPesan" />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6 fw-bold">Sub total</div>
+                      <div class="col-6" id="subtotal">Rp. 0</div>
+                      <input
+                        type="hidden"
+                        name="subTotal"
+                        id="subTotalInput"
+                        value="0"
+                      />
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6 fw-bold">Total Bayar</div>
+                      <div class="col-6" id="totalBayar">Rp. 0</div>
+                      <input
+                        type="hidden"
+                        name="totalBayar"
+                        id="totalBayarInput"
+                        value="0"
+                      />
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6 fw-bold">Discount :</div>
+                      <div class="col-6">
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="diskon"
+                          id="diskon"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <label for="alamatPengiriman" class="fw-bold"
+                          >Alamat Kirim:</label
+                        >
+                      </div>
+                      <div class="col-12">
+                        <textarea
+                          class="form-control"
+                          name="alamatPengiriman"
+                          id="alamatPengiriman"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 text-center mt-3">
+                    <button type="submit" class="btn btn-success">Pesan</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end page title -->
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end content -->
+</div>
+<script>
+  // Inisialisasi koneksi WebSocket untuk halaman dashboard
+  const dashboardSocket = io(); // Menggunakan nama koneksi "dashboardSocket"
+
+  const reqTglPesanInput = document.querySelector('input[name="reqTglPesan"]');
+  const subTotalInput = document.getElementById("subTotalInput");
+  const inputTglTransaksi = document.getElementById("totalBayarInput");
+  const diskonUpdate = document.getElementById("diskon");
+  const alamatInput = document.getElementById("alamatPengiriman");
+
+  // Gabungkan event listeners dalam satu blok
+  reqTglPesanInput.addEventListener("input", function () {
+    const reqTglPesan = reqTglPesanInput.value;
+    dashboardSocket.emit("updateReqTglPesan", { reqTglPesan: reqTglPesan });
+  });
+
+  subTotalInput.addEventListener("change", function () {
+    const subtotal = subTotalInput.value;
+    const total = inputTglTransaksi.value;
+    dashboardSocket.emit("updateSubTotal", {
+      subTotal: subtotal,
+      total: total,
+    });
+  });
+
+  inputTglTransaksi.addEventListener("change", function () {
+    const totalTransaksi = inputTglTransaksi.value;
+    const subtotal = subTotalInput.value;
+    dashboardSocket.emit("updateStrukPesanan", {
+      total: totalTransaksi,
+      subTotal: subtotal,
+    });
+  });
+
+  diskonUpdate.addEventListener("input", function () {
+    const diskon = diskonUpdate.value;
+    dashboardSocket.emit("updateDiskon", { diskon: diskon });
+  });
+
+  alamatInput.addEventListener("input", function () {
+    const alamat = alamatInput.value;
+    dashboardSocket.emit("updateAlamat", { alamat: alamat });
+  });
+
+  // Mendapatkan referensi elemen <div class="col-md-12 text-center mt-3">
+  const targetDiv = document.querySelector(".col-md-12.text-center.mt-3");
+  if (targetDiv.children.length === 1) {
+    console.log("targetDiv.children.length === 1");
+    dashboardSocket.emit("kosongkanDatabase");
+  }
+
+  // SEARCH BAR
+  // Store the original HTML content of the product list
+  const productList = document.getElementById("productList");
+  const originalHTML = productList.innerHTML;
+  let originalProducts = Array.from(
+    document.querySelectorAll("#productList .product-box")
+  );
+
+  document.getElementById("searchInput").addEventListener("input", function () {
+    let searchTerm = this.value.toLowerCase();
+    let filteredProducts = originalProducts.filter(function (product) {
+      let productName = product
+        .querySelector(".sp-line-1 span")
+        .textContent.toLowerCase();
+      return searchTerm === "" || productName.includes(searchTerm);
+    });
+
+    productList.innerHTML = "";
+
+    if (filteredProducts.length > 0) {
+      filteredProducts.forEach(function (product) {
+        productList.appendChild(product.parentNode);
+      });
+    } else {
+      productList.innerHTML = "No matching products found.";
+    }
+  });
+
+  // href roti
+  // Add event listener to the "Roti" link
+  document
+    .querySelector('a[href="#roti"]')
+    .addEventListener("click", function () {
+      const currentURL = new URL(window.location.href);
+      currentURL.searchParams.set("kategori", "Roti");
+      window.location.href = currentURL.href;
+    });
+
+  // href nasi
+  // Add event listener to the "Nasi" link
+  document
+    .querySelector('a[href="#nasi"]')
+    .addEventListener("click", function () {
+      const currentURL = new URL(window.location.href);
+      currentURL.searchParams.set("kategori", "Snack");
+      window.location.href = currentURL.href;
+    });
+
+  // href semua
+  // Add event listener to the "Semua" link
+  document
+    .querySelector('a[href="#semua"]')
+    .addEventListener("click", function () {
+      const currentURL = new URL(window.location.href);
+      currentURL.searchParams.delete("kategori");
+      window.location.href = currentURL.href;
+    });
+</script>
+<script src="/js/dashboardadmin.js"></script>

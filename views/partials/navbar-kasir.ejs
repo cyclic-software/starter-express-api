@@ -1,0 +1,61 @@
+
+
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu" style="margin-top: -70px; width: 80px;">
+      <div class="h-100" data-simplebar>
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+          <ul id="side-menu">
+            <!-- LOGO -->
+            <li>
+              <a href="#sidebarDashboards" data-bs-toggle="collapse">
+               <img src="/images/logo-sm.png" alt=""
+               style="width: 40px; height: 40px;">
+              </a>
+            </li>
+            <li>
+              <a href="/kasir/dashboard" class="text-center">
+                <i data-feather="shopping-cart"></i>
+              </a>
+            </li>
+            <li>
+              <a href="/kasir/iklan" class="text-center" >
+                <i class="fas fa-chart-pie"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Sidebar -->
+      </div>
+      <!-- Sidebar -left -->
+    </div>
+    <!-- Left Sidebar End -->
+  </div>
+</div>
+<script>
+  function getDataAndLogout() {
+    // Fetch data from the "/kasir" endpoint using fetch API
+    fetch("/kasir")
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the data obtained from the server
+        console.log("Data received:", data);
+
+        // Now, proceed with the logout process (you can call the logout function here)
+        logout();
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the fetch
+        console.error("Error fetching data:", error);
+
+        // If there's an error, you can still proceed with the logout process
+        logout();
+      });
+  }
+
+  function logout() {
+    // Add your logout logic here, e.g., redirect the user to the logout URL
+    window.location.href = "/logout";
+  }
+</script>

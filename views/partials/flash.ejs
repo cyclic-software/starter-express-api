@@ -1,0 +1,58 @@
+<% if (success && success.length) { %>
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title" id="successModalTitle">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= success %>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+        <% if (error && error.length) { %>
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger">
+                            <h5 class="modal-title" id="errorModalTitle">Error</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <%= error %>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+                <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var successModal = document.getElementById('successModal');
+                        var errorModal = document.getElementById('errorModal');
+
+                        if (successModal) {
+                            var successModalInstance = new bootstrap.Modal(successModal);
+                            successModalInstance.show();
+                        }
+
+                        if (errorModal) {
+                            var errorModalInstance = new bootstrap.Modal(errorModal);
+                            errorModalInstance.show();
+                        }
+                    });
+                </script>

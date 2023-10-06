@@ -1,0 +1,91 @@
+<div class="col-xl-4">
+  <div class="card m-0" style="min-height: 100vh">
+    <div class="card-body m-0">
+      <form action="/customer/transaksi" method="POST">
+        <div class="" id="currentOrder">
+          <a href="#">
+            <i class="fa-solid fa-arrow-left fa-2xl" style="color: #ff8000"></i>
+            <span class="fs-4 text-dark fw-bold ms-2">Current Order</span>
+          </a>
+          <hr />
+          <!-- Di sini, tempatkan elemen-elemen produk yang sudah ada atau tambahan produk yang baru -->
+        </div>
+        <hr class="mt-5" />
+        <div class="row">
+          <div class="col-md-12 p-2 rounded" style="background-color: #f5f5f5">
+            <div class="row mb-3">
+              <div class="col-6 fw-bold">Tgl Pesan</div>
+              <div class="col-6">
+                <input
+                  disabled
+                  type="date"
+                  name="tglPesan"
+                  id="tglPesan"
+                  value=" "
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6 fw-bold">Req tgl Pesan</div>
+              <div class="col-6">
+                <input type="date" name="reqTglPesan" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6 fw-bold">Sub total</div>
+              <div class="col-6" id="subtotal">Rp. 0</div>
+              <input
+                type="hidden"
+                name="subTotal"
+                id="subTotalInput"
+                value="0"
+              />
+            </div>
+            <div class="row mb-3">
+              <div class="col-6 fw-bold">Total Bayar</div>
+              <div class="col-6" id="totalBayar">Rp. 0</div>
+              <input
+                type="hidden"
+                name="totalBayar"
+                id="totalBayarInput"
+                value="0"
+              />
+            </div>
+            <div class="row mb-3">
+              <div class="col-6 fw-bold">Discount :</div>
+              <div class="col-6">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="diskon"
+                  id="diskon"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <label for="alamatPengiriman" class="fw-bold"
+                  >Alamat Kirim:</label
+                >
+              </div>
+              <div class="col-12">
+                <textarea
+                  class="form-control"
+                  name="alamatPengiriman"
+                  id="alamatPengiriman"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center mt-3">
+            <button type="submit" class="btn btn-success">Pesan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

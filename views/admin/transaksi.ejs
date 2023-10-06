@@ -1,0 +1,195 @@
+<% layout('layouts/boilerplate') %>
+<div class="content-page">
+  <div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html"> <%= subnav[0] %> </a>
+                </li>
+                <li class="breadcrumb-item disabled">
+                  <a href="#"> <%= subnav[1] %> </a>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-2">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-body">
+                <ul class="nav nav-tabs nav-bordered">
+                  <li class="nav-item">
+                    <a
+                      href="#home-b1"
+                      data-bs-toggle="tab"
+                      aria-expanded="true"
+                      class="nav-link active"
+                    >
+                      Pesanan Masuk
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="#profile-b1"
+                      data-bs-toggle="tab"
+                      aria-expanded="true"
+                      class="nav-link"
+                    >
+                      Belum diselesaikan
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="#messages-b1"
+                      data-bs-toggle="tab"
+                      aria-expanded="false"
+                      class="nav-link"
+                    >
+                      Selesai
+                    </a>
+                  </li>
+                  <div class="ms-auto" style="padding-right: 5px">
+                    <p>Maksimal Harian :</p>
+                  </div>
+                  <% if(bobot){ %>
+                  <form
+                    action="/admin/updateBobot"
+                    class="d-flex"
+                    method="POST"
+                  >
+                    <input
+                      type="date"
+                      name="tglKerja"
+                      style="height: 36px; width: 130px"
+                      value="<%= bobot.tglKerja %>"
+                      id="tglKerjaInput"
+                      class="form-control"
+                      required
+                    />
+                    <input
+                      readonly
+                      type="number"
+                      value="<%= bobot.pointNow %>"
+                      class="form-control text-end <%= bobot.pointNow > bobot.pointMax ? 'bg-danger' : 'bg-success' %> text-white"
+                      style="
+                        width: 70px;
+                        height: 37px;
+                        border: 0.3px solid rgba(137, 137, 137, 0.3);
+                      "
+                    />
+
+                    <input
+                      type="number"
+                      name="pointMax"
+                      value="<%= bobot.pointMax %>"
+                      class="form-control text-start <%= bobot.pointNow > bobot.pointMax ? 'bg-danger' : 'bg-success' %> text-white"
+                      style="
+                        width: 78px;
+                        height: 37px;
+                        margin-right: 5px;
+                        border: 0.3px solid rgba(137, 137, 137, 0.3);
+                      "
+                    />
+
+                    <button
+                      type="submit"
+                      class="btn btn-warning text-white"
+                      style="height: 37px; color: rgba(0, 0, 0, 0.4)"
+                    >
+                      Update
+                    </button>
+                  </form>
+                  <form
+                    action="/admin/resetPointNow"
+                    class="d-flex"
+                    method="POST"
+                  >
+                    <input
+                      type="hidden"
+                      name="tglKerja"
+                      value="<%= bobot.tglKerja %>"
+                      id="tglKerjaInput"
+                      class="form-control"
+                      required
+                    />
+
+                    <input type="hidden" name="resetPointNow" value="true" />
+                    <button
+                      type="submit"
+                      class="btn btn-dark ms-1 text-white"
+                      style="height: 37px; color: rgba(0, 0, 0, 0.4)"
+                    >
+                      Reset
+                    </button>
+                  </form>
+                  <% }else{ %>
+                  <form
+                    action="/admin/createBobot"
+                    class="d-flex"
+                    style="height: 30px"
+                    method="POST"
+                  >
+                    <input
+                      style="width: 140px"
+                      type="date"
+                      name="tglKerja"
+                      value="<%= bobot ? bobot.tglKerja : tglKerja %>"
+                      id="tglKerjaInput"
+                      class="form-control me-1"
+                      required
+                    />
+                    <input
+                      style="width: 80px"
+                      type="number"
+                      name="pointMax"
+                      class="form-control me-1"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      class="btn btn-primary py-0"
+                      style="background-color: #0292e6"
+                    >
+                      Set Bobot
+                    </button>
+                  </form>
+                  <% } %>
+                </ul>
+                <div class="tab-content">
+                  <%- include('./transaksi/transaksiMasuk') %> <%-
+                  include('./transaksi/transaksiProses') %> <%-
+                  include('./transaksi/transaksiSelesai') %>
+                </div>
+                <!-- end row -->
+              </div>
+              <!-- end page title -->
+            </div>
+            <!-- container -->
+          </div>
+          <!-- content -->
+
+          <script>
+            const tglKerjaInput = document.getElementById("tglKerjaInput");
+            const currentURL = new URL(window.location.href); // Mengambil URL saat ini
+
+            tglKerjaInput.addEventListener("change", function () {
+              const selectedDate = this.value;
+              console.log(selectedDate);
+
+              currentURL.searchParams.set("tglKerja", selectedDate); // Menetapkan nilai query parameter
+
+              window.location.href = currentURL.href; // Mengarahkan pengguna ke URL dengan query parameter yang diubah
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
