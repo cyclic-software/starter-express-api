@@ -1,7 +1,9 @@
 import express from "express"
+import path from "path"
+
 const app = express()
 const port=process.env.PORT||5000
-app.all('/', (req, res) => {
+app.get('/', (req, res) => {
     console.log("Just got a request!")
     res.send('Yo!')
 })
