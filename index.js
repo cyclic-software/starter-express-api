@@ -5,7 +5,7 @@ const app = express()
 const port=process.env.PORT||5000
 app.get('/', (req, res) => {
     console.log("Just got a request!")
-    res.send('Yo!')
+    res.sendFile(path.join(__dirname,"./client/public/index.html"))
 })
 app.listen(port,()=>{
     console.log(`server on port ${port}`)
