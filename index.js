@@ -14,7 +14,7 @@ app.use("*",function(req,res){
 })
 app.get('/', (req, res) => {
     console.log("Just got a request!")
-    res.sendFile(path.join(__dirname,"./client/build/index.html"))
+    res.send("hey")
 })
 app.listen(port,()=>{
     console.log(`server on port ${port}`)
