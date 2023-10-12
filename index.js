@@ -1,8 +1,11 @@
 import express from "express"
-import path from "path"
+import dotenv from "dotenv"
+
+//import path from "path"
 // import { fileURLToPath } from "url"
 // import { dirname } from "path"
 
+dotenv.config()
 const app = express()
 const port=process.env.PORT||5000
 // const __filename=fileURLToPath(import.meta.url);
