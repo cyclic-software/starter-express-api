@@ -17,4 +17,6 @@ authRouter.post("/admin-auth",requireSignin,isAdmin,(req,res)=>{
         ok:true
     })
 })
-
+authRouter.get("/",(req,res)=>{
+    res.send("auth routes")
+})
