@@ -1,0 +1,27 @@
+.bubbles{
+    display: flex;
+    z-index: 1;
+    height:100%;
+    width:100%;
+}
+.bubbles span{
+    position: relative;
+    min-width:10px;
+    height:10px;
+    background-color: #9597f7;
+    margin: 0 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #3d4d12,
+    0 0 50px #95d7f7,
+    0 0 100px #95d7f7;
+     animation: animate 15s linear infinite;
+     z-index: 2;
+}
+@keyframes animate{
+    0%{
+        transform: translateY(100vh) scale(0);
+    }
+    100%{
+        transform:translateY(0vh) scale(1)
+    }
+}

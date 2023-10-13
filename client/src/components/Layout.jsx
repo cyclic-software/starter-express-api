@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css"
 function Layout(props) {
   return (
    <>
-      <Header/>
+       <Header/>
       
         <div style={{minHeight:"70vh",width:"100vw",paddingTop:"50px"}}>
           <ToastContainer/>

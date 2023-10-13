@@ -1,0 +1,91 @@
+.header{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    background-color:hsl(240, 4%, 16%) ;
+    transition: 1s;
+    z-index: 10;
+    pointer-events: none;
+}
+.logoCont{
+   position: absolute;
+   top:50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   height: 400px;
+   width:400px;
+   background-image: url("./assets/logo.jpg");
+   background-size: contain;
+   background-repeat: no-repeat;
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-end;
+   overflow: hidden;
+   transition: 1s;
+}
+#logoText{
+    width:100%;
+    transition: 1s;
+}
+.nav{
+    position: fixed;
+    z-index: 11;
+    display: none;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    background: #28282b;
+    padding: 5px;
+    height:50px;
+    box-sizing: border-box;
+    width:180px;
+    margin-right: 20px;
+}
+@media (min-width:550px) {
+    .nav{
+       top:0;
+       right:0;
+    }
+    .icon{
+        height:22px;
+    }
+}
+@media (max-width: 550px){
+    .nav{
+        bottom:0px;
+        width:100vw;
+    }
+    .icon{
+        height:35px;
+    }
+}
+@media (max-width:450px){
+    .nav{
+        justify-content: space-around;
+    }
+}
+.nav li{
+    margin: 10px;
+   display: flex;
+   align-items: center;
+}
+.icon{
+    
+    z-index: 2;
+}
+
+.sticky{
+    position:fixed;
+    width:100%;
+    height:50px;
+    background-color:#28282b ;
+    transition: 1s;
+    pointer-events: all;
+}
+.sticky .logoCont{
+    height:50px;
+    width:50px;
+}
+.sticky .bubbles{
+    display: none;
+}
