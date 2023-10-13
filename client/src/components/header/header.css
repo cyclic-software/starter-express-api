@@ -27,6 +27,9 @@
     width:100%;
     transition: 1s;
 }
+.textlogo{
+    display: none;
+}
 .nav{
     position: fixed;
     z-index: 11;
@@ -34,7 +37,6 @@
     list-style: none;
     justify-content: center;
     align-items: center;
-    background: #28282b;
     padding: 5px;
     height:50px;
     box-sizing: border-box;
@@ -54,6 +56,8 @@
     .nav{
         bottom:0px;
         width:100vw;
+        background-color: #5193b3cc;
+        backdrop-filter: blur(2px);
     }
     .icon{
         height:35px;
@@ -62,6 +66,8 @@
 @media (max-width:450px){
     .nav{
         justify-content: space-around;
+        background-color: #5193b3cc;
+        backdrop-filter: blur(2px);
     }
 }
 .nav li{
@@ -78,7 +84,8 @@
     position:fixed;
     width:100%;
     height:50px;
-    background-color:#28282b ;
+    background-color:#5193b3cc;
+    backdrop-filter: blur(2px);
     transition: 1s;
     pointer-events: all;
 }
@@ -88,4 +95,18 @@
 }
 .sticky .bubbles{
     display: none;
+}
+.sticky .textlogo{
+    display: block;
+}
+.sticky #logoText{
+    display: none;
+}
+.sticky .logoCont{
+    background-image: none;
+    width:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
 }

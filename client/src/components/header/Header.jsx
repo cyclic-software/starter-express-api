@@ -21,7 +21,8 @@ function Header() {
   }
   
  
-  window.addEventListener("scroll",handleScroll,{once:true})
+  //window.addEventListener("scroll",handleScroll,{once:true})
+  setTimeout(handleScroll,3000)
 
   return (
     <>
@@ -30,6 +31,7 @@ function Header() {
       <Link to="/">
       <div key="logoCont" className='logoCont'>
          <img src={logoText} id="logoText" alt=''/>
+         <h1 className='textlogo'>DRIP</h1>
       </div>
       </Link>
     </div>
