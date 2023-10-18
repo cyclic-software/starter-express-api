@@ -47,7 +47,7 @@ app.get("/standings2", async (req, res) => {
     await s3
       .getObject({
         Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-        Key: "standings2.json",
+        Key: "/standings.json",
       })
       .promise()
       .then((data) => {
@@ -84,7 +84,7 @@ function requestStandingsAndSave() {
         s3.putObject({
           Body: fileInStringFormat,
           Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-          Key: "/standings2.json",
+          Key: "/standings.json",
         }).promise();
         resolve(JSON.stringify(fileInStringFormat));
       } else {
