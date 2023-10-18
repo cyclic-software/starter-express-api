@@ -66,7 +66,9 @@ app.get("/standings2", async (req, res) => {
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
     console.log(err);
-    requestStandingsAndSave();
+    requestStandingsAndSave().then((result) => {
+      res.send(result);
+    });
   }
 });
 
