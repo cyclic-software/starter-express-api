@@ -56,8 +56,9 @@ app.get("/standings2", async (req, res) => {
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
         if (fileDate.add(1, "hour").isBefore(moment())) {
           console.log("Updating Standings...");
-          const result = requestStandingsAndSave();
-          res.send(result);
+          requestStandingsAndSave().then((result) => {
+            res.send(result);
+          });
         } else {
           res.send(jsonFile);
         }
