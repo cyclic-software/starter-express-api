@@ -53,17 +53,18 @@ app.get("/standings2", async (req, res) => {
     const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
     if (fileDate.add(1, "hour").isBefore(moment())) {
       console.log("Updating Standings...");
-      requestStandingAndSave();
+
+      res.send(requestStandingsAndSave());
     } else {
       res.send(jsonFile);
     }
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
-    requestStandingAndSave();
+    requestStandingsAndSave();
   }
 });
 
-function requestStandingAndSave() {
+function requestStandingsAndSave() {
   request(
     "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
     options,
@@ -82,7 +83,7 @@ function requestStandingAndSave() {
             Key: "standings2.json",
           })
           .promise();
-        res.send(fileInStringFormat);
+        return fileInStringFormat;
       } else {
         console.log(response.body);
       }
