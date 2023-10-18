@@ -47,7 +47,7 @@ app.get("/standings2", async (req, res) => {
     await s3
       .getObject({
         Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-        Key: "/standings.json",
+        Key: "standings.json",
       })
       .promise()
       .then((data) => {
@@ -55,7 +55,7 @@ app.get("/standings2", async (req, res) => {
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
         if (fileDate.add(1, "hour").isBefore(moment())) {
           console.log("Updating Standings...");
-          requestStandingsAndSave().then((result) => {
+          requestStandings().then((result) => {
             res.send(result);
           });
         } else {
@@ -65,28 +65,28 @@ app.get("/standings2", async (req, res) => {
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
     console.log(err);
-    requestStandingsAndSave().then((result) => {
-      res.send(result);
-    });
+    requestStandings()
+      .then((result) => {
+        s3.putObject({
+          Body: result,
+          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+          Key: "standings.json",
+        }).promise();
+      })
+      .then((data) => {
+        res.send(result);
+      });
   }
 });
 
-function requestStandingsAndSave() {
+function requestStandings() {
   return new Promise((resolve, reject) => {
     request(requestOptions, (error, response, json) => {
       if (!error && response.statusCode === 200) {
         console.log(json);
         json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
-
         let fileInStringFormat = JSON.stringify(json);
-
-        // For demonstration, write to a local file instead of S3
-        s3.putObject({
-          Body: fileInStringFormat,
-          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-          Key: "/standings.json",
-        }).promise();
-        resolve(JSON.stringify(fileInStringFormat));
+        resolve(fileInStringFormat);
       } else {
         console.error(
           "Error:",
