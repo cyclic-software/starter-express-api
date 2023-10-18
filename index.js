@@ -6,7 +6,6 @@ const request = require("request");
 const moment = require("moment");
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
-const fs = require("fs");
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
@@ -87,7 +86,7 @@ function requestStandingsAndSave() {
           Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
           Key: "/standings2.json",
         }).promise();
-        resolve(fileInStringFormat);
+        resolve(JSON.stringify(fileInStringFormat));
       } else {
         console.error(
           "Error:",
@@ -100,14 +99,14 @@ function requestStandingsAndSave() {
   });
 }
 
-app.get("/standings", async (req, res) => {
-  console.log("GET - Requesting standings...");
-  fs.readFile("standings.json", function (err, data) {
-    if (!err) {
-      const json = JSON.parse(data);
-      json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
-      res.send(JSON.stringify(json));
-    }
-  });
-});
+// app.get("/standings", async (req, res) => {
+//   console.log("GET - Requesting standings...");
+//   fs.readFile("standings.json", function (err, data) {
+//     if (!err) {
+//       const json = JSON.parse(data);
+//       json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
+//       res.send(JSON.stringify(json));
+//     }
+//   });
+// });
 app.listen(process.env.PORT || 3001);
