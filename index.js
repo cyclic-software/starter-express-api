@@ -4,8 +4,8 @@ var cors = require("cors");
 const cron = require("node-cron");
 const request = require("request");
 const moment = require("moment");
-// const AWS = require("aws-sdk");
-// const s3 = new AWS.S3();
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3();
 const fs = require("fs");
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
