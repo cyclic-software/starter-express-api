@@ -31,14 +31,14 @@ const allowedOrigins = [
 ];
 
 const requestOptions = {
-  // uri: 'https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022',
+  // uri: 'https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2023',
   uri: "https://random-data-api.com/api/v2/banks",
   method: "GET",
   headers: {
     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
     "x-rapidapi-key": process.env.API_KEY,
   },
-  json: true, // Automatically parses the JSON string in the response
+  json: true,
 };
 
 app.get("/standings2", async (req, res) => {
@@ -98,14 +98,14 @@ function requestStandings() {
   });
 }
 
-// app.get("/standings", async (req, res) => {
-//   console.log("GET - Requesting standings...");
-//   fs.readFile("standings.json", function (err, data) {
-//     if (!err) {
-//       const json = JSON.parse(data);
-//       json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
-//       res.send(JSON.stringify(json));
-//     }
-//   });
-// });
+app.get("/standings", async (req, res) => {
+  console.log("GET - Requesting standings...");
+  fs.readFile("standings.json", function (err, data) {
+    if (!err) {
+      const json = JSON.parse(data);
+      json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
+      res.send(JSON.stringify(json));
+    }
+  });
+});
 app.listen(process.env.PORT || 3001);
