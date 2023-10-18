@@ -7,7 +7,6 @@ const moment = require("moment");
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
 const fs = require("fs");
-import fetch from "node-fetch";
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
@@ -32,12 +31,15 @@ const allowedOrigins = [
   "https://draft-bola-ao-ar.onrender.com",
 ];
 
-const options = {
+const requestOptions = {
+  // uri: 'https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022',
+  uri: "https://random-data-api.com/api/v2/banks",
   method: "GET",
   headers: {
     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
     "x-rapidapi-key": process.env.API_KEY,
   },
+  json: true, // Automatically parses the JSON string in the response
 };
 
 app.get("/standings2", async (req, res) => {
@@ -68,37 +70,43 @@ app.get("/standings2", async (req, res) => {
 });
 
 function requestStandingsAndSave() {
-  // "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
-  return fetch("https://random-data-api.com/api/v2/banks", options)
-    .then((response) => {
-      console.log("Received response from API.");
-      if (response.status === 200) {
-        return response.json();
+  return new Promise((resolve, reject) => {
+    request(requestOptions, (error, response, json) => {
+      if (!error && response.statusCode === 200) {
+        console.log(json);
+        json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
+
+        let fileInStringFormat = JSON.stringify(json);
+
+        // For demonstration, write to a local file instead of S3
+        writeFileAsync("standings2.json", fileInStringFormat)
+          .then(() => {
+            return s3
+              .putObject({
+                Body: fileInStringFormat,
+                Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+                Key: "/standings2.json",
+              })
+              .promise();
+
+            resolve(fileInStringFormat);
+          })
+          .catch((writeError) => {
+            console.error("Error writing to file:", writeError);
+            reject(writeError);
+          });
       } else {
-        console.log("Error:", response.status, response.statusText);
-        throw new Error("Failed to fetch data");
+        console.error(
+          "Error:",
+          error || response.statusCode,
+          response && response.statusMessage
+        );
+        reject(error || response.statusCode);
       }
-    })
-    .then((json) => {
-      console.log(json);
-      json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
-
-      let fileInStringFormat = JSON.stringify(json);
-
-      return s3
-        .putObject({
-          Body: fileInStringFormat,
-          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-          Key: "/standings2.json",
-        })
-        .promise();
-    })
-    .catch((error) => {
-      console.error("Error:", error.message);
-      // Handle errors or return a default value if needed
-      return null;
     });
+  });
 }
+
 app.get("/standings", async (req, res) => {
   console.log("GET - Requesting standings...");
   fs.readFile("standings.json", function (err, data) {
