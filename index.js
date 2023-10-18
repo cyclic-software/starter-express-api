@@ -7,7 +7,7 @@ const moment = require("moment");
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
 const fs = require("fs");
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
