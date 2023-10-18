@@ -73,7 +73,7 @@ app.get("/standings2", async (req, res) => {
           Key: "standings.json",
         }).promise();
       })
-      .then((data) => {
+      .then((result) => {
         res.send(result);
       });
   }
