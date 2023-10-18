@@ -4,8 +4,8 @@ var cors = require("cors");
 const cron = require("node-cron");
 const request = require("request");
 const moment = require("moment");
-const AWS = require("aws-sdk");
-const s3 = new AWS.S3();
+// const AWS = require("aws-sdk");
+// const s3 = new AWS.S3();
 const fs = require("fs");
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
@@ -53,7 +53,8 @@ app.get("/standings2", async (req, res) => {
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
         if (fileDate.add(1, "hour").isBefore(moment())) {
           console.log("Updating Standings...");
-          res.send(requestStandingsAndSave());
+          const result = requestStandingsAndSave();
+          res.send(result);
         } else {
           res.send(jsonFile);
         }
@@ -66,37 +67,43 @@ app.get("/standings2", async (req, res) => {
 });
 
 function requestStandingsAndSave() {
-  return request(
-    // "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
-    "https://random-data-api.com/api/v2/banks",
-    options,
-    async function (error, response, body) {
+  // "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
+  return fetch("https://random-data-api.com/api/v2/banks", options)
+    .then((response) => {
       console.log("Received response from API.");
-      if (!error && response.statusCode == 200) {
-        json = JSON.parse(response.body);
-        json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
-
-        let fileInStringFormat = JSON.stringify(json);
-        await s3
-          .putObject({
-            Body: fileInStringFormat,
-            Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-            Key: "standings2.json",
-          })
-          .promise();
-        return fileInStringFormat;
+      if (response.status === 200) {
+        return response.json();
       } else {
-        console.log(response.body);
+        console.log("Error:", response.status, response.statusText);
+        throw new Error("Failed to fetch data");
       }
-    }
-  );
-}
+    })
+    .then((json) => {
+      console.log(json);
+      json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
 
+      let fileInStringFormat = JSON.stringify(json);
+
+      return s3
+        .putObject({
+          Body: fileInStringFormat,
+          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+          Key: "/standings2.json",
+        })
+        .promise();
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle errors or return a default value if needed
+      return null;
+    });
+}
 app.get("/standings", async (req, res) => {
   console.log("GET - Requesting standings...");
   fs.readFile("standings.json", function (err, data) {
     if (!err) {
       const json = JSON.parse(data);
+      json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
       res.send(JSON.stringify(json));
     }
   });
