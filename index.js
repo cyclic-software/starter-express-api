@@ -6,6 +6,8 @@ const request = require("request");
 const moment = require("moment");
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
+const fs = require("fs");
+(path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
   cors({
@@ -39,16 +41,15 @@ const options = {
 
 app.get("/standings2", async (req, res) => {
   console.log("GET - Requesting standings...");
+  try {
+    let standingsFile = await s3
+      .getObject({
+        Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+        Key: "standings2.json",
+      })
+      .promise();
 
-  let standingsFile = await s3
-    .getObject({
-      Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-      Key: "standings2.json",
-    })
-    .promise();
-
-  if (standingsFile) {
-    const jsonFile = JSON.parse(data);
+    const jsonFile = JSON.parse(standingsFile);
     const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
     if (fileDate.add(1, "hour").isBefore(moment())) {
       console.log("Updating Standings...");
@@ -56,7 +57,7 @@ app.get("/standings2", async (req, res) => {
     } else {
       res.send(jsonFile);
     }
-  } else {
+  } catch (err) {
     console.log("File does not exists. Creating a new one.");
     requestStandingAndSave();
   }
