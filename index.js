@@ -42,22 +42,22 @@ const options = {
 app.get("/standings2", async (req, res) => {
   console.log("GET - Requesting standings...");
   try {
-    let standingsFile = await s3
+    await s3
       .getObject({
         Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
         Key: "standings2.json",
       })
-      .promise();
-
-    const jsonFile = JSON.parse(standingsFile);
-    const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
-    if (fileDate.add(1, "hour").isBefore(moment())) {
-      console.log("Updating Standings...");
-
-      res.send(requestStandingsAndSave());
-    } else {
-      res.send(jsonFile);
-    }
+      .promise()
+      .then((data) => {
+        const jsonFile = JSON.parse(data);
+        const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
+        if (fileDate.add(1, "hour").isBefore(moment())) {
+          console.log("Updating Standings...");
+          res.send(requestStandingsAndSave());
+        } else {
+          res.send(jsonFile);
+        }
+      });
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
     console.log(err);
@@ -68,7 +68,7 @@ app.get("/standings2", async (req, res) => {
 function requestStandingsAndSave() {
   return request(
     // "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
-    "https://random-data-api.com/api/v2/users?size=2&is_xml=true",
+    "https://random-data-api.com/api/v2/banks",
     options,
     async function (error, response, body) {
       console.log("Received response from API.");
@@ -77,7 +77,6 @@ function requestStandingsAndSave() {
         json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
 
         let fileInStringFormat = JSON.stringify(json);
-
         await s3
           .putObject({
             Body: fileInStringFormat,
