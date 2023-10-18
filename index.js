@@ -60,13 +60,15 @@ app.get("/standings2", async (req, res) => {
     }
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
+    console.log(err);
     requestStandingsAndSave();
   }
 });
 
 function requestStandingsAndSave() {
-  request(
-    "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
+  return request(
+    // "https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022",
+    "https://random-data-api.com/api/v2/users?size=2&is_xml=true",
     options,
     async function (error, response, body) {
       console.log("Received response from API.");
