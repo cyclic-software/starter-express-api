@@ -51,8 +51,7 @@ app.get("/standings2", async (req, res) => {
       })
       .promise()
       .then((data) => {
-        console.log(data);
-        const jsonFile = JSON.parse(data);
+        const jsonFile = JSON.parse(data.Body);
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
         if (fileDate.add(1, "hour").isBefore(moment())) {
           console.log("Updating Standings...");
@@ -86,8 +85,6 @@ function requestStandings() {
       if (!error && response.statusCode === 200) {
         json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
         let fileInStringFormat = JSON.stringify(json);
-        console.log(json);
-        console.log(fileInStringFormat);
         resolve(fileInStringFormat);
       } else {
         console.error(
