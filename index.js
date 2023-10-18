@@ -79,22 +79,13 @@ function requestStandingsAndSave() {
         let fileInStringFormat = JSON.stringify(json);
 
         // For demonstration, write to a local file instead of S3
-        writeFileAsync("standings2.json", fileInStringFormat)
-          .then(() => {
-            return s3
-              .putObject({
-                Body: fileInStringFormat,
-                Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-                Key: "/standings2.json",
-              })
-              .promise();
-
-            resolve(fileInStringFormat);
+        return s3
+          .putObject({
+            Body: fileInStringFormat,
+            Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+            Key: "/standings2.json",
           })
-          .catch((writeError) => {
-            console.error("Error writing to file:", writeError);
-            reject(writeError);
-          });
+          .promise();
       } else {
         console.error(
           "Error:",
