@@ -6,6 +6,7 @@ const request = require("request");
 const moment = require("moment");
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
+const fs = require("fs");
 (path = require("path")), (filePath = path.join("/", "standings.json"));
 
 app.use(
