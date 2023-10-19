@@ -54,8 +54,6 @@ app.get("/standings2", async (req, res) => {
       .then((data) => {
         const jsonFile = JSON.parse(data.Body);
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
-        console.log("file plus 1h: ", fileDate.add(1, "hour"));
-        console.log("time now: ", moment());
         if (fileDate.add(1, "hour").isBefore(moment())) {
           console.log("Updating Standings...");
           requestStandings().then((result) => {
@@ -68,17 +66,9 @@ app.get("/standings2", async (req, res) => {
   } catch (err) {
     console.log("File does not exists. Creating a new one.");
     console.log(err);
-    requestStandings()
-      .then((result) => {
-        s3.putObject({
-          Body: JSON.stringify(result),
-          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
-          Key: "standings.json",
-        }).promise();
-      })
-      .then((result) => {
-        res.send(result);
-      });
+    requestStandings().then((result) => {
+      res.send(result);
+    });
   }
 });
 
@@ -87,6 +77,11 @@ function requestStandings() {
     request(requestOptions, (error, response, json) => {
       if (!error && response.statusCode === 200) {
         json.lastUpdate = moment().format("DD-MM-YYYY HH:mm:ss");
+        s3.putObject({
+          Body: JSON.stringify(json),
+          Bucket: "cyclic-elated-tuxedo-mite-eu-central-1",
+          Key: "standings.json",
+        }).promise();
         resolve(json);
       } else {
         console.error(
