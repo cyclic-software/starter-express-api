@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "node-cron": "^3.0.2",
     "node-fetch": "^3.3.2",
     "path": "^0.12.7",
