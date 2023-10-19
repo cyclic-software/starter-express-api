@@ -53,7 +53,7 @@ app.get("/standings", async (req, res) => {
       .then((data) => {
         const jsonFile = JSON.parse(data.Body);
         const fileDate = moment(jsonFile.lastUpdate, "DD-MM-YYYY HH:mm:ss");
-        if (fileDate.add(1, "hour").isBefore(moment().tz("Europe/Lisbon"))) {
+        if (fileDate.add(1, "minute").isBefore(moment().tz("Europe/Lisbon"))) {
           console.log("Updating Standings...");
           requestStandings().then((result) => {
             res.send(result);
