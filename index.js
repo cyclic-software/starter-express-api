@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors");
 const app = express()
 require("dotenv/config");
 const { Client } = require('pg');
@@ -19,11 +20,7 @@ client.connect()
     console.error('เกิดข้อผิดพลาดในการเชื่อมต่อกับฐานข้อมูล:', err);
 });
 
-
-app.all('/', (req, res) => {
-    
-    res.send('Hello World!')
-})
+app.use(cors({ origin: "*", credentials: true }));
 
 app.post('/api/scholarship/login', (req, res) => {
     
