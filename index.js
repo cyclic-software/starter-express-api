@@ -11,7 +11,7 @@ const client = new Client({
   port: process.env.PORT,
   database: process.env.USER_NAME
 });
-// เชื่อมต่อกับฐานข้อมูล
+
 client.connect()
   .then(() => {
     console.log('เชื่อมต่อกับฐานข้อมูลสำเร็จ');
