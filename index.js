@@ -51,4 +51,27 @@ app.get('/api/scholarship/classYearType',(req,res)=>{
     //         console.error('เกิดข้อผิดพลาดในการปิดการเชื่อมต่อ:', err);
     //       });
     //   });
+}),
+app.get('/api/scholarship/scholarshipType',(req,res)=>{
+  const query = 'SELECT * FROM scholarship_type';
+  
+  // ส่งคำสั่ง SQL ไปยังฐานข้อมูล
+  client.query(query)
+    .then(result => {
+      const rows = result.rows;
+      res.send({result:rows})
+    })
+    .catch(err => {
+      console.error('เกิดข้อผิดพลาดในการค้นหาข้อมูล:', err);
+    })
+  //   .finally(() => {
+  //     // ปิดการเชื่อมต่อเมื่อไม่ได้ใช้งาน
+  //     client.end()
+  //       .then(() => {
+  //         console.log('การเชื่อมต่อถูกปิด');
+  //       })
+  //       .catch(err => {
+  //         console.error('เกิดข้อผิดพลาดในการปิดการเชื่อมต่อ:', err);
+  //       });
+  //   });
 })
