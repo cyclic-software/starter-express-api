@@ -23,7 +23,9 @@
     "express": "^4.18.2",
     "pg": "^8.11.3",
     "pg-pool": "^3.6.1",
-    "pgtools": "^1.0.1"
+    "pgtools": "^1.0.1",
+    "uuid": "^9.0.1",
+    "uuid-v4-regex": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
