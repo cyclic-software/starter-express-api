@@ -1,0 +1,91 @@
+name: Next.js Build and Discord Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.1
+
+      - name: Assign variable
+        id: secret
+        run: |
+          formatted_date=$(node -e "console.log(new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }))")
+          echo "::set-output name=secret::$formatted_date"
+
+      - name: Send Discord notification on failure
+        if: ${{ failure() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+          "embeds": [
+              {
+                "color": 16711680,
+                "fields": [
+                  {
+                    "name": "Project Name",
+                    "value": "${{ github.event.repository.name }}",
+                    "inline": false
+                  },
+                  {
+                    "name": "Branch",
+                    "value": "${{ github.ref_name }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Time",
+                    "value": "${{ steps.secret.outputs.secret }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Status",
+                    "value": "failure",
+                    "inline": true
+                  }
+                ]
+              }
+            ]
+          }' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R
+
+      - name: Send Discord notification on success
+        if: ${{ success() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+          "embeds": [
+              {
+                "color": 65280,
+                "fields": [
+                  {
+                    "name": "Project Name",
+                    "value": "${{ github.event.repository.name }}",
+                    "inline": false
+                  },
+                  {
+                    "name": "Branch",
+                    "value": "${{ github.ref_name }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Time",
+                    "value": "${{ steps.secret.outputs.secret }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Status",
+                    "value": "success",
+                    "inline": true
+                  }
+                ]
+              }
+            ]
+          }' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R

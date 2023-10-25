@@ -13,7 +13,6 @@ const client = new Client({
 });
 // เชื่อมต่อกับฐานข้อมูล
 
-
 app.use(cors({ origin: "*", credentials: true }));
 
 app.post('/api/scholarship/login', (req, res) => {
@@ -63,7 +62,6 @@ app.get('/api/scholarship/scholarshipType',(req,res)=>{
 });
   const query = 'SELECT * FROM scholarship_type';
   
-  // ส่งคำสั่ง SQL ไปยังฐานข้อมูล
   client.query(query)
     .then(result => {
       const rows = result.rows;
