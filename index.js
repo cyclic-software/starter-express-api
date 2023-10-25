@@ -11,6 +11,14 @@ const client = new Client({
   port: process.env.PORT,
   database: process.env.USER_NAME
 });
+
+client.connect()
+  .then(() => {
+    console.log('เชื่อมต่อกับฐานข้อมูลสำเร็จ');
+})
+  .catch(err => {
+    console.error('เกิดข้อผิดพลาดในการเชื่อมต่อกับฐานข้อมูล:', err);
+});
 // เชื่อมต่อกับฐานข้อมูล
 
 app.use(cors({ origin: "*", credentials: true }));
