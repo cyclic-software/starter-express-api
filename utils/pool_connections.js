@@ -20,6 +20,10 @@ function executeQuery(query, res) {
         .then((result) => {
           const rows = result.rows;
           client.end();
+          if(result.command === 'INSERT' || result.command === 'UPDATE' || result.command === 'DELETE'){
+            res.send({message : true});
+            return
+          }
           res.send({ result: rows });
         })
         .catch((err) => {
