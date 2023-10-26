@@ -50,7 +50,9 @@ VALUES
       '${scholarship_codition}',
       '${scholarship_qualification}'
   )`;
-  executeQuery(query, res);
+  executeQuery(query, (data)=>{
+    res.send({success:data.rowCount === 1})
+  });
 };
 
 module.exports = handlerAddscholarship;

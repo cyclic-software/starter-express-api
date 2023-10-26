@@ -3,7 +3,7 @@ require("dotenv/config");
 
 // สร้างการเชื่อมต่อฐานข้อมูล
 
-function executeQuery(query, res) {
+function executeQuery(query, cb) {
   const client = new Client({
     user: process.env.USER_NAME,
     host: process.env.POSTGRESQL_URL,
@@ -18,13 +18,9 @@ function executeQuery(query, res) {
       client
         .query(query)
         .then((result) => {
-          const rows = result.rows;
-          client.end();
-          if(result.command === 'INSERT' || result.command === 'UPDATE' || result.command === 'DELETE'){
-            res.send({message : true});
-            return
-          }
-          res.send({ result: rows });
+          
+          cb(result)
+
         })
         .catch((err) => {
           console.error("เกิดข้อผิดพลาดในการค้นหาข้อมูล:", err);

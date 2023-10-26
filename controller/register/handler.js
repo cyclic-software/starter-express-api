@@ -46,7 +46,9 @@ VALUES
      '${phone}',
      '${is_active}'
  )`;
-  executeQuery(query, res);
+ executeQuery(query, (data)=>{
+  res.send({success:data.rowCount === 1})
+});
 };
 
 module.exports = handlerRegister;
