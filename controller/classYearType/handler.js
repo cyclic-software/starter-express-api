@@ -1,6 +1,6 @@
 const executeQuery = require("../../utils/pool_connections");
 
-const handleclassYearType = (req, res) => {
+const handlerclassYearType = (req, res) => {
     const query = "SELECT * FROM class_year_type";
     executeQuery(query, (data)=>{
         res.send({result:data.rows})
@@ -8,4 +8,4 @@ const handleclassYearType = (req, res) => {
 
 }
 
-module.exports = handleclassYearType
+module.exports = handlerclassYearType

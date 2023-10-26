@@ -18,9 +18,7 @@ function executeQuery(query, cb) {
       client
         .query(query)
         .then((result) => {
-          
           cb(result)
-
         })
         .catch((err) => {
           console.error("เกิดข้อผิดพลาดในการค้นหาข้อมูล:", err);
