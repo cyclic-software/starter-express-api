@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    let url = '<%-url%>';
+    if(url) {
+      $(document).ready(() => {
+        $("#content").load(url);
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <form action="/view-page" method="post">
+    <input placeholder="enter or paste url" name="url" type="text" required/> <br/>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+  <div id="content" style="width: 800px; height: 600px;">
+    <!-- <% if(loadPage) {%>
+      <iframe noborder="0" width="830" height="800" scrolling="yes" seamless src=<%= url %>></iframe> -->
+      <!-- <iframe style="width: max-content; height: 300px; scroll-behavior: auto;" src=<%= url %> ></iframe> -->
+    <!-- <%}%> -->
+  </div>
+</body>
+
+</html>
