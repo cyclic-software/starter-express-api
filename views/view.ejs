@@ -9,9 +9,9 @@
   <script>
     let url = '<%-url%>';
     if(url) {
-      // $(document).ready(() => {
-      //   $("#content").load(url);
-      // })
+      $(document).ready(() => {
+        $("#content").load(url);
+      })
     }
   </script>
 </head>
@@ -23,21 +23,10 @@
     <button type="reset">Reset</button>
   </form>
   <div id="content" style="width: 800px; height: 600px;">
-    <!-- <% if(loadPage) {%> -->
-      <!-- <iframe noborder="0" width="830" height="800" scrolling="yes" seamless src=<%= url %>></iframe> -->
+    <% if(loadPage) {%>
+      <iframe noborder="0" width="830" height="800" scrolling="yes" seamless src=<%= url %>></iframe>
       <!-- <iframe style="width: max-content; height: 300px; scroll-behavior: auto;" src=<%= url %> ></iframe> -->
-    <!-- <%}%> -->
-    <div style="width: 560px; height: 315px; float: none; clear: both; margin: 2px auto;">
-      <embed
-        src="//www.youtube.com/embed/UPBNq9tH-lk?autohide=1&autoplay=1"
-        wmode="transparent"
-        type="video/mp4"
-        width="100%" height="100%"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen
-        title="Keyboard Cat"
-      >
-    </div>
+    <%}%>
   </div>
 </body>
 
