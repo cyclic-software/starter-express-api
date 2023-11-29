@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "build": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,15 @@
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
