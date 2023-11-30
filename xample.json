@@ -1,0 +1,695 @@
+{
+  "info": {
+    "_postman_id": "6f08aabc-536a-4f8f-992c-a7989f86043c",
+    "name": "luckybuystore",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "16557531"
+  },
+  "item": [
+    {
+      "name": "site",
+      "item": [
+        {
+          "name": "contact-us messages",
+          "item": [
+            {
+              "name": "all-messages",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/contact-us/all-messages"
+              },
+              "response": []
+            },
+            {
+              "name": "contact-us",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Adedokun Faith\",\r\n    \"email\":\"faithadedokun2018@gmail.com\",\r\n    \"message\":\"i want to buy phones but its not included in your category, can u please include it there\",\r\n    \"address\":\"Scheme 13b, aduin area, ogbomosho\",\r\n    \"number\": \"09063111875\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/contact-us"
+              },
+              "response": []
+            },
+            {
+              "name": "single-contact-message",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/contact-us/6531de8f4a74f414bad93cfe"
+              },
+              "response": []
+            },
+            {
+              "name": "update-single-message",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"number\": \"09063111875\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/contact-us/6531de8f4a74f414bad93cfe"
+              },
+              "response": []
+            },
+            {
+              "name": "delete-contact-message",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/contact-us/6531de8f4a74f414bad93cfe"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "faq",
+          "item": [
+            {
+              "name": "all-faq",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/faq"
+              },
+              "response": []
+            },
+            {
+              "name": "create-faq",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"question\":\"How to use your public Api as a developer\",\r\n    \"answer\":\"checkout our documentation and read well\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/faq/create-faq"
+              },
+              "response": []
+            },
+            {
+              "name": "single-faq",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/faq/6531df99a93fb8cf885a1e20"
+              },
+              "response": []
+            },
+            {
+              "name": "update-single-api",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"answer\":\"checkout our documentation on how to make use of our api\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/faq/6531df99a93fb8cf885a1e20"
+              },
+              "response": []
+            },
+            {
+              "name": "delete-faq",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/faq/6531df99a93fb8cf885a1e20"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "policy",
+          "item": [
+            {
+              "name": "policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/policy"
+              },
+              "response": []
+            },
+            {
+              "name": "create-policy",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\":\"How to use your public Api as a developer\",\r\n    \"content\":\"checkout our documentation and read well\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/policy/create-policy"
+              },
+              "response": []
+            },
+            {
+              "name": "single-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/policy/6531e7b7c2c2d2b22f5a65ce"
+              },
+              "response": []
+            },
+            {
+              "name": "upadate-policy",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\":\"Our Policy\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/policy/6531e7b7c2c2d2b22f5a65ce"
+              },
+              "response": []
+            },
+            {
+              "name": "delete-policy",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/policy/6531e7b7c2c2d2b22f5a65ce"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "about",
+          "item": [
+            {
+              "name": "about",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/about"
+              },
+              "response": []
+            },
+            {
+              "name": "create-story",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Bing\",\r\n  \"address\": \"One Microsoft Way, Redmond, WA 98052, USA\",\r\n  \"industry\": \"Search engine\",\r\n  \"established\": \"2009-06-03\",\r\n  \"employees\": 1000,\r\n  \"stories\": [\r\n    {\r\n      \"title\": \"How Bing became the world's second most popular search engine\",\r\n      \"story\": \"Bing was launched in 2009 as a rebranding of Microsoft's previous search engines, such as MSN Search and Live Search. Bing aimed to provide a more intelligent and user-friendly search experience, with features such as instant answers, image and video search, maps and directions, and integration with other Microsoft products and services. Bing also partnered with other companies, such as Yahoo, Facebook, Twitter, and LinkedIn, to enhance its search results and reach more users. Over the years, Bing has improved its algorithms and technologies to deliver faster and more relevant results, as well as adding new features such as voice search, visual search, and Bing Rewards. Bing has also expanded its presence in different markets and languages, catering to the needs and preferences of users around the world. As of 2023, Bing has a global market share of 18%, making it the second most popular search engine after Google.\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/about/create-story"
+              },
+              "response": []
+            },
+            {
+              "name": "single-about",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/about/6531f1094f4dfe5eb0971031"
+              },
+              "response": []
+            },
+            {
+              "name": "update-about",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Dignity Technology\",\r\n  \"address\": \"One Microsoft Way, Redmond, WA 98052, USA\",\r\n  \"industry\": \"I.T Company\",\r\n  \"established\": \"2015-06-03\",\r\n  \"employees\": 20,\r\n  \"stories\": [\r\n    {\r\n      \"title\": \"How Dignity Technology become one of the leading I.T company in Nigeria\",\r\n      \"story\": \"Bing was launched in 2009 as a rebranding of Microsoft's previous search engines, such as MSN Search and Live Search. Bing aimed to provide a more intelligent and user-friendly search experience, with features such as instant answers, image and video search, maps and directions, and integration with other Microsoft products and services. Bing also partnered with other companies, such as Yahoo, Facebook, Twitter, and LinkedIn, to enhance its search results and reach more users. Over the years, Bing has improved its algorithms and technologies to deliver faster and more relevant results, as well as adding new features such as voice search, visual search, and Bing Rewards. Bing has also expanded its presence in different markets and languages, catering to the needs and preferences of users around the world. As of 2023, Bing has a global market share of 18%, making it the second most popular search engine after Google.\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/about/6531f1094f4dfe5eb0971031"
+              },
+              "response": []
+            },
+            {
+              "name": "delete-about",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/about/6531f1094f4dfe5eb0971031"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "homepage",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "sign-up",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Adedokun Faith\",\r\n    \"email\":\"Adedokun3@gmail.com\",\r\n    \"password\":\"adedokun@123\",\r\n    \"Cpassword\":\"adedokun@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/auth/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "sign-in",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\r\n    \"email\":\"Adedokun3@gmail.com\",\r\n    \"password\":\"adedokun@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/auth/sign-in"
+          },
+          "response": []
+        },
+        {
+          "name": "activate_acct",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\":\"jvSfLb\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/auth/user-activate"
+          },
+          "response": []
+        },
+        {
+          "name": "seller-sign-up",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Adedokun Faith\",\r\n    \"email\":\"Adedokun3@gmail.com\",\r\n    \"password\":\"adedokun@123\",\r\n    \"Cpassword\":\"adedokun@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/auth/seller/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "admin-sign-up",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Adedokun Faith 3\",\r\n    \"email\":\"Adedokun5@gmail.com\",\r\n    \"password\":\"adedokun@125\",\r\n    \"Cpassword\":\"adedokun@125\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/auth/admin/sign-up"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "product",
+      "item": [
+        {
+          "name": "create-product",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Lenovo Ideapad 14-inch - AMD Quad Core 64GB SSD - 4GB RAM Win 11\",\r\n    \"price\": 120000,\r\n    \"inStock\": 10,\r\n    \"description\":\" Lenovo IdeaPad 14 Laptop has 4GB RAM for smooth multitasking. This Lenovo IdeaPad Windows 10 laptop is available in a gray finish. Maintain your productivity levels with the powerful Lenovo  IdeaPad 14 Laptop. It is elegantly designed and features a 14-inch HD display that renders images with incredible clarity. This Lenovo IdeaPad 14  Laptop comes with 64GB internal storage that lets you easily store all your necessary files for accessing at a later time. The perfect combination of AMD QUAD core processor and 4GB RAM assures you of a seamless multitasking experience. This Lenovo IdeaPad 14-inch laptop features an integrated AMD RADEON GRAPHICS that improves the overall performance of the system manifold times. It runs on the Windows 10 operating system that is packed with a lot of innovative features, making it easier to operate. This Lenovo IdeaPad Windows 10 laptop is equipped with an ergonomically designed Eng-Arb keyboard that gives you excellent typing comfort. All the more, it has a battery life of about 9 hours that assures you of optimum functionality for a long span of time.\",\r\n    \"category\":\"65288a8796d97e1874d24a3b\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/product/create-product"
+          },
+          "response": []
+        },
+        {
+          "name": "all-products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/product/all-products"
+          },
+          "response": []
+        },
+        {
+          "name": "single-product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/product/65137a76608725a1caedee8a"
+          },
+          "response": []
+        },
+        {
+          "name": "update-product",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"price\": \"200,000\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/product/651371d58ef387c6a0a1d49a"
+          },
+          "response": []
+        },
+        {
+          "name": "delete-product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/product/651371d58ef387c6a0a1d49a"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "item": [
+        {
+          "name": "all-category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/category/all-category"
+          },
+          "response": []
+        },
+        {
+          "name": "create-category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Phones & Tablets\"\r\n    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/category/create-category"
+          },
+          "response": []
+        },
+        {
+          "name": "single-category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/category/6513255c90d6c4c3d369e381"
+          },
+          "response": []
+        },
+        {
+          "name": "update-category",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Computers\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/category/6513255c90d6c4c3d369e381"
+          },
+          "response": []
+        },
+        {
+          "name": "delete-category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/category/651325cab87f3902082a37af"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "cart",
+      "item": [
+        {
+          "name": "create-cart",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"products\": [\r\n    {\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/product/6529e715841cdb82d1fbe05c/createOrder"
+          },
+          "response": []
+        },
+        {
+          "name": "single-cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/cart/652ffb3493cea1212eec703f"
+          },
+          "response": []
+        },
+        {
+          "name": "delete-cart item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/cart/652f39bb8a9cc279d8146a4e"
+          },
+          "response": []
+        },
+        {
+          "name": "cart-items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/cart/cart-item"
+          },
+          "response": []
+        },
+        {
+          "name": "update item in cart",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"products\": [\r\n    {\r\n      \"productId\": \"6529e715841cdb82d1fbe05c\",\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/cart/6531225639c1932f16cd600f"
+          },
+          "response": []
+        },
+        {
+          "name": "remove an item from cart",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"products\": [\r\n    {\r\n      \"productId\": \"6529e715841cdb82d1fbe05c\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "127.0.0.1:3000/api/luckybuystore/cart/6531225639c1932f16cd600f"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "profile",
+          "item": [
+            {
+              "name": "user-profile",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "127.0.0.1:3000/api/luckybuystore/auth/profile/user"
+              },
+              "response": []
+            },
+            {
+              "name": "dis-activate",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/auth/profile/user/dis-activate"
+              },
+              "response": []
+            },
+            {
+              "name": "manage-profile",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": " {\r\n        \"name\": \"Adedokun Faith Oluwatosin\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "127.0.0.1:3000/api/luckybuystore/auth/profile/user/manage-profile/"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "order",
+      "item": [
+        {
+          "name": "order-items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/order/order-items"
+          },
+          "response": []
+        },
+        {
+          "name": "checkout-order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/order/cart-items/6531225639c1932f16cd600f/checkout"
+          },
+          "response": []
+        },
+        {
+          "name": "cancel-order",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "127.0.0.1:3000/api/luckybuystore/order/order-item/65347ea41cc4080ec6abb83c/cancel-order"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
