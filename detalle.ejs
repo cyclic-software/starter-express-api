@@ -1,0 +1,99 @@
+<%- include('template/cabecera',{tituloweb : 'Detalle' })  %>
+
+    <div class="container">
+
+        <h1> Detalle del producto </h1>
+        <% if (error) { %>
+         <p><%= mensaje %></p>
+         <a href="/Productos" class="btn btn-primary btn-lg btn-block">Volver a productos</a>
+        <% } %>
+
+        <% if (!error) { %>
+            <form id="editar"  data-id="<%= productos.id %>">
+                <input type="text"
+                class="form-control my-2"
+                name="nombre"
+                value="<%= productos.nombre%>"
+                id="nombreInput"
+                >
+
+                <input type="text"
+                class="form-control my-2"
+                name="Descripcion"
+                value="<%= productos.descripcion %>"
+                id="descripcionInput"
+                >
+                <button class="btn btn-warning btn-block"
+                type="submit"
+                >
+                    Editar
+
+                </button>
+            </form>
+
+             <button class="btn btn-danger btn-sm mt-5"
+             id="btnEliminar" 
+             data-id="<%= productos.id %>"
+             >
+               Eliminar
+             </button>
+
+        <% } %>
+    </div>
+    
+<%- include('template/footer') %>
+
+<script>
+    //elimiar javascrip
+    const btnEliminar = document.querySelector('#btnEliminar')
+    btnEliminar.addEventListener('click', async()=>{
+        const id = btnEliminar.dataset.id
+        console.log('id',id)
+     try {
+        const data = await fetch(`/Productos/${id}`,{
+            method: 'delete'
+        })
+        const res = await data.json()
+        if(res.estado){
+            window.location.href = '/productos'
+        }else{
+            console.log(res)
+        }
+     } catch (error) {
+        console.log(error)
+     }
+}) 
+     //editar javascrip
+     const formEditar = document.querySelector('#editar');
+
+     formEditar.addEventListener('submit', async(e) => {
+     e.preventDefault()
+    // Alternativa #1 (capturar input)
+    const nombre = formEditar.elements['nombre'].value
+    // Alternativa #2 (capturar input)
+    const descripcion = document.querySelector('#descripcionInput').value
+    const id = formEditar.dataset.id 
+
+        
+        try {
+            const data = await fetch(`/Productos/${id}`,{
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body : JSON.stringify({nombre: nombre, descripcion: descripcion})
+            })
+             
+            const res = await data.json()
+
+            console.log(res)
+            if(res.estado){
+                window.location.href = '/Productos'
+            }else{
+                console.log(res)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+     })
+</script>

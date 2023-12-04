@@ -1,0 +1,43 @@
+<%- include('template/cabecera',{tituloweb : 'Productos' })  %>
+
+    <div class="container">
+        <h1>PRODUCTOS</h1>
+         <a class="btn btn-success my-4"
+         href="/productos/crear">
+          Crear nuevo producto
+         </a>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Accion  </th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <% if (ArrayProductos.length > 0) { %>
+    
+                    <% ArrayProductos.forEach(productos  => { %>
+                        <tr>
+                            <th scope="row"><%= productos.id %></th>
+                            <td><%= productos.nombre%></td>
+                            <td><%= productos.descripcion %></td>
+                            <td>
+                              <a href="/Productos/<%= productos.id %>"
+                                class="btn btn-warning btn-sm"
+                            >
+                                Editar
+                            </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                   <% } %>
+
+            </tbody>
+          </table>
+    
+    </div>
+
+<%- include('template/footer') %>
