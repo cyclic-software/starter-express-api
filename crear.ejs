@@ -1,0 +1,33 @@
+<%- include('template/cabecera',{tituloweb : 'Crear nuevo Producto' })  %>
+
+    <div class="container">
+
+        <h1> Crear </h1>
+        <form action="/productos" class="my-2" method="POST">
+    
+            <input 
+                type="text"
+                placeholder="Ingrese Nombre"
+                class="form-control my-2"
+                name="nombre"
+            >
+        
+            <input 
+                type="text"
+                placeholder="Ingrese Descripción"
+                class="form-control my-2"
+                name="descripcion"
+            >
+        
+            <button
+                type="submit"
+                class="btn btn-success btn-block"
+            >
+                Agregar
+            </button>
+        
+        </form>
+
+    </div>
+    
+<%- include('template/footer') %>
