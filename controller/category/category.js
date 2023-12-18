@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
       return cb(new Error('Invalid file type or size'));
     }
 
-    const dir = `public/images/category/${req.body.name}`;
+    const dir = `public/images/categories/${req.body.name}`;
 
     fs.exists(dir, (exist) => {
       if (!exist) {
@@ -97,25 +97,6 @@ export const allCategory = async (req, res, next) => {
   }
 };
 
-// find a single category controller
-export const singleCategory = async (req, res, next) => {
-  try {
-    const singlecategory = req.params.id;
-    const category = await Category.findById(singlecategory);
-    if (!category) {
-      return next(
-        customError(404, `category with id ${singlecategory} does not exist`),
-      );
-    }
-    res.status(200).json({
-      status: 'success',
-      category,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 // update a single category controller
 export const updateCategory = async (req, res, next) => {
   try {
@@ -144,18 +125,41 @@ export const updateCategory = async (req, res, next) => {
   }
 };
 
-// delete a single category controller
-export const deleteCategory = async (req, res, next) => {
+// find a single category controller
+export const singleCategory = async (req, res, next) => {
   try {
-    const singlecategory = req.params.id;
-    const category = await Category.findByIdAndDelete(singlecategory);
+    const singleCategory = req.params.id;
+    const category = await Category.findById(singleCategory);
     if (!category) {
       return next(
-        customError(404, `category with id ${singlecategory} does not exist`),
+        customError(404, `category with id ${singleCategory} does not exist`)
       );
     }
-    res.status(204).json();
+    res.status(200).json({
+      status: "success",
+      category,
+    });
   } catch (err) {
     next(err);
   }
 };
+
+// delete a single category controller
+export const deleteCategory = async (req, res, next) => {
+  try {
+    const singleCategory = req.params.id;
+    const category = await Category.findByIdAndDelete(singleCategory);
+    if (!category) {
+      return next(
+        customError(404, `category with id ${singleCategory} does not exist`)
+      );
+    }
+    res.status(204).json({
+      status: "success",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+

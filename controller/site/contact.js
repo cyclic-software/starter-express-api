@@ -15,8 +15,8 @@ export const createMessage = async (req, res, next) => {
 
     res.status(201).json({
       status: 'success',
-      message: `contact message sent successfully`,
-      message,
+      message: `Contact message sent successfully`,
+      message
     });
   } catch (err) {
     next(err);
@@ -61,33 +61,6 @@ export const singleMessage = async (req, res, next) => {
   }
 };
 
-// update a single contacts controller
-export const updateMessage = async (req, res, next) => {
-  try {
-    const singleMessage = req.params.id;
-    const message = await Contact.findByIdAndUpdate(
-      singleMessage,
-      { $set: req.body },
-      { new: true, runValidators: true },
-    );
-    if (!message) {
-      return next(
-        customError(
-          404,
-          `contact message with id ${singleMessage} does not exist`,
-        ),
-      );
-    }
-    res.status(200).json({
-      status: 'success',
-      message: `contact message updated successfully `,
-      message,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 // delete a single contacts controller
 export const deleteMessage = async (req, res, next) => {
   try {
@@ -108,3 +81,7 @@ export const deleteMessage = async (req, res, next) => {
     next(err);
   }
 };
+
+
+
+

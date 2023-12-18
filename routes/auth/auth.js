@@ -34,9 +34,9 @@ authRoute.get('/logout', logout);
 authRoute.patch('/user-activate', protect, verification);
 
 // forgotten password route
-authRoute.patch('/forget-password', forgotPassword);
+authRoute.post('/forget-password', forgotPassword);
 
 // reset password route
-authRoute.patch('/new-password-reset', resetPassword);
+authRoute.post('/new-password-reset', resetPassword);
 
 export default authRoute;

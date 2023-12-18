@@ -2,6 +2,7 @@ import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 import User from '../../model/user/user.js';
 import customError from '../../utils/error.js';
+import Cart from '../../model/cart/cart.js';
 
 export const protect = async (req, res, next) => {
   try {
@@ -63,15 +64,112 @@ export const logout = async (req, res, next) => {
       httpOnly: true,
     });
 
-    // 2) Send a JSON response with a status code of 200 (ok), a status message of 'success', and a message saying 'Logged out successfully'
-    res.status(200).json({
-      status: 'success',
-      message: 'Logged out successfully',
-    });
-
-    // 3) Redirect to the index page
-    res.redirect('/');
+    // 2) Redirect to the index page
+    res.redirect('/cidar/technology/auth/login');
   } catch (err) {
     next(err);
   }
 };
+
+// authenticated route
+// export function authenticateToken(req, res, next) {
+//   const token = req.cookies.key;
+
+//   if (token != null) {
+//     jwt.verify(token, process.env.super_token, async (err, user) => {
+//       if (!err) {
+//         req.user = user;
+//         res.locals.user = user;
+
+//         // Retrieve the user's cart
+//         try {
+//           const cart = await Cart.findOne({ user: user._id });
+//           req.cart = cart;
+//         } catch (err) {
+//           next(err)
+//         }
+//       }
+//       next();
+//     });
+//   } else {
+//     next();
+//   }
+// }
+// Authenticate user token and retrieve cart information
+
+// authenticated route
+
+// authenticated route
+export async function authenticateToken(req, res, next) {
+  // Check for token presence
+  const token = req.cookies.key;
+
+  if (!token) {
+    next();
+    return;
+  }
+
+  try {
+    // Verify JWT token and extract user ID
+    const decoded = jwt.verify(token, process.env.super_token);
+    const userId = decoded.id;
+
+    // Find user based on ID
+    const currentUser = await User.findById(userId);
+
+    // Check if token is valid and user exists
+    if (!currentUser) {
+      return res
+        .status(401)
+        .json({ message: 'Invalid token or User not found' });
+    }
+
+    // Check if token has expired
+    if (decoded.exp < Math.floor(Date.now() / 1000)) {
+      return res.status(401).json({ message: 'Token expired' });
+    }
+
+    // Retrieve user's cart
+    let cartItem = await Cart.findOne({ user: currentUser._id });
+
+    if (!cartItem) {
+      // Handle case where no cart is found
+      // Initialize an empty cart
+      cartItem = new Cart({ user: currentUser._id });
+    }
+
+    // Prepare empty array for cart items
+    const cartItems = [];
+
+    // Check for empty products array
+    if (cartItem.products.length > 0) {
+      // Iteratively add each item to the array
+      for (const item of cartItem.products) {
+        cartItems.push(item);
+      }
+    }
+
+    // Add user and cart information to request object
+    const userObject = {
+      currentUser,
+      cartItem,
+    };
+
+    req.user = userObject.currentUser;
+    res.locals.user = userObject.currentUser;
+
+    req.cart = userObject.cartItem;
+    res.locals.cart = userObject.cartItem;
+
+    next();
+  } catch (error) {
+    // Handle token verification errors
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ message: 'Token expired' });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ message: 'Invalid token' });
+    } else {
+      next(error);
+    }
+  }
+}

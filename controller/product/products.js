@@ -2,73 +2,71 @@ import multer from 'multer';
 import Product from '../../model/product/products.js';
 import customError from '../../utils/error.js';
 import path from 'path';
-import fs from 'fs';
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    if (!isImage(file.mimetype) || file.size > 10 * 1024 * 1024) {
-      return cb(new Error('Invalid file type or size'));
-    }
-
-    const dir = `public/images/products/${req.body.name}`;
-
-    fs.exists(dir, (exist) => {
-      if (!exist) {
-        return fs.mkdir(dir, (error) => cb(error, dir));
-      }
-      return cb(null, dir);
-    });
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/products/');
   },
-  filename: (req, file, cb) => {
-    const fileName = path.parse(file.originalname).name;
-    const extension = path.parse(file.originalname).ext;
-    cb(null, `${fileName}${Date.now()}${extension}`);
+  filename: function (req, file, cb) {
+    // Ensure unique filenames
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileExtension = path.extname(file.originalname).toLowerCase();
+    cb(null, 'product-' + uniqueSuffix + fileExtension);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  if (!isImage(file.mimetype)) {
-    return cb(new Error('Invalid file type, image only!'));
-  }
+  // Check if the file is an image and has an allowed extension
+  const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+  const fileExtension = path.extname(file.originalname).toLowerCase();
 
-  cb(null, true);
+  if (file.mimetype.startsWith('image/') && allowedExtensions.includes(fileExtension)) {
+    cb(null, true); // Accept the file
+  } else {
+    cb(new Error('Only jpg, jpeg, png, and gif files are allowed!'), false); // Reject the file
+  }
 };
 
 export const upload = multer({
-  storage,
-  fileFilter,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10 MB limit
+  },
+  fileFilter: fileFilter,
 });
-
-function isImage(mimeType) {
-  const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
-  return imageMimeTypes.includes(mimeType);
-}
 
 // create product controller
 export const createProduct = async (req, res, next) => {
   try {
-    let imageNames = [];
-    if (req.files) {
-      imageNames = req.files.map((file) => file.filename);
-    }
+    // Extract product details from the request body
+    const { name, price, inStock, description, specification, category, shop } = req.body;
 
-    const product = await Product.create({
-      ...req.body,
-      image: imageNames,
-      // seller: req.user_id,
+    // Extract the image filenames from Multer upload
+    const imageFilenames = req.files.map(file => file.filename);
+
+    // Create a new product instance with the extracted details and image filenames
+    const newProduct = new Product({
+      name,
+      price,
+      inStock,
+      description,
+      specification,
+      category,
+      seller:req.user._id,
+      shop,
+      image: imageFilenames,
     });
 
-    if (!product) {
-      return next(customError(404, 'Unable to create product'));
-    }
+    // Save the new product to the database
+    const savedProduct = await newProduct.save();
 
+    // Respond with the saved product details and redirect information
     res.status(201).json({
       status: 'success',
-      message: `product ${product.name} created successfully`,
-      product,
+      data: savedProduct,
     });
   } catch (err) {
+    // Handle any errors that occurred during the process
     next(err);
   }
 };
@@ -147,8 +145,33 @@ export const deleteProduct = async (req, res, next) => {
         customError(404, `product with id ${singleProduct} does not exist`),
       );
     }
-    res.status(204).json();
+    res.status(204).json({
+      status: 'success',
+    });
   } catch (err) {
     next(err);
   }
 };
+
+// Search product route
+// productRoute.get('/search', async (req, res) => {
+//   try {
+//     const query = req.query.q;
+//     const products = await Product.find({
+//       $or: [
+//         { name: { $regex: new RegExp(query, 'i') } },
+//         { brand: { $regex: new RegExp(query, 'i') } },
+//         { description: { $regex: new RegExp(query, 'i') } },
+//       ],
+//     });
+//     res.status(200).json({
+//       status: 'success',
+//       products,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       status: 'fail',
+//       message: err.message,
+//     });
+//   }
+// });
