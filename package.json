@@ -1,22 +1,32 @@
 {
-  "name": "starter-express-api",
+  "name": "firstproject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --env-file .env server.js",
+    "pro": "nodemon --env-file .env server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
-  },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.2"
   }
 }
