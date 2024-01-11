@@ -3,7 +3,7 @@ const express = require("express");
 const { default: helmet } = require("helmet");
 const { connectDB } = require("./src/dbs/init.mongodb");
 const { app: { port } } = require("./src/configs/config.mongodb");
-const { userRouter } = require("./src/routes")
+const { userRouter, predictRouter, stockRouter } = require("./src/routes")
 const morgan = require("morgan");
 const cors = require('cors')
 
@@ -23,6 +23,8 @@ app.use(compression()); // nén gói tin trong quá trình truyền
 
 //routes
 app.use("/api/users", userRouter);
+app.use("/api/predict", predictRouter);
+app.use("/api/stock", stockRouter);
 app.get("/", (req, res, next) => {
   res.status(200).json({
     mess: "Dashboard",
