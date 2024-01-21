@@ -40,7 +40,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
   }
 
   const fileName = 'img.jpg';
-  const filePath = path.join(__dirname, '/public/upload', fileName);
+  const filePath = path.join(__dirname, '/', fileName);
 
   fs.writeFile(filePath, req.file.buffer, async (err) => {
     if (err) {
