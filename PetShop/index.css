@@ -1,0 +1,153 @@
+main {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    width: 1000px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.slides {
+    width: 500%;
+    height: 500px;
+    display: flex;
+}
+
+.slides input {
+    display: none;
+}
+
+.slide {
+    width: 20%;
+    transition: 2s;
+}
+
+.slide img {
+    width: 1000px;
+    height: 300px;
+}
+
+.navigation-manual {
+    position: absolute;
+    width: 1000px;
+    margin-top: -230px;
+    display: flex;
+    justify-content: center;
+}
+
+.manual-btn {
+    border: 2px solid #0d6efd;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.manual-btn:not(:last-child) {
+    margin-right: 40px;
+
+
+}
+
+.manual-btn:hover {
+    background-color: #0d6efd;
+}
+
+#radio1:checked~.first {
+    margin-left: 0;
+}
+
+#radio2:checked~.first {
+    margin-left: -20%;
+}
+
+#radio3:checked~.first {
+    margin-left: -40%;
+}
+
+.navigation-auto {
+
+    position: absolute;
+    display: flex;
+    width: 1000px;
+    justify-content: center;
+}
+
+.navigation-auto div {
+    border: 2px solid #0d6efd;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+    margin-top: 270px;
+}
+
+.navigation-auto div:not(:last-child) {
+    margin-right: 40px;
+}
+
+#radio1:checked~.navigation-auto .auto-btn1 {
+    background: #0d6efd;
+}
+
+#radio2:checked~.navigation-auto .auto-btn2 {
+    background: #0d6efd;
+
+}
+
+#radio3:checked~.navigation-auto .auto-btn3 {
+    background: #0d6efd;
+
+}
+
+
+
+
+
+
+.row-banner main {
+    border-top: 1px solid #282938;
+    padding: 2rem;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5rem;
+    color: #fff;
+}
+
+.title-news {
+    text-decoration: underline;
+}
+
+.news ul li a {
+    text-decoration: underline;
+}
+
+.social-links .fa-brands {
+    transition: 500ms;
+}
+
+.social-links .fa-facebook:hover {
+    color: #0d6efd;
+}
+
+.social-links .fa-instagram:hover {
+    color: #e043f5;
+}
+
+.social-links .fa-x-twitter:hover {
+    color: #000000;
+}
+
+.social-links .fa-github:hover {
+    color: #000000;
+}

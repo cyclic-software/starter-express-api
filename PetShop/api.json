@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "name": "Fisky",
+    "img": "https://placekitten.com/300/200",
+    "url": "#",
+    "description": "Fisky is a cute and playful cat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 2,
+    "name": "Whiskers",
+    "img": "https://placekitten.com/311/200",
+    "url": "#",
+    "description": "Whiskers is known for its long and elegant whiskers. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 3,
+    "name": "Fluffy",
+    "img": "https://placedog.net/300/200",
+    "url": "#",
+    "description": "Fluffy is an adorable and fluffy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 4,
+    "name": "Spike",
+    "img": "https://placedog.net/301/200",
+    "url": "#",
+    "description": "Spike is a playful and energetic dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 5,
+    "name": "Mittens",
+    "img": "https://placekitten.com/302/200",
+    "url": "#",
+    "description": "Mittens loves to play with yarn. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 6,
+    "name": "Bella",
+    "img": "https://placedog.net/302/200",
+    "url": "#",
+    "description": "Bella is a friendly and loyal dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 7,
+    "name": "Oreo",
+    "img": "https://placekitten.com/303/200",
+    "url": "#",
+    "description": "Oreo has a unique black and white fur pattern. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 8,
+    "name": "Rocky",
+    "img": "https://placedog.net/303/200",
+    "url": "#",
+    "description": "Rocky is an adventurous and outgoing dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 9,
+    "name": "Cleo",
+    "img": "https://placekitten.com/304/200",
+    "url": "#",
+    "description": "Cleo is a graceful and elegant cat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 10,
+    "name": "Max",
+    "img": "https://placedog.net/304/200",
+    "url": "#",
+    "description": "Max is a smart and obedient dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 11,
+    "name": "Sassy",
+    "img": "https://placekitten.com/305/200",
+    "url": "#",
+    "description": "Sassy is a playful and mischievous cat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 12,
+    "name": "Charlie",
+    "img": "https://placedog.net/305/200",
+    "url": "#",
+    "description": "Charlie is a loving and friendly dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 13,
+    "name": "Mocha",
+    "img": "https://placekitten.com/306/200",
+    "url": "#",
+    "description": "Mocha has a beautiful and silky coat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 14,
+    "name": "Riley",
+    "img": "https://placedog.net/306/200",
+    "url": "#",
+    "description": "Riley is a lively and energetic dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "dog"
+  },
+  {
+    "id": 15,
+    "name": "Shadow",
+    "img": "https://placekitten.com/307/200",
+    "url": "#",
+    "description": "Shadow is a mysterious and independent cat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "cat"
+  },
+  {
+    "id": 16,
+    "name": "Tweety",
+    "img": "",
+    "url": "#",
+    "description": "Tweety is a colorful and melodious bird. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "bird"
+  },
+  {
+    "id": 17,
+    "name": "Nibbles",
+    "img": "",
+    "url": "#",
+    "description": "Nibbles is a small and cute rodent. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "rodent"
+  },
+  {
+    "id": 18,
+    "name": "Bubbles",
+    "img": "",
+    "url": "#",
+    "description": "Bubbles is a colorful and graceful fish. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "type": "fish"
+  },
+  {
+    "id": 19,
+    "name": "Dog Food",
+    "img": "https://m.media-amazon.com/images/I/81xyE8OZBqL.jpg",
+    "url": "#",
+    "description": "PEDIGREE Complete Nutrition Adult Dry Dog Food Grilled Steak & Vegetable Flavor Dog Kibble, 33 lb.",
+    "type": "accessories"
+  },
+  {
+    "id": 20,
+    "name": "Cat Food",
+    "img": "https://headsupfortails.com/cdn/shop/files/WhiskasOceanFishAdultDryCatFood_f5bbf1f9-31dd-433e-99bd-00582d979f60.jpg?v=1683109071",
+    "url": "#",
+    "description": "Whiskas Ocean Fish Adult Dry Cat Food",
+    "type": "accessories"
+  },
+  {
+    "id": 21,
+    "name": "Metal Cage",
+    "img": "https://www.easipet.co.uk/wp-content/uploads/2021/01/24-inch-black-cage-with-blue-faux-M-004.jpg",
+    "url": "#",
+    "description": "Our metal dog cage is designed with your pet in mind and use only the highest quality materials with a non-toxic coating",
+    "type": "accessories"
+  }
+]
