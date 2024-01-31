@@ -37,7 +37,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .nav-logo {
@@ -130,6 +130,7 @@ footer {
     padding: 85px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     color: white;
     border-top: 1px solid #282938;
 
@@ -226,18 +227,20 @@ footer .bottom .links a {
 
 .filter {
     display: flex;
-    gap: 25px;
+    gap: 15px;
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #282938;
-
+    overflow: visible;
+    flex-wrap: wrap;
+    margin: 2rem;
+    padding: 2rem;
 }
 
 .filter a {
     background-color: var(--text-color);
     border-radius: 15px;
     padding: 5px 10px;
-    margin: 2rem 0;
     color: #1d4ed8;
     transition: 200ms 100ms all ease-in-out;
     text-decoration: none;

@@ -62,7 +62,25 @@
             <a id="filter-fish">Fish</a>
             <a id="filter-accessories">Accessories</a>
         </div>
-
+        <button onclick="toggleAddItem()" class="showCreate" id="toggleCreate">Add More</button>
+        <div class="createItem" id="addContainer">
+            <h2>Add an Item</h2>
+            <form id="addItemForm" class="createItem-form">
+                <input type="text" placeholder="Enter product name..." id="productName">
+                <input type="text" placeholder="Enter image url..." id="imageUrl">
+                <textarea type="text" placeholder="Enter description..." id="description"></textarea>
+                <select id="itemType">
+                    <option value="all">All</option>
+                    <option value="dog">Dogs</option>
+                    <option value="cat">Cats</option>
+                    <option value="bird">Birds</option>
+                    <option value="rodent">Rodents</option>
+                    <option value="fish">Fishes</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+        </div>
         <div class="content" id="card-container">
 
 
