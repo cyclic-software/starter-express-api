@@ -1,0 +1,37 @@
+const ROLES = {
+    ADMIN: 'ADMIN',
+    PATIENT: 'PATIENT',
+    DOCTOR: 'DOCTOR',
+}
+
+const APPOINTMENT_METHOD = {
+    TEXTCHAT: 'TEXTCHAT',
+    VIDEOCHAT: 'VIDEOCHAT',
+    AUDIOCHAT: 'AUDIOCHAT',
+}
+
+const APPOINTMENT_STATUS = {
+    COMPLETED: "COMPLETED",
+    PENDING: "PENDING"
+}
+
+const DOCTOR_STATUS = {
+    REJECTED: 'REJECTED',
+    APPROVED: "APPROVED",
+    WAITING_APPROVAL: "WAITING_APPROVAL"
+}
+
+const GENDER = {
+    MALE: 'M',
+    FEMALE: "F"
+}
+
+const HEALTH_NEWS_API_KEY='0505bf26946c4c4f8804d1e91674edde'
+
+const DOCTOR_REGISTER_URL = 'https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor'
+
+const JWT_SECRET = 'qwertertyuidfg'
+
+
+
+module.exports = { ROLES, GENDER, JWT_SECRET, DOCTOR_STATUS, DOCTOR_REGISTER_URL, APPOINTMENT_METHOD, APPOINTMENT_STATUS }
