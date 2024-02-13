@@ -1,22 +1,32 @@
 {
-  "name": "starter-express-api",
+  "name": "telehealth",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "a backend server",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
-  },
-  "author": "",
+  "author": "Divine Destiny",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
-  },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "@google-ai/generativelanguage": "^1.1.0",
+    "@types/node": "^20.7.0",
+    "axios": "^1.6.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "google-auth-library": "^9.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mailgun-js": "^0.22.0",
+    "mongoose": "^7.5.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "sharp": "^0.32.6",
+    "socket.io": "^4.7.2"
   }
 }
