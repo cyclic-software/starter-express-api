@@ -5,6 +5,6 @@ app.all('/', (req, res) => {
     res.send('Yo!')
 })
 app.get('/test',(res,req)=>{
-    res.send('hola')
+    return res.status(200).json({check:'hiii'})
 })
 app.listen(process.env.PORT || 3000)
