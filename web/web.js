@@ -63,10 +63,11 @@ webApp.get("/chapters/:module_id", (req, res) => __awaiter(void 0, void 0, void 
     else
         res.status(404).end();
 }));
-webApp.get("/tests/:chapter_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+webApp.get("/tests/:chapter_id/:quiz_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const chapterId = req.params.chapter_id;
+    const thisQuizIsTheFirstQuiz = req.params.quiz_id;
     if (chapterId in db.tests) {
-        res.json(db.tests[chapterId].sort(() => Math.random() - 0.5).slice(0, 4));
+        res.json(db.tests[chapterId].filter((item) => item.quiz == thisQuizIsTheFirstQuiz).sort(() => Math.random() - 0.5).slice(0, 4));
     }
     else
         res.status(404).end();
