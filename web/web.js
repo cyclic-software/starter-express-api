@@ -65,8 +65,9 @@ webApp.get("/chapters/:module_id", (req, res) => __awaiter(void 0, void 0, void 
 }));
 webApp.get("/tests/:chapter_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const chapterId = req.params.chapter_id;
-    if (chapterId in db.tests)
-        res.json(db.tests[chapterId]);
+    if (chapterId in db.tests) {
+        res.json(db.tests[chapterId].sort(() => Math.random() - 0.5).slice(0, 4));
+    }
     else
         res.status(404).end();
 }));
