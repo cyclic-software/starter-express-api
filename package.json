@@ -3,21 +3,48 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "build": "echo 'running build'"
+    "start": "node index.js"
   },
+  "keywords": [
+    "trip",
+    "match",
+    "travel",
+    "group",
+    "close",
+    "public",
+    "connect",
+    "tour"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyclic-software/starter-express-api.git"
   },
-  "author": "",
+  "author": "Samuel Tamunobarainipiri\u001b[D\u001b[D\u001b[D\u001b[Joseph Tamunobarasinipiri",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cyclic-software/starter-express-api/issues"
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "axios": "^1.6.7",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mailgen": "^2.0.28",
+    "mongoose": "^8.1.3",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.10",
+    "nodemon": "^3.0.3",
+    "otp-generator": "^4.0.1",
+    "path": "^0.12.7",
+    "unique-random": "^3.0.0",
+    "uuid": "^9.0.0"
   }
 }
