@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String       @id @default(uuid())
+  username   String
+  email      String       @unique
+  password   String
+  avatar     String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  addresses  Address[]
+  Cart       Cart[]
+  profile    Profile?
+  Review     Review[]
+  UserAccess UserAccess[]
+  Wishlist   Wishlist[]
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  cpf       String   @unique
+  birthDate String
+  phone     String
+  isProfile Boolean  @default(false)
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id         String   @id @default(uuid())
+  userId     String?
+  cep        String
+  logradoro  String
+  bairro     String
+  localidade String
+  isAddress  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User?    @relation(fields: [userId], references: [id])
+}
+
+model UserAccess {
+  id        String   @id @default(uuid())
+  userId    String?
+  accessId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Access    Access?  @relation(fields: [accessId], references: [id])
+  User      User?    @relation(fields: [userId], references: [id])
+}
+
+model Access {
+  id         String       @id @default(uuid())
+  name       String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  userAccess UserAccess[]
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  quantity  Int
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Product {
+  id           String          @id @default(uuid())
+  name         String
+  description  String
+  price        Float
+  image        String
+  manufacturer String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  carts        CartItem[]
+  categories   OrderCategory[]
+  reviews      Review[]
+  stock        Stock?
+  Wishlist     Wishlist[]
+}
+
+model Stock {
+  id        String   @id @default(uuid())
+  productId String   @unique
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  rating    Int
+  comment   String
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model OrderCategory {
+  id         String   @id @default(uuid())
+  productId  String
+  categoryId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Category   Category @relation(fields: [categoryId], references: [id])
+  Product    Product  @relation(fields: [productId], references: [id])
+}
+
+model Category {
+  id         String          @id @default(uuid())
+  name       String          @unique
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  categories OrderCategory[]
+}
